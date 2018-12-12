@@ -1,0 +1,66 @@
+<script type="text/javascript">
+//jquery中的queue
+a=$("body")
+.queue((next)=>{console.log(1);next()})
+.queue((next)=>{console.log(2);next()})
+.queue((next)=>{console.log(3);next()})
+.queue((next)=>{console.log(4);})
+1
+2
+3
+4
+b=a.queue((next)=>{console.log(4)})
+4
+c=b.queue((next)=>{console.log(4)})
+//不会再运行，因为上一个没有调用next()
+class myQueue1{
+  constructor(){
+    this.fn=[]
+  }
+  queue(f){
+    if(this.fn.length){
+      this.fn.push(f)
+    }else{
+      this.fn.push(f)
+      this.start()
+    }
+    return this
+  }
+  start(){
+    if(this.fn.length){
+      this.fn[0](next=>{
+         this.fn.shift()
+         this.start()
+      })
+    }
+  }
+}
+class myQueue{
+  constructor(){
+    this.fn=[]
+  }
+  queue(f){
+    if(this.fn.length){
+      this.fn.push(f)
+    }else{
+      this.fn.push(f)
+      //this.start() //若用该，会导致所有函数都同步执行
+      setTimeout(()=>{ //所以需要放到setTimeout，事件循环结束之后才执行，即所有的queue执行完才执行
+        this.start()
+      })
+    }
+    return this
+  }
+  start(){
+    var f=this.fn.shift()
+    if(f){
+       f(next=>this.start())
+    }
+  }
+}
+new myQueue()
+.queue((next)=>{setTimeout(()=>console.log(1),1000);next()})
+.queue((next)=>{setTimeout(()=>console.log(2),1000);next()})
+.queue((next)=>{setTimeout(()=>console.log(3),1000);next()})
+
+</script>

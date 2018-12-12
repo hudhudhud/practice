@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<!--
+Created using JS Bin
+http://jsbin.com
+
+Copyright (c) 2017 by xieranmaya (http://jsbin.com/midabex/1/edit)
+
+Released under the MIT license: http://jsbin.mit-license.org
+-->
+<meta name="robots" content="noindex">
+<html ng-app="app">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JS Bin</title>
+  <script src="jquery.js"></script>  
+<style id="jsbin-css">
+* {
+  background-color: rgba(0,0,0,0.1);
+
+}
+body {
+  margin-bottom: 100px;
+}
+</style>
+</head>
+<body>
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Temporibus est necessitatibus ipsum laudantium tempore, possimus doloribus, nisi assumenda voluptatum alias ratione, facilis consectetur ipsa repellendus sapiente aut reprehenderit at nostrum.</p>
+  <p>Beatae earum adipisci, doloribus magnam illo numquam tempore nemo non, amet commodi aliquam voluptates, quidem accusantium natus consectetur placeat quas laboriosam neque debitis voluptatem vel quae quo qui. Dolores, sit.</p>
+  <p>Cupiditate modi quo nulla, dolores obcaecati eveniet iure alias maiores voluptas sunt. Ea totam assumenda similique quae neque eos voluptatum, veritatis dolores mollitia cum enim explicabo dolorem, deserunt. Incidunt, sapiente?</p>
+  <p>Fuga nisi velit voluptatibus similique saepe harum corporis veniam optio autem porro. Hic doloribus, laboriosam cumque sint omnis. Nihil ea est alias, tempore placeat incidunt atque cum tenetur neque ducimus.</p>
+  <p>Tenetur porro, reprehenderit doloremque nesciunt ex, cupiditate animi officiis voluptatibus aliquid voluptatem! Hic aliquid ducimus qui reiciendis, earum similique esse tempore quia unde architecto. Natus cum sapiente a, quibusdam doloribus!</p>
+<script id="jsbin-javascript">
+$(function(){
+
+  var loading = false//还在加载的时候如果鼠标滚动了，不触发事件
+
+  $(window).on('mousewheel scroll', function(){//当视口高度与滚动的高度和 与 页面高度相同，则加载数据
+    if (loading) {
+      return
+    }
+    var scrollPos = window.scrollY
+    var viewportHeight = window.innerHeight
+    var pageHeight = document.documentElement.scrollHeight
+    console.log(scrollPos, viewportHeight, pageHeight)
+    
+    if (Math.abs(scrollPos + viewportHeight - pageHeight) < 5) {//由于有浮点数，无法精确的相等，所以小于某个较小值即可
+      if (loading === false) {
+        loading = true
+        var loadingText = $('<footer>loading</footer>').appendTo(document.body)
+        loadNewContent(function(){
+          loadingText.remove()
+          loading = false
+        })
+      }
+    }
+  })
+  
+  function loadNewContent(cb) {//cb为回调函数
+    setTimeout(function(){
+      $('<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium blanditiis aliquam, sequi error saepe id, dolorum aperiam ullam tempore maiores sapiente architecto quod iusto illum cumque, beatae dolore ipsam. Sequi.</p>').appendTo('body')
+      cb()
+    }, 1000)
+  }
+})
+
+// function jQuery(selector, context) {
+//   if(typeof selector === 'function') {
+//     return jQuery(document).ready(selector)
+//   }
+// }
+
+//domready
+//DOMContentLoaded
+//readystatechange
+//document.readyState === 'complete'
+</script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<script type="text/javascript">
+  function  bind(f,thisArg,...fixedArgs) {
+    return function(...sendArgs){
+      // return f.apply(thisArg,[...fixedArgs,...sendArgs]) //三种方法都可，apply后只能传一个参数
+      // return f.apply(thisArg,fixedArgs.concat(sendArgs))
+      return f.call(thisArg,...fixedArgs，...sendArgs)
+    }
+  }
+
+  function bind_lodash(f,thisArg,...fixedArgs) {//_,1,_,3,_
+    return function(...restArgs){//0,2,4,5   => 0,1,2,3,4,5
+      var args=[] //以保证可以多次调用，所以不能改变fixArgs数组，要新创造一个对象
+      for([key,val] of fixArgs.entries()){
+        if(val==="_"){
+          args[key]=restArgs.shift()
+        }
+        else{
+           args[key]=val
+        }
+      }
+      args=args.concat(restArgs)
+      return f.call(thisArg,...args)
+    }
+  },
+
+  Function.prototype.bind2 = function bind2(thisValue, ...fixedArgs) {
+      var self = this //该this即为调用bind2的函数，保存以返回函数中用
+      return function(...restArgs) {
+        console.log(this)
+        self.call(thisValue, ...fixedArgs, ...restArgs)
+      }
+  }
+  function test(a,b,c){
+    console.log(this+a+b+c)
+  }
+  f=test.bind2(1,2)(3,4)
+
+
+//需要考虑被myBind返回的函数当做构造函数的情况,即是以原函数为构造函数
+//mdn 一个绑定函数也能使用new操作符创建对象：这种行为就像把原函数当成构造器。提供的 this 值被忽略，同时调用时的参数被提供给模拟函数。
+Function.prototype.myBind = function(thisArg, ...fixedArgs) {
+  var self = this
+  return function bound(...restArgs) {
+    if (new.target === bound) {
+      return new self(...fixedArgs, ...restArgs)
+    }
+    return self.call(thisArg, ...fixedArgs, ...restArgs)
+  }
+}
+
+//polyfill
+if(!Function.prototype.bind){
+  Function.prototype.bind=function(oThis){
+    if(typeof this !== "function"){
+      throw new TypeError("Function.prototype.bind - what is trying "+
+        "to be bound is not callable")
+    }
+
+    var aArgs=Array.prototype.slice.call(arguments,1)
+    var fToBind=this
+    var fNOP = function(){}
+    var fBound = function(){
+      return fToBind.apply(
+        this instanceof fNOP && oThis ? this:oThis,
+        aArgs.concat([].slice.call(arguments))
+        )
+    }
+    fNOP.prototype=this.prototype
+    fBound.prototype=new fNOP()
+    return fBound
+  }
+}
+</script>

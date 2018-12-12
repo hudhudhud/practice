@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<!--
+Created using JS Bin
+http://jsbin.com
+
+Copyright (c) 2018 by anonymous (http://jsbin.com/hatepaxeha/1/edit)
+
+Released under the MIT license: http://jsbin.mit-license.org
+-->
+<meta name="robots" content="noindex">
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <!--  <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css"> -->
+<!--   <script src="http://code.jquery.com/jquery-1.9.1.js"></script> -->
+<!--    -->
+
+<script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+
+<link href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css" />
+<!-- 解决jquery3.0与jquery低版本的冲突 -->
+    <script src="https://code.jquery.com/jquery-migrate-3.0.0.min.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
+<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+
+
+
+   <!--  -->
+
+
+
+
+
+  <link rel="stylesheet" href="http:http://jqueryui.com/resources/demos/style.css">
+  <title>JS Bin</title>
+<style id="jsbin-css">
+.ui-autocomplete{
+  height:400px;
+  overflow-y:scroll;
+}
+</style>
+</head>
+<body>
+  <input type="text" id="key" placeholder="我是值">
+  <br>
+<input type="text" id="input">
+<script id="jsbin-javascript">
+$(function(){
+    var input=$("#input")
+    var key=$("#key")
+    var availableTags = [
+      "ActionScript",
+      "AppleScript",
+      "Asp",
+      "BASIC",
+      "C",
+      "C++",
+      "Clojure",
+      "COBOL",
+      "ColdFusion",
+      "Erlang",
+      "Fortran",
+      "Groovy",
+      "Haskell",
+      "Java",
+      "JavaScript",
+      "Lisp",
+      "Perl",
+      "PHP",
+      "Python",
+      "Ruby",
+      "Scala",
+      "Scheme"
+    ];
+  var objs={
+"ActionScript":1,
+"AppleScript":2,
+"Asp":3,
+"BASIC":4,
+"C":5,
+"C++":6,
+"Clojure":7,
+"COBOL":8,
+"ColdFusion":9,
+"Erlang":10,
+"Fortran":11,
+"Groovy":12,
+"Haskell":13,
+"Java":14,
+"JavaScript":15,
+"Lisp":16,
+"Perl":17,
+"PHP":18,
+"Python":19,
+"Ruby":20,
+"Scala":21,
+"Scheme":22
+}
+    var labels=[]
+    for(var i=0;i<20;i++){
+      labels.push(...availableTags)
+    }
+    console.log(labels)
+    input.autocomplete({
+      minLength: 0,
+      source:labels,
+      select: function (event, ui) {
+            event.preventDefault();
+            input.val(ui.item.label);//选中文案
+            key.val(objs[ui.item.label])
+      },
+    });
+    input.on("focus",function(){
+        if(!input.val()){
+            input.autocomplete( "search", "" );
+        }
+    })
+    input.on("blur",function(){
+        var id=objs[input.val()]
+        console.log(input.val())
+        if(id){
+             key.val(id)
+        }else{
+            input.val('')
+            key.val('')
+        }
+    })
+})
+
+// $(function(){
+//     var brandList=[]
+//     var labels=[]
+//     $('.sort_list').children('.num_name').each(function(){
+//         var key=$(this).text().trim()
+//         var val=$(this).attr('data-id').trim()
+//         brandList[key]=val
+//         // brandList.push({label:$(this).text().trim(),value:$(this).attr('data-id').trim()})
+//     })
+//     labels=Object.keys(brandList).sort(function(a,b){
+//         var str1=makePy(a)[0].toUpperCase()
+//         var str2=makePy(b)[0].toUpperCase()
+//         if(str1 < str2 ) return -1
+//         if(str1 > str2 ) return 1
+//         return 0
+//     })// a.localeCompare(b,"zh");纯中文数组按中文排
+//     var eleBrandName= $('input[name="brand_name"]' )
+//     var eleBrandId= $('input[name="brand_id"]' )
+//     eleBrandName.autocomplete({
+//       minLength: 0,
+//       source:labels,
+//       select: function (event, ui) {
+//             event.preventDefault();
+//             eleBrandName.val(ui.item.label);//选中文案
+//             eleBrandId.val(brandList[ui.item.label])
+//       },
+//     });
+//     eleBrandName.on("focus",function(){
+//         eleBrandName.autocomplete("search", "" );
+//     })
+//     eleBrandName.on("blur",function(){
+//         var id=brandList[eleBrandName.val().trim()]
+//         if(id){
+//              eleBrandId.val(id)
+//         }else{
+//             eleBrandName.val('')
+//             eleBrandId.val('')
+//         }
+//     })
+// })
+</script>
+</body>
+</html>

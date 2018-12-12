@@ -1,0 +1,75 @@
+  <div id=a>
+    <button class="toggle">Toggle</button>
+    <div class="content">this is the content</div>
+  </div>
+<script type="text/javascript">
+class Eventer{
+  constructor(){
+    this.event=Object.create(null)
+  }
+  on(eventName,handler){
+    if(this.event[eventName]){
+      this.event[eventName].push(handler)
+    }
+    else {
+      this.event[eventName]=[handler]
+    }
+    return this
+  }
+  off(eventName,handler){
+     if(this.event[eventName]){
+        var index=this.event[eventName].indexOf(handler)
+        if(index>-1){
+          this.event[eventName].splice(index,1)
+        }
+     }
+  }
+  once(eventName,handler){
+   var self=this
+   self.on(eventName,function one(){
+      handler.call(self)
+      self.off(eventName,one)
+   })
+  }
+  trigger(eventName){
+    if(this.event[eventName]){
+      this.event[eventName].forEach(handler=>handler.call(this)) 
+    }
+  }
+}
+
+class Slider extends Eventer { //Eventer类一般用于被别的类继承，而非直接调用
+  constructor(selector) {
+    super()
+    this.el = document.querySelector(selector)
+    this.button = this.el.querySelector('.toggle')
+    this.content = this.el.querySelector('.content')
+    this.init()
+  }
+
+  init() {
+    this.button.addEventListener('click', () => {
+      if (this.content.style.display != 'none') {
+        this.content.style.display = 'none'
+        this.trigger('hide')
+      } else {
+        this.content.style.display = 'block'
+        this.trigger('show')
+      }
+    })
+  }
+}
+
+var slider = new Slider('#a')
+
+slider
+
+.on('show', function(){
+  console.log('showed')
+})
+
+.on('hide', function(){
+  console.log('hided')
+})
+
+</script>

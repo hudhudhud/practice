@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JS Bin</title>
+  <style type="text/css">
+    div{
+      width: 500px;
+      height: 300px;
+      border:1px solid;
+      box-sizing: border-box;
+      margin:20px;
+    }
+    ::-webkit-file-upload-button {
+        padding: .4em;
+        line-height: 30px;
+        border: 1px solid #a0b3d6;
+        background: #f0f3f9;
+        color: #34538b;
+        content:"123";
+    }
+  </style>
+</head>
+<body>
+
+<div id="one">
+<input type="file" id="input1" multiple>
+</div>
+<div id="two">
+<input type="file" id="input2" multiple>
+</div>
+</body>
+<script type="text/javascript">
+input1.addEventListener("change",function(){
+  console.log(input1.files)
+  for(let f of input1.files){
+    var img=new Image()
+    img.src=URL.createObjectURL(f)
+    img.width=100
+    document.getElementById("one").append(img)
+  }
+})
+
+
+input2.addEventListener("change",function(){
+  if(window.FileReader){
+    for(let f of input2.files){
+        var fr = new FileReader()
+        fr.onloadend = function(e) {
+          var img=new Image()
+          img.src = e.target.result
+          img.width=100
+          document.getElementById("two").append(img)
+        }
+        fr.readAsDataURL(f)
+      }
+  }
+})
+
+</script>
+</html>

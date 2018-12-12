@@ -1,0 +1,65 @@
+<script type="text/javascript">
+// decode/encodeURIComponent()
+// "abc.def%2F%2F%E4%BD%A0%E6%88%91%2F%E4%BB%96"
+// <=>
+// 'abc.def//你我/他'
+// UTF-8编码是将该字符的ASC码转成二进制 xxxx+四位  10+六位
+// 将百分号之间的16进制转换为二进制，查看前四位1的个数即表示该字符占的字节数，若没有1则直接转换为字符，否则按个数往后取若干个，后面的取其后六位与之前的拼接最后得到的即为code
+function myDecode(str) {
+  var res=""
+  for(var i=0;i<str.length;){
+    if(str[i]!="%"){
+      res+=str[i]
+      i++
+    }
+    else{
+      var x=Number("0x"+str.substr(i+1,2)).toString(2)
+      i=i+3
+      while(x.length<8){
+        x="0"+x
+      }
+      var count=x.match(/..../)[0].match(/(1){1,4}/)[0].length
+      if(count==1){
+          res+=String.fromCharCode(parseInt(x,2))
+      }else{
+        var n=count-1
+        var code=x.match(/....(....)/)[1]
+        while(n--){
+          x=Number("0x"+str.substr(i+1,2)).toString(2)
+          code+=x.match(/..(......)/)[1]
+          i=i+3
+        }
+        res+=String.fromCharCode(parseInt(code,2))
+      }
+    }
+  }
+  return res
+}
+function myDecode2(str) {
+  str.replace(/%(..)%(..)%(..)/g, function(match, h1,h2,h3, index, input){
+    h1 = parseInt(h1, 16)
+    h2 = parseInt(h2, 16)
+    h3 = parseInt(h3, 16)
+
+    h1 = h1 & 0b00001111
+    h2 = h2 & 0b00111111
+    h3 = h3 & 0b00111111
+
+    h1 = h1 << 12
+    h2 = h2 << 6
+    return String.fromCharCode(h1 + h2 + h3)
+  })
+}
+function encodeURIComponent(str) {
+  var res=""
+  for(var i=0;i<str.length;){
+    var code=str[i].charCodeAt(0).toString(2)
+    if(code.length<=8){
+      res+=str[i]
+      i++
+    }else{
+      
+    }
+  }
+}
+</script>

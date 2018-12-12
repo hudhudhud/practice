@@ -1,0 +1,19 @@
+<script>
+//由一个半圆，两个四分之一圆组成，半圆内的点即distance(x,y,0,0.5) < 0.5
+//四分之一下方圆内的点即为distance(x,y,1,0) < 1 
+//四分之一上方圆内的点即为distance(x,y,1,1) < 1
+//只要满足这三个条件即为交集部分，随机数越多，点越密集，面积就越精确
+function distance(x1,y1,x2,y2) {
+  return Math.sqrt((x1 - x2)**2 + (y1 - y2)**2)
+}
+var count = 0
+var num = 10000000
+for(var i = 0; i< num; i++) {
+  var x = Math.random()
+  var y = Math.random()
+  if (distance(x,y,1,1) < 1 && distance(x,y,1,0) < 1 && distance(x,y,0,0.5) < 0.5) {
+    count++
+  }
+}
+console.log(count / num)
+</script>

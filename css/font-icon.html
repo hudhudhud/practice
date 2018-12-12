@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf8">
+	<title></title>
+	<xlink rel="stylesheet" href="font-awesome.min.css">
+	<style>
+		.my {
+			display: inline-block;/* transform只对块级元素生效*/
+		}
+		.my-star:before {
+			content:'⛄';  /*http://getemoji.com/*/
+		}
+		@keyframes spin{
+		  from{
+		    transform:rotate(0deg);
+		  }
+		  to{
+		    transform:rotate(359deg);
+		  }  
+		}
+		.spin{
+		  animation:spin 1s linear;
+		  animation-iteration-count:infinite;
+		}
+	</style>
+</head>
+<body>
+<i class="my my-star spin"></i>
+</body>
+</html>

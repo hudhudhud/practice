@@ -1,0 +1,46 @@
+<script type="text/javascript">
+var isPrime=function(a){
+    if (a < 2) {
+        return false
+    } else {
+        for (var i = 2; i <Math.sqrt(a)+1; i++) { //一个数的因数是他根号左右的数，所以它只要能被根号左边的数整除，即能被根号右边的数整除
+            if (a % i == 0&&a!=i) {
+               return false
+            }
+        }
+    }
+    return true
+}
+//查找100以内的素数
+var all = 100
+for (var n = 0; n <= all; n++) {
+    if(isPrime(n))
+        console.log(n)
+}
+</script>
+
+<script type="text/javascript">
+//高效率查找n以内的素数的个数
+//排除法排除素数的倍数
+////最优方法
+var countPrimes = function(n) {
+   var notPrime=new Array(n).fill(false)
+   var count=0
+   for(var i=2;i<n;i++){
+       if(!notPrime[i]){//只需排除素数的倍数
+           count++
+           for(var j=i;i*j<n;j++){//当i=5,排除5*5,5*6,5*7...
+               notPrime[i*j]=true
+           }
+       }
+   }
+   return count
+};
+</script>
+<!-- 假如需要判断一个数n是否为素数，只需要确定2到n-1都无法整除它就可以了
+把n写成如下形式n = a * b = sqrt(n) * sqrt(n)
+如果a跟b不同，那么a跟b里一定有一个数小于sqrt(n)
+即a跟b是成对出现而且分布在sqrt(n)的两边
+如果我们找不到能整除的n的a，那也找不到b，所以只用除到sqrt(n)
+假设m为小于根号n的非素数，那么m一定有大于1且小于m的约数c
+如果n除不尽此c，则肯定也除不尽m，所以不用除以m，直接除以c即可，即除以根号n以内的所有素数。 -->

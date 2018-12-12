@@ -1,0 +1,26 @@
+<template>
+    <section class="page">
+        <Header :shadow="headerShadow"/>
+        <div class="content">
+            <slot></slot>
+        </div>
+        <Footer/>
+    </section>
+</template>
+<script>
+// @ is an alias to /src
+import Header from '@/components/Header.vue'
+import Footer from '@/components/Footer.vue'
+export default {
+    components: {
+        Header,
+        Footer
+    },
+    props:{
+        headerShadow:{
+            type:Boolean,
+            default:true,
+        }
+    }
+}
+</script>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JS Bin</title>
+  <style type="text/css">
+    input{
+  display:none;
+}
+input+span{
+  display:inline-block;
+  border:3px solid;
+  width:30px;
+  height:30px;
+  text-align:center;
+  line-height:33px;
+  vertical-align:middle;
+}
+input[type=checkbox]+span{
+  font-size:0px;
+  transition:font-size 0.1s linear;
+}
+input[type=checkbox]:checked+span{
+  font-size:30px;
+} 
+input[type=checkbox]:checked +span:after{
+  content:"√";
+}
+
+/* ul{
+  list-style:none;
+}
+ */
+input[type=radio] +span{
+  border-radius:30px;
+  transition:all 0.1s linear;
+}
+input[type=radio]:checked +span{
+  background-color:red;
+}
+
+ table{
+ border-collapse:collapse;
+}
+table tr td{
+  border:2px solid;
+  width:50px;
+  height:50px;
+  display:inline-block;
+  margin:-1.1px;
+  position:relative;
+  text-align:center;
+  /* vertical-align:middle; */
+  line-height:50px;
+}
+table tr td:hover{
+  border-color:red;
+  z-index:12;
+}
+  </style>
+</head>
+<body>
+  <p>1.自定义checkbox与radio样式</p>
+  <label>
+   <input type="checkbox">
+   <span role='checkbox'  aria-checked='false'></span> 
+  点我
+  </label>
+  &nbsp
+  <label>
+    男
+    <input type="radio" name="sex">
+    <span></span>
+  </label>
+  <label>
+    女
+    <input type="radio" name="sex">
+    <span></span>
+  </label>
+ <p>2.</p>
+  <table> <!-- cellspacing=0 -->
+  <tr>
+  <td>1</td>
+  <td>2</td>
+  <td>3</td>
+  </tr>
+   <tr>
+    <td>4</td>
+  <td>5</td>
+  <td>6</td>
+  </tr>
+   <tr>
+    <td>7</td>
+  <td>8</td>
+  <td>9</td>
+  </tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,149 @@
+<script type="text/javascript">
+  //重写对象的prototype时，需要重置相应的constructor属性
+  var monkey={a:1,b:2}
+  function m(){}
+  m.prototype=monkey
+
+  c=new m()
+  c.a==1
+  typeof c.contructor === function Object(){[native code]}
+  c.constructor.prototype.hasOwnProperty("a")===false
+
+
+  m.prototype.constructor=m
+  c.contructor === m
+  c.constructor.prototype.hasOwnProperty("a")===true
+</script>
+<script type="text/javascript">
+  function Shape(){
+    this.name="Shape"
+    this.toString=function(){
+      return this.name
+    }
+  }
+  function TwoDShape(){
+    this.name='2D shape'
+  }
+  function Triangle(side,height){
+    this.name='Triangle'
+    this.side=side
+    this.height=height
+    this.getArea=function(){
+      return this.side*this.height/2
+    }
+  }
+  //把实体对象赋给继承原型，保证未来对Shape的原型上添加或删除修改属性都不对被继承的原型影响
+  TwoDShape.prototype=new Shape()
+  Triangle.prototype=new TwoDShape()
+  //在对对象的prototype属性进行完全替换后，最好重置constructor,否则会有副作用，如替换成对象则他的原型构造函数则变成object
+  TwoDShape.prototype.constructor=TwoDShape
+  Triangle.prototype.constructor=Triangle
+
+  var my=new Triangle(5,10)
+  my.getArea()
+  my.toString()//继承方法里的this任然是my
+  my.__proto__.__proto__.hasOwnProperty("toString")==true
+</script>
+<script type="text/javascript">
+//为不必要的内存浪费，可以把不变的属性放到原型上，这样就避免了每次new一个实体都拥有一个新的属性
+  function Shape(){}
+  Shape.prototype.name="Shape"
+  Shape.prototype.toString=function(){
+    return this.name
+  }
+
+  function TwoDShape(){}
+  TwoDShape.prototype=new Shape()
+  TwoDShape.prototype.constructor=TwoDShape
+  TwoDShape.prototype.name="2D shape"
+ 
+  function Triangle(side,height){
+    this.side=side
+    this.height=height
+  }
+  Triangle.prototype=new TwoDShape()
+  Triangle.prototype.constructor=Triangle
+  Triangle.prototype.name="Triangle"
+  Triangle.prototype.getArea=function(){
+    return this.side*this.height/2
+  }
+
+  var my = new Triangle(5,10)
+  my.getArea()
+  my.toString()
+  my.__proto__.__proto__.__proto__.hasOwnProperty("toString")==true
+</script>
+<script type="text/javascript">
+//不要单独为继承关系创建新对象，占内存
+//尽量减少运行时的方法搜索
+  function Shape(){}
+  Shape.prototype.name="Shape"
+  Shape.prototype.toString=function(){
+    var res=this.constructor.uber?
+    this.constructor.uber.toString()+","+this.name:this.name
+    console.log(res)
+    return  res
+  }
+
+  function TwoDShape(){}
+  function F(){}
+  //临时构造器，避免直接赋原型都指向同一个对象而导致父对象受到子对象属性的影响
+  // 如TwoDShape.prototype=Shape.prototype
+  F.prototype=Shape.prototype
+  TwoDShape.prototype=new F()
+  TwoDShape.prototype.constructor=TwoDShape
+  TwoDShape.prototype.name="2D shape"
+  TwoDShape.uber=Shape.prototype //子对象访问父对象的方式，通过引入uber属性，另其指向其父级原型对象
+ 
+  function Triangle(side,height){
+    this.side=side
+    this.height=height
+  }
+  function F(){}
+  F.prototype=TwoDShape.prototype
+  Triangle.prototype=new F()
+  Triangle.prototype.constructor=Triangle
+  Triangle.prototype.name="Triangle"
+  Triangle.prototype.getArea=function(){
+    return this.side*this.height/2
+  }
+  Triangle.uber=TwoDShape.prototype
+
+  var my = new Triangle(5,10)
+  my.getArea()
+  my.toString()//"shape,2D shape,Triangle"
+</script>
+<script type="text/javascript">
+  function extend(Child,Parent){
+    var F=function(){}
+    F.prototype=Parent.prototype
+    Child.prototype=new F()
+    Child.prototype.constructor=Child
+    Child.uber=Parent.prototype
+  }
+
+  function Shape(){}
+  Shape.prototype.name="Shape"
+  Shape.prototype.toString=function(){
+    var res=this.constructor.uber?
+    this.constructor.uber.toString()+","+this.name:this.name
+    return  res
+  }
+
+  function TwoDShape(){}
+  extend(TwoDShape,Shape)
+  TwoDShape.prototype.name="2D shape"
+ 
+  function Triangle(side,height){
+    this.side=side
+    this.height=height
+  }
+  extend(Triangle,TwoDShape)
+  Triangle.prototype.getArea=function(){
+    return this.side*this.height/2
+  }
+  Triangle.prototype.name="Triangle"
+
+  var my = new Triangle(5,10)
+
+</script>

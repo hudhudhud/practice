@@ -1,0 +1,30 @@
+<script type="text/javascript">
+  var longestPalindrome = function(s) {
+    let objs={}
+    let sarray=Array.from(s)
+    let addone=false
+    for(let val of sarray){
+        if(val in objs){
+            objs[val]++
+        }else{
+            objs[val]=1
+        }
+    }
+    let countArray=Object.values(objs)
+    let res=countArray.reduce(function(a,b){ 
+        if(b%2===0){
+          return a+b 
+        }
+        else if(b/2>1){
+            addone=true
+            return a+Math.floor(b/2)*2
+        }
+        else{
+          return a
+        }
+        
+    },0)
+    addone=addone||(countArray.indexOf(1)>-1)
+    return res+(addone?1:0)
+};
+</script>

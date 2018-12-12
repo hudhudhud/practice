@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>问题</title>
+</head>
+<body>
+<h1>Question</h1>
+<h2>{{question.title}}</h2>
+<h2>{{question.content}}</h2>
+<h4>from {{from.name}}</h4>
+
+<h1>Answers</h1>
+<ul>
+{{#each answers}}
+  <li><h2>{{content}}</h2><h4>from {{from}}</h4><li>
+{{/each}}
+</ul>
+</body>
+</html>

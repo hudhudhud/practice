@@ -1,0 +1,26 @@
+<script type="text/javascript">
+function reduce(ary, reducer, initialValue){
+  let res=initialValue
+  let i=0
+  if(res==undefined){
+    if(ary.length<2){
+      return false
+    }
+    res=ary[0]
+    i=1
+  }
+  for(;i<ary.length;i++){
+      res=reducer(res,ary[i])
+   }
+   return res
+}
+
+function redu(ary,cb,start){
+  var res=start||ary[0]
+  var ary=start?ary:(ary.shift(),ary)
+  ary.forEach((item,i)=>{
+    res=cb(res,item,i,ary)
+  })
+  return res
+}
+</script>

@@ -1,0 +1,44 @@
+<!-- <script type="text/javascript">
+// 二元一次
+  var a=1
+  var b=2 
+  var c=3
+  var d=4
+  var e=5
+  var f=6
+  var x=((c*e)-(b*f))/((a*e)-(b*d));
+  var y=((c*d)-(a*f))/((b*d)-(a*e));
+  console.log("x="+x)
+  console.log("y="+y)
+</script> -->
+<script type="text/javascript">
+// 一元二次
+var a = prompt("输入a")
+var b = prompt("输入b")
+var c = prompt("输入c")
+if (isNaN(a) || isNaN(b) || isNaN(c)) {
+    alert("请输入正确数值");
+}
+
+//debugger
+
+var delta = b * b - 4 * a * c
+if (delta > 0) {
+    var x1 = (-b + Math.sqrt(delta)) / (2 * a)
+    var x2 = (-b - Math.sqrt(delta)) / (2 * a)
+    console.log("大于0")
+    console.log("x1=" + x1)
+    console.log("x2=" + x2)
+} else if (delta == 0) {
+    var x1 = (-b) / (2 * a)
+    console.log("等于0")
+    console.log("x1=x2=" + x1)
+} else {
+    var rdelta = Math.sqrt(-delta)
+    var m = -b / (2 * a)
+    var n = a > 0 ? rdelta / (2 * a) : rdelta / (2 * -a)
+    console.log("小于0")
+    console.log("x1=" + m + "+" + n + "i")
+    console.log("x2=" + m + "-" + n + "i")
+}
+</script>

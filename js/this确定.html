@@ -1,0 +1,74 @@
+<script type="text/javascript" src="jquery.js"></script>
+<div>12312</div>
+<script type="text/javascript">
+//this属于哪个函数，包裹this的最近一个function关键字声明的函数
+//这个函数是如何被调用，有没有bind，是不是传给其他库
+
+//从this外面找大括号外部，大括号外部即为this对象
+//jQuery绑定事件时，默认是把传入的函数call当前的dom元素，所以如果是调用另一个函数，则需要bind
+class one{
+  constructor(){
+    this.m=1
+    //$("div").click(this.f)//错误！！this.f中的this在大括号里找就是one,调用f时f里的this默认就是dom元素，需哦一需要绑定
+    $("div").click(this.f.bind(this)) 
+   //或 $("div").click(()=>this.f())
+    /*
+    
+     */
+  }
+  f(){
+    console.log(this)
+    console.log(this.m)
+  }
+}
+o=new one()
+
+
+//this上下文
+
+//对象中的this即指向对象自己
+//var pet={
+//  words:"...",
+//  speak:function(){
+//    console.log(this.words);
+//    console.log(this==pet);
+//  }
+//}
+//pet.speak();
+
+
+//函数中的this在nodejs中指向全局变量，在浏览器中指向window
+//function pet(words){
+//  this.words=words;
+//  console.log(this.words);
+//  console.log(this==global);
+//  console.log(this);
+//}
+//pet("...");
+
+//构造函数中，实例化对象后的this即为新构建好的对象
+function pet(words){
+  this.words=words;
+  this.speak=function(){
+    console.log(this.words);
+    console.log(this);
+  }
+}
+var cat=new pet("...");
+cat.speak();
+
+
+obj={
+  f:function(){
+    return this.x-1
+  },
+  x:1
+};
+[1,2,3,4].map(obj.f);//[NaN,NaN,NaN,NaN] ，里面的this在全局
+[1,2,3,4].map(obj.f,obj);//[0,0,0,0]，指定第二个参数为上下文的this
+
+
+// 嵌套函数的this和外层函数的this 
+//  不一样，如果内层函数是箭头函数，则是一样的
+//  否则不一样
+</script>

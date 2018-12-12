@@ -1,0 +1,17 @@
+<script type="text/javascript">
+//需要通过用node建立服务器打开，anywhere 8080 ,然后发送消息，即实现了线程的通信
+//a1.postMessage(3)即得到9
+var a1=new Worker("worker.js")
+var obj={}//a1.postMessage(obj)之后在子线程上改变e.data的值，发现obj还是没有变化，说明线程之间不共享数据，只是拷贝了一份
+// var a2=new Worker("worker.js")
+a1.addEventListener("message",function(e){
+  console.log(e)
+})
+
+//封装Worder的调用方法，参数为一个函数
+Worker.start = function(thread) {
+  var source = '(' + thread.toString() + '())'  //把函数作为字符串且执行格式
+  var url = URL.createObjectURL(new Blob([source])) //在Blob中作为参数转换为一个类似文件，再通过createObjectURL创建该文件的一个可用的url
+  return new Worker(url)//worker加载该url即执行文件里代码的内容，即实现了新开线程
+}
+</script>

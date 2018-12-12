@@ -1,0 +1,56 @@
+<script type="text/javascript">
+//题目：给定两个数，求它们的最小公倍数和最大公约数。
+//最小公倍数
+var gcd=function(a,b){
+  var start=a
+  while(true){
+    if(start%a==0&&start%b==0){
+      return start
+    }
+    start++
+  }
+}
+var gcd2=function(a,b){
+  var max=a>b?a:b
+  var start=max
+  while(true){
+    if(start%a==0&&start%b==0){
+      return start
+    }
+    start+=max
+  }
+}
+
+//最大公约数
+var gcf=function(a,b){
+  var min=a<b?a:b
+  var start=min
+  while(true){
+    if(a%start==0&&b%start==0){
+      return start
+    }
+    start--
+  }
+}
+var gcf2=function(a,b){
+  return a*b/gcd2(a,b) //最大公约数*最小公倍数=a*b
+}
+var gcf3=function(a,b){//辗转相减法，留下小的，利用递归
+  var max=a>b?a:b
+  var min=a<b?a:b
+  if(max==min){
+    return max
+  }else{
+    return gcf3(min,max-min)    //递归return的是最外层的函数，就把递归函数当成一个值返回
+  }
+}
+var gcf4=function(a,b){//辗转取模法
+  var t
+  while(b!=0){
+    t=b
+    b=a%b
+    a=t
+  }
+  return a
+}
+</script>

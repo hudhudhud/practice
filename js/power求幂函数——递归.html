@@ -1,0 +1,21 @@
+<script type="text/javascript">
+var count=0
+//考虑n为负的情况
+var myPow = function(x, n) { //调用次数相对循环少很多，如2的100次，递归就调用8次，但是循环需要100次
+   count++
+    console.log(count)
+    if(n==0)return 1
+    var init=x
+    if(n<0)
+      init=1/x
+    if(n==1||n==-1)
+      return init
+    if(n%2==0){
+        var res=myPow(x,n/2)
+        return res*res
+    }else{
+        var res=myPow(x,parseInt(n/2))
+        return init*res*res
+    }
+};
+</script>

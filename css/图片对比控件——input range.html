@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<!--
+Created using JS Bin
+http://jsbin.com
+
+Copyright (c) 2017 by anonymous (http://jsbin.com/zacowolaji/1/edit)
+
+Released under the MIT license: http://jsbin.mit-license.org
+-->
+<meta name="robots" content="noindex">
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JS Bin</title>
+<style id="jsbin-css">
+.image-slider{
+  position:relative;
+  display:inline-block;
+}
+.image-slider>div{
+  position:absolute;
+  top:0;
+  left:0;
+  width:50%;
+  overflow:hidden;
+}
+
+.image-slider img{
+  display:block;
+  user-select:none; 
+}
+
+.image-slider input{
+  position:absolute;
+  left:0;
+  bottom:10px;
+  width:50%;
+  margin:0;
+  filter:contrast(0.5);
+  transform:scale(2);
+  transform-origin:left bottom;
+}
+</style>
+</head>
+<body>
+<div class="image-slider">
+   <img src="http://meyerweb.com/eric/css/edge/complexspiral/glassy-ripple.jpg" alt="">
+   <img src="http://meyerweb.com/eric/css/edge/complexspiral/glassy-bg.jpg" alt="before">
+</div>
+<script id="jsbin-javascript">
+document.querySelectorAll(".image-slider").forEach(function(slider){
+    
+  var div= document.createElement("div")
+  var img=slider.querySelector('img')
+  slider.insertBefore(div,img)
+  div.appendChild(img)
+  
+  var range=document.createElement("input")
+  range.type='range'
+  range.oninput=function(){
+    div.style.width=this.value+"%"
+  }
+  slider.appendChild(range)
+})
+</script>
+</body>
+</html>

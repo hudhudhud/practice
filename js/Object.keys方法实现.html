@@ -1,0 +1,24 @@
+<script type="text/javascript">
+function keys(obj){
+  var result=[]
+    for(key in object){
+      if(Object.prototype.hasOwnProperty.call(object,key)){
+        result.push(key)
+      }
+    }
+    return result
+  }
+//装B模式
+function keys1(obj) {
+  with([]) {
+    with(Object.prototype.hasOwnProperty) {
+      for(var key in obj) {
+        if (call(obj, key)) {
+          push(key)
+        }
+      }
+      return slice()
+    }
+  }
+}
+</script>

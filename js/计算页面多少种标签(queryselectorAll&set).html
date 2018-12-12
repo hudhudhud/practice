@@ -1,0 +1,10 @@
+<script type="text/javascript">
+  //用尽量短的代码计算出当前页面使用了多少【种】标签
+Array.prototype.reduce.call(document.querySelectorAll("*"),
+  (res,val)=>{
+                res.add(val.tagName)
+                return res
+             },
+    new Set())
+
+</script>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+search:<input type="text" name="search">
+total:<span id=totalCount>0</span><br>
+<section>
+</section>
+</body>
+  <script type="text/javascript" src="jquery.js"></script>
+  <script type="text/javascript">
+  var api="https://api.github.com/search/repositories?page=1&q="
+  $("[name=search]").on("keypress",function(e){
+    if(e.keyCode=="Enter"){
+       getDate.call(this)
+    }
+  })
+  $("[name=search]").on("change",function(e){
+       getDate.call(this)
+  })
+  function getDate(){
+    var req=new XMLHttpRequest()
+    req.open("get",api+$(this).val())
+    req.addEventListener("load",function(){
+        var obj=JSON.parse(req.responseText)
+        var result=""
+        if(obj.items.length>0){
+           $("#totalCount").text(obj.total_count)
+           for(var i=0;i<obj.items.length;i++){
+              result+=`<div>${obj.items[i].full_name}</div>`
+           }
+           $("section").html(result)
+        }
+        else{
+           $("#totalCount").text("nothing!")
+        }
+    })
+    req.send(null)
+  }
+  </script>
+</html>

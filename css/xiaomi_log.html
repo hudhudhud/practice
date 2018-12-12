@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title></title>
+		<style>
+	/*思路一：伪元素加定位
+		思路二：移动背景图片的位置
+		源代码里的图是两张，透明png，普通手段无法合并，所以选择使用多背景
+		主要代码
+		a{
+			background-position: 0 0,55px 0;
+			transition: background-position 1s linear;
+		}
+		a:hover{
+			background-position: -55 0,0 0;
+		}*/
+		/*思路二*/
+		section{
+			width: 55px;
+			height:55px;
+			background-color: #ff6700;
+			background-image: url(http://s01.mifile.cn/i/mi-logo.png),url(http://s01.mifile.cn/i/mi-home.png);
+			background-position: 50% 50%,-55px 0;
+			transition: background-position 0.2s linear;
+			background-repeat: no-repeat;
+		}
+		section:hover{
+			background-position: 55px 0,50% 50%;
+		}
+		/*思路一*/
+		/*section{
+  width: 55px;
+  height:55px;
+  background-color: #ff6700;
+  position:relative;
+  overflow:hidden;
+}
+
+section:before
+,section:after
+{
+  content:'';
+  width:55px;
+  height:55px;
+  position:absolute;
+  top:0;
+  bottom:0;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+section:before{
+  left:0;
+  background-image: url(http://s01.mifile.cn/i/mi-logo.png);
+  transition:left 0.1s linear;
+}
+section:hover:before{
+  left:100%;
+}
+section:after{
+  left:-100%;
+  background-image: url(http://s01.mifile.cn/i/mi-home.png);
+  transition:left 0.1s linear;
+}
+section:hover:after{
+  left:0;
+}*/
+		</style>
+	</head>
+	<body>
+	<section></section>
+</body>
+</html>

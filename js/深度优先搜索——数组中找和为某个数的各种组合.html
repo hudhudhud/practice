@@ -1,0 +1,23 @@
+<script type="text/javascript">
+  var sum=0
+  function search(ary,target,start=0,path=[]) {
+    for(var i=start;i<ary.length;i++){
+      sum+=ary[i]
+      path.push(ary[i])
+      if(sum===target){
+        console.log(path)
+        sum-=ary[i]
+        path.pop()
+        continue
+      }
+      if(sum>target){
+        sum-=ary[i]
+        path.pop()
+        continue
+      }
+      search(ary,target,i+1,path)
+      sum-=ary[i]
+      path.pop()
+    }
+  }
+</script>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>cpu 正弦波</title>
+</head>
+<body>
+  <script>
+    function sleep(n) {//用循环次数来制造出cup使用率的高低频率
+      var start = Date.now()
+      while(true) {
+        if (Date.now() - start > n) {
+          break
+        }
+      }
+    }
+    setInterval(function(){//每1s按照正弦公式确定循环次数
+      var percent = 0.5 + 0.5 * Math.sin(Date.now() / 1000 * 2 * Math.PI / 20)
+      console.log(percent)
+      sleep(percent * 1000)
+    }, 1000)
+  </script>
+</body>
+</html>

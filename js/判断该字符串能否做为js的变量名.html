@@ -1,0 +1,18 @@
+<script type="text/javascript">
+//题目：实现一个函数，该函数接收一个字符串，判断该字符串能否做为js的变量名。
+ function isValidIdentifier(name){
+    var innerVal={"var":1,"for":1,"while":1}
+    if(innerVal[name])return false
+    return true
+ }
+ function isValidIdentifier2(name){
+    try{
+        eval(`function f(){var ${name}=1;return  ${name}}`)//在f里面try/catch无法捕获语法异常，try/catch只能捕获执行异常
+        return true
+    }
+    catch(ex){
+      return false
+    }
+ }
+ // http://stackoverflow.com/questions/13273526/try-catch-not-catching-syntax-error-in-chrome
+</script>

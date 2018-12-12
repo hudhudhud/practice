@@ -1,0 +1,25 @@
+<script type="text/javascriptx">
+  // 题目：求s=a+aa+aaa+aaaa+aa...a的值，其中a是一个数字。例如2+22+222+2222+22222(此时共有5个数相加)，具体有几个数相加有通过输入或者函数的实际参数决定。输入两个值，题目中的a与相加的项数n
+  var a = prompt("请输入一个数") - 0
+  var num = prompt("请输入项数") - 0
+  var sum=0
+  var str=""
+  for(var i=0;i<num;i++){
+    str+=a
+    sum+=str-0
+  }
+  console.log(sum)
+
+//思路二
+// 2(1+11+111+1111)
+// 2(9+99+999+9999)/9
+// a(n)=10**n-1  
+function m(a,num){
+  var sum=0
+  for(var i=1;i<=num;i++){
+    sum+=10**i-1
+  }
+  sum=a*(sum/9)
+  console.log(sum)
+}
+</script>

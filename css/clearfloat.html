@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title></title>
+		<style>
+		[qq]{
+		border:1px solid;
+		overflow:hidden;  /*触发BFC，被浮动元素撑大*/
+		}
+		[qq] div{
+		background-color: pink;
+		}
+		[qq] span{
+		height:10px;
+		background-color:red;
+		float:right;
+		margin:10px;
+		clear:both;   /* 此时clear:right;对浮动元素无效，所以clear:left;相当于clear:both;*/
+		}
+		[q1]{
+		width:30px;
+		}
+		[q2]{
+		width:50px;
+		}
+		[q3]{
+		width:70px;
+		}
+		[q4]{
+		width:90px;
+		}
+		[q5]{
+		width:110px;
+		}
+		</style>
+	</head>
+	<body>
+		<div qq>
+			
+			<span q1></span>
+			<span q2></span>
+			<span q3></span>
+			<span q4></span>
+			<span q5></span>
+			<div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, a, reprehenderit. Porro quidem, molestias beatae consequuntur obcaecati velit, nobis accusamus reiciendis quam, doloremque doloribus animi in quas autem? Iure, ipsam quae aut sint harum eius. Facere id voluptas laboriosam corrupti debitis ipsum unde, illo laborum saepe praesentium rerum, vitae facilis totam quia. Tempora dolorum vitae quae natus fugiat, laboriosam enim, distinctio, quo amet placeat sapiente itaque, nobis porro dolor molestiae aperiam? Vero labore in repudiandae pariatur consectetur possimus qui libero vitae, modi provident? Accusantium, assumenda, earum? Laudantium illum error officia numquam asperiores expedita assumenda molestias cumque. Eos, rerum voluptatum eius!</div>
+		</div>
+	</body>
+</html>

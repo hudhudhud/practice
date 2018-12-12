@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>circles</title>
+  <style>
+    svg circle {
+      fill: transparent;
+      stroke-width: 3px;
+      /*stroke: violet;*/
+    }
+    svg {
+      border: 5px solid pink;
+    }
+  </style>
+</head>
+<body>
+  <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias a eaque, hic natus quas impedit ducimus. Animi cum quae deleniti! Ipsum dolor quaerat cumque, commodi, consequatur est. Numquam odio, animi!</div>
+</body>
+<script src="d3.v4.min.js"></script>
+<script>
+  var div = document.querySelector('div')
+  div.onclick=function(){
+    console.log(event)
+    console.log(this)
+    console.log(d3.mouse(div))
+  }
+</script>
+<script xtype="x">
+  var width = 500
+  var height = 400
+
+  var svg = d3.select('body').append('svg')
+    .attr('width', width)
+    .attr('height', height)
+
+  svg.append('rect')
+    .attr('x',0)
+    .attr('y',0)
+    .attr('width', width)
+    .attr('height', height)
+    .attr('fill', 'black')
+  var i = 0
+
+  svg.on('mousemove', function(){
+    var m = d3.mouse(this)
+    svg.append('circle')
+      .attr('cx', m[0])
+      .attr('cy', m[1])
+      .attr('r', 1e-6)
+      .attr('stroke', d3.hsl(i++%360,1,0.5))
+      // .attr('stroke-opacity', 1)
+      .transition()
+      .duration(2000)
+      .ease(Math.sqrt)
+      .attr('r', 100)
+      .attr('stroke', 'transparent')
+      // .attr('stroke-opacity', 0)
+      .remove()
+  })
+</script>
+</html>

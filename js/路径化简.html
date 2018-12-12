@@ -1,0 +1,36 @@
+<script type="text/javascript">
+// 路径化简
+// path = "/home/", => "/home"
+// path = "/a/./b/../../c/", => "/c" ，.不变/a/b/../../c/，..往前一步即与a抵消/a/../c/,..再往前即/c/
+var simplifyPath = function(path) {
+    var node=document.createElement("a")
+    node.href=path
+    return node.href
+};
+var simplifyPath2 = function(path) {
+    var res=[]
+    path.split("/").reduce(function(r,value){
+        if(value!="."&&value!==""){
+            if(value==="..")
+               r.pop()
+            else
+               r.push(value)
+        }
+        return r
+    },res)
+   return "/"+res.join("/")
+};
+
+function simplifyPath3(path) {
+  return "/"+path.split('/').reduce((stack, currPath) => {
+    if (currPath === '..') {
+      return stack.pop(), stack   //逗号表达式，外可不加括号，返回最后那一项
+    } else if (currPath === '.') {
+      return stack
+    } else {
+      if(currPath!="")stack.push(currPath)
+      return stack
+    }
+  }, []).join('/')
+}
+</script>

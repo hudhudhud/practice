@@ -1,0 +1,46 @@
+<div>
+<script type="text/javascript">
+  var f=(x,y)=>Math.sin(x)+Math.cos(y)
+  var start=-Math.PI
+  var end=Math.PI
+  var step=0.2
+  var factor=100
+  var z,x,y
+  for(x=start;x<=end;x+=step){
+    for(y=start;y<=end;y+=step){
+      z=f(x,y)
+      document.write(`<i style='transform:translate3d(${x*factor}px,${y*factor}px,${z*factor}px);background-color:hsl(${z*180},100%,50%)'></i>`)
+    }
+  }
+</script>
+<style type="text/css">
+div{
+  position: relative;
+  width: 300px;
+  height: 300px;
+  background-color: rgba(0,0,0,0.05);
+  margin: auto;
+  margin-top:150px;
+  transform-style: preserve-3d;
+  animation: my3d 10s linear 1; 
+}
+div:hover{
+  animation-play-state:paused;
+}
+i{
+  position:absolute;
+  width: 10px;
+  height: 10px;
+  top:50%;
+  left:50%;
+}
+@keyframes my3d{
+  from{
+     transform:perspective(1000px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+  }
+  to{
+     transform:perspective(1000px) rotateX(280deg) rotateY(280deg) rotateZ(280deg);
+  }
+}
+</style>
+</div>

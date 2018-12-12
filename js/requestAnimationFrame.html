@@ -1,0 +1,55 @@
+<!-- 元素绕着圆转 -->
+<style>
+  *{
+  background-color: rgba(0,0,0,0.1);
+}
+div{
+  width:50px;
+  height: 50px;
+  border-radius:50%;
+  background-color: red;
+  position:relative;
+  margin:auto;
+  margin-top:20%; 
+}
+</style>
+<div></div>
+<script type="text/javascript">
+var div=document.querySelector("div")
+var angle=0,lastTime=null;
+function animate(time){
+  if(lastTime!=null)
+    angle+=(time-lastTime)*0.001
+   lastTime=time
+   div.style.top=(Math.sin(angle)*50)+"px"
+   div.style.left=(Math.cos(angle)*50)+"px"
+   id=requestAnimationFrame(animate)
+   console.log(oldtime)
+   console.log(time)
+   if(time>oldtime+5000)cancelAnimationFrame(id)
+}
+oldtime=requestAnimationFrame(animate)
+</script>
+
+
+<!-- 帽子绕着猫转 -->
+<!-- <img src="http://eloquentjavascript.net/img/cat.png" id="cat" style="position: absolute">
+<img src="http://eloquentjavascript.net/img/hat.png" id="hat" style="position: absolute">
+<script type="text/javascript">
+var cat = document.querySelector("#cat");
+var hat = document.querySelector("#hat");
+var angle = 0, lastTime = null;
+function animate(time) {
+  if (lastTime != null)
+    angle += (time - lastTime) * 0.001;
+  lastTime = time;
+  var catTop = (Math.sin(angle) * 20) + 40;
+  var catLeft = (Math.cos(angle) * 200) + 250;
+  cat.style.top = catTop + "px";
+  cat.style.left = catLeft + "px";
+  hat.style.top = (Math.sin(angle*3) * 40) + catTop - 20 + "px";
+  hat.style.left = (Math.cos(angle*3) * 60) + catLeft + "px";
+  requestAnimationFrame(animate);
+}
+requestAnimationFrame(animate);
+</script> -->

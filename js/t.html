@@ -1,0 +1,27 @@
+<script type="text/javascript">
+  
+  function f(o){
+     o.x=1     
+     o={}   //引用拷贝的情况，不会起作用     
+     o.y=2     
+  }
+  var tv = {};
+  tv.x=0;
+  f(tv);
+
+  tv.x=1
+  tv={}
+  tv.y=2
+
+  console.log(tv.x)
+  console.log(tv.y)
+
+  //引用传递
+  //{y:2}
+  //
+  // 值传递
+  // {x:0}
+  // 
+  // 引用的拷贝 o=tv
+  //  {x:1} 
+</script>

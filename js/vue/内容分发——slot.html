@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+  <div id=app>
+    <card>
+      <p slot=header>header</p>
+      <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+      </ul>
+      <p slot=foot>foot</p>
+    </card>
+    <list :items="[{title:1,desc:111},{title:2,desc:222}]">
+      <template scope="slotProps">
+          <p>No.{{slotProps.index}}</p>
+          <p>title:{{slotProps.data.title}}</p>
+          <p>desc:{{slotProps.data.desc}}</p>
+      </template>
+    </list>
+  </div>
+</body>
+<script type="text/javascript" src='vue.js'></script>
+<script type="text/javascript">
+  //作用域插槽
+  Vue.component("list",{
+    props:{
+      items:Array
+    },
+    template:`
+       <ul>
+        <li v-for="(item,i) in items">
+          <slot :data="item" :index=i></slot>
+        </li>
+       </ul>
+    `
+  })
+  //内容分发
+  Vue.component("card",{
+    template:`
+      <div style="border:1px solid;width:200px;height:200px">
+        <h3>i m card</h3>
+        <slot name=header>i m header</slot>
+        <slot>i m header</header>
+        <slot name=foot>i m foot</foot>
+      </div>
+    `
+  })
+  new Vue({
+    el: '#app'
+  })
+  
+</script>
+</html>

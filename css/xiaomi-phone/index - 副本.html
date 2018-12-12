@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>my_小米手机商城</title>
+  <meta charset="utf-8">
+  <link rel="icon shortcut" href="favicon.ico">
+  <meta name="viewport" content="width=device-width">
+  <link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+  <xlink rel="stylesheet" type="text/less" href="mi.less"> 
+  <style type="text/less">
+  *{
+    xbackground-color:rgba(0,0,0,0.2);
+  }
+   html{
+    font-family: Arial,Verdana,Sans-serif;
+    font-size:calc( 100vw / 720 * 100) ; /*52.1px,这里以iphone6为例，设计稿720相当于iphone6宽度的2倍，所以就以网页上量出来的2倍再除以100即可*/
+   }
+   body{
+    margin:0;
+    padding: 0;
+   }
+   ul{
+    list-style: none;
+    margin:0;
+    padding: 0;
+    font-size:0;
+    li{
+      display: inline-block;
+    }
+   }
+   .top-header{
+    position: fixed;
+    z-index: 3;
+    top:0;
+    height: 1.51rem;  
+    width:100%;
+    background-color: #fff;
+    .search-bar{
+        height: 0.8rem;
+        line-height: 0.8rem;
+       .logo{
+          img{
+             width:0.5rem;
+             padding-left:0.24rem;
+             padding-right:0.24rem; 
+             vertical-align:middle;
+           }
+       }
+      .search{
+        width:5.3rem;  
+        position: relative;
+        input{
+           padding-left:0.7rem;
+           outline: none;
+           box-sizing: border-box;
+           border:0.02rem solid #e5e5e5;
+           border-radius: 0.01rem;
+           height:0.5rem;
+           width:100%;
+           vertical-align:middle;
+        }
+        a{
+          position: absolute;
+          width:0.54rem;
+          height: 80%;
+          left:0.1rem;
+          top:0.1rem;
+          i{
+           font-size: 0.3rem; 
+          }
+        }
+       }
+      .login{
+        margin-left: 0.15rem;
+        a{
+          font-size:0.28rem;
+          text-decoration: none;
+          color:#969696;
+          vertical-align:middle;
+        }
+       }
+     }
+     .sub-header{
+       height: 0.6rem;
+       display: table-cell;
+       vertical-align: middle;
+       ul{
+        li{
+          font-size:.26rem;
+          margin-left:0.28rem;
+          margin-right:0.28rem;
+          color:#747474;
+        }
+       }
+     }
+   }
+   .content{
+    overflow-y: scroll;
+    overflow-x:hidden;
+    margin-top:1.51rem;
+    margin-bottom:0.94rem;
+    .slider{
+       position: relative;
+       width:100%;
+       height: 3.74rem;
+       overflow: hidden;
+       .dots{
+         z-index:9999;
+         height: 0.2rem;
+         position:absolute;
+         top:3.3rem;
+         left:80%;
+         span{
+           display: inline-block;
+           width: 0.1rem;
+           height: 0.1rem;
+           vertical-align: top;
+           border-radius: 0.1rem;
+           background-color: #f8f8f8;
+           opacity: 0.6;
+         }
+         .current-dot{
+            background-color: white;
+            opacity: 1;
+         }
+       }
+       .imgs{
+          width:1000%;
+          height:100%;
+          position:absolute;
+          top:0;
+          left:-7.5rem;
+          img{
+            width:7.5rem;
+            float:left;
+         }
+       }
+    }
+    .section{
+       overflow: hidden;
+       div{
+          border-bottom:0.02rem solid gray;
+          float:left;
+          img{
+            width:1.8rem;
+            vertical-align: top;
+          }
+       }
+    }
+    .box{
+      height: 0.82rem;
+      xline-height: 0.82rem;
+      position: relative;
+      *{
+        position: absolute;
+        top:50%;
+        transform: translateY(-50%);
+      }
+      img{
+         width:1.56rem;
+         xmargin-left:0.2rem;
+         
+      }
+      .message{
+         display: inline-block;
+         width:5rem;
+         font-size:.24rem;
+         left:25%;
+         text-overflow:ellipsis;
+         overflow: hidden;
+         white-space:nowrap;
+      }
+    }
+    .advice{
+      margin-top:0.16rem;
+      div img{
+        vertical-align: top;
+      }
+      div:nth-child(1){
+        float:left;
+        width:50%;
+        img{
+          width:100%;
+          height: 5.29rem;
+        }
+      }
+      div:nth-child(2){
+        float:right;
+        box-sizing: border-box;
+        padding-left:0.05rem;
+        width:50%;
+        img:first-child{
+          padding-bottom:0.05rem;
+        }
+        img{
+          height: 2.625rem;
+        }
+      }
+      div:nth-child(3){
+        clear:both;
+        box-sizing: border-box;
+        padding-top:0.04rem;
+        width:100%;
+        img{
+          height: 2.9rem;
+        }
+      }
+    }
+    .mxdp{
+       display: flex;
+       flex-wrap:wrap;
+       margin-top:0.16rem;
+      .top{
+        width:100%;
+        img{
+          width: 100%;
+        }
+      }
+      .detail{
+        margin-top:0.041rem;
+        &:nth-child(2n){
+          margin-right: 0.08rem;
+        }
+        display: flex;
+        flex-direction: column;
+        flex-wrap:wrap;
+        width:49.2%;
+        .pro{
+          img{
+            vertical-align: top;
+            width:100%;
+           }
+        }
+        .info{
+          width:100%;
+          padding: 0.2rem 0.28rem;
+          box-sizing: border-box;
+          p{
+            white-space:nowrap;
+            overflow: hidden;
+            text-overflow:ellipsis;
+            margin:0;
+          }
+          p:first-child{
+            font-size:.28rem;
+          }
+          p:nth-child(2){
+            font-size:0.23rem;
+          }
+          p:last-child{
+            font-size:.32rem;
+            color:#ff6000;
+          }
+          p:last-child:before{
+            content:"￥";
+          }
+        }
+      }
+    }
+   }
+   .foot{
+     position: fixed;
+     bottom:0;
+     width:100%;
+     height: 0.94rem;
+     background-color: #fff;
+     ul{
+      height: 100%;
+      li{
+        font-size:.22rem;
+        box-sizing: border-box;
+        width: 25%;
+        height: 100%;
+        position: relative;
+        div{
+          margin-top:0.1rem;
+          width:0.416rem;
+          height: 0.416rem;
+          position: absolute;
+          left:50%;
+          transform: translateX(-50%);
+          background-image: url(imgs/spr1_5b2e09c.png);
+          background-size: .4rem 3.2rem;
+        }
+        .first-page{
+          background-position-y:-2.4rem;
+        }
+        .catg{
+          background-position-y:-.4rem;
+        }
+        .shopping-car{
+          background-position-y:-1.2rem;
+        }
+        .my{
+          background-position-y:-2rem;
+        }
+        p{
+          text-align: center;
+          margin-top:0.5rem;
+        }
+        
+      }
+     }
+   }
+   .loading {
+      text-align: center;
+      width:100%;
+    }
+  </style>
+  <script type="text/javascript" src="jquery.js"></script>
+  <script type="text/javascript">
+    var sliderImg=["501e1a9e327059b210935cc3b03d3ac8.jpg",
+      "1b963be5-2ba4-29cf-e19b-d43fdae3bc04.webp",
+      "711ad39a-53fd-73a7-b5fe-bb226ad51873.webp",
+    ]
+    var sliderImg2=["501e1a9e327059b210935cc3b03d3ac8.jpg",
+      "DEB3029C-150D-4418-A307-794DDE9818F0!641x409!70.jpg",
+      "CEB9B48D-FBC4-E4CF-6FCA-A3E29CF8C7F4!641x409!70.jpg",
+    ]
+    var hasWebP = false;
+    (function() {
+      var img = new Image();
+      img.onload = function() {
+        hasWebP = !!(img.height > 0 && img.width > 0);
+        $(".slider .imgs").append(`<img src="imgs/${sliderImg[2]}" data-index=${2}>`)
+        $(".slider .imgs").append(`<img src="imgs/${sliderImg[0]}" data-index=${0}>`)
+        $(".slider .imgs").append(`<img src="imgs/${sliderImg[1]}" data-index=${1}>`)
+        // sliderImg.forEach((item,i)=>{
+        //   $(".slider .imgs").append(`<img src="imgs/${item}" data-index=${i}>`)
+        // })
+      };
+      img.onerror = function() {
+        hasWebP = false;
+        $(".slider .imgs").append(`<img src="imgs/${sliderImg2[2]}" data-index=${2}>`)
+        $(".slider .imgs").append(`<img src="imgs/${sliderImg2[0]}" data-index=${0}>`)
+        $(".slider .imgs").append(`<img src="imgs/${sliderImg2[1]}" data-index=${1}>`)
+        // sliderImg2.forEach((item,i)=>{
+        //   $(".slider .imgs").append(`<img src="imgs/${item}" data-index=${i}>`)
+        // })
+      };
+      img.src = 'http://www.gstatic.com/webp/gallery/1.webp';
+    })();
+  </script>
+</head>
+<body>
+<div class="top-header">
+  <ul class="search-bar">
+    <li class="logo">
+      <img src="imgs/logo_121d4a6.png" alt="logo">
+    </li>
+    <li class="search">
+      <a href=""><i class="fa fa-search" aria-hidden="true"></i></a>
+      <input type="text">
+    </li>
+    <li class="login">
+      <a href="#">登录</a>
+    </li>
+  </ul>
+  <div class="sub-header">
+    <ul>
+      <li>推荐</li>
+      <li>手机</li>
+      <li>智能</li>
+      <li>电视</li>
+      <li>盒子</li>
+      <li>电脑</li>
+    </ul>
+  </div>
+</div>
+<div class="content">
+  <div class="slider">
+    <div class="imgs">
+    </div>
+    <div class="dots">
+      <span class="current-dot"></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+  <div class="section">
+    <div><img src="imgs/594dec83-b317-175c-1916-e73c591452b7!180x152.webp" alt=""></div>
+    <div><img src="imgs/82d92b9e-63fa-16d5-2a37-a1675c72351a!180x152.webp" alt=""></div>
+    <div><img src="imgs/0437c9f2-dfba-a19f-d8d6-472e107bc4ca!180x152.webp" alt=""></div>
+    <div><img src="imgs/6b06addd-6460-aa48-bdb2-043292b3d141!180x152.webp" alt=""></div>
+  </div>
+  <div class="box">
+     <img src="imgs/sczb_ed0a4af.png" alt="">
+     <span class="message">|&nbsp;&nbsp;&nbsp;米家wiha螺丝刀是怎样诞生的</span>
+  </div>
+  <div class="advice">
+      <div>
+        <img src="imgs/66260ba5-acdd-e69c-acda-11bcf43e8b8d!358x508.webp" alt="">
+      </div>
+      <div>
+        <img src="imgs/72357f14580e1d9fb80bccb30c7e265a.jpg" alt="">
+        <img src="imgs/66e4957a-3df1-fc3d-7557-afa1d01bf126!358x252.webp" alt="">
+      </div>
+      <div>
+        <img src="imgs/bac901d5-35b9-8975-1f89-a6070b2c6862!720x280.webp" alt="">
+      </div>
+  </div>
+  <div class="mxdp">
+    <div class="top"><img src="imgs/cfff291b-a832-becf-d86d-71d29369698f!720x440.webp" alt=""></div>
+  
+  </div>
+</div>
+<div class="foot">
+   <ul>
+     <li>
+       <div class="first-page"></div>
+       <p>首页</p>
+     </li>
+     <li>
+       <div class="catg"></div>
+       <p>分类</p>
+     </li>
+     <li>
+       <div class="shopping-car"></div>
+       <p>购物车</p>
+     </li>
+     <li>
+       <div class="my"></div>
+       <p>我的</p>
+     </li>
+   </ul>
+</div>
+</body>
+<script type="text/javascript" src="less.min.js"></script>
+<script type="text/javascript">
+    var mxdp=[{
+      img:'imgs/0774806c-54ca-92fc-38bf-f15864945ae6.webp?width=360&height=360',
+      name:'小米便携鼠标',
+      desc:'轻薄便携，含电池仅重77.5g',
+      price:99,
+    },{
+      img:'imgs/7441815c-10e6-8811-d87a-3b7355e8a7e7.webp?width=360&height=360',
+      name:'米家智能插座',
+      desc:'超智能的插座',
+      price:69,
+    },{
+      img:'imgs/fd53c201-0171-b0c8-d131-610d746e5110.webp?width=360&height=360',
+      name:'红米Note 5A 高配版',
+      desc:'1600万像素柔光自拍',
+      price:899,
+    },{
+      img:'imgs/fb4f9754-0164-b2a1-59b9-8ad995cee0ac.webp?width=360&height=360',
+      name:'红米Note 4X',
+      desc:'多彩金属，超长续航',
+      price:999,
+    }]
+
+  jQuery(function($){
+
+    var id=setInterval(next,2000)
+
+    var start=0,end=0
+    var target=$(".slider .imgs img")
+    $("body").on("touchstart",target,function(e){
+         start = e.originalEvent.touches[0].clientX
+         clearInterval(id)
+    })
+    $("body").on("touchmove",target,function(e){
+        end= e.originalEvent.touches[0].clientX
+    })
+    $("body").on("touchend",target,function(e){
+        end-start>0?prev():next()
+    })
+
+    function next(){
+      var $imgs = $('.imgs')
+      $imgs.animate({
+        left: "-15rem"
+      },500, function(){
+        $imgs.find("img:first-child").appendTo($imgs)
+        $imgs.css('left', '-7.5rem')//注意这里不是渐变
+        changeDot()
+      })
+    }
+
+    function prev(){
+      var $imgs = $('.imgs')
+      $imgs.animate({
+        left: "0rem"
+      },500, function(){
+        $imgs.find("img:last-child").prependTo($imgs)
+        $imgs.css('left', '-7.5rem')
+        changeDot()
+      })
+    }
+
+    function changeDot(){
+      var index=$('.imgs img').eq(1).attr("data-index")
+      $(".dots").find("span").removeClass("current-dot")
+      $(".dots").find("span").eq(index).addClass("current-dot")
+    }
+
+    var ary=["米家wiha螺丝刀是怎样诞生的","有趣评NO.18：红米Note 5A用起来到底怎么样ererer？","带上这5件，让你的秋游更舒适"]
+    var i=1
+    setInterval(()=>{
+      i= i>=ary.length?0:i
+      $(".message")
+      .animate({opacity:0},500,"linear",()=>{
+         $(".message").html("|&nbsp;&nbsp;&nbsp;"+ary[i])
+         i++
+      })
+      .animate({opacity:1},500,"linear")
+    },3000)
+    
+     mxdp.forEach(item=>{
+            $(` 
+            <div class="detail">
+             <div class="pro">
+               <img src="${item.img}" alt="">
+             </div>
+             <div class="info">
+               <p>${item.name}</p>
+               <p>${item.desc}</p>
+               <p>${item.price}</p>
+             </div>
+          </div>
+
+            `).appendTo('.mxdp')})
+
+    var loading=false
+    $(window).on('mousewheel scroll',function(){
+        if(loading){
+          return 
+        }
+        var scrollPos=window.scrollY
+        var viewportHeight=window.innerHeight
+        var pageHeight=document.documentElement.scrollHeight
+        if(Math.abs(scrollPos+viewportHeight-pageHeight)<5){
+          if(loading===false){
+            loading = true
+            var loadingText=$(`<div class="loading"><embed src="imgs/Ellipsis.svg" type="image/svg+xml" /></div>`).appendTo(".mxdp")
+            loadNewData(function(){
+              loadingText.remove()
+              loading=false
+            })
+          }
+        }
+    })
+    function loadNewData(cb){
+        setTimeout(function(){
+          mxdp.forEach(item=>{
+            $(` 
+            <div class="detail">
+             <div class="pro">
+               <img src="${item.img}" alt="">
+             </div>
+             <div class="info">
+               <p>${item.name}</p>
+               <p>${item.desc}</p>
+               <p>${item.price}</p>
+             </div>
+          </div>
+
+            `).appendTo('.mxdp')
+          })
+          cb()
+        },3000)
+    }
+
+  })
+ 
+</script>
+</html>

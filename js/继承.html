@@ -1,0 +1,64 @@
+<script type="text/javascript">
+  function People(name,head) {
+    this.name=name
+    this.head=head
+    //私有变量，即只能用this访问，即在函数内部，不能用实例._private访问，
+    //私有变量在js中只能在语法上控制，统一私有变量前带_或其他符号
+    this._private="food"
+    //或者用var及闭包原则
+    // var _private=1
+    // function private(){
+    //     console.log(_private)
+    // }
+  }
+
+  People.prototype.eat=function(){
+    console.log(this.name+this.head+" is eatting "+this._private)
+  }
+
+  function Man(name,head){
+    People.call(this,name,head) //共享父类的属性
+    this.gender="man"
+  }
+  Man.prototype.play=function(){
+    console.log(this.name+this.head+" is playing football")
+  }
+
+  p=new Man("xiaoming","head")
+  Object.setPrototypeOf(Man.prototype,People.prototype)//实现继承，共享父类原型中的方法
+  // Man.prototype.__proto__==People.prototype
+  // Man.prototype=new People()
+  // Man.prototype=Object.create(People.prototype)
+  p.eat()
+  p.play()
+</script>
+<script type="text/javascript">
+  
+</script>
+<script type="text/javascript">
+function Person(){//构造方法
+}
+
+Person.prototype = function () {
+  //"private" variables:
+  var myPrivateVar = "I can be accessed only from within Person.prototype";
+
+  //"private" method:
+  var myPrivateMethod = function () {
+      console.log("I can be accessed only from within Person.prototype");
+  }
+  return  {//return an object
+      constructor:Person, 
+      myPublicProperty: "I'm accessible as public property.",
+      myPublicMethod: function () {
+          console.log("I'm accessible as public method.");
+          //可用this访问公有变量:
+          console.log(this.myPublicProperty);
+
+          //访问私有变量
+          console.log(myPrivateVar);
+          myPrivateMethod();
+      }
+  };
+}(); //注意这里的括号，表示立刻执行此匿名函数
+</script>

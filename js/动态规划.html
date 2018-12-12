@@ -1,0 +1,300 @@
+<script type="text/javascript">
+//  最大三角形
+var matrix = [
+  [3],
+  [5, 1],
+  [2, 4, 7],
+  [6, 8, 9, 0]
+]
+
+var cache = [
+  [21],
+  [18, 17],
+  [10, 13, 16],
+  [6, 8, 9, 0]
+]
+
+function Solve(m, i, j) {
+  if (i === m.length - 1) {
+    return m[i][j]
+  }
+
+  if (cache[i][j] !== undefined) {
+    return cache[i][j]
+  }
+
+  return cache[i][j] = m[i][j] + Math.max(
+    Solve(m, i + 1, j),
+    Solve(m, i + 1, j + 1)
+  )
+}
+
+
+//最长回文子序列
+//askjfauwsdifhyuawesfjnaksgjop23uyrjaslkdgfjaldskfj
+//
+//dabcd
+//dxyabx
+//xyabxd
+//dxyabxd
+//3def4e2d
+
+function LPS(s) {
+  if (s.length === 0) {
+    return 0
+  }
+  if (s.length === 1) {
+    return 1
+  }
+
+  var l = s.length
+  if (s[0] === s[l - 1]) {
+    return 2 + LPS(s.substr(1, l - 2))
+  } else {
+    return Math.max(
+      LPS(s.substr(1)),
+      LPS(s.substr(0, l - 1))
+    )
+  }
+}
+
+
+
+function minMulTimes(mats) {
+  if (mats.length < 2) {
+    return 0
+  }
+
+  var mulTimes = new Array(mats.length - 1)
+
+  for (var i = 0; i < mulTimes.length; i++) {
+    let leftMats = mats.slice(0, i + 1)
+    let rightMats = mats.slice(i + 1)
+    mulTimes[i] = minMulTimes(leftMats) + minMulTimes(rightMats) + mats[0][0] * mats[i][1] * mats[mats.length - 1][1]
+  }
+
+  return Math.min(...mulTimes)
+}
+
+
+//最长递增子序列
+function LIS(ary) {
+  if (ary.length === 1) {
+    return 1
+  }
+  if (ary.length === 0) {
+    return 0
+  }
+  var ls = new Array(ary.length)
+  for (var i = ls.length - 1; i >= 0; i--) {
+    for (var j = i - 1; j >= 0; j--) {
+      if (ary[i] > ary[j]) {
+
+      }
+    }
+  }
+}
+
+
+
+/**
+ * 
+10   10    2   10    9
+ 4   10   13    3    8
+ 9    4    4   13   14
+14    0    6   11   12
+ 7   12    6   0    3
+ */
+
+function lr(m, i, j) {
+  var max = 0
+  for (var i = 0; i < m.length; i++) {
+    for (var j = 0; j < m[0].length; j++) {
+
+    }
+  }
+}
+
+
+
+function isMatch(str, wildcard) {
+  if (wildcard === '*') {
+    return true
+  }
+  if (str.length === 0 && wildcard.length === 0) {
+    return true
+  }
+
+  // abccc
+  // a?xxx
+  if (str[0] === wildcard[0] || wildcard[0] === '?') {
+    return isMatch(str.substr(1), wildcard.substr(1))
+  }
+
+  if (wildcard[0] === '*') {
+    for (var i = 0; i <= str.length; i++) {
+      if (isMatch(str.substr(i), wildcard.substr(1))) {
+        return true
+      }
+    }
+    return false
+      // return isMatch(str, wildcard.substr(1))||
+      //        isMatch(str.substr(1), wildcard(1))||
+      //        isMatch(str.substr(2), wildcard(2))
+  }
+}
+
+
+// 子串
+// 子序列
+// slkjfoiwjeflkajosjflkaejwsfoijasdlifs
+
+// slkjfoiwjeflkajosjflkaejwsfoijasdli
+// lkjfoiwjeflkajosjflkaejwsfoijasdlif
+
+
+// 1
+// 2
+// 3
+// 4
+// 5
+// 6
+// 7
+// 8
+// 9
+// 10
+// n
+// n*3
+
+
+function longestPalin(s) {
+  var l = s.length
+  if (l === 0 || l === 1) {
+    return l
+  }
+  if (s[0] === s[l - 1] && isPalin(s.substr(1, l - 2))) {
+    return l
+  } else {
+    return Math.max(
+      longestPalin(s.substr(0, l - 1)),
+      longestPalin(s.substr(1))
+    )
+  }
+}
+
+function longestPalin2(s) {
+  var l = s.length
+  if (l === 0 || l === 1) {
+    return l
+  }
+  if (s[0] === s[l - 1] && longestPalin2(s.substr(1, l - 2)) === l - 2) {
+    return l
+  } else {
+    return Math.max(
+      longestPalin2(s.substr(0, l - 1)),
+      longestPalin2(s.substr(1))
+    )
+  }
+}
+
+function isPalin(s) {
+  return s === s.split('').reverse().join('')
+}
+
+
+
+// alksjf
+// askjf
+
+function minEdit(a, b) {
+  if (a.length === 0 || b.length === 0) {
+    return Math.max(a.length, b.length)
+  }
+
+  if (a === b) {
+    return 0
+  }
+
+  if (a[0] === b[0]) {
+    return minEdit(a.substr(1), b.substr(1))
+  } else {
+    return Math.min(
+      1 + minEdit(a.substr(1), b),
+      1 + minEdit(a, b.substr(1)),
+      1 + minEdit(a.substr(1), b.substr(1))
+    )
+  }
+}
+
+//背包问题，数组中的每一项左边为石头的重量，右边为石头的价值，背包最多能装指定重量，怎么装才能得到最大价值
+// [[1,2],    [3,5],[2,3],[5,8]]
+//             9
+// [[1,2],    [3,5],[2,3],[5,8]]
+// 1           8   
+function knapsack(stones, bag) {
+  var l = stones.length
+  if (bag === 0){
+    return 0
+  }
+  if (l === 0){
+    return 0
+  }
+  if (l === 1){
+    if (stones[0][0] <= bag) {//重量小于包的就直接该重量的价值，否则返回0
+      return stones[0][1]
+    } else {
+      return 0
+    }
+  }
+  var maxValues = new Array(l)
+  for (var i = 0; i < l; i++) {
+    var stone = stones[i]
+    if (stone[0] > bag) {//石头大于包的重量，则跳过这个，求剩下的石头的价值
+      maxValues[i] = knapsack(stones.slice(0, i).concat(stones.slice(i + 1)), bag)
+    } else {
+      maxValues[i] = Math.max(//否则计算加上当前石头或不加当前石头，两个里较大的
+        knapsack(stones.slice(0, i).concat(stones.slice(i + 1)), bag),//
+        stone[1] + knapsack(stones.slice(0, i).concat(stones.slice(i + 1)), bag - stone[0])
+      )
+    }
+  }
+  return Math.max(...maxValues)
+}
+
+
+
+// ieikk kkdiesseeee
+//   n           m
+//切最少的次数让所有段落都为回文
+function minCut(str) {
+  if (isPalin(str)) {
+    return 0
+  }
+
+  var l = str.length
+  var minCuts = new Array(l - 1)
+  for (var i = 0; i < l - 1; i++) {
+    minCuts[i] = 1 + minCut(str.slice(0, i + 1)) + minCut(str.slice(i + 1))
+  }
+  return Math.min(...minCuts)
+}
+
+function isPalin(s) {
+  return s === s.split('').reverse().join('')
+}
+
+//git diff 查找两个文件的不同 转换为查找最长子序列，即不需要连续，但顺序相同的字符
+function LCB(a,b){
+  if(a==""||b==""){
+    return ""
+  }
+  if(a[0]==b[0]){
+    return a[0]+LCB(a.substr(1),b.substr(1))
+  }else{
+    var one=LCB(a,b.substr(1))
+    var two=LCB(a.substr(1),b)
+    return one.length>two.length?one:two
+  }
+}
+
+</script>

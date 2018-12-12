@@ -1,0 +1,43 @@
+<script type="text/javascript">
+/**
+ * @param {number[]} data
+ * @return {boolean}
+ */
+var validUtf8 = function(data) {
+  if(!data||!data.length)return true
+  var bin=data.map(item=>{
+    var b=item.toString(2);
+    var len=String(b).length
+    b="0".repeat(8-len>0?8-len:0)+b
+    return b
+  },"")
+  
+  for(var i=0;i<bin.length;i++){
+    var byte=bin[i].split("0")[0]
+    if(bin[i].startsWith("10")||byte.length>4)return false
+    var byteCount=1
+    if(byte!=""){
+      byteCount=byte.length-1
+      if(byteCount>bin.length-1)return false
+      for(j=i+1;j<=i+byteCount;j++){
+        if(!bin[j].startsWith("10"))
+          return false
+      }
+      i=j-1
+    }
+    else{
+      continue
+    }
+  }
+  return true
+};
+
+console.log(validUtf8([197,130,1]))
+console.log(validUtf8([]))
+console.log(validUtf8([1,2,333]))
+console.log(validUtf8([145]))
+console.log(validUtf8([250,145,145,145,145]))
+console.log(validUtf8([228,189,160,229,165,189,13,10]))
+console.log(validUtf8([115,100,102,231,154,132,13,10]))
+
+</script>

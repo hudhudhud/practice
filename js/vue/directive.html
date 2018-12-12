@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <script type="text/javascript" src="../jquery.js"></script>
+  <link rel="stylesheet" href="../jquery-ui/jquery-ui.css">
+  <script type="text/javascript"  src="../jquery-ui/jquery-ui.js"></script>
+  <script type="text/javascript" src="vue.js"></script>
+  <script type="text/javascript">
+  Vue.directive("datepicker",{
+    inserted(el){
+        $(el).datepicker()
+    },
+  })
+  Vue.directive("hide",{
+    update(el,binding){
+      console.log(binding)
+        if(binding.value){
+          el.style.display="none"
+        }else{
+          el.style.display="block"
+        }
+    },
+  })
+</script>
+</head>
+<body>
+<div id="app">
+  <input type="" name=""  v-datepicker />
+  <span v-hide="hide">you see me</span>
+</div>
+<script type="text/javascript">
+    app=new Vue({
+      el:"#app",
+      data:{
+        hide:false
+      }
+  })
+</script>
+</body>
+</html>

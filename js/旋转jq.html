@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<meta name="robots" content="noindex">
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<script src="https://cdn.jsdelivr.net/lodash/3/lodash.min.js"></script>
+<title>旋转按钮</title>
+<style id="jsbin-css">
+body{
+  margin:0;
+}
+*{
+  xbackground-color: rgba(0,0,0,0.1);
+ /*  -webkit-background-origin: padding-box;
+  background-origin: padding-box;
+  background-clip:padding-box; */
+  user-select:none;
+}
+.cursor{
+  cursor:pointer
+}
+#control{
+  width: 500px;
+  height: 500px;
+  border:20px solid rgba(111,0,0,0.1);
+  border-radius:50%;
+  background-image:linear-gradient(to right,red 50%,blue 0,blue 50%);
+  display:flex;
+  position: relative;
+  margin:auto;
+  margin-top:calc(50vh - 250px);
+}
+
+ul{
+  z-index: -1;
+  width:500px;
+  height: 500px
+}
+ul li{
+    list-style: none;
+    display:inline-block;
+    width:50px;
+    height: 30px;
+    background-color: pink;
+    text-align: center;
+    line-height: 30px;
+    border:1px solid;
+    position: absolute;
+}
+.knob{
+  box-sizing:content-box;
+  margin:auto;
+  width: 200px;
+  height: 200px;
+  xborder:20px solid rgba(111,0,0,0.1);
+  border-radius:50%;
+  xbackground-image:linear-gradient(to right,red 50%,blue 0,blue 50%)
+}
+
+.knob .nei{
+  box-sizing:border-box;
+  border:1px solid rgba(333,0,0,0.1);
+  width:200px;
+  height:200px;
+  border-radius:50%;
+  position:relative;
+  transform: rotate(0deg);
+  background-image: linear-gradient(to right,red,blue,yellow,pink);
+  xanimation:test linear 10s infinite;
+}
+
+.knob .move{
+  width: 20px;
+  height: 20px;
+  background-color: blue;
+  border-radius:50%;
+  position:absolute;
+  top:100px;
+  left:0px;
+  transform: translateY(-50%);
+}
+
+.deg{
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  top:0;
+  left:50%;
+  transform: translateX(-50%);
+  text-align: center;
+  line-height: 100px;
+  font-size: 50px;
+}
+
+
+/*@keyframes test{
+  from{ transform: rotate(0deg);}
+   to { transform: rotate(359deg);}
+}*/
+</style>
+</head>
+<body>
+
+<section id="control">
+   <p class="deg"></p> 
+</section>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript">
+
+$.fn.knob=function(config={}){
+    $(this).append(
+      `<div class="knob">
+        <section class="nei">
+          <div class="move"></div>
+        </section>
+      </div>`)
+  
+    let knob=$(".knob")
+    let move=knob.find(".move")
+    let nei=knob.find(".nei")
+
+    let centerx,centery,startDeg=-1,rotation=0,current=0,lastDeg=0
+    let begin=false
+
+    let initConfig=$.extend({
+        from:0,
+        to:359,
+        value:0,
+        turn:function(){},
+        begin:function(){},
+        end:function(){},
+    },config)
+
+    Object.defineProperty(initConfig,"start",{
+          get:function(){
+            return this.value
+          },
+          set:function(val){
+             this.value=val
+             $(nei).css('transform','rotate('+val+'deg)')
+          }
+    })
+
+    // for(val of Object.keys(config)){
+    //   if(Object.prototype.hasOwnProperty.call(initConfig,val)){
+    //     initConfig[val]=config[val]
+    //   }
+    // }
+
+  
+   
+    if(initConfig.start&&initConfig.start!=0){
+      $(nei).css('transform','rotate('+initConfig.start+'deg)')
+      initConfig.turn(initConfig.start)
+    }
+
+    knob.on("mousedown touchstart",function(e){
+        initConfig.begin()
+
+        let rect = $(this).offset()
+        centerx=rect.left+$(this).width()/2
+        centery=rect.top+$(this).height()/2
+        begin=true
+
+         knob.on("mousemove.a touchmove.a",(e)=>{
+
+            e=e.touches?e.touches[0]:e
+            if(begin){
+              $(move).addClass("cursor")
+              newleft=centerx-e.pageX
+              newtop=centery-e.pageY
+              
+              //计算鼠标点击位置到原点的弧度
+              let m=Math.atan2(newtop,newleft) * (180/Math.PI)
+              
+              //保存刚开始点击的位置
+              if(startDeg==-1){
+                 startDeg=m
+              }
+              current=Math.floor(m-startDeg+rotation)
+              
+              if(current<0){
+                current=360+current
+              }
+            
+              if(current>359){
+                current=current%360
+              }
+
+              if(Math.abs(current-lastDeg)>180){//如果当前与上次相差大于180，说明为0deg的点
+                current=0
+              }
+
+              if(current<initConfig.from) {
+                current=initConfig.from
+              }
+              if(current>initConfig.to)
+                current=initConfig.to
+
+              lastDeg=current
+              $(nei).css('transform','rotate('+current+'deg)')
+              initConfig.turn(current)
+              
+            }
+        })
+        knob.on("mouseup.a touchend.a",(e)=>{
+          initConfig.end()
+          knob.off(".a")
+          rotation=current
+          startDeg=-1
+          begin=false
+        })
+
+    })
+    return initConfig
+}
+
+let config=$('#control').knob({
+      from:0,
+      to:359,
+      value:60,
+      begin:function(){
+        if(id)
+          cancelAnimationFrame(id)
+      },
+      end:function(){
+        id=requestAnimationFrame(function a(time) {
+          let deg=parseInt(time/30>359?time/30%360:time/30)
+          config.turn(deg)
+          id=requestAnimationFrame(a)
+        })
+      },
+      turn:function(deg){
+         $(".deg").text(deg)
+         $('#control').css("background-image",`linear-gradient(${deg}deg,red 50%,blue 0,blue 50%)`)
+         this.start=deg
+      }
+  })
+
+let id=requestAnimationFrame(function a(time) {
+  let deg=parseInt(time/30>359?time/30%360:time/30)
+  config.turn(deg)
+  id=requestAnimationFrame(a)
+})
+
+</script>
+</body>
+</html>

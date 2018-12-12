@@ -1,0 +1,112 @@
+<div>
+  <span class="a">Lorem ipsum dolor sit.</span>
+  <span p="p1"></span>
+  <span id="show"></span>
+  <span p="p2"></span>
+  <span class="a b c"></span>
+  <span></span>
+</div>
+<script type="text/javascript">
+var index=-1
+//先按逗号分隔，再按空格分隔，再按#,.,[],:,等分隔，然后倒序匹配所有元素，比如.a#c,先匹配#c,再匹配.a
+var selector="div > div.Aaron input[name=ttt]"
+var ch=""
+var result=[]
+var isEnd=false
+var eles=document.body
+querySelectorAll()
+function querySelectorAll() {
+  next()
+  value()
+  return result
+} 
+function next() {
+  if(index<selector.length-1){
+    index++
+    ch=selector[index]
+  }
+  else isEnd=true  
+}
+function value(){
+  if(ch=="."){
+    return classSelector()
+  }
+  else if(ch=="["){
+    return arrtributeSelector()
+  }
+  else if(ch=="#"){
+    return idSelector()
+  }
+  else if(ch==","){
+    next()
+    value()
+  }
+  else{
+    return tagSelector()
+  }
+}
+
+function tagSelector(){
+
+}
+function classSelector(){
+  var name=""
+  next()
+  while(isSelector()){
+     name+=ch
+     next()
+  }
+  return getElementsByClassName(name)
+}  
+
+function arrtributeSelector(){
+
+}
+
+function isSelector() {
+
+
+}
+function getElementsByTagName(name,node=eles,ary=[]){
+     if(!node)return []
+     name=name.toUpperCase()
+     for(var i=0;i<node.children.length;i++){
+        if(node.children[i].tagName===name){
+            ary.push(node.children[i])
+        }
+        getElementsByTagName(node.children[i],name,ary)
+     }
+     return ary
+}
+function getElementsByClassName(name,node=eles,ary=[]){
+   if(!node)return []
+   for(var i=0;i<node.children.length;i++){
+    if(node.children[i].className&&node.children[i].className.split().indexOf(name)>-1){
+        ary.push(node.children[i])
+    }
+    getElementsByClassName(name,node.children[i],ary)
+  } 
+  return ary
+}
+function getElementById(id,node=eles){
+   if(!node)return null
+   for(var i=0;i<node.children.length;i++){
+    if(node.children[i].id&&node.children[i].id==id){
+        return node.children[i]
+    }
+    else{
+      getElementById(id,node.children[i])
+    }
+  }
+}
+function getElementsByAttr(name,node=eles,ary=[]) {
+  if(!node)return []
+  for(var i=0;i<node.children.length;i++){
+    if(node.children[i].getAttribute(name)!=null){
+        ary.push(node.children[i])
+    }
+    getElementsByAttr(name,node.children[i],ary)
+  } 
+  return ary
+}
+</script>

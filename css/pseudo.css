@@ -1,0 +1,45 @@
+/*有一个ul中有100个li子结点。使用css让素数项颜色为红，合数项为绿。不接受暴力代码*/
+
+
+/* 所有素数项为红色
+ul{
+  color:green;
+}
+ */
+
+/*所有合数项为绿色*/
+/*素数为除了1之外的所有的约数只有1和他本身，所以合数为所有偶数项，3的倍数，5的倍数，7的倍数*/
+li:nth-child(2n+4),
+li:nth-child(3n+6),
+li:nth-child(5n+10),
+li:nth-child(7n+14)
+{
+  color:green;
+}
+
+/* 所有素数项为红色*/
+li:not(:first-child):not(:nth-child(2n+4)):not(:nth-child(3n+6)):not(:nth-child(5n+10)):not(:nth-child(7n+14))
+{
+  color:green;
+}
+
+
+
+
+/* 有一个ul里有若干个li，使用选择器实现当且仅当li个数为8个时，li的颜色全部为红。 */
+li:nth-child(1):nth-last-child(8),
+li:nth-child(1):nth-last-child(8)~li{
+  color:red;
+} 
+
+/* 有一个ul里有若干个li，使用选择器实现当li个数小于8时，li的颜色全部为红。当li个数大于20个时，颜色全部为绿。li个数在9到19之间时，li颜色全部为青 */
+li:nth-last-child(-n+8),
+li:nth-last-child(-n+8)~li{
+  color:green;
+}
+
+
+/*第8个子结点之后，倒数第5个子结点之前的li结点*/
+li:nth-child(n+9):last-nth-child(n+6){
+	
+};

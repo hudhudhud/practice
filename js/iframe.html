@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <style>
+    iframe{
+      width:500px;
+      height: 500px;
+      border:1px solid;
+    }
+  </style>
+</head>
+<body>
+<iframe src="http://iamabj.club/" frameborder="0" id="a" ></iframe>
+<iframe src="/联动select.html" frameborder="0"  id="b" style="width:700px;height:700px"></iframe>
+</body>
+</html>
+<script type="text/javascript">
+document.getElementById("a").onload =function(){
+  if(document.getElementById("a").contentDocument)
+  document.getElementById("a").contentDocument.body.style.backgroundColor="red"
+}
+document.getElementById("b").onload =function(){
+if(document.getElementById("b").contentDocument)
+  document.getElementById("b").contentDocument.body.style.backgroundColor="red"
+}
+</script>

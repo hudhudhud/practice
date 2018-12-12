@@ -1,0 +1,81 @@
+<script type="text/javascript">
+ function TreeNode(val) {
+     this.val = val;
+      this.left = this.right = null;
+ }
+  var root={val:5}
+  root.left={val:3}
+  root.right={val:7}
+  root.left.left={val:1}
+  root.left.right={val:4}
+/**
+ * Definition for binary tree
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @constructor
+ * @param {TreeNode} root - root of the binary search tree
+ */
+var BSTIterator = function(root) {
+   var f=function*(root){
+   if(root){
+        yield *f(root.left)
+        yield root.val
+        yield *f(root.right)
+    }
+  }
+  this.itera=f(root)
+  //this.done=root?false:true
+  //或
+  this.current=this.itera.next()
+};
+
+
+/**
+ * @this BSTIterator
+ * @returns {boolean} - whether we have a next smallest number
+ */
+BSTIterator.prototype.hasNext = function() {
+    //return !this.done
+    //或
+    return  !this.current.done
+};
+
+/**
+ * @this BSTIterator
+ * @returns {number} - the next smallest number
+ */
+BSTIterator.prototype.next = function () {//因为默认的生成函数next返回的值为undefined时，done才为true，所以需要获取下一个的done来确定
+    // if(!this.done){
+    //     var current=this.nextVal?this.nextVal:this.itera.next().value
+    //     this.next1=this.itera.next()
+    //     if(this.next1.value){
+    //       this.nextVal=this.next1.value
+    //     }else{
+    //       this.done=true
+    //     }
+    //     return current
+    // }
+    // else{
+    //   this.done=true
+    //   return null
+    // }
+
+    //或
+    try{
+      return this.current.value
+    }
+    finally{
+      this.current=this.itera.next()
+    }
+};
+
+/**
+ * Your BSTIterator will be called like this:
+ * var i = new BSTIterator(root), a = [];
+ * while (i.hasNext()) a.push(i.next());
+*/
+</script>

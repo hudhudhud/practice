@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+i m here
+</body>
+<script type="text/javascript">
+  function loadStyle(path) {
+     var absolutePath=resolvePath(path)
+     if(localStorage[absolutePath]){
+
+        var style=document.createElement("style")
+        style.innerText=localStorage[absolutePath]
+        document.head.appendChild(style)
+        
+     }
+     else{
+      //没有缓存则请求服务器文件得到文件内容
+      //fetch 的参数类型 must be "http" or "https" for CORS request.
+      //所以需要开服务器打开 anywhere
+        fetch(absolutePath).then(res=>res.text()).then(txt=>{
+            localStorage[absolutePath]=txt
+            var style = document.createElement('style')
+            style.innerText = txt
+            document.head.appendChild(style)
+        })
+     }
+  }
+  
+  function resolvePath(path){
+     return location.protocol+location.pathname.substr(0,location.pathname.lastIndexOf("/"))+"/"+path
+  }
+
+  loadStyle("t.css")
+
+</script>
+</html>

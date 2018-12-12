@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JS Bin</title>
+  <style>
+    .slider{
+   border:3px solid red;
+   width: 200px;
+   height:200px;
+   margin-left:200px;
+}
+.imgs{
+  width:999px;
+  position:relative;
+  left:-200px;
+}
+.imgs img{
+  float:left;
+  width:200px;
+  height:200px;
+}
+  </style>
+<script src="https://code.jquery.com/jquery-3.0.0.js"></script>
+</head>
+<body>
+  <div class="slider">
+     <div class="imgs">
+        <img class="swiper-slide" src="http://img07.tooopen.com/images/20170314/tooopen_sy_201828895498.jpg" alt="">
+        <img class="swiper-slide" src="http://pic.sc.chinaz.com/files/pic/pic9/201509/apic15069.jpg" alt="" >
+        <img class="swiper-slide" src="http://img07.tooopen.com/images/20170314/tooopen_sy_201828895498.jpg" alt="">
+        <img class="swiper-slide" src="http://pic.sc.chinaz.com/files/pic/pic9/201509/apic15069.jpg" alt="" >
+    </div>
+  </div>
+  <button class="next">next</button>
+  <button class="prev">prev</button>
+</body>
+<script type="text/javascript">
+//原理：每移动一次把最前的放到最后(next)，或把最后的放到最前(pre),放完之后重新设置left为初始值
+$(".next").on("click",()=>{
+  $(".imgs").animate({"left":"-400px"},
+  function(){
+    $(".imgs").append($("img:first-child")) //动画完成之后需要把第一个图片放到最后
+    $(".imgs").css('left', '-200px')        //因此需要重新设置left
+  }); 
+})
+
+$(".prev").on("click",()=>{
+  $(".imgs").animate({"left":"0px"},
+  function(){
+    $(".imgs").prepend($("img:last-child"))
+    $(".imgs").css('left', '-200px')
+  }) ;
+})
+</script>
+</html>

@@ -1,0 +1,46 @@
+<script type="text/javascript">
+ /**
+ * "25525511135"
+ * @param {string} s
+ * @return {string[]}
+ */
+var restoreIpAddresses = function(s) {
+ var result=[]
+ function f(ss,parts=[]) {
+    if(parts.length==3){
+      if(isIpPart(ss)){
+        parts.push(ss)
+        result.push(parts.join("."))
+        parts.pop()
+        return
+      }
+      else{
+        return
+      }
+    }
+    for(var i=1;i<4;i++){
+        var str=ss.substr(0,i)
+        if(isIpPart(str)){
+          parts.push(str)
+          var rest=ss.substr(i)
+          f(rest,parts) 
+        }
+        else{
+          break
+        }
+        parts.pop()
+    }
+ }
+ f(s)
+ return result
+};
+var isIpPart=function(s) {
+  if(s=="")
+    return false
+  if(s.length>=1&&s[0]=="0")
+    return false
+  if(s<256)
+    return true
+  return false
+}
+</script>

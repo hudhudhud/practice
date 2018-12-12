@@ -1,0 +1,53 @@
+<script type="text/javascript">
+//leetcode counting-bits
+//数二进制数里1的个数，如输入2，输出2,1,0三个数里面二进制数1的个数为[0,0,1]
+//规律，11的个数为8的个数加3的个数，12的个数为8的个数加4的个数，16,8,4,2都为1
+// 0    0    0
+// 1    1    1
+// 10   2    1
+// 011  3    2
+// 100  4    1
+// 101  5    2
+// 110  6    2
+// 111  7    3
+// 1000 8    1
+// 1001 9    2
+// 1010 10   2
+// 1011 11   3
+// 1100 12   2
+// 1101 13   3
+// 1110 14   3
+// 1111 15   4
+// 10000 16  1
+var countBits = function(num) {
+  var newArray=[]
+  var count=0
+  var lastlog2=0
+  var currentlog2=0
+  if(num==0)
+    return [0]
+  for(var i=0;i<=num;i++){
+    if(i==0){
+      newArray[i]=0
+    }else{
+      currentlog2=Math.log2(i)%1
+      if(currentlog2==0||i==1){
+        lastlog2=i
+        count=1
+      }else{
+        count=newArray[lastlog2]+newArray[i-lastlog2]
+      }
+    }
+    newArray[i]=count
+  }
+  return newArray
+};
+var countBits2=function(num){
+  var result=[]
+  result[0]=0
+  for(var i=1;i<=num;i++){
+     result[i] = result[parseInt(i/2)] + i%2;
+  }
+  return result;
+}
+</script>

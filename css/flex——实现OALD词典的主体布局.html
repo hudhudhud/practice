@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <style type="text/css">
+  /*法一:父元素flex,子四个div，中间的div再flex成两份*/
+   html *{
+      background-color: rgba(0,0,0,0.2);
+    }
+    [s1]{
+      display:flex;
+      width:300px;
+      height:100px;
+    }
+    [s1] div{
+      border:1px solid;
+      box-sizing:border-box;
+    }
+    [s1] [a],[c],[d]{
+      width:50px;
+    }
+    [s1] [b]{
+      flex-grow:1;
+      display:flex;
+      flex-direction:column;
+    }
+    [s1] [e]{
+      height:30px;
+    }
+    [s1] [f]{
+      flex-grow:1
+    }
+    /*法二：实现用五个兄弟元素实现，使用主轴往下，纵轴向右，且让他换行*/
+    [s2]{  
+      margin-top:50px;
+      display:flex;
+      flex-direction:column;
+      flex-wrap:wrap;
+      height:400px;
+      width:500px;
+    }
+    [s2] div{
+      box-sizing:border-box;
+      border:1px solid;
+    }
+    [s2] [a],[s2] [d],[s2] [e]{
+      height:400px;
+      width:100px;
+    }
+    [s2] [b]{
+      height:100px;
+      width:200px;
+    }
+    [s2] [c]{
+      //height:300px;
+      flex-grow:1;
+      width:200px;
+    }
+  </style>
+</head>
+<body>
+<section s1>
+  <div a>a</div>
+  <div b>
+    <div e>b</div>
+    <div f>c</div>
+  </div>
+  <div c>d</div>
+  <div d>e</div>
+</section>
+
+ <section s2>
+  <div a>a</div>
+  <div b>b</div>
+  <div c>c</div>
+  <div d>d</div>
+  <div e>e</div>
+</section>
+</body>
+</html>

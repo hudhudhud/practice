@@ -1,0 +1,69 @@
+<script type="text/javascript">
+  //遍历dom元素
+  function traverseDom(ele){
+    if(!ele)return
+    console.log(ele)
+    if(ele.childNodes){
+        for(var i=0;i<ele.childNodes.length;i++){
+          traverseDom(ele.childNodes[i])
+        }
+    }
+  }
+
+
+  function getElementByTagName(ele,name,ary=[]){
+     if(!ele)return []
+     name=name.toUpperCase()
+     for(var i=0;i<ele.children.length;i++){//深度优先，先序遍历，保证遍历顺序与页面上节点出现顺序一致
+        if(ele.children[i].tagName===name){
+            ary.push(ele.children[i])
+        }
+        getElementByTagName(ele.children[i],name,ary)
+     }
+     return ary
+  }
+
+  function getElementsByTagName2(el, tagName) {
+    var result = []
+    tagName = tagName.toUpperCase()
+    return get(el)
+    function get(el){
+      if (el) {
+        for(var i = 0; i<el.children.length; i++) {
+          if (el.children[i].tagName === tagName) {
+            result.push(el.children[i])
+          }
+          get(el.children[i], tagName)
+        }
+        return result
+      } else {
+        return result
+      }
+    }
+  }
+
+  //利用闭包避免多次创建get函数，这样只创建一次即可
+  var getElementByName1=function(){
+    var result
+    return function(el,tagName){
+      result=[]
+      tagName=tagName.toUpperCase()
+      get(el,tagName)
+      return result
+    }
+    function get(el,tagName){
+      if (el) {
+        for(var i = 0; i<el.children.length; i++) {
+          if (el.children[i].tagName === tagName) {
+            result.push(el.children[i])
+          }
+          get(el.children[i], tagName)
+        }
+        return result
+      } else {
+        return result
+      }
+    }
+  }()
+
+  </script>

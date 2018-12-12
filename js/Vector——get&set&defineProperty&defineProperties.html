@@ -1,0 +1,79 @@
+<script type="text/javascript">
+  function Vector(x,y){
+    this.x=x
+    this.y=y
+  }
+  Vector.prototype={
+    constructor:Vector,
+    plus(v){
+      let x=v.x+this.x
+      let y=v.y+this.y
+      return new Vector(x,y)
+    },
+    minus(v){
+      let x=this.x-v.x
+      let y=this.y-v.y
+      return new Vector(x,y)
+    },
+    get length(){
+      return this.x**2+this.y**2
+    },
+    // set length(v){
+    //    this.x=v.x
+    //    this.y=v.y
+    // }
+  }
+  //用Object.defineProperty
+  // Object.defineProperty(Vector.prototype,"length",{
+  //   set:function(v){
+  //      this.x=v.x
+  //      this.y=v.y
+  //   }
+  // })
+  //用Object.defineProperties
+  Object.defineProperties(Vector.prototype,{
+    length:{
+      set(v){
+         this.x=v.x
+         this.y=v.y
+      },
+      get(){
+        return this.x**2+this.y**2
+      }
+    },
+    X:{
+      set(x){
+         this.x=x
+      },
+      get(){
+        return this.x
+      }
+    },
+    Y:{
+      set(y){
+         this.y=y
+      },
+      get(){
+        return this.y
+      }
+    },
+  })
+  // a=new Vector(1,2)
+  // console.log(a.length)
+  // b=new Vector(1,3)
+  // a.length=b
+  // console.log(a.length)
+  // 
+  
+
+
+  function f(a,b){
+    this.a=a
+    this.b=b
+  }
+  Object.defineProperty(f.prototype,"length",{
+    enumerable:false,
+    get(){return this.a+this.b},
+    set(args){[this.a,this.b]=args}
+  })
+</script>

@@ -1,0 +1,12 @@
+doctype html
+
+html
+  head
+    title 留言板 - 注册
+  body
+    if status
+      div= status
+    form(action="/register", method="post")
+      input(name="name")
+      input(name="password", type="text")
+      button 注册

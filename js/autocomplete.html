@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <style type="text/css">
+  input{
+    width: 443px;
+    height: 25px;
+    outline: none;
+  }
+  ul{
+    width: 443px;
+   list-style:none;
+   margin:0;
+   padding: 0;
+   border:1px solid;
+   border-top:none;
+  }
+  li{
+    height: 25px;
+    border:none;
+    padding: 2px;
+  }
+  li:hover{
+    background-color: rgba(0,0,0,0.3);
+  }
+  .current{
+    background-color: rgba(0,0,0,0.3);
+  }
+  a{
+    text-decoration: none;
+  }
+  </style>
+</head>
+
+<body>
+  <input type="text" id="search">
+  <ul id=b></ul>
+
+  <div>
+    <p>用jquery</p>
+    <script src="jquery.js"></script>
+    <!-- 解决jquery3.0与jquery低版本的冲突 -->
+    <script src="https://code.jquery.com/jquery-migrate-3.0.0.min.js"></script>
+    <!-- 用jquery1.12会卡顿，所以用1.11 -->
+    <link rel="stylesheet" href="jquery-ui-1.11.4.custom/jquery-ui.min.css">
+    <script src="jquery-ui-1.11.4.custom/jquery-ui.min.js"></script>
+    <input type="text" id="jqSearch">
+    <script>
+
+    var availableTags = [
+      "ActionScript",
+      "AppleScript",
+      "Asp",
+      "BASIC",
+      "C",
+      "C++",
+      "Clojure",
+      "COBOL",
+      "ColdFusion",
+      "Erlang",
+      "Fortran",
+      "Groovy",
+      "Haskell",
+      "Java",
+      "JavaScript",
+      "Lisp",
+      "Perl",
+      "PHP",
+      "Python",
+      "Ruby",
+      "Scala",
+      "Scheme"
+    ];
+    $( "#jqSearch" ).autocomplete({
+      source: availableTags
+    });
+    </script>
+  </div>
+
+</body>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="lodash.js"></script>
+<script type="text/javascript">
+  var lastShowTime=0//为防止先发的命令晚回来而导致覆盖后发命令的结果，做的时间标志
+  search.addEventListener("input",function(e){
+    var sendTime=Date.now()
+    get(this.value,function(obj){
+      if(sendTime>lastShowTime&&obj&&obj.subjects){//发送命令的时间要大于上一次返回的时间，才显示结果
+        lastShowTime=sendTime
+        var html=""
+        obj.subjects.forEach(function(item,key){
+          html+=`<li><a href=${item.alt} target="_blank">${item.title}</a></li>`
+        })
+        b.innerHTML=html
+      }
+    })
+})
+
+ $("#search").on("keydown",function(e){
+   var curr=$(".current:first")
+   var result
+   if(e.key=="ArrowUp"){
+      if(curr&&curr.length>0){
+        curr=curr[0]
+        if($(curr).prev()){
+          $("li").removeClass("current")
+          $(curr).prev().addClass("current")
+          result=$(curr).prev().text()
+        }
+      }
+      else{
+        $("li:last").addClass("current")
+        result= $("li:last").text()
+      }
+      $(this).val(result)
+   }
+   else if(e.key=="ArrowDown"){
+      if(curr&&curr.length>0){
+        curr=curr[0]
+        if($(curr).next()){
+          $("li").removeClass("current")
+          $(curr).next().addClass("current")
+          result= $(curr).next().text()
+        }
+      }
+      else{
+        $("li:first").addClass("current")
+        result= $("li:first").text()
+      }
+      $(this).val(result)
+   }
+   else if(e.key=="Enter"){
+      // $(curr).children("a").attr("target",function(){
+      //   if(this.host==location.host){
+      //     return "_self"
+      //   }
+      //   else{
+      //     return "_blank"
+      //   }
+      // })
+      //window.location.href=$(curr).children("a").attr("href")
+      window.open($(curr).children("a").attr("href"),"_blank")
+   }
+ })
+
+function get(querystring,cb){
+  var res=new XMLHttpRequest()
+  res.open("get","https://api.douban.com/v2/movie/search?q="+querystring)
+  res.onload=function(){
+    cb(JSON.parse(res.responseText))
+  }
+  res.send()
+}
+</script>
+</html>

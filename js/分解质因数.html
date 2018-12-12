@@ -1,0 +1,103 @@
+<script type="text/javascript">
+  // 题目：分解质因数。如12被分解成2*2*3.
+function isPrimeFunc(num){
+    for(var j=2;j<Math.sqrt(num)+1;j++){
+      if(num%j==0&&num!==j){
+        return false
+      }
+    }
+    return true
+}
+function findPrimeN(num){//查找一个数的所有质因数
+  var primeN=[]//质因数数组
+  for(var i=2;i<=num;i++){
+    if(isPrimeFunc(i)&&num%i==0)
+       primeN.push(i)
+  }
+  return primeN;
+}
+function findOnePrimeN(num){//查找一个数的第一个质因数
+  for(var i=2;i<=num;i++){
+    if(isPrimeFunc(i)&&num%i==0)
+        return i
+  }
+}
+function resolve(num){//法一
+  var inter=num
+  var isPrime=true
+  var s=""
+  var i=2;
+  while(!isPrimeFunc(inter)&&inter!=1){
+    isPrime=true
+    if(inter%i!=0){ 
+      i++
+      continue
+    }
+    isPrime=isPrimeFunc(i)
+    if(isPrime){
+       s+=i+"x"
+       inter=inter/i
+       i=2
+    }
+    else{
+        i++
+    }
+  }
+  s+=inter
+  console.log(s)
+}
+function resolve2(num){ //法二
+  var inter=num
+  var isPrime=true
+  var s=""
+  var i=2;
+  while(inter!=1){
+     var va=findOnePrimeN(inter)
+     inter=inter/va
+     if(inter!=1){
+       s+=va+"x"
+     }
+     else{
+       s+=va
+     }
+  }
+  console.log(s)
+}
+function resolve3(num){ //法三 递归
+  var inter=num
+  var i=2;
+  var s=""
+  while(inter!=1){
+     if(inter%i==0&&isPrimeFunc(i)){
+        inter=inter/i
+        if(inter!=1){
+          s+=i+"x"
+        }
+        else{
+          s+=i
+        }
+        return s+resolve3(inter)
+      }
+    i++
+  }
+  if(inter==1){
+    return ""
+  }
+}
+function resolve4(n){ 
+  var result=[]
+  while(n%2==0){
+     result.push(2)
+     n=n/2
+  }
+  for(var i=3;;i+=2){//偶数都不需要再除
+    if(n%i==0){
+      result.push(i)
+      n=n/i
+      if(n==1)break
+      i-=2
+    }
+  }
+  return result
+}
+</script>

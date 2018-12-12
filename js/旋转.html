@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<meta name="robots" content="noindex">
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<script src="https://cdn.jsdelivr.net/lodash/3/lodash.min.js"></script>
+<title>旋转按钮</title>
+<style id="jsbin-css">
+body{
+  margin:0;
+}
+*{
+  background-color: rgba(0,0,0,0.1);
+ /*  -webkit-background-origin: padding-box;
+  background-origin: padding-box;
+  background-clip:padding-box; */
+}
+.cursor{
+  cursor:pointer
+}
+section#control{
+  width: 500px;
+  height: 500px;
+  border:20px solid rgba(111,0,0,0.1);
+  border-radius:50%;
+  xbackground-image:linear-gradient(to right,red 50%,blue 0,blue 50%);
+  display:flex;
+}
+
+ul{
+  z-index: -1;
+  width:500px;
+  height: 500px
+}
+ul li{
+    list-style: none;
+    display:inline-block;
+    width:50px;
+    height: 30px;
+    background-color: pink;
+    text-align: center;
+    line-height: 30px;
+    border:1px solid;
+    position: absolute;
+}
+div#wai{
+  box-sizing:content-box;
+  margin:auto;
+  width: 200px;
+  height: 200px;
+  xborder:20px solid rgba(111,0,0,0.1);
+  border-radius:50%;
+  xbackground-image:linear-gradient(to right,red 50%,blue 0,blue 50%)
+}
+
+section#nei{
+  box-sizing:border-box;
+  border:1px solid rgba(333,0,0,0.1);
+  width:200px;
+  height:200px;
+  border-radius:50%;
+  position:relative;
+  transform: rotate(0deg);
+  background-image: linear-gradient(to right,red,blue,yellow,pink);
+}
+
+div#move{
+  width: 20px;
+  height: 20px;
+  background-color: blue;
+  border-radius:50%;
+  position:absolute;
+  top:100px;
+  left:0px;
+  transform: translateY(-50%);
+}
+
+
+</style>
+</head>
+<body>
+<section id="control">
+    <div id="wai">
+      <section id="nei">
+        <div id="move"></div>
+      </section>
+   </div>
+</section>
+
+<script type="text/javascript">
+
+let move=document.getElementById("move")
+let nei=document.getElementById("nei")
+let wai=document.getElementById("wai")
+let centerx,centery,startDeg=-1,rotation=0,current=0;
+let begin=false;
+
+wai.addEventListener("mousedown",(e)=>{
+  if(e.which==1){
+    let rect = wai.getBoundingClientRect()
+    centerx=rect.x+wai.offsetWidth/2
+    centery=rect.y+wai.offsetHeight/2
+    begin=true
+  }
+})
+
+wai.addEventListener("mousemove",(e)=>{
+  if(begin){
+    move.classList.add("cursor")
+    newleft=centerx-e.pageX
+    newtop=centery-e.pageY
+    
+    //计算鼠标点击位置到原点的弧度
+    let m=Math.atan2(newtop,newleft) * (180/Math.PI)
+    
+    //保存刚开始点击的位置
+    if(startDeg==-1){
+       startDeg=m
+    }
+    current=Math.floor(m-startDeg+rotation)
+    
+
+    if(current<0){
+      current=360+current
+    }
+    else if(current>359){
+      current=current%360
+    }
+
+    nei.style.transform='rotate('+current+'deg)'
+    //nei.style.backgroundImage='linear-gradient('+current+'deg,red,blue,yellow,pink)'
+    e.preventDefault()
+  }
+   
+})
+
+wai.addEventListener("mouseup",(e)=>{
+  rotation=current
+  startDeg=-1
+  begin=false
+})
+</script>
+</body>
+</html>

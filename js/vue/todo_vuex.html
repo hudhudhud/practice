@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <script type="text/javascript" src="vue.js"></script>
+  <script type="text/javascript" src="vuex@2.3.1.js"></script>
+</head>
+<body>
+<div id="app">
+  <todo-app></todo-app>
+</div>
+</body>
+<script type="text/javascript">
+  Vue.component("TodoApp",{
+    template:`
+      <div class="todoApp">
+          <AddTodo />
+          <TodoList />
+        <div>
+            <Rest />
+            <FilterTodos />
+            <ClearComplete />
+        </div>
+      </div>
+    `
+  })
+ 
+  Vue.component("AddTodo",{
+    template:`
+      <div class="addtodo">
+         <input type="text" @keyup.enter="addTodo" v-model="input" />
+      </div>
+    `,
+    data(){
+      return {
+        input:""
+      }
+    },
+    methods:{
+      addTodo(){
+        if(this.input){
+           this.$store.commit("addTodo",{name:this.input,done:false})
+           this.input=""
+        }
+      }
+    }
+  })
+
+  Vue.component("TodoList",{
+    template:`
+      <ul>
+         <TodoItem v-for="item in todos" :todo="item" />
+      </ul>
+    `,
+    computed:{
+        todos(){
+           return this.$store.getters.showingTods
+        }
+    }
+  })
+
+  Vue.component("TodoItem",{
+    props:["todo"],
+    template:`
+      <li>
+          <input type="checkbox" @click="toggleTodo" :checked="todo.done"/>
+          <span>{{todo.name}}</span>
+          <button @click="deleteTodo">X</button>
+      </li>
+    `,
+    methods:{
+        toggleTodo(){
+           this.$store.commit("toggleTodo",this.todo)
+        },
+        deleteTodo(){
+          this.$store.commit("deleteTodo",this.todo)
+        }
+     }
+  })
+   
+  Vue.component("Rest",{
+    template:`
+      <div>
+         <span>{{active}} items left</span>
+      </div>
+    `,
+    computed:{
+      active(){
+         return this.$store.state.todos.filter(it=>!it.done).length
+      }
+    }
+  })
+
+  Vue.component("FilterTodos",{
+    template:`
+      <div>
+        <label>
+          <input type="radio" value="all"  v-model="showing">all
+        </label>
+        <label>
+          <input type="radio" value="active" v-model="showing">active
+        </label>
+        <label>
+          <input type="radio" value="completed" v-model="showing">completed
+        </label>
+      </div>
+    `,
+    data(){
+      return {
+        showing:"all"
+      }
+    },
+    watch:{
+      showing(newVal){
+         this.$store.commit("toggleShow",newVal)
+      }
+    }
+  })
+  
+  Vue.component("ClearComplete",{
+    template:`
+      <span v-if="completed"  @click="clearComplete">clear completed</span>
+    `,
+    computed:{
+       completed(){
+          return this.$store.state.todos.filter(it=>it.done).length>0
+       }
+    },
+    methods:{
+      clearComplete(){
+         this.$store.commit("clearComplete")
+      }
+    }
+
+  })
+  const store=new Vuex.Store({
+    state:{
+      showing:"all",
+      todos:[
+        {"name":1,done:true,id:1},
+        {"name":2,done:true,id:2},
+        {"name":3,done:true,id:3},
+      ]
+    },
+    mutations:{
+      addTodo(state,todo){
+        var newid=Math.max(...state.todos.map(it=>it.id))+1
+        state.todos.push({...todo,id:newid})
+        console.log("add")
+      },
+      deleteTodo(state,todo){
+        var index=-1
+        state.todos.forEach((item,i)=>{if(item.id==todo.id){index=i;return}})
+        if(index>-1)
+          state.todos.splice(index,1)
+      },
+      toggleTodo(state,todo,...args){
+        var index=-1
+        state.todos.forEach((item,i)=>{if(item.id==todo.id){index=i;return}})
+        if(index>-1)
+          state.todos[index].done=!state.todos[index].done
+      },
+      toggleShow(state,show){
+        state.showing=show
+      },
+      clearComplete(state){
+        state.todos=state.todos.filter(it=>!it.done)
+      }
+    },
+    getters:{
+      showingTods(state){
+         if(state.showing=="active"){
+          return state.todos.filter(it=>!it.done)
+         }
+         else if(state.showing=="completed"){
+          return state.todos.filter(it=>it.done)
+         }
+         else{
+            return state.todos
+         }
+      }
+    }
+  })
+  
+  var app = new Vue({
+    el: '#app',
+    store,
+  })
+</script>
+</html>

@@ -1,0 +1,37 @@
+<script type="text/javascript">
+  function reload(fns){
+    return function(){
+      if(arguments.length==2){
+        return new fns[0](...arguments)
+      }
+      else if(arguments.length==1){
+        var arg=arguments[0]
+        if(typeof arg=="string")
+            return new fns[1](arg)
+        else if(arg instanceof fns[0]||arg instanceof fns[1])
+            return new fns[2](arg)
+      }
+    }
+  }
+  var Complex=reload([
+    function a(nReal,nImage){
+      this.re=nReal
+      this.im=nImage
+    },
+    function b(sComplex){
+      let ary=sComplex.split("+")
+      let real=Number(ary[0])
+      let imag=Number(ary[1].substr(0,ary[1].length-1))
+      this.re=real
+      this.im=imag
+    },
+    function c(oComplex){
+      this.re=oComplex.re
+      this.im=oComplex.im
+    }
+  ])
+  a=new Complex(1,2)
+  b=new Complex("2+3i")
+  c=new Complex(a)
+  d=new Complex(b)
+</script>

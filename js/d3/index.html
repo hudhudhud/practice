@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>d3</title>
+</head>
+<body>
+  <div></div>
+</body>
+<script src="d3.v4.min.js"></script>
+<script>
+  var data = Array(10).fill(0).map(it => Math.random()*1000)
+  d3.select('div')
+    .selectAll('p')
+    .data(data)
+    .enter()
+    .append('p').text(d=>d)
+    .style('background-color', 'green')
+    .style('width', '0')
+    .transition()
+    .duration(1000)
+    .delay((d,i) => i*50)
+    .style('width', d => d + 'px')
+    .style('background-color', d => '#' + parseInt(d).toString(16).substr(0,2).repeat(3))
+
+  var width = 800
+  var height = 400
+  var padding = 40
+
+  var xrange = Math.random() * 1000
+  var yrange = Math.random() * 1000
+
+  var xScale = d3.scaleLinear()
+    .domain([0, xrange])//输入域
+    .range([padding, width - padding])//输出域
+  var yScale = d3.scaleLinear()
+    .domain([0, yrange])
+    .range([padding, height - padding].reverse())
+  var xAxis = d3.axisBottom(xScale)//生成一个创建底部坐标轴的函数
+  var yAxis = d3.axisLeft(yScale)//生成一个合建适合放置在左侧的坐标轴函数
+
+  var svg = d3.select('body').append('svg')
+    .attr('width', width)
+    .attr('height', height)
+    .style('border', '5px solid pink')
+
+  svg.append('g').call(xAxis)
+    .style('transform', `translate(0px,${height - padding}px)`)
+  svg.append('g').call(yAxis)
+    .style('transform', `translate(${padding}px,0)`)
+
+  svg.append('g').selectAll('circle')
+    .data(
+      Array(30).fill(0).map(_ => [Math.random() * xrange, Math.random() * yrange, Math.random() * 10])
+    )
+    .enter()
+    .append('circle')
+    .attr('cx', xScale(0))
+    .attr('cy', yScale(0))
+    .transition().duration(500)
+    .delay((d,i)=>i*30)
+    .attr('cx', ([x,y]) => xScale(x))
+    .attr('cy', ([x,y]) => yScale(y))
+    .attr('r', ([x,y,r]) => r)
+</script>
+</html>

@@ -1,0 +1,80 @@
+ <!-- 
+['abc', 'foo', 3, '7', {2}] value
+[0        1     2   3   4 ] index
+[ -2,     0,   -3, 2,   3 ] uset 
+给要合并的元素生成一个值都为-1的数组，数组长度即集合长度
+-1表示当前项是以自己为代表的集合
+后比如第0项与第一项合并union[0,1],即下标为1的值变成0，下标为0的变为-2表示以0为代码的集合长度为-2
+union[1,2],即下标为2的值为1，下标为1的值-1，合并之后还剩下的负数的长度即为集合数量
+[0        1     2   3   4 ] index
+[ -2,     -1,   1, -1,  -1] uset  
+
+并查集还可以用于图的算法，如计算图中需要能到每个点，但权值要最小的路径（不能构成环即实现最优路径）
+
+ -->
+<script>
+  class Uset {
+  constructor(n) {
+    this.set = new Array(n).fill(-1)
+  }
+
+  // [-4, 0, 0, 2, 0, 4, 4, 6]
+  // [ 0, 1, 2, 3, 4, 5, 6, 7]
+
+  // 找出x所在集合的代表元素
+  find(x) {
+    if (this.set[x] < 0) {
+      return x
+    } else {
+      // find并同时做路径压缩
+      return this.set[x] = this.find(this.set[x])
+    }
+  }
+
+  // 合并x和y所在集合
+  // 返回this
+  union(x, y) {
+    var xset = this.find(x)
+    var yset = this.find(y)
+    // 在相同的集合里，什么也不做
+    if (xset === yset) {
+      return this
+    } 
+    else{
+      // 在不同的集合里，按大小来合并，集合小的合并到集合大的
+      if (this.set[xset] < this.set[yset]) { //-1  2
+        this.set[yset] = xset  //2变成-1的index
+      } else if (this.set[xset] > this.set[yset]) {//2 -1
+        this.set[xset] = yset//2变成-1的index
+      } else {
+        // 深度相同时，合并后深度加1
+        this.set[xset]--
+        this.set[yset] = xset
+      }
+    }
+    return this
+  }
+  // 判断x和y两个元素是否在同一个集合里
+  same(x, y) {
+    return this.find(x) === this.find(y)
+  }
+  //集合长度，即值为负数的项的数量
+  sets() {
+    return this.set.filter(it => it < 0).length
+  }
+}
+
+//letcode 547
+var findCircleNum = function(M) {
+  var uset=new Uset(M.length)
+  for(var i=0;i<M.length;i++){
+    for(var j=i;j<M.length;j++){
+       if(M[i][j]==1){
+         uset.union(i,j)
+       }
+    }
+  }
+  return uset.sets()
+};
+
+</script>

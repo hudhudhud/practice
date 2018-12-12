@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    div {
+      width: 100px;
+      height: 100px;
+      border: 5px solid;
+      margin: 5px;
+      float: left;
+    }
+  </style>
+</head>
+<body>
+  <section>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+    <div data-content="lorem"></div>
+  </section>
+</body>
+<script src="jquery.js"></script>
+<script src="lodash.js"></script>
+<script>
+  jQuery(function($){//默认jquery会传参数jquery给里面的function，为了以防$符号在使用jquery之前已经被其他地方使用而出错，所以可以在外面用jquery,里面的参数写$，该$即表示默认参数jquery,
+    $(window).on('scroll', _.throttle(function a(){
+      console.log('scroll')
+      var vpHeight = window.innerHeight
+      $('section div').filter(function(index, el){//因为所有元素的位置都是排序的，即从小到大，进一步可优化用二分查找法查找在视口中的元素，找到即让其上下一定范围内的元素显示，事件复杂度降为logn
+        var rect = el.getBoundingClientRect()
+        if (rect.bottom < 0 || rect.top > vpHeight) {//在视口上方的元素bottom小于0，在视口下方的top大于视口高度
+          return false
+        } else {
+          return true
+        }
+      }).each(function(){
+        this.innerHTML = this.dataset.content  //为true的（即在视口中的）元素内部给值
+      }).end().filter(function(index, el) {//为false的（视口外的）去掉值，end()意为返回该层元素切换之前的元素，即回到$('section div')
+        var rect = el.getBoundingClientRect()
+        if (rect.bottom < 0 || rect.top > vpHeight) {
+          return true
+        } else {
+          return false
+        }
+      }).each(function(){
+        $(this).empty()
+      })
+      return a //返回该函数
+    }()//第一次就执行
+    , 100))
+  })
+
+  // requestAnimationFrame(function a(){
+  //   // ...
+  //   requestAnimationFrame(a)
+  // })
+
+  // setInterval(function a(){
+  //   return a
+  // }(), 1000)
+</script>
+</html>

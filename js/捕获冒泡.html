@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <meta charset="utf-8">
+</head>
+<body>
+<div id="s1">s1
+    <div id="s2">s2</div>
+</div>
+</body>
+<script type="text/javascript">
+//   若addEventListener函数中传了第三个参数为true，则事件元素会先执行最外层元素的该事件，依次往里捕获执行，直到到target元素；
+// 若target元素上即有冒泡模式，又有捕获模式，则按照绑定顺序执行；
+// 若其父元素同时又有绑定冒泡事件，则先从外捕获到里，再冒泡到最外层
+s1.addEventListener("click",function(e){
+        console.log("s1 冒泡事件");  
+              
+});
+s2.addEventListener("click",function(e){
+        console.log("s2 冒泡事件");
+        //e.stopPropagation() 
+        
+});
+s1.addEventListener("click",function(e){
+        console.log("s1 捕获事件");
+},true);
+
+s2.addEventListener("click",function(e){
+        console.log("s2 捕获事件");
+},true);  
+</script>
+</html>
+
+

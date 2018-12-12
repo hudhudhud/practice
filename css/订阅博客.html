@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+		/*方法一*/
+		[a]{
+			background-color: #abcdef;
+			border-bottom:1px solid red;
+			text-decoration:none;
+			padding-top:65px;
+			width:180px;
+			display:inline-block;
+			transition:all 1s linear;
+			line-height:1;
+		}
+		[a]:hover{
+			font-size:2em;
+			line-height:1;
+			padding-top:49px;
+		}
+		/*方法二*/
+		[b]{
+			display:table-cell;
+			height: 100px;
+			width: 200px;
+			background-color: pink;
+			border-bottom:1px solid red;
+			text-decoration:none;
+			vertical-align:bottom;
+			transition:all 1s linear;
+		}
+		[b]:hover{
+			font-size:2em;
+		}
+		/*方法三*/
+		[c]{
+			background-color: pink;
+			border-bottom:1px solid;
+			height: 80px;
+			line-height:80px;
+			font-size:12px;
+		}
+		[c] span{
+			line-height:1;
+			vertical-align:bottom;
+			transition:all 1s linear;
+		}
+		[c] span:hover{
+			font-size:2em;
+		}
+		/*方法四*/
+		[d]{
+			width: 150px;
+			height: 80px;
+			background-color: pink;
+			transform:scaleY(-1);
+		}
+		[d] span{
+			display:inline-block;
+			transform:scaleY(-1);
+			transition:all 1s linear;
+			vertical-align:bottom;
+			border-bottom:1px solid red;
+		}
+		[d] span:hover{
+			font-size:2em;
+		}
+		</style>
+	</head>
+	<body>
+		<a a href="">订阅博客</a>
+		<a b href="">订阅博客</a>
+		<div c>
+			<span>订阅博客</span>
+		</div>
+		<div d>
+			<span>订阅博客</span>
+		</div>
+	</body>
+</html>

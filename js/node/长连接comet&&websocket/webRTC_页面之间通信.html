@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+
+</body>
+<script type="text/javascript" src="http://cdn.peerjs.com/0.3/peer.js"></script>
+<script type="text/javascript">
+  peer=new Peer({key:'hry6jtq366ewb3xr'})
+  peer.on('connection',conn=>cosole.log("connection!"))
+  conn=peer.connect(peer.id)//连接对方页面的peerid
+  conn.on('data',console.log)//接收到数据就打出来
+  conn.send("123")//发送数据
+</script>
+</html>

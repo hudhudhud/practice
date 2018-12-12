@@ -1,0 +1,188 @@
+<script type="text/javascript" src="C:\damiao\大喵教育前端培训第二期\js\异步下载\imgs.js"></script>
+<script type="text/javascript">
+  // 一个一个下载
+function downloadImgOneByOne(imgs, callback){
+  function *g(){
+    for(var i=0;i<imgs.length;i++){
+      yield imgs[i]
+    }
+  }
+  var ger=g()
+  f()
+  function f(){
+    var next=ger.next()
+    if(next.done)
+      callback()
+    else{
+      downloadImg(next.value,f)
+    }
+  }
+}
+function downloadImgOneByOne1(imgs,callback){
+  var i=0
+  function d(){
+    if(i==img.length){
+      callback()
+    }
+    else{
+      downloadImg(img[i++],d)
+    }
+  }
+}
+function downloadImgOneByOne2(imgs,callback){
+  if(imgs.length==0){
+    callback()
+  }
+  else{
+    downloadImg(imgs[0],downloadImgOneByOne2(imgs.slice(1),callback))
+  }
+}
+
+
+function downloadImgOneByOne3(imgs,callback){
+  function downloadImg2(url){
+    return function(url,callback){
+        downloadImg(url,callback)
+    }
+  }
+  function*g(){
+    for(val of imgs){
+      var img=yield downloadImg2(val)//next传入的值即为返回值，第二次next才把该次的next的参数return
+      console.log(img)//还可以做其他的
+    }
+  }
+
+  var ger=g()
+  d()
+  var d=function(img){
+    var fun=ger.next(img).value
+    if(typeof fun=="function"){
+      fun(d)
+    }
+    else{
+      callback()
+    }
+  }
+}
+
+//promise 思路
+function downloadImgOneByOne4(imgs,callback){
+  imgs.reduce(function(promise, url){
+    return promise.then(function(){
+      return downloadImgPromise(url)
+    })
+  }, Promise.resolve())
+  .then(function(){
+    callback()
+  },function(e){
+    console.log("error"+e)
+  })
+} 
+function downloadImgPromise(url){
+  return new Promise(function(resolve,reject){
+    var img=new Image()
+    img.onload=function(){
+      resolve()
+    }
+    img.onerror=function(e){
+      reject(e)
+    }
+    img.src=url
+  })
+}
+
+async function downloadImgOneByOne5(imgs,callback){
+    if(imgs.length>0){
+        var a=await downloadImgPromise(imgs.slice(0,1))
+        downloadImgOneByOne5(imgs.slice(1),callback)
+    }
+    else{
+      callback()
+    }
+}
+
+// 两个一组下载，一组下完后开始下一组
+function downloadImgOneByTwo(imgs, callback){
+  var ger=g()
+  f()
+  function f(){
+      var one=false
+      var two=false
+      downloadImg(ger.next().value,f1)
+      downloadImg(ger.next().value,f2)
+      function f1(){
+        one=true
+        if(one&&two&&!ger.done)f()
+      }
+      function f2(){
+        two=true
+        if(one&&two&&!ger.done)f()
+      }
+  }
+}
+
+function downloadImgOneByTwo1(imgs,callback){
+  var index=0
+  d()
+  function d(){
+    if(index==imgs.length){
+      callback()
+    }
+    else{
+        if(imgs[index]){
+          downloadImg(imgs[index],function(){
+            index++
+            if(index%2==0)d()
+          })
+        }
+        if(imgs[index+1]){
+          downloadImg(imgs[index+1],function(){
+            index++
+            if(index%2==0)d()
+          })
+        }
+    }
+  }
+}
+
+async function downloadImgOneByTwo2(imgs,callback){
+    if(imgs.length>1){
+        await Promise.all([downloadImgPromise(imgs.splice(0,1)),downloadImgPromise(imgs.splice(1,1))])
+        await downloadImgOneByTwo2(imgs.slice(2),callback)
+    }
+    else if(imgs.length>0){
+      var a=await downloadImgPromise(imgs.slice(0,1))
+      callback()
+    }
+    else{
+      callback()
+    }
+}
+
+// 同时最多有两个正在下载
+function downloadImgMax2(imgs, callback){
+  var i=0
+  var isCallBack=false
+  function d(){
+    if(i>=imgs.length){
+      if(!isCallBack){
+        callback()
+        isCallBack=true
+      }
+    }else{
+      if(i<imgs.length){
+        downloadImg(imgs[i],d)
+         i++
+      }
+    }
+  }
+  d()
+  d()
+}
+
+function downloadImg(url, cb) {
+  var img = new Image()
+  img.onload = cb
+  img.src = url
+}
+</script>

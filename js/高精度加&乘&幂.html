@@ -1,0 +1,98 @@
+<script type="text/javascript">
+// 实现高精度幂：  power(bigInteger, exp)
+function power(bigInteger, exp){
+  var newInteger=[1]
+  var len=bigInteger.length-1
+  var num=exp
+  while(num>0){
+    newInteger=mul(newInteger,bigInteger)
+    num--
+  }
+  return newInteger
+}
+// 实现高精度*法： mul(bigInteger1, bigInteger2)
+function mul(sbigInteger1,sbigInteger2){
+  var bigInteger1=Array.from(sbigInteger1)
+  var bigInteger2=Array.from(sbigInteger2)
+  var newInteger=[]
+  var len1=bigInteger1.length-1
+  var len2=bigInteger2.length-1
+  var jinw=0
+  var sum=0
+  var val1=1,val2=1
+  var tempInteger=[]
+  while(len1>=0){//每次取一位与另一个乘数相乘
+    tempInteger=[]
+    for(var i=0;i<bigInteger1.length-1-len1;i++){//每取一位，需要在后面补0表示十分位，百分位
+      tempInteger.unshift(0)
+    }
+    len2=bigInteger2.length-1
+    if(len1>-1){
+      val1=bigInteger1[len1]
+    }
+    while(len2>=0){
+      val2=1
+      if(len2>-1){
+        val2=bigInteger2[len2]
+      }
+      sum=val1*val2+jinw
+      if(sum>9){
+        tempInteger.unshift(sum%10)
+        jinw=parseInt(sum/10)
+      }
+      else{
+        tempInteger.unshift(sum)
+        jinw=0
+      }
+      if(len2>=0)len2--
+    }
+    if(jinw!=0){
+      tempInteger.unshift(jinw)
+      jinw=0
+    }
+    newInteger=add(newInteger,tempInteger)
+    if(len1>=0)len1--
+  }
+  while(newInteger[0]===0){
+      if(newInteger.length===1)
+        break
+      newInteger.shift(0)
+  }
+  //console.log("realNumber:"+Number(bigInteger1.join(""))*Number(bigInteger2.join("")))
+  return newInteger.join("")
+}
+// 实现高精度加法：add(bigInteger1, bigInteger2)
+function add(bigInteger1,bigInteger2){
+  var newInteger=[]
+  var len1=bigInteger1.length-1
+  var len2=bigInteger2.length-1
+  var jinw=0
+  var sum=0
+  var val1=0,val2=0
+  while(len1>=0||len2>=0){
+    val1=0
+    val2=0
+    if(len1>-1){
+      val1=bigInteger1[len1]
+    }
+    if(len2>-1){
+      val2=bigInteger2[len2]
+    }
+    sum=val1+val2+jinw
+    if(sum>9){
+      newInteger.unshift(sum%10)
+      jinw=1
+    }
+    else{
+      newInteger.unshift(sum)
+      jinw=0
+    }
+    if(len1>=0)len1--
+    if(len2>=0)len2--
+  }
+  if(sum>9){
+    newInteger.unshift(1)
+  }
+  return newInteger
+}
+</script>

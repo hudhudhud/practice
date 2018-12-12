@@ -1,0 +1,54 @@
+<script type="text/javascript">
+  class Ary{
+    constructor(...args){
+      for(var i=0;i<args.length;i++){
+        this.push(args[i])
+      }
+    }
+    get length(){
+      return Object.keys(this).length
+    }
+    set length(len){
+      if(len>this.length){
+        for(var i=this.length;i<len;i++){
+          this[i]=undefined
+        }
+      }
+      else if(len<this.length){
+        var count=this.length-len
+        while(count>0){
+          this.pop()
+          count--
+        }
+      }
+    }
+    push(obj){
+      this[this.length]=obj
+      return this
+    }
+    pop(){
+      delete this[this.length-1]
+      return this
+    }
+    [Symbol.iterator](){
+       let self=this
+       return function*() {
+         for(var i=0;i<self.length;i++){
+          yield self[i]
+         }
+       }()
+    }
+    slice(from=0,to=this.length){
+      var ary=new Ary()
+      while(from<0)
+        from+=this.length
+      while(to<0)
+        to+=this.length
+      to=to>this.length?this.length:to
+      for(var i=from;i<to;i++){
+        ary.push(this[i])
+      }
+      return ary
+    }
+  }
+</script>

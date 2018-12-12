@@ -1,0 +1,83 @@
+<script type="text/javascript">
+//时间复杂度：O(n)+n+n*log(n)  ===> O(n*log(n))
+function heapSort(ary){
+  heapify(ary)  // O(n)
+  for(var i=ary.length-1;i>=0;i--){
+    swap(ary,0,i) //O(1)
+    reheap(ary,0,i-1) //O(log(n))
+  }
+  return ary
+}
+// 把数组表示的树调整成一个堆
+// 同下my reheap2 方法
+function heapify(ary, last=ary.length) {
+  for(var i = last; i>=0; i--) {
+    reheap(ary, i, last)
+  }
+  return ary
+}
+//该方法只能在堆的基础上调
+//同下my sweap 方法
+function reheap(ary,top=0,last=ary.length-1){
+  var left=top*2+1
+  var right=top*2+2
+  var maxPos=top
+  if(left<=last&&ary[left]>ary[maxPos]){
+    maxPos=left
+  }
+  if(right<=last&&ary[right]>ary[maxPos]){
+    maxPos=right
+  }
+  if(maxPos!=top){
+    swap(ary,maxPos,top)
+    reheap(ary,maxPos,last)//重新调整以换下来的这个位置为根的树
+  }
+  return ary
+}
+function swap(ary,x,y){
+  var temp=ary[x]
+  ary[x]=ary[y]
+  ary[y]=temp
+}
+
+//my，把数组的任意部分维护为一个堆
+//维护一个堆顶在top位置，堆尾在last位置的伪堆
+// 从最后的结点开始，依次往上走，每走到一个结点，调整它到最后一个结点为堆
+function heapSort2(ary){
+  reheap2(ary)  // O(n)
+  for(var i=ary.length-1;i>=0;i--){
+    swap(ary,0,i) //O(1)
+    reheap2(ary,0,i-1) //O(log(n))
+  }
+  return ary
+}
+function reheap2(ary,top=0,last=ary.length-1){
+  function forKeepLast(ary,begin,end){
+     if(begin>end)return
+     sweap(ary,end,last)
+     forKeepLast(ary,begin,end-1)
+     return ary
+  }
+  return forKeepLast(ary,top,last)
+}
+function sweap(ary,rootp,last){
+  var root,left,right
+  leftp=rootp*2+1
+  rightp=(rootp*2+2)>last?-1:(rootp*2+2)
+  while(ary[rootp]!=undefined&&rootp<=last&&leftp<=last){
+     root=ary[rootp]
+     left=ary[leftp]==undefined?0:ary[leftp]
+     right=ary[rightp]==undefined?0:ary[rightp]
+     pos=(left>right?leftp:rightp)
+     if(root<ary[pos]){
+      [ary[rootp],ary[pos]]=[ary[pos],ary[rootp]]
+     }
+     rootp=pos
+     leftp=pos*2+1
+     rightp=(pos*2+2)>last?-1:(pos*2+2)
+  }
+  return ary
+}
+
+
+</script>

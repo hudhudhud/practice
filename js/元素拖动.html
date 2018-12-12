@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://cdn.jsdelivr.net/lodash/4/lodash.min.js"></script>
+  <style type="text/css">
+      body{
+      overflow:hidden
+    }
+    div{
+      background-color:rgba(111,1,1,0.5);
+      width: 100px;
+      height: 100px;
+      position:absolute;
+      resize:both;
+      overflow:hidden;
+      xtransition:all 100ms linear;
+      xtransition-property:top,left;
+    }
+    [a]{
+      background-color: red;
+    }
+    [b]{
+      background-color: blue;
+    }
+    [c]{
+      background-color: yellow;
+    }
+    .cursor{
+      cursor:pointer
+    }
+  </style>
+</head>
+<body id=body>
+<div a  style="top:0;left:0"></div>
+<div b  style="top:0;left:0"></div>
+<div c  style="top:0;left:0"></div>
+</body>
+</html>
+<script type="text/javascript">
+  var maxZ=0
+var isMouseDown=false
+var x,y,div
+body.addEventListener("mousedown",function(e){//为了让所有div元素都能拖动，所以绑在body上
+  isMouseDown=true
+  if(e.which==1&&e.target.tagName=="DIV"){
+     div=e.target
+     x=e.pageX
+     y=e.pageY
+  }
+})
+window.addEventListener("mousemove",function(e){//可以用_.throttle来降低该事件的发生频率，以看起来更流畅，为使鼠标移动太快使元素也跟上，也能拖动
+ if(isMouseDown){
+    div.classList.add("cursor")
+    var left=parseFloat(div.style.left)//可以直接得到值
+    var top=parseFloat(div.style.top)
+    div.style.zIndex=maxZ++//点击一个元素就把它zindex提前
+    //防止元素被拖到视口看不到的地方
+    var newtop=Math.max(e.pageY-y+top,0)
+    var newleft=Math.max(e.pageX-x+left,0)
+    if(newtop>window.innerHeight-div.getBoundingClientRect().height)
+    newtop=window.innerHeight-div.getBoundingClientRect().height
+    if(newleft>window.innerWidth-div.getBoundingClientRect().width)
+      newleft=window.innerWidth-div.getBoundingClientRect().width
+      div.style.top=newtop+"px"
+      div.style.left=newleft+"px"
+      x=e.pageX
+      y=e.pageY
+      e.preventDefault()
+ }
+})
+window.addEventListener("mouseup",function(e){
+  isMouseDown=false
+})
+</script>
+</html>

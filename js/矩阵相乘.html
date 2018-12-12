@@ -1,0 +1,46 @@
+<script type="text/javascript">
+//   作业：实现矩阵相乘得row1*col2
+var matrix1 = [
+  [1,3,8],
+  [0,4,7],
+  [4,2,9]
+]
+var matrix2 = [
+  [1,1,1,1,1],
+  [2,2,2,2,2],
+  [3,4,5,6,7],
+]
+
+function matrixMulti(array1,array2){
+  var newArray=[]
+  var temp=[]
+  var rows1=array1.length
+  var cols1=array1[0].length
+  var rows2=array2.length
+  var cols2=array2[0].length
+  var rowi1=0
+  var rowi2=0
+  var coli1=0
+  var coli2=0
+  while(rowi1<rows1){
+    temp=[]
+    coli2=0
+    while(coli2<cols2){
+         var sum=0
+         coli1=0
+         rowi2=0
+         while(rowi2<rows2){
+           sum+=array1[rowi1][coli1]*array2[rowi2][coli2]
+           coli1++
+           rowi2++
+         }
+         temp.push(sum)
+         coli2++
+     }
+     rowi1++
+     newArray.push(temp)
+  }
+  return newArray
+}
+//matrixMulti(matrix1,matrix2)
+</script>

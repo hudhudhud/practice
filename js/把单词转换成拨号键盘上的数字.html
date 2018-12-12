@@ -1,0 +1,53 @@
+<script type="text/javascript">
+//   题目：把单词转换成拨号键盘上的数字。
+// 如“dell”转换成3355.“alienware”转换成254369273
+function sTob(ch){
+    if(ch.charCodeAt()>=97){
+      return String.fromCharCode(ch.charCodeAt()-32)
+    }
+    else return ch
+}
+function strToNum(s){
+  var num=""
+  for(var i=0;i<s.length;i++){
+    var val=sTob(s[i]).charCodeAt()-65
+    if(val>=0&&val<=2){
+      num+=2
+    }else if(val>=3&&val<=5){
+      num+=3
+    }else if(val>=6&&val<=8){
+      num+=4
+    }else if(val>=9&&val<=11){
+      num+=5
+    }else if(val>=12&&val<=14){
+      num+=6
+    }else if(val>=15&&val<=18){
+      num+=7
+    }else if(val>=19&&val<=21){
+      num+=8
+    }else if(val>=22&&val<=24){
+      num+=9
+    }
+  }
+  return Number(num)
+}
+
+function strToNum2(word){
+  var result=""
+  for(var i=0;i<word.length;i++){
+      var val=sTob(word[i]).charCodeAt()-65
+    if(val<15){
+        result+=parseInt((word.charCodeAt(i)-65)/3)+2  //想象所有按键上都是三个字母，则可以推导出字母的ascii码减去65除以3再加上2的值刚好对应到键盘值
+    }else{
+       if(val>=15&&val<=18){
+          result+=7
+        }else if(val>=19&&val<=21){
+          result+=8
+        }else if(val>=22&&val<=24){
+          result+=9
+        }
+      }
+  }
+  return result
+}
+</script>

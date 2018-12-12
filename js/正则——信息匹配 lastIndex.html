@@ -1,0 +1,58 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    em {
+      color: red;
+      border: 2px solid;
+      padding: 2px;
+    }
+  </style>
+</head>
+<body>
+  RegExp:
+  <input id="re" type="text">
+  <p id="result"></p>
+  <textarea id="source" cols="30" rows="10"></textarea>
+
+  <script>
+    var reInput = document.querySelector('#re')
+    var strInput = source
+
+    reInput.onkeyup = strInput.onkeyup = function(){
+      var reStr = reInput.value
+      var srcString = strInput.value
+
+      try {
+        if (reStr === '') {
+          throw new SyntaxError('empty regexp')
+        }
+        var re = new RegExp(reStr, 'g')
+        var match
+        var matchedResult = ''
+        var lastIndex = 0
+        //每次匹配完，match.index为匹配开始位置，re.lastIndex为匹配到的结束位置+1
+        while(match = re.exec(srcString)) {
+          matchedResult += srcString.substring(lastIndex, match.index)//非匹配到的原样显示
+
+          matchedResult += `<em>${match[0]}</em>`
+          lastIndex = re.lastIndex
+        }
+        matchedResult += srcString.substr(lastIndex) //非匹配到的追加到最后
+
+        result.innerHTML = matchedResult
+      } catch(e) {
+        if (e instanceof SyntaxError) {
+          result.innerHTML = '正则语法错误'
+        }
+        throw e
+      }
+
+
+    }
+  </script>
+</body>
+</html>

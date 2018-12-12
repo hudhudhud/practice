@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>review</title>
+  <link rel="stylesheet" href="review.css" media=print>
+  <style type="text/css">
+  *{
+      background-color: rgba(0,0,0,0.1);  /*不同层级的元素颜色显示不一样*/
+    }
+     p{
+      font-family:Verdana;
+    }
+
+    :target{
+      background-color:yellow;
+
+    }
+    a[href^="http"]:hover:after{
+    content:'(' attr(href) ')';
+    background-color: green;
+    }
+
+    a[href^="https"]:hover:after{
+    content:'(' attr(href) ')';
+    background-color: yellow;
+    }
+    a[href^="mailto"]:before{
+    content:'';
+    }
+   
+   /*为单行设置两端对齐*/
+    p:after{
+      content:'';
+      width:100%;
+      display: inline-block;
+      height: 0;
+    }
+
+    p{
+      text-align: justify;
+      margin-bottom: -15px;
+    }
+
+  </style>
+</head>
+<body>
+<a href="https://www.baidu.com">百度</a>
+<br>
+<a  href="http://www.google.com">google</a>
+<br>
+<a  href="tel:18273849382">tel</a>
+<br>
+<a  href="mailto:a@b.com">mail</a>
+<br>
+  <a href="#a">跳到1</a>
+  <a href="#2">跳到2</a>
+  <a href="#3">跳到3</a>
+
+  <p id="a">1 Lorem 我是 ipsum dolor sit amet, consectetur adipisicing elit. Maxime, quos? Saepe nemo, nos voluciatis, sint aliquid!
+<!--   <span style="width:100%;display: inline-block;"></span> -->
+  </p>
+
+  <p id="2">2 Nam assumenda dolorum perferendis ab, ad amet praesentium dolorem quidem eveniet explicabo reprehenderit impedit dignissimos voluptatem temporibus, perspiciatis, sint aliquid!</p>
+  <p id="3">3 Expedita nobis culpa, aspernatur quam consectetur delectus voluptates. Beatae id tenetur nam doloremque assumenda. Delectus nostrum consequuntur facilis explicabo reprehenderit.</p>
+  <p id="4">4 Sed laboriosam sunt aut, officia, voluptatum dolor laborum blanditiis pariatur, velit, quia culpa est deleniti! Amet aliquam quidem tenetur veritatis?</p>
+  <p id="5">5 Corporis assumenda molestiae aspernatur, ullam tenetur veniam impedit dicta in! Laudantium optio animi blanditiis ratione praesentium, dolorum ipsam, magnam sint.</p>
+
+</html>

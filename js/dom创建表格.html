@@ -1,0 +1,66 @@
+<div a></div>
+<div b></div>
+<script type="text/javascript" src="mountains.js"></script>
+<script type="text/javascript">
+// createTable()
+// createTable2()
+function createTable(){
+    var table="<table>"
+    for(var i=0;i<MOUNTAINS.length;i++){
+      table+="<tr>"
+       for(key in MOUNTAINS[i]){
+          if(i==0){
+            table+=`<th>${key}<th>`
+          }else{
+            table+=`<td>${MOUNTAINS[i][key]}<td>`
+          }
+       }
+       table+="</tr>"
+    }
+    table+="</table>"
+    //document.write(table)
+   document.querySelector("div[a]").innerHTML=table
+   document.querySelectorAll("td").forEach(function(item){item.style.textAlign="right"})
+   document.querySelectorAll("th").forEach(function(item){item.style["font"]="20px 'Verdana'"})
+}
+
+function createTable2() {
+  var div=document.querySelector("div[b]")
+  var table=document.createElement('table')
+  div.appendChild(table)
+  for(var i=0;i<MOUNTAINS.length;i++){
+      tr=document.createElement("tr")
+      table.appendChild(tr)
+       for(key in MOUNTAINS[i]){
+          if(i==0){
+            th=document.createElement("th")
+            th.innerText=key
+            tr.appendChild(th)
+          }else{
+            td=document.createElement("td")
+            td.innerText=MOUNTAINS[i][key]
+            tr.appendChild(td)
+          }
+       }
+    }
+}
+
+function createElement(name, attrs, ...children) {
+    var node = document.createElement(name)  
+    for(var key in attrs) {
+      node.setAttribute(key, attrs[key])
+    }
+    children.forEach(node.appendChild, node)
+    return node
+  }
+ //遍历dom节点
+function traverseDom(ele){
+  if(!ele)return
+  console.log(ele)
+  if(ele.childNodes){
+      for(var i=0;i<ele.childNodes.length;i++){
+        traverseDom(ele.childNodes[i])
+      }
+  }
+}
+</script>

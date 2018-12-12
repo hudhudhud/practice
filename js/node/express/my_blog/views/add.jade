@@ -1,0 +1,39 @@
+extends layout
+block content
+  script(type="text/javascript" src="/javascripts/editor/froala_editor.min.js")
+  link(href="/stylesheets/editor/font-awesome.min.css" rel="stylesheet" type="text/css")
+  link(href="/stylesheets/editor/codemirror.min.css"  rel="stylesheet")
+  link(href="/stylesheets/editor/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" )
+  link(href="/stylesheets/editor/froala_style.min.css" rel="stylesheet" type="text/css" )
+ 
+  if id&&blog.userId==user.id
+    p edit blog
+    form(method='post', action='/add/#{blog.id}',style="color:white")
+      table
+        tr
+         td 标题：
+         td 
+           input#title(name="title",style="width:800px",value='#{blog.title}') 
+        tr
+         td(style="vertical-align:top") 内容：
+         td 
+           textarea#content(name="content",style="width:1000px;height:300px") #{blog.content}
+        tr
+          td(colspan=2,style="text-align:center")
+            button(style="width:70px;height:30px") 提交
+  else
+    p publish blog
+    form(method='post', action='/add',style="color:white")
+      table
+        tr
+         td 标题：
+         td 
+           input#title(name="title",style="width:800px") 
+        tr
+         td(style="vertical-align:top") 内容：
+         td 
+           textarea#content(name="content",style="width:1000px;height:300px")
+        tr
+          td(colspan=2,style="text-align:center")
+            button(style="width:70px;height:30px") 提交
+

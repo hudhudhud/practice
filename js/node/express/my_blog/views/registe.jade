@@ -1,0 +1,17 @@
+extends layout
+
+block content
+  h2 注册
+  if error
+    div error
+  form(action='/registe',method="post")
+    label 用户名：
+    input(type='text',name="name")
+    br
+    label 密码：
+    input(type='text',name="password")
+    br
+    label email:
+    input(type='text',name="email")
+    br
+    button 注册

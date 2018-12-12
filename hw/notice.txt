@@ -1,0 +1,3 @@
+1、ie get缓存   换成post
+2、element-ui fork后build  lib需要整个替换
+3、父 组件传动态值给子组件，子组件需要watch该属性！！否则不会有变化

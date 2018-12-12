@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <link rel="stylesheet" href="slider.css">
+</head>
+<body>
+<section>
+  <img src="imgs/a.jpg">
+  <img src="imgs/b.jpg">
+  <img src="imgs/c.jpg">
+  <img src="imgs/d.jpg">
+  <!-- <img src="imgs/e.jpg"> -->
+</section>
+</body>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="slider.js"></script>
+<script type="text/javascript">
+  a=new Slider("section",{
+    "width":500,
+    "height":400,
+    "autoPlay":true,
+    "duration":3000
+  })
+  // a.on("beforePaly",console.log(1))
+  // a.on("beforePaly",console.log(2))
+</script>
+</html>

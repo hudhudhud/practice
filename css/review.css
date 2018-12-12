@@ -1,0 +1,8 @@
+p{
+  font-family:Courier,'幼圆',serif;
+  font-size:50px;
+}
+
+:target{
+  background-color:yellow;
+}

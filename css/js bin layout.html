@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title></title>
+		<style type="text/css">
+			html{
+				height: 100%;
+			}
+			body{
+				height: 100%;
+				margin:0;
+				font-size:10px ;
+				font-family:  system, "Helvetica Neue", Helvetica, Arial;
+			}
+			.header{
+				width:100%;
+				height:40px;
+				background-color: #EEE;
+				border-bottom:0.5px solid #BFBFBF ;
+				position: relative;
+			}
+			.content{
+				height: calc(100% - 80px - 2px);  /*切记边框的宽度也要去掉*/
+				font-size: 0px;  /*为去掉div之间的空格，因为空格也是字符，所以用font-size设置，也可以用margin-right*/
+			}
+			.left,.center,.right{
+				display: inline-block;          /*内联块级元素可以横向设置其宽高*/
+				width:33.25%;
+				height: 100%;
+				border-right:0.5px solid #BFBFBF;
+				background-color: #EEE;
+				vertical-align: bottom; /*当内容为空时，没有基线则底端与父元素底端对齐，会导致结构混乱*/
+				font-size:15px;
+				text-align: center;
+			}
+			.footer{
+				width: 100%;
+				height: 40px;
+				border-top:0.5px solid #BFBFBF;
+				background-color: #EEE;
+			}
+			.header  img{
+				display: inline-block;
+				height: 60%;
+				margin-top:10px;
+				margin-left: 8px;
+				vertical-align: top;  /*否则图片基线与父元素基线对齐*/
+			}
+			.header ul{
+				display: inline-block;
+				position: absolute;
+				font-size: 0px;
+				width:200px;
+			}
+			.tool{
+				margin: 0;
+				padding: 0;
+				left:30px;
+				height: 100%;
+			}
+			.lan{
+				margin: 2px auto;
+				height: 80%;
+				left:calc(50% - 100px);
+				right: calc(50% - 100px);
+				top:0;
+				bottom: 0;
+			}
+			.header li{
+				display: inline-block;
+				height: 100%;
+				font-size:15px;
+				line-height:1em;
+				margin-left:-1px;
+			}
+			.header li span{
+				padding: 5px;
+				position: relative;
+				top:15px;
+			}
+			.header  li:hover{
+				background-color: #E5E5E5;
+			}
+			.tool li:hover{
+				border:0.5px solid #BFBFBF;
+				border-bottom: none;
+				border-top:none;
+			}
+			.lan li{
+				border:0.5px solid  #BFBFBF;
+				/*	padding: 1px;
+				line-height:0.2em;*/
+			}
+			.lan li:first-child{
+				border-top-left-radius: 10px;
+				border-bottom-left-radius: 10px;
+			}
+			.lan li:last-child{
+				border-top-right-radius: 10px;
+				border-bottom-right-radius: 10px;
+			}
+			.left{
+				position: relative;
+			}
+			.left ul{
+			          list-style: none;
+			          position: absolute;
+			          left: 0;
+			          padding: 0px;
+			}
+			.left ul>ul{
+                                                    position: absolute;
+                                                    top:100%;
+                                                    margin:10px;
+			}
+			.left li{
+				position: relative;
+				width:100px;
+				height: 50px;
+				text-align: left;
+				line-height: 1em;
+			}
+			.left li>ul>li:hover{
+				background-color: red;
+			}
+			.left ul ul{
+				display: none;
+			}
+			.left ul>li:hover ul{
+				display: block;
+			}
+		</style>
+	</head>
+	<body>
+		<div  class="header">
+			<img src="https://static.jsbin.com/images/dave.min.svg">
+			<ul  class="tool">
+				<li><span>File</span></li>
+				<li><span>Add library</span></li>
+				<li><span>Share</span></li>
+			</ul>
+			<ul  class="lan">
+				<li><span>Html</span></li>
+				<li><span>CSS</span></li>
+				<li><span>Javascript</span></li>
+			</ul>
+		</div>
+		<div  class="content">
+			<div  class="left">
+				<ul>
+					<li>
+						HTML
+						<ul>
+							<li>HTML</li>
+							<li>Markdown</li>
+							<li>Jade</li>
+						</ul>
+					</li>
+				</ul>
+				<div   contenteditable>
+				</div>
+			</div>
+			<div  class="center">tt</div>
+			<div  class="right">right</div>
+		</div>
+		<div class="footer">footer</div>
+	</body>
+</html>

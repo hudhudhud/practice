@@ -1,0 +1,12 @@
+doctype html
+
+html
+  head
+    title 留言板 - 登陆
+  body
+    if status
+      div= status
+    form(action="/login", method="post")
+      input(name="name")
+      input(name="password", type="text")
+      button 登陆

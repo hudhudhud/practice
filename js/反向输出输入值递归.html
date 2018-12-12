@@ -1,0 +1,13 @@
+<script type="text/javascript">
+//数组逆序重放：让用户顺次输入n个数，然后程序按反序输出这组数
+  function inputReverse(n){
+    var a=prompt("输入")
+    if(n==1){
+       console.log(a)
+    }
+    else{
+       inputReverse(n-1) //最后一次递归n为1输出结束后，即执行下一行输出a，而当时的a就是你最后第二次输入的a
+       console.log(a)
+    }
+  }
+</script>

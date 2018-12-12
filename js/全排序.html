@@ -1,0 +1,16 @@
+<script type="text/javascript">
+  //全排序
+//[1,2,3]的 全排序是1放到[2,3]全排序位置的各个位置，即[1,2,或1,3,或1] [1,3,或1,2,或1]，依此类推
+function permutations(ary) {
+  if (ary.length < 2) {
+    return [ary.slice()]
+  }
+  return [].concat(...ary.map((item, index) => {
+    var sub = ary.slice(0, index).concat(ary.slice(index + 1))
+    return permutations(sub).map(permu => {
+      permu.push(item)
+      return permu
+    })
+  }))
+}
+</script>

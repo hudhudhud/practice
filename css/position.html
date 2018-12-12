@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JS Bin</title>
+  <style type="text/css">
+     html,body{
+  width:100%;
+  height:100%;
+  margin:0px;
+}
+section{
+  position:relative;
+  background-color:gray;
+  width:100%;
+  height:100%;
+}
+section>*{
+  position:absolute;
+}
+#a p{
+  background-color:white;
+  position:fixed;
+  bottom:0px;
+  margin:0px;
+}
+#a{
+  width:80px;
+  height:100%;
+  background-color:red;
+  top:0px;
+  bottom:0px;
+  left:0px;
+  right:10px;
+}
+#b{
+  background-color:blue;
+  width:calc(100% - 240px);
+  height:50px;
+  top:0px;
+  left:80px;
+  right:160px;
+}
+#c{
+  background-color:yellow;
+  width:calc(100% - 240px);
+  height:calc(100% - 50px);
+  top:50px;
+  left:80px;
+  right:160px;
+}
+#d{
+  background-color:white;
+  width:80px;
+  height:100%;
+  top:0px;
+  right:80px;
+}
+#e{
+  background-color:green;
+  width:80px;
+  height:100%;
+  top:0px;
+  right:0px;
+}
+  </style>
+</head>
+<body>
+  <section>
+    <div id="a">Lorem ipsum <p>aaa</p> dolor sit amet, consectetur adipisicing elit. Alias, excepturi!</div>
+    <div id="b"></div>
+    <div id="c"></div>
+    <div id="d"></div>
+    <div id="e"></div>
+  </section>
+</body>
+</html>

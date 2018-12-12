@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>todoMVC</title>
+  <style type="text/css">
+    *{
+      xbackground-color: rgba(0,0,0,0.1);
+    }
+    body{
+      background-color: #f5f5f5;
+    }
+    .content,.foot{
+       width: 505px;
+       margin:auto;
+    }
+    .content{
+       position: relative;
+    }
+    #mainInput{
+      width: 100%;
+      height: 60px;
+      font-size: 20px;
+      padding: 16px;
+      padding-left:60px;
+      box-sizing: border-box;
+      height: 60px;
+      outline:none;
+      border: none;
+      box-shadow: inset 0px -2px 1px rgba(0,0,0,0.03);
+    }
+    .selectAll{
+      box-sizing: border-box;
+      padding-left:23px;
+      padding-right: 23px;
+      height: 60px;
+      line-height: 60px;
+      color:gray;
+      position: absolute;
+      left:0;
+      top:0;
+    }
+    .black{
+      color:black;
+    }
+    .hide{
+      display: none;
+    }
+    .show{
+      display: inline-block;
+    }
+    .writeable{
+      display: none;
+    }
+    .linethrough{
+      text-decoration:line-through;
+      color:gray;
+    }
+    [name="thing"] *{
+      line-height: 50px;
+      text-align: center;
+    }
+    .item{
+      width:100%;
+      background-color: #fff;
+      position:relative;
+      height: 58px;
+      border-top:1px solid rgba(0,0,0,0.1);
+    }
+    .close{
+     display: none
+    }
+    .item:hover .close{
+      cursor:pointer;
+      color:#AF5B6D;
+      float:right;
+      width:20px;
+      height:100%;
+      display: inline-block;
+      line-height: 58px;
+    }
+    input[type=checkbox]{
+      display: none;
+    }
+    input[type=checkbox]:checked +span:after{
+      content: "✔";
+      text-align: middle;
+    }
+    .cbCircle{
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      line-height: 20px;
+      border:0.5px solid;
+      border-radius: 50%;
+      margin:19px 10px auto 5px;
+      color:gray;
+      vertical-align: top;
+    }
+    .context{
+      vertical-align:top;
+      width:430px;
+      line-height: 58px;
+      display:inline-block;
+      padding-right: 10px;
+      text-align:left;
+      word-wrap: break-word;
+    }
+
+    .foot{
+      background-color: #fff;
+      font-size:15px;
+      color: gray;
+      height: 40px;
+      line-height: 40px;
+      border: 1px solid #e6e6e6;
+      box-shadow:0 10px 0px -3px #fff,
+      0 11px 1px -3px rgba(0, 0, 0, 0.2),
+      0 21px 0px -7px #fff,
+      0 22px 1px -7px rgba(0, 0, 0, 0.2);
+    }
+    .foot div{
+        margin-left:75px;
+        display: inline-block;
+    }
+    .foot div span{
+      margin-right: 10px;
+      padding: 2px 7px 2px 7px;
+    }
+    .current{
+      border:1px solid rgba(175, 47, 47, 0.2);
+      border-radius: 3px;
+    }
+    .itemsNum{
+      margin-left:15px;
+    }
+    .clear{
+      font-size:5px;
+      white-space:nowrap;
+    }
+    .editInput{
+      height: 30px;
+      width: 70%;
+      text-align: left;
+      vertical-align:-5px;
+      outline: none;
+    }
+  </style>
+  <script type="text/javascript" src="../jquery.js"></script>
+  <script type="text/javascript" src="vue.js"></script>
+</head>
+<body>
+<div id="app">
+  <div class="content">
+    <span class="selectAll"  :class="{black:alldone}" @click="alldone=!alldone">V</span> 
+    <input type="text" id=mainInput placeholder="what need to be done?"
+    @keyup.enter=add  v-model="todo">
+
+    <div name="thing" class="item" v-for="(todo,i) in currentTodos">
+      <label>
+        <input type="checkbox" v-model="todo.done"
+        ><span class="cbCircle" ></span>
+      </label>
+      <span name="context" class="context" :class="{linethrough:todo.done&&editing!=i}"
+      v-show="editing!=i" @dblclick="edit(i,$event)"
+      >{{todo.content}}</span>
+      <input v-show="editing==i" type="text" v-model="todo.content"
+      class="editInput" @blur="editing=-1" > 
+      <span name="close" class="close" @click="remove(i)">X</span>
+    </div>
+  </div>
+  <div class="foot" :class="{hide:!todos.length}">
+    <span class="itemsNum"><span>{{todos.filter(x=>!x.done).length}}</span> item(s) left</span>
+
+    <div id=filter>
+    <label><input type="radio" name="status" value="all" v-model="status">All</label>
+    <label><input type="radio" name="status" value="active" v-model="status">Active</label>
+    <label><input type="radio" name="status" value="completed" v-model="status">Completed</label>
+      <!-- 或 -->
+      <!-- <span  @click="status='all'">All</span>
+      <span  @click="status='active'">Active</span>
+      <span  @click="status='completed'">Completed</span> -->
+    </div>
+    <span class="clear" :class="{hide:!hasCompleted}" @click="removeComp">clear completed</span>
+  </div>
+</div>
+</body>
+<script type="text/javascript" src="todoMVC.js"></script>
+</html>

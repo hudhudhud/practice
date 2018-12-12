@@ -1,0 +1,24 @@
+<script type="text/javascriptx">
+// 题目：找出唯一的满足a + b + c = 1000的毕达哥拉斯三元组{a, b, c}。
+// 一个毕达哥拉斯三元组是一个包含三个自然数的集合，a<b<c，满足条件：
+// a^2 + b^2 = c^2例如：3^2 + 4^2 = 9 + 16 = 25 = 5^2.（说白了就是一组勾股数）
+// 已知存在并且只存在一个毕达哥拉斯三元组满足条件a + b + c = 1000。
+// 找出这个三元组。
+// 题目中a^b代表a的b次方（这是一个通用表示法） 。
+console.time("aaa") //运行时间戳
+var isok=0
+for(var i=1;i<1000;i++){
+  for(var j=i+1;j<1000;j++){
+     var k=1000-i-j
+     if(i**2+j**2==k**2){
+       console.log("a="+i)  
+       console.log("b="+j)  
+       console.log("c="+k)  
+       isok=1
+       break
+     }
+  }
+if(isok)break
+}
+console.timeEnd("aaa")
+</script>

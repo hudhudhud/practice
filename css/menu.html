@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style>
+    .menu{
+    position: relative;
+    xz-index: 2;
+    }
+    ul{
+    list-style:none;
+    padding:0;
+    xfont-size:0px;
+    }
+    li{                /* 所有li显示为行内块，并且所有ul都要相对每一个li */
+    display:inline-block;
+    position:relative;
+    background-color:#E6EAED;
+    min-width:100px;
+    height:50px;
+    font-size:20px;
+    text-align:center;
+    line-height:40px;
+    margin:0;
+    }
+    .menu>li>ul{       /* 第二层 */
+    position:absolute;
+    left:0px;
+    top:100%;
+    }
+    li>ul>li>ul{      /* 大于第二层的嵌套 */
+    position:absolute;
+    left:100%;
+    top:0px;
+    }
+    ul ul li{
+    visibility:hidden;
+    transition-delay: 1s;
+ /*   display: none;*/
+    transition-timing-function: linear;
+    transition-property: visibility;
+    xbackground-color:white;
+    }
+    li:hover > ul > li{
+   /*   display:inline-block;*/
+    visibility:visible;
+    transition: none;
+    text-decoration:underline;
+    cursor:pointer;
+    }
+    li ul li:hover{
+        background-color:pink;
+    }
+    ul ul ul:before{
+    content: ">";
+    position: absolute;
+    xleft:-10px;
+    right: 100%;
+    margin-right: 2px;
+    }
+    </style>
+  </head>
+  <body>
+    <ul class="menu"  id="menu">
+      <li><span>网络技术</span>
+      <ul>
+        <li><span>html</span></li>
+        <li><span>css</span>
+        <ul>
+          <li><span>111</span></li>
+          <li><span>222</span>
+          <ul>
+            <li><span>1111</span></li>
+            <li><span>2222</span>
+            <ul>
+              <li><span>11111</span></li>
+              <li><span>22222</span></li>
+              <li><span>33333</span></li>
+            </ul>
+          </li>
+          <li><span>3333</span></li>
+        </ul>
+      </li>
+      <li><span>333</span></li>
+    </ul>
+  </li>
+  <li><span>js</span></li>
+</ul>
+</li>
+<li><span>test</span>
+<ul>
+<li><span>11</span></li>
+<li><span>22</span>
+<ul>
+  <li><span>111</span></li>
+  <li><span>222</span>
+  <ul>
+    <li><span>1111</span></li>
+    <li><span>2222</span>
+    <ul>
+      <li><span>11111</span></li>
+      <li><span>22222</span></li>
+      <li><span>33333</span></li>
+    </ul>
+  </li>
+  <li><span>3333</span></li>
+</ul>
+</li>
+<li><span>333</span></li>
+</ul>
+</li>
+<li><span>33</span></li>
+</ul>
+</li>
+</ul>
+</body>
+</html>

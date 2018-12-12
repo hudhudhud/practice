@@ -1,0 +1,31 @@
+<script type="text/javascript">
+//页面dom加载完之后，也能执行指定函数，且在之后也可以调用该函数
+var whenReady = function(){
+  var runned = false
+  var fns = []
+  document.addEventListener('DOMContentLoaded', function(){
+    fns.forEach(fn => fn())
+    runned = true
+  })
+ 
+  document.addEventListener("readystatechange",function(){
+    if(document.readyState=="complete"){
+      fns.forEach(fn=>fn())
+      runned=true
+    }
+  })
+  return function whenReady(fn) {
+    if (runned) {
+      fn()
+      runned = true
+    }
+    else{
+      fns.push(fn)
+    }
+  }
+}()
+whenReady(console.log.bind(null,1))
+whenReady(console.log.bind(null,2))
+whenReady(console.log.bind(null,3))
+whenReady(console.log.bind(null,4))
+</script>

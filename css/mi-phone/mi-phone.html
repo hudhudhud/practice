@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="1080">
+	<title></title>
+	<link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+	<style type="text/less">
+	html{
+		width: 1080px;
+	}
+	body{
+		margin:0;
+		width: 100%;
+		background-color: #efeff0;
+	}
+	*{
+		xbackground-color: rgba(0,0,0,0.1);
+	}
+	ul{
+		margin:0;
+		padding: 0;
+		li{
+			margin:0;
+			padding:0;
+			list-style: none;
+		}
+	}
+	p{
+		margin:0;
+		padding: 0;
+	}
+	.head{
+		[top]{
+			background-color: #cba26c;
+			height:192px;
+			width: 100%;
+			text-align: center;
+			input{
+				width: 1022px;
+				height: 99px;
+				margin:0;
+				padding: 0;
+				border-style: none;
+				border-radius: 10px;
+				margin-top: 70px;
+				font-size:40px;
+				padding-left: 10px;
+				color:#A4a4a4;
+			}
+		}
+		[menu]{
+			height: 211px;
+			background-color: #fff;
+			ul{
+				width:1022px;
+				margin:auto;
+				li{
+					display: inline-block;
+					margin-left: 68px;
+					margin-top: 38px;
+					p{
+						text-align: center;
+						line-height: 40px;
+						font-size: 40px;
+					}
+				}
+			}
+
+		}
+	}
+	.content{
+		height: 963px;
+		margin-top:20px;
+		background-color: #fff;
+		overflow: scroll;
+		ul{
+			width:1013px;
+			margin:auto;
+			li{
+				box-sizing: border-box;
+				height: 211px;
+				border-bottom: 1px solid gray;
+				padding-top:22px;
+				img{
+					float:left;
+				}
+				.left{
+					float: left;
+					padding-left: 48px;
+					i:nth-child(-n+3){
+						color:#ff9600;
+					};
+					[name]{
+						font-size: 40px;
+					}
+					[star]{
+						font-size: 25px;
+						color:#b5b5b5;
+						padding-top:20px;
+					}
+					[desc]{
+						font-size: 35px;
+						color:#b5b5b5;
+						padding-top:20px;
+					}
+				}
+				button{
+					float:right;
+					width: 152px;
+					height: 84px;
+					border:2px solid green;
+					background-color: #fff;
+					border-radius: 10px;
+					font-size: 30px;
+					margin-top:45px;
+					color:green;
+					font-weight: blod;
+				}
+			}
+		}
+	}
+	.foot{
+		position: fixed;
+		height: 144px;
+		width: 100%;
+		background-color: #fff;
+		border:1px solid;
+		bottom: 0;
+		ul{
+			margin-left: 111px;
+			li{
+				display: inline-block;
+				&:not(:first-child){
+					margin-left: 200px;
+				}
+				font-size:40px;
+				line-height:144px;
+				&:hover{
+					color:#ff9600;
+				}
+			}
+		}
+	}
+	</style>
+</head>
+<body>
+<div class="head">
+	<div top>
+		<input type="text" placeholder="在阅读中自我增值">
+	</div>
+	<img src="head.png" alt="">
+	<div menu>
+		<ul>
+			<li><img src="one.png" alt=""><p>必备</p></li>
+			<li><img src="two.png" alt=""><p>游戏</p></li>
+			<li><img src="three.png" alt=""><p>猜你喜欢</p></li>
+			<li><img src="four.png" alt=""><p>购物</p></li>
+			<li><img src="five.png" alt=""><p>红包</p></li>
+		</ul>
+	</div>
+</div>
+<div class="content">
+	<ul>
+		<li>
+			<img src="pro1.png" alt="">
+			<div class="left">
+				<p  name>小米贷款-新人免息</p>
+				<p  star>
+				<i class="fa fa-star" aria-hidden="true"></i>
+				<i class="fa fa-star" aria-hidden="true"></i>
+				<i class="fa fa-star" aria-hidden="true"></i>
+				<i class="fa fa-star" aria-hidden="true"></i>
+				<i class="fa fa-star" aria-hidden="true"></i>
+				金融理财|12.5M 广告</p>
+				<p  desc>小米官方出品，1分钟极速放款</p>
+			</div>
+			<button>安装</button>
+		</li>
+		<li>
+			<img src="pro2.png" alt="">
+			<div class="left">
+				<p  name>小米贷款-新人免息</p>
+				<p  star>
+				<i class="fa fa-star" aria-hidden="true"></i>
+				<i class="fa fa-star" aria-hidden="true"></i>
+				<i class="fa fa-star" aria-hidden="true"></i>
+				<i class="fa fa-star" aria-hidden="true"></i>
+				<i class="fa fa-star" aria-hidden="true"></i>
+				金融理财|12.5M 广告</p>
+				<p  desc>小米官方出品，1分钟极速放款</p>
+			</div>
+			<button>安装</button>
+		</li>
+			<li>
+			<img src="pro3.png" alt="">
+			<div class="left">
+				<p  name>小米贷款-新人免息</p>
+				<p  star>
+				<i class="fa fa-star" aria-hidden="true"></i>
+				<i class="fa fa-star" aria-hidden="true"></i>
+				<i class="fa fa-star" aria-hidden="true"></i>
+				<i class="fa fa-star" aria-hidden="true"></i>
+				<i class="fa fa-star" aria-hidden="true"></i>
+				金融理财|12.5M 广告</p>
+				<p  desc>小米官方出品，1分钟极速放款</p>
+			</div>
+			<button>安装</button>
+		</li>
+			<li>
+			<img src="pro4.png" alt="">
+			<div class="left">
+				<p  name>小米贷款-新人免息</p>
+				<p  star>
+				<i class="fa fa-star" aria-hidden="true"></i>
+				<i class="fa fa-star" aria-hidden="true"></i>
+				<i class="fa fa-star" aria-hidden="true"></i>
+				<i class="fa fa-star" aria-hidden="true"></i>
+				<i class="fa fa-star" aria-hidden="true"></i>
+				金融理财|12.5M 广告</p>
+				<p  desc>小米官方出品，1分钟极速放款</p>
+			</div>
+			<button>安装</button>
+		</li>
+		<li>
+			<img src="pro1.png" alt="">
+			<div class="left">
+				<p  name>小米贷款-新人免息</p>
+				<p  star>
+				<i class="fa fa-star" aria-hidden="true"></i>
+				<i class="fa fa-star" aria-hidden="true"></i>
+				<i class="fa fa-star" aria-hidden="true"></i>
+				<i class="fa fa-star" aria-hidden="true"></i>
+				<i class="fa fa-star" aria-hidden="true"></i>
+				金融理财|12.5M 广告</p>
+				<p  desc>小米官方出品，1分钟极速放款</p>
+			</div>
+			<button>安装</button>
+		</li>
+		<li>
+			<img src="pro2.png" alt="">
+			<div class="left">
+				<p  name>小米贷款-新人免息</p>
+				<p  star>
+				<i class="fa fa-star" aria-hidden="true"></i>
+				<i class="fa fa-star" aria-hidden="true"></i>
+				<i class="fa fa-star" aria-hidden="true"></i>
+				<i class="fa fa-star" aria-hidden="true"></i>
+				<i class="fa fa-star" aria-hidden="true"></i>
+				金融理财|12.5M 广告</p>
+				<p  desc>小米官方出品，1分钟极速放款</p>
+			</div>
+			<button>安装</button>
+		</li>
+	</ul>
+</div>
+<div class="foot">
+	<ul>
+		<li>首页</li>
+		<li>榜单</li>
+		<li>分类</li>
+		<li>我的</li>
+	</ul>
+</div>
+<script src="less.min.js"></script>
+</body>
+</html>

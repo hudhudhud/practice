@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+<div id="app"></div>
+</body>
+<script type="text/javascript" src='vue.js'></script>
+<script type="text/javascript">
+
+  Vue.component('JsonInput',{
+    props:["value"],
+    template:`
+      <div>
+        <textarea cols="30" rows="10" v-model.lazy="jsonText"></textarea>
+      </div>
+    `,
+    data(){
+      return {
+        jsonText:JSON.stringify(this.value)
+      }
+    },
+    watch:{
+      jsonText(newVal){//输入内容改变触发jsonText,emit触发input事件如果json对象有变又会触发value事件
+        try{  
+          var json=JSON.parse(newVal)
+          this.$emit("input",json)
+        }
+        catch(e){}
+      },
+      value(newVal){
+          console.log("111",typeof newVal,newVal)
+          this.jsonText=JSON.stringify(newVal)
+      }
+    }
+  })
+  app=new Vue({
+    el:"#app",
+    template:`
+    <div>
+      <JsonInput v-model="json"></JsonInput>
+      //等同于 <JsonInput :value="json" @input="v=>json=v"></JsonInput>
+    </div>
+    `,//从外部看，他绑定的就是json对象，所以对应的value的变化值是json
+    data:{
+      json:{
+        a:1,
+        b:2
+      }
+    }
+  })
+</script>
+</html>

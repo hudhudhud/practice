@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <style type="text/css">
+    div{
+      border:2px solid transprent;
+      width:200px;
+      height:200px;
+      position:relative;
+      
+    }
+    div span{
+      border:2px solid;
+      position:absolute;
+      top:-2px;
+      left:-2px;
+      right:-2px;
+      bottom:-2px;
+      /* pointer-events:none; */   /*用该属性即鼠标跟span之间无交互，可以不选中span*/
+      z-index:-999;    /*或用z-inidex，此时需要把div的border变成透明色span的border才会显示，否则span被div覆盖，将无法显示*/
+    }
+    div input:focus +span{
+      border-color:red;
+    }
+  </style>
+</head>
+<body>
+  <div><input type="text"><span></span></div>
+</body>
+</html>

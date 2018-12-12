@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <script type="text/javascript" src="jquery.js"></script>
+</head>
+<body>
+<textarea id=a rows="10" cols="20"></textarea>
+<input type="text" name="" id=b>
+</body>
+<script type="text/javascript">
+  $("#a").on("keydown",function(e){
+      if(["X","Y","Z"].indexOf(e.key)>-1){
+        e.preventDefault()
+      }
+  })
+  //粘贴时也不允许粘贴该字符
+   a.addEventListener("paste",function(e){
+     var val=e.clipboardData.getData('text/plain')
+     var res=val.replace(/[XYZ]/g,"")
+     var from=this.selectionStart//要提前把之前的保存，否则赋值后selectionStart已经为新值
+     var to=this.selectionEnd
+     $(this).val($(this).val().slice(0,from)+res+$(this).val().slice(to))
+     this.selectionStart=this.selectionEnd=from+res.length
+     e.preventDefault()//阻止自己的粘贴行为，因为已经赋值给他，不需要再粘贴
+  });
+
+  //防止用户通过代码往输入框里写入不允许的字符
+  //js原生 obj.value="XYZZ"
+  Object.defineProperty(document.getElementById("a"),"value",{
+    set:function(v){
+      var val=v.replace(/[XYZ]/g,"")
+      Object.getOwnPropertyDescriptor(this.__proto__,"value").set.call(this,val)
+    },
+    get:function(){
+      return  Object.getOwnPropertyDescriptor(this.__proto__,"value").get.call(this)
+    }
+  })
+ 
+ //防止用户通过XMLHttpRequest直接send("XYZDDD")
+ XMLHttpRequest.prototype._send=XMLHttpRequest.prototype.send
+ XMLHttpRequest.prototype.send=function(data){
+   this._send(data.replace(/[XYZ]/g,''))
+ }
+
+ //结论：所有前端的验证都形同虚设，最终还是需要在后端做验证才是保障！！
+ 
+  //jquery obj.text("XYZ")
+  // $.fn.extend({
+  //   text:function(v){
+  //     if(this==$("#a")){
+  //        var val=v.replace(/[XYZ]/g,"")
+  //        this.val(val)
+  //     }
+  //     else{
+  //       this.val(v)
+  //     }
+     
+  //   }
+  // })
+
+
+</script>
+</html>

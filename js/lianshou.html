@@ -1,0 +1,269 @@
+<script type="text/javascript">
+  function bind(fn,thisArg,...fixArgs){
+    return function(...restArgs){
+      var args={}
+      for([key,val] of fixArgs.entries()){
+        if(val==="_"){
+          args[key]=restArgs.shift()
+        }
+        else{
+           args[key]=val
+        }
+      }
+      args=args.concat(restArgs)
+      return fn.call(thisArg,...args)
+    }
+  }
+
+  Function.prototype.bind2=function(thisArg,...fixArgs){
+    var fn=this
+    return function bond(...restArgs){
+      if(new.target===bond){
+         return new fn(...fixArgs,...restArgs)
+      }
+      return fn.call(thisArg,...fixArgs,...restArgs)
+    }
+  }
+
+  Function.prototype.apply1=function(context){
+      var fn=Symbol()
+      context[fn]=this
+
+      var res=eval('context[fn]('+(arguments[1]?Array.from(arguments[1]).join():"")+')')
+      //var res=context[fn](...(arguments[1]?arguments[1]:[]))
+      delete context[fn]
+      return res
+  }
+
+  Function.prototype.call1=function(context){
+    return this.apply1(context,Array.from(arguments).slice(1))
+  }
+  
+  Function.prototype.bind1=function(context){
+    let self=this
+    let fixArgs=[].slice.apply1(arguments,[1])
+    return function(){
+      let args=[].slice.apply1(arguments)
+      if(new.target == arguments.callee){
+          return eval('new self('+fixArgs.concat(args).join()+")")
+      } 
+      return self.apply1(context,fixArgs.concat(args))
+    }
+  }
+
+  obj1={
+    m:"hu",
+    n:function(a,b){
+      res=a+b
+      if(this.m)
+         res= this.m+(a+b)+""
+      return {res}
+    }
+  }
+  obj2={m:"dan"}
+  o=obj1.n.apply1(obj2,[2,3])
+  p=obj1.n.call1(obj2,2,3)
+  q=obj1.n.bind1(obj2,2)
+
+
+  function deepCopy(obj){
+    var res={}
+    for(key in obj){
+      res[key]=Object.prototype.toString.call(obj[key])==="[object Object]"?deepCopy(obj[key]):obj[key]
+    }
+    return res
+  }
+
+  a=[1,2,[3,4,[5,6,7]]]
+  
+  function flattenDeep(ary){
+    return ary.reduce((res,value)=>{
+      if(Array.isArray(value)){
+           return res.concat(flattenDeep(value))
+        }
+        else{
+          return res.concat(value)
+        }
+    },[])
+  }
+
+  Object.prototype[Symbol.iterator]=function*(){
+    for(key in this){
+      yield [key,this[key]]
+    }
+  }
+
+
+  function mixin(sourceObj,targetObj){
+    for(var key in sourceObj){
+      if(!(key in targetObj)){
+        targetObj[key]=sourceObj[key]
+      }
+    }
+    return targetObj
+  }
+
+  var Vehicle={
+    engines:1,
+    ignition:function(){
+      console.log("turning on my engine.")
+    },
+    drive:function(){
+      this.ignition();
+      console.log("steering and moving forward")
+    }
+  }
+
+  var Car = mixin(Vehicle,{
+    wheels:4,
+    drive:function(){
+      Vehicle.drive.call(this);
+      console.log("Rolling on all "+ this.wheels+"  wheels!")
+    }
+  })
+
+  class Event{
+    constructor(){
+      this.event=Object.create(null)
+    }
+    on(name,handle){
+      if(this.event[name]){
+        this.event[name].push(handle)
+      }else{
+        this.event[name]=[handle]
+      }
+      return this
+    }
+    off(name,handle){
+      if(this.event[name]){
+        var index=this.event[name].indexOf(handle)
+        if(index>-1){
+          this.event[name].splice(index,1)
+        }
+      }
+      return this
+    }
+    once(name,handle){
+      var self=this
+      this.on(name,function one(){
+        handle.call(self)
+        self.off(name,one)
+      })
+      return this
+    }
+    trigger(name){
+      if(this.event[name]){
+        this.event[name].forEach((fn)=>fn.call(this))
+      }
+    }
+  }
+
+  function convert(num){
+    return num.toString().replace(/(?!^)(?=([^.]{3})+($|\.))/g,",")
+  }
+  var Obj = {a:{b:{c:1}},e:2}
+  count(Obj) //3
+  function count(obj){
+    var res=0
+    function c(obj){
+
+    }
+
+  }
+
+  // 有一个request(params,callback)请求函数，用promise实现一个reqRetry(params,times)，times表示请求的次数，如果成功则不继续后面剩余的请求，如果失败继续请求到次数完为止
+ 
+
+  async function reqRetry(params,times){
+      for(let i=0;i<times;i++){
+        try{
+            return await new Promise((res,rej)=>{
+              request(params,(err,data)=>{
+                if(err){
+                  rej(err)
+                }
+                else res(data)
+              })
+            })
+        }
+        catch(e){
+            continue
+        }
+      }
+      throw new Error('ALL Failed')
+  }
+
+ 
+  function reTry(params, times) {
+     
+      var p =new Promise((res,rej)=>{
+              request(params,(err,data)=>{
+                if(err){
+                  rej(err)
+                }
+                else res(data)
+              })
+            })
+      var res=p
+      for(var i = 0; i<times; i++) {
+        p = p.catch(() => res)
+      }
+      return p
+  }
+
+
+
+  Promise.all=function(promises){
+    return new Promise((res,rej)=>{
+      var result=[]
+      for(let i=0;i<promises.length;i++){
+        promises[i].then((val)=>{
+          result.push(val)
+          if(result.length==promises.lenth){
+            res(result)
+          }
+        }).catch((reson)=>reject(reson))
+      }
+
+    })
+  }
+
+  Promise.race=function(promises){
+    return new Promise(function(resolve,reject){
+      for(let i=0;i<promises.length;i++){
+        promises[i].then((value)=>{
+          resolve(value)
+        }).catch((e)=>reject(e))
+      }
+    })
+  }
+
+
+  whenReady=function(){
+    return new Promise((res,rej)=>{
+      document.addEventListener("DOMContentLoaded",()=>res("DOMContentLoaded"))
+      document.addEventListener("readystatechange",()=>res("readystatechange"))
+      document.addEventListener("load",()=>res("load"))
+    })
+  }
+
+  whenReady().then((d)=>console.log(d))
+  //6. Vue watch的原理是什么
+// 7. 闭包是什么
+// 8. JSON解析器思路
+// 简述IE和W3C事件机制的区别
+// ie8以下不支持事件捕获
+
+var MyApp={}
+MyApp.namespace=function(name){
+  var names=name.split('.')
+  var current=MyApp
+  for(name of names){
+    if(!current[name]){
+      current[name]={}
+      current=current[name]
+    }
+  }
+  return MyApp
+}
+</script>

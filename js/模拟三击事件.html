@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>模拟3击</title>
+</head>
+<body>
+  <div id=my>三击我我我我my 计数</div>
+  <div id=a>三击我我我我a </div>
+  <div id=b>三击我我我我b</div>
+  <div id=c>三击我我我我c</div>
+  <script>
+    //法1,计数
+    my.ontplclick = function(){
+      console.log('my triple click')
+    }
+    var click=0
+    var lastTime
+    my.addEventListener("mousedown",function(){
+      console.log("i m click")
+      click++
+      if(click==1)lastTime=Date.now()
+      else if(Date.now()-lastTime>500&&click>1){
+        click=0
+      }
+      if(click==3){
+        this.ontplclick()
+        click=0
+      }
+    })
+    //法二，双击加单击
+    c.ontplclick = function(){
+      console.log('b triple click')
+    }
+
+    var lastdblclick = -Infinity
+    c.addEventListener('dblclick', function({detail}) {
+      lastdblclick = Date.now()
+      console.log('c dblclick')
+    })
+
+    c.addEventListener('click', function({detail}) {
+      var t = Date.now()
+      if (t - lastdblclick < 200) {
+        this.ontplclick()
+      }
+    })
+    //法三，event.detail事件
+    b.ontplclick = function(){
+      console.log('b triple click')
+    }
+
+    b.addEventListener('click', function({detail}) {//只取参数的detail属性，es6写法
+      if (detail % 3 == 0) {
+        this.ontplclick ? this.ontplclick() : null
+      }
+    })
+    //法四，记住每次点击的时间，时间差满足，则重新记下一次，不满足则把第二次给第一次，第三次给第二次
+    a.ontplclick = function(){
+      console.log('triple click!')
+    }
+   
+    var t1 = -Infinity
+    var t2 = -Infinity
+    a.addEventListener('click', function(event) {
+      console.log('click')
+      var t3 = Date.now()
+      if (t2 - t1 < 200 && t3 - t2 < 200) {
+        this.ontplclick(event)
+        t1 = -Infinity
+        t2 = -Infinity
+      } else {
+        [t1, t2] = [t2, t3]
+      }
+    })
+  </script>
+</body>
+</html>

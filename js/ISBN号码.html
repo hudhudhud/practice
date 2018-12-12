@@ -1,0 +1,32 @@
+<script type="text/javascriptx">
+  // 题目：ISBN号码
+  function ISBN(s){
+    var sum=0
+    var count=1
+    var code
+    var news=""
+    var l=s.length//写在外面以防每次循环计算机都要计算，影响性能
+    for(var i=0;i<l-1;i++){
+      news+=s[i]
+      if(s[i].charCodeAt()>=48&&s[i].charCodeAt()<=57){//48到57为数字的ascii码
+        sum+=(s[i]-0)*count
+        count++
+      }
+    }
+    code=sum%11
+    if(code==s[l-1]){
+      console.log("right")
+    }
+    else if(sum%11==10&&s[l-1]=="x"){
+      console.log("right")
+    }
+    else{
+      if(sum%11==10){
+        code="X"
+      }
+      console.log(news+code)
+    }
+  }
+  ISBN('0-670-82162-1')
+  ISBN('0-670-82162-4')
+</script>

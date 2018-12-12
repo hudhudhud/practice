@@ -1,0 +1,18 @@
+<script type="text/javascript">
+  // 不声明变量，交换两个值
+function change(x,y){
+  x=x+y
+  y=x-y
+  x=x-y
+  console.log(x,y)
+}
+ 
+// var x=0b1101
+// var y=0b0111
+function change2(x,y){//按位异或，不会损失精度 a^b=c b^c=a a^c=b
+  x=x^y
+  y=x^y
+  x=x^y
+  console.log(x,y)
+}
+</script>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <style type="text/css">
+    .a{
+      width: 100px;
+      height: 100px;
+      background-color: gray;
+      display: inline-block;
+      margin-right: 10px;
+    }
+    #b{
+      width: 50px;
+      height: 50px;
+      background-color: blue;
+    }
+  </style>
+</head>
+<body>
+<section class=a></section>
+<section class=a></section>
+<div id=b draggable=true></div>
+
+
+<script type="text/javascript">
+  var a= document.querySelector("#a")
+  var b= document.querySelector("#b")
+  //被拖放元素上的事件
+  b.addEventListener("dragstart",function(e){
+    e.dataTransfer.setData("text",e.target.id)
+    //console.log("start")
+  })
+  b.addEventListener("drag",function(e){
+    //console.log("drag")
+  })
+  b.addEventListener("dragend",function(e){
+    //console.log("dragend")
+  })
+
+  //拖放到目标位置的事件
+  addEventListener("dragenter",function(e){
+    console.log("dragenter")
+  })
+  addEventListener("dragover",function(e){
+    console.log("dragover")
+    e.preventDefault()
+  })
+  addEventListener("drop",function(e){
+    if(e.target.classList.contains("a")){
+      var id=e.dataTransfer.getData("text")
+      e.target.appendChild(document.getElementById(id))
+    }
+   // console.log("drop",e.dataTransfer.items)
+    e.preventDefault()
+  })
+  addEventListener("dragleave",function(e){
+    console.log("dragleave")
+  })
+</script>
+</body>
+</html>

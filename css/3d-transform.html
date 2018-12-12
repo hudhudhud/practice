@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<!--
+Created using JS Bin
+http://jsbin.com
+
+Copyright (c) 2017 by anonymous (http://jsbin.com/jiyunebili/2/edit)
+
+Released under the MIT license: http://jsbin.mit-license.org
+-->
+<meta name="robots" content="noindex">
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JS Bin</title>
+<style id="jsbin-css">
+body *{
+  background-color: rgba(0,0,0,0.1);
+}
+.d3-child *{
+  padding:0;
+  margin:0;
+  text-align:center;
+}
+.d3-parent{
+  width:500px;
+  height:500px;
+  xperspective:1000px;
+  xperspective-origin:14% 0%;
+  transition:transform 1s linear; 
+  transform-style:preserve-3d;
+}
+.d3-parent:hover{
+  transform: rotateY(180deg);
+} 
+.d3-child{
+  transform:translateZ(50px);
+  backface-visibility:hidden;
+}
+
+</style>
+</head>
+<body>
+<div class="d3-parent">
+  <div class="d3-child">
+    <h2>one</h2>
+  </div>
+  <div class="d3-child">
+    <h2>two</h2>
+  </div>
+</div>
+</body>
+</html>

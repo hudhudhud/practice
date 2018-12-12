@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<!--
+Created using JS Bin
+http://jsbin.com
+
+Copyright (c) 2017 by anonymous (http://jsbin.com/garizacigi/33/edit)
+
+Released under the MIT license: http://jsbin.mit-license.org
+-->
+<meta name="robots" content="noindex">
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JS Bin</title>
+<style id="jsbin-css">
+html,body{
+  margin:0;
+  padding:0;
+  background-color: rgba(0,0,0,0.1);
+}
+
+section{
+  margin:auto;
+  width:200px;
+  height:200px;
+  background-color: gray;
+}
+
+div{
+  width: 100px;
+  height: 100px;
+  position:absolute;
+}
+
+#a{
+  background-color: red;
+}
+#b{
+  background-color: pink;
+}
+
+#c{
+  background-color: blue;
+}
+</style>
+</head>
+<body>
+<section id="con">
+ <div id=a style="top:0;left:0px"></div>
+<div id=b style="top:0;left:100px"></div>
+<div id=c style="top:100px;left:0px;"></div>
+ 
+</section>
+<script id="jsbin-javascript">
+var a
+var container=window
+if(container==window)
+  document.documentElement.setAttribute("style","position:relative")
+else
+  container.setAttribute("style","position:relative")
+var maxLeftOrign=container==window?window.innerWidth:(container.offsetWidth)
+var maxTopOrign=container==window?window.innerHeight:(container.offsetHeight)
+var minLeft=0
+var minTop=0
+var maxTop,maxLeft
+document.addEventListener("mousedown",(e)=>{
+  if(a)a.style.zIndex=1
+  a=e.target
+  a.style.zIndex=2
+  maxLeft=maxLeftOrign-a.offsetWidth
+  maxTop=maxTopOrign-a.offsetHeight
+})
+
+document.addEventListener("keydown",(e)=>{
+  var step=100
+  var top,left;
+  if(e.key=="j"){
+    if(parseFloat(a.style.left)-step>minLeft)
+     left=parseFloat(a.style.left)-step
+    else 
+     left=minLeft
+  }
+  if(e.key=="k"){
+    if(parseFloat(a.style.left)<maxLeft-step)
+      left=parseFloat(a.style.left)+step
+    else
+      left=maxLeft
+  }
+  if(e.key=="m"){
+    if(parseFloat(a.style.top)+step<maxTop)
+       top=parseFloat(a.style.top)+step 
+     else
+       top=maxTop
+  }
+  if(e.key=="i"){
+    if(parseFloat(a.style.top)-step>minTop)
+      top=parseFloat(a.style.top)-step
+    else 
+      top=minTop
+  }
+  a.style.left=left+"px"
+  a.style.top=top+"px"
+  console.log(a.style.left,a.style.top)
+})
+</script>
+</body>
+</html>

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+<div id="app">
+<input type="text" v-model="a">
+<input type="text" v-model="b">
+<input type="text" v-model="c">
+
+<hr>
+<counter :start="a"></counter>
+<counter :start="b"></counter>
+<counter :start="c"></counter>
+<hr>
+
+<slider  :slider="imgs"  :indicate=false  :autoplay=false ></slider>
+<slider  :slider="imgs1" :indicate=true    :autoplay=true></slider>
+
+<player source=""   @volumnchange="vchange"></player> 
+
+<pagger :all="pagerCount" v-model="current"></pagger>
+</div>
+</body>
+</html>
+<script type="text/javascript" src="vue.js"></script>
+<script type="text/javascript"> 
+  Vue.component('counter',{
+    props:["start"],
+    template:`
+     <div style="border:1px solid;">
+     <button @click="count++">+</button>
+     <span >{{count}}</span>
+     <button @click="count--">-</button>
+     </div>
+    `,
+    data:function() {
+      return {
+        foo:Math.random(),
+        bar:3,
+        count:this.start || 0,
+      }
+    },
+    watch:{
+      start(newV,oldV){
+         this.count=newV
+        console.log(newV,oldV)
+      }
+    }
+  })
+
+  Vue.component('player',{
+      props:["source",],
+      // 在默认情况下， v-model 在 input 事件中同步输入框的值与数据 (除了 上述 IME 部分)，但你可以添加一个修饰符 lazy ，从而转变为在 change 事件中同步：
+      template:` 
+       <div style="border:1px solid">
+         <p>{{status?"play":"stop"}}</p>
+         <button @click="status=!status">{{status?"stop":"play"}}</button>
+         <input  type="range" v-model.lazy="vol" />
+         <button @click="toggleMute">{{vol?"取消静音":"静音"}}</button>
+       </div>
+      `,
+      data:function(){
+        return {
+          status:true,
+          vol:50,
+        }
+      },
+      methods:{
+          toggleMute:function(){
+            if(this.vol){
+              this.saveVol=this.vol
+              this.vol=0
+            }
+            else{
+              this.vol=this.saveVol
+              this.saveVol=0
+            }
+          }
+      },
+      watch:{
+        vol:function(newVal,oldVal){
+          this.$emit('volumnchange',newVal,oldVal)
+        }
+      }
+    
+  })
+  Vue.component('slider',{
+     // prop内不能命名为驼峰式！！要么全小写，要么中间加 -
+     // 当使用的不是字符串模版，camelCased (驼峰式) 命名的 prop 需要转换为相对应的 kebab-case (短横线隔开式) 命名
+      props:["slider","indicate","autoplay"],
+      template:`
+        <div style="border:1px solid;">
+        <img :src="slider[current]" :alt="slider[current]" style="width:400px;height:300px" />
+        <div v-if="indicate">
+            <template v-for="(img,i) in slider">
+              <a v-if="i!=current" href="javascript:0" @click="current=i">{{i+1}}</a>
+              <span v-if="i==current">{{i+1}}</span>
+            </template>
+        </div>
+        <button @click="pre">pre</button>
+        <button @click="next">next</button>
+        </div>
+      `,
+      data:function(){
+        return {
+          current:0,
+        }
+      },
+      mounted:function(){//同domready事件
+        this.auto()
+      },
+      methods:{
+        pre:function(){
+          this.current=(this.current+this.slider.length-1)%this.slider.length
+        },
+        next:function(){
+          this.current=(this.current+1)%this.slider.length
+        },
+        auto:function(){
+          if(this.autoplay){
+            setInterval(this.next,4000)
+          }
+        }
+      },
+  })
+
+  Vue.component("pagger",{
+    props:["value","all"],
+    template:`
+        <div>
+            <template v-for="i in all">
+              <a v-if="i!=value" href="javascript:0" @click="value=i">{{i}}</a>
+              <span v-if="i==value">{{i}}</span>
+            </template>
+        </div>
+      `,
+    data:function(){
+      return {
+        //pageIndex:this.value||0
+      }
+    },
+    methods:{
+      pageChange:function(i){
+        //this.value=i
+        console.log(this.value)
+      }
+    }
+
+  })
+ 
+
+  app=new Vue({
+    el:"#app",
+    data:{
+      a:3,
+      b:4,
+      c:5,
+      imgs:["../imgs/a.jpg","../imgs/b.jpg","../imgs/c.jpg"],
+      imgs1:["../img/q.jpg","../img/m.jpg","../img/z.jpg"],
+      pagerCount:10,
+      current:5,
+    },
+    methods:{
+      vchange:function(n,o){
+        if(n>80){
+          console.log("声音过大！")
+        }
+      }
+    },
+  })
+</script>

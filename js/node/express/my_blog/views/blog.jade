@@ -1,0 +1,54 @@
+extends layout
+
+block content
+  script(type="text/javascript" src="/javascripts/editor/froala_editor.min.js")
+  link(href="/stylesheets/editor/font-awesome.min.css" rel="stylesheet" type="text/css")
+  link(href="/stylesheets/editor/codemirror.min.css"  rel="stylesheet")
+  link(href="/stylesheets/editor/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" )
+  link(href="/stylesheets/editor/froala_style.min.css" rel="stylesheet" type="text/css" )
+   
+  if message
+    p(style="color:red") #{message}
+  else
+    div.blog-header
+      h1 #{blog.title}
+      label(title="赞")
+          input(type="checkbox")
+          div.love
+      if user&&user.id==blog.userId
+        ul
+          li 
+           a(href='/') 返回首页
+          li 
+           a(href='/add/#{blog.id}') 修改
+          li 
+           a(href='./delete/#{blog.id}') 删除
+
+    p.blog-content  !{blog.content}
+    
+    if user
+      h3 发表评论
+      form(method='post', action='/blog/#{blog.id}')
+        table
+          tr
+            td(style="text-align:right") 用户名：
+            td #{user.name}
+          tr
+            td(style="vertical-align:top;text-align:right") 内容：
+            td 
+              textarea#content(name="content")
+          tr
+            td(colspan=2,style="text-align:center")
+             button 提交
+    //- else 
+    //-   a(href="/login") 请先登录
+   
+    if evals.length>0
+      h3 评论列表
+        ul 
+          for eval in evals
+            li
+              p=eval.content
+              p from 
+                a(href="/user/#{eval.userId}")=eval.user.name
+              p #{eval.createdAt.toLocaleString()}

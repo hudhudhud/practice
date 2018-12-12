@@ -1,0 +1,15 @@
+{
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "vue": "^2.5.16",
+    "vue-server-renderer": "^2.5.16",
+  },
+  "devDependencies": {
+    "fs": "^0.0.1-security",
+    "webpack": "^4.20.2",
+    "webpack-cli": "^3.1.2",
+    "webpack-merge": "^4.1.4",
+    "webpack-node-externals": "^1.7.2"
+  }
+}

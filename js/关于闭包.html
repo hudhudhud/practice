@@ -1,0 +1,36 @@
+<script type="text/javascript">
+obj={}
+for(var i=0;i<3;i++){
+  obj[i]=function(){console.log(i)}
+}
+console.log(i)
+obj[0]()
+obj[1]()
+obj[2]()
+
+//3 3 3 3 函数调用的时候去外层寻找i，此时i已经为3
+
+obj={}
+for(let i=0;i<3;i++){
+  obj[i]=function(){console.log(i)}
+}
+console.log(i)
+obj[0]()
+obj[1]()
+obj[2]()
+
+//undefinde 0 1 2 因为let在每一次循环都重新创建了i，运行的时候会找当时创建的i，出了代码块i就失效
+function f(i){
+  return function(){
+    console.log(i)
+  }
+}
+obj={}
+for(var i=0;i<3;i++){
+  obj[i]=f(i)
+}
+obj[0]()
+obj[1]()
+obj[2]()
+//0 1 2  每次f(i)中的i都处在自己的闭包环境中
+</script>

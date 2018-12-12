@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <script type="text/javascript" src="vue.js"></script>
+  <style type="text/css">
+    .active{
+      color:red;
+    }
+  </style>
+</head>
+<body>
+<div id="app" @keyup="add1">
+  string:<input type="string" name="a" v-model="a" @keyup.enter.stop="add" @keyup.stop="">
+  <br>
+  number:<input type="number" name="a" v-model="b" >
+  <label for="">{{b | one(3)}}</label>
+  <div>{{reverseMessage}}</div>
+  <ul>
+    <li v-for="todo in todos"  :class="todo.class" >{{todo.text}}</li>
+  </ul>
+  firstName:<input type="text" name="" v-model="firstName"><br>
+  lastName:<input type="text" name="" v-model="lastName"><br>
+  fullName:<input type="text" name="" v-model="fullName"><br>
+  <p v-if="seen">seen is true</p>
+  <p v-else>seen if false</p>
+  <span v-once>This will never change: {{ a }}</span>
+  <br>v-html:<div v-html="a"></div>
+  <div :class="{active:seen}">123</div>
+  
+  <button @contextmenu.prevent="add">点</button>
+  <dl>
+  <template v-if=true>
+    <dt>a</dt>
+    <dd>1</dd>
+    <dd>2</dd>
+    <dd>3</dd>
+  </template>
+   <template v-else>
+     <dt>b</dt>
+    <dd>1</dd>
+    <dd>2</dd>
+    <dd>3</dd>
+  </template>
+  </dl>
+  <product></product>
+</div>
+</body>
+<script type="text/javascript">
+  Vue.component('product',{
+    template:`
+     <div>
+      <img src="" alt="" />
+      <p>description</p>
+      <p>price</p>
+     </div>
+    `
+  })
+  var app=new Vue({
+    el:"#app",
+    //template:`<p>i m {{a}}<p>`,
+    data:{
+      a:"1",//"<span style='color:red'>123</span>",
+      b:1,
+      todos: [
+        { text: '学习 JavaScript',class:"a" },
+        { text: '学习 Vue' ,class:"b"},
+        { text: '整个牛项目',class:"c" }
+      ],
+      seen:true,
+      firstName:"hu",
+      lastName:"dan",
+      fullName:"hu dan",
+    },
+    filters:{
+      one:function(input,b){
+        return input+b
+      }
+    },
+    methods:{
+      add:function(){
+        console.log(1)
+      },
+      add1:function(){
+        console.log(2)
+      }
+    },
+    watch:{
+      a:function(newVal,oldVal){
+        //console.log(newVal,oldVal)
+      }
+    },
+    computed:{//基于缓存
+      reverseMessage:function () {
+        return this.a.split("").reverse().join("")
+      },
+      fullName:{
+        get(){
+          return this.firstName+" "+this.lastName
+        },
+        set(val){
+           [this.firstName,this.lastName]=val.split(" ")
+        },
+      }
+    },
+    beforeMount:function(){
+      console.log("beforeMount")
+    },
+    mounted:function(){//加载完模板之后
+      console.log("mounted")
+      //$.get("/api/users",function())
+    }
+
+  })
+</script>
+</html>

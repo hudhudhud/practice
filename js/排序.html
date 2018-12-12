@@ -1,0 +1,184 @@
+<script type="text/javascript">
+// 作业：排序；
+// 给定一个数组，返回其被排序后的结果。
+// [1,4,2,3,7,5,6]->[1,2,3,4,5,6,7]
+// 冒泡排序，从左往右比较，大的依次往后移，每次选出最大的放最后
+// 交换次数较多，时间复杂度n*n
+function bubbleSort(array){
+  var loopCount=0
+  for(var i=0;i<array.length-1;i++){
+    loopCount++
+    var swapped=false
+    for(var j=0;j<array.length-1-i;j++){
+       loopCount++
+      if(array[j]>array[j+1]){
+         swapped=true;
+         [array[j],array[j+1]]=[array[j+1],array[j]]
+      }
+    }
+    if(!swapped){//如果一次都没进if，说明数组已经有序，所以不需要再排序
+      break
+    }
+  }
+  console.log(loopCount)
+  return array
+}
+
+//插入排序,后面的比较项先保存，然后依次与前面已经排好序的值左比较，比前面一项大则不动，比前面一项小则前面一项往后移，一直比到比前面一项大为止，然后换位
+//对于有序数列比较适合用排序,最差的情况要移动n-1+n-2+....+1,时间复杂度n**2,最好情况移动n次即可
+//是一种稳定的排序，即原来就有序的数不会再被交换位置
+//考虑用链表实现
+function insertSort(array){
+  var temp
+  var loopCount=0
+  for(var i=1;i<array.length;i++){
+     loopCount++
+      temp=array[i]
+      j=i-1;
+      while(j>-1 && array[j]>temp) {
+        loopCount++
+        array[j+1]=array[j]
+        j--
+      }
+     array[j+1]=temp
+  }
+  console.log(loopCount)
+  return array
+}
+//选择排序,从左往右记住哪个值最小，然后换位放最左边，下次从下一个开始同理
+//相对于其他排序交换次数最少
+function choiceSort(array){
+  var min
+  var minIndex=0
+  var loopCount=0
+  for(var i=0;i<array.length-1;i++){
+     min=array[i]
+     minIndex=i
+     for(var j=i+1;j<array.length;j++){
+       loopCount++
+        if(array[j]<min){
+          min=array[j]
+          minIndex=j
+        }
+     }
+     [array[i],array[minIndex]]=[array[minIndex],array[i]]
+     // if(minIndex!=i){
+     //   var temp=array[minIndex]
+     //   array[minIndex]=array[i]
+     //   array[i]=temp
+     // }
+  }
+  console.log(loopCount)
+  return array
+}
+//BST排序
+//[5,4,2,7,8]二叉树结构，5作为根，比根大的放右边，比根小的放左边，最终中序遍历可以得到排好序的数组
+function bstSort(ary){
+ var root=null
+ for(val of ary){//先构造一颗BST
+   root=insert(root,val)
+ }
+ ary=[]
+ middleTraverse(root,ary)//中序遍历即得到
+ return ary
+}
+function middleTraverse(root,ary) {
+  if(root){
+    middleTraverse(root.left,ary)
+    ary.push(root.val)
+    middleTraverse(root.right,ary)
+  }
+  return ary
+}
+function insert(root,value){
+  if(root==null){
+    return {val:value,left:null,right:null}
+  }else if(value>root.val){
+    var rightTree=insert(root.right,value)
+    root.right=rightTree
+  }else{
+    var leftTree=insert(root.left,value)
+    root.left=leftTree
+  }
+  return root
+}
+
+
+//快速排序，直接写法，空间复杂度大,时间复杂度log(n)
+function quickSort(ary){
+  var left=[]
+  var right=[]
+  var middle=[]
+  var start=ary[0]
+  if(ary.length<2)
+    return ary
+  for(var i=0;i<ary.length;i++){
+    if(ary[i]>start)
+      right.push(ary[i])
+    else if(ary[i]<start)
+      left.push(ary[i])
+    else 
+      middle.push(ary[i])   
+  }
+  return quickSort(left).concat(middle,quickSort(right))
+}
+
+
+// i=left
+// j=right
+// base=ary[left]
+// while(i<j){
+//   while(i<j&&ary[i]<base){
+//    i++
+//   }
+//   while(i<j&&ary[j]>base){
+//   j++
+//   }
+//   swap(ary[i],ary[j])
+// }
+
+//归并排序
+function mergeSort(ary,start=0,end=ary.length-1){
+  if(end-start<1){
+    return ary.slice(start,end+1)
+  }
+  var middle=Math.floor((start+end)/2)
+  var sortedLeft=mergeSort(ary,start,middle)
+  var sortedRight=mergeSort(ary,middle+1,end)
+  var result=[]
+  while(sortedLeft.length&&sortedRight.length){
+    if(sortedLeft[0]<sortedRight[0]){
+      result.push(sortedLeft.shift())
+    }else{
+      result.push(sortedRight.shift())
+    }
+  }
+  if(sortedLeft.length){
+    result.splice(result.length,0,...sortedLeft)
+  }
+  if(sortedRight.length){
+    result.splice(result.length,0,...sortedRight)
+  }
+  return result
+}
+
+//性能及时间复杂度测试
+var array=[[],[],[]]
+var num=0
+for(var i=0;i<3;i++){
+  num=0
+  for(var j=10000;j>-1;j--){
+    array[i][num++]=j
+  }
+}
+
+// console.time("a")
+// console.log("i m bubble\n",bubbleSort(array[0]))
+// console.timeEnd("a")
+// console.time("b")
+// console.log("i m insert\n",insertSort(array[1]))
+// console.timeEnd("b")
+// console.time("c")
+// console.log("i m choice\n",choiceSort(array[2]))
+// console.timeEnd("c")
+</script>

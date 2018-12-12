@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<!--
+Created using JS Bin
+http://jsbin.com
+
+Copyright (c) 2017 by anonymous (http://jsbin.com/jokagojovu/4/edit)
+
+Released under the MIT license: http://jsbin.mit-license.org
+-->
+<meta name="robots" content="noindex">
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JS Bin</title>
+</head>
+<body>
+  <select name="" id="sel">
+    <option value="1">a</option>
+    <option value="2">b</option>
+  </select>
+   <select name="" id="sel1">
+  </select>
+  <input type="text" id="input">
+<script id="jsbin-javascript">
+var ary=[["1","101","aa"],["1","102","ab"],
+         ["2","201","ba"],["2","202","bb"]]
+
+var sel=document.getElementById("sel")
+var sel1=document.getElementById("sel1")
+var input=document.getElementById("input")
+sel.addEventListener("change",function(e){
+  var items=ary.filter(item=>item[0]==e.target.value)
+  sel1.innerHTML='<option value="">请选择</option>'
+  items.forEach(item=>{
+    sel1.innerHTML+=`<option value="${item[1]}">${item[2]}</option>`
+  }) 
+})
+
+sel1.addEventListener("change",function(e){
+  var oo=ary.filter(item=>item[1]==e.target.value)[0][2]
+  console.log(e.target.value.substr(0,1))
+  var o= [].slice.call(sel.children).filter(item=>item.value==e.target.value.substr(0,1))[0].innerText
+  input.value=o+","+oo
+  })
+
+
+document.addEventListener("load",function(e){
+  sel1.innerHTML='<option value="">请选择</option>'
+  ary.forEach(item=>{
+    sel1.innerHTML+=`<option value="${item[1]}">${item[2]}</option>`
+  })
+})
+</script>
+</body>
+  <script>
+  document.addEventListener("load",function(e){
+  sel1.innerHTML='<option value="">请选择</option>'
+  ary.forEach(item=>{
+    if(item[0]=="1")
+    sel1.innerHTML+=`<option value="${item[1]}">${item[2]}</option>`
+  })
+})
+  </script>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style>
+	section{
+		width:500px;
+		height: 200px;
+	}
+	div{
+		position: absolute;
+		width:500px;
+		height: 400px;
+		xoverflow: hidden;     /*当子元素position为fix时，父元素overflow:hidden失效;*/
+		clip: rect(auto, auto, auto,auto);     /* 裁剪整个，只适用于 position:absolute or position:fixed.的元素*/
+	}
+	span{
+		position: fixed;   /*让所有文字固定在一个位置*/
+		top:300px;
+		font-size:50px;
+	}
+	[a]{
+		background-color: red;
+		top:0;
+	}
+	[b]{
+		background-color: blue;
+		top:400px;
+	}
+	[c]{
+		background-color: green;
+		top:800px;
+	}
+	[d]{
+		background-color: yellow;
+		top:1200px;
+	}
+	[a] span{
+		color:blue;
+	}
+	[b] span{
+		color:pink;
+	}
+	[c] span{
+		color:yellow;
+	}
+	[d] span{
+		color:red;
+	}
+	</style>
+</head>
+<body>
+<section>
+	<div a><span>i m title</span></div>
+	<div b><span>i m title</span></div>
+	<div c><span>i m title</span></div>
+	<div d><span>i m title</span></div>
+</section>
+</body>
+</html>

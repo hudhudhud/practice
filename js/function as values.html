@@ -1,0 +1,19 @@
+<script type="text/javascript">
+
+doAnyThingWithDig(123,doSthWithDig)
+// 或
+doAnyThingWithDig(123,function(digit){console.log(digit)})
+
+
+function doSthWithDig(digit){
+  console.log(digit) 
+}
+function doAnyThingWithDig(n,thing){
+  var digit
+  while(n>=1){
+    digit=n%10
+    thing(digit)
+    n=(n-digit)/10
+  }
+}
+</script>

@@ -1,0 +1,23 @@
+<script type="text/javascript">
+// 题目：给定一个数，取其整数部分，如1.5，返回1，-8.3，返回-8
+var toInteger=function(a){
+  return a-a%1
+}
+// 题目：给定一个数，对其进行四舍五入，如1.4返回1，1.6返回2
+var round=function(a){
+  var res
+  if(a % 1<0.5){
+    res=a - a % 1
+  }else{
+    res=a - a % 1+1
+  }
+  return res
+}
+
+//思路二：先加0.5再对其取整即为四舍五入后的整数部分
+var round2=function(a){
+  return toInteger(a+0.5)
+}
+var a = prompt("请输入一个数") - 0
+console.log(round(a))
+</script>

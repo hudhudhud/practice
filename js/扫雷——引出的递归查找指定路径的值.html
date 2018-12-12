@@ -1,0 +1,125 @@
+<script type="text/javascript">
+// 题目：给定一个二维数组，表示扫雷游戏的地图。
+// 其中某行某列的值如果为'*'则表示此处是地雷，为'?'则表示此处无雷而是需要填一个提示
+// 这个位置周围的8个位置中有多少个雷的数字。返回一个新的二维数组，将其中的'?'全部换成对应的数字。
+// 例：输入
+// [
+//   ['*', '*', '?', '?'],
+//   ['?', '?', '?', '*'],
+//   ['?', '*', '*', '?'],
+//   ['?', '?', '*', '?'],
+//   ['?', '*', '?', '*']
+// ]
+// 则输出：
+// [
+//   ['*', '*', '2', '1'],
+//   ['3', '4', '4', '*'],
+//   ['1', '*', '*', '3'],
+//   ['2', '4', '*', '3'],
+//   ['1', '*', '3', '*']
+// ]
+//获取数组或对象在指定path的值，没获取到就返回undefined
+//getValueAt({"a":1,"b":{"c":'d'}},["b","c"]) 最后得到"d"
+//getValueAt([1,2,3,[4,5]],[3,1]) 最后得到5
+function getValueAt(matrix,path){
+  if(matrix==null||matrix==undefined){
+    return undefined
+  }else if(path.length==1){
+    return matrix[path]
+  }else{
+    return getValueAt(matrix[path[0]],path.splice(1))//path.splice(1)返回删除的数组，从第一个位置开始的数组，path才是剩下的值
+  }
+}
+//扫雷
+function sweep(array){
+  var rows=array.length
+  var cols=array[0].length
+  var num=0
+  var lei="*"
+  for(var i=0;i<rows;i++){
+    for(var j=0;j<cols;j++){
+      num=0
+      if(array[i][j]==lei){
+        continue
+      }else{
+          if(getValueAt(array,[i-1,j])===lei){
+            num++
+          }
+          if(getValueAt(array,[i+1,j])===lei){
+            num++
+          }
+          if(getValueAt(array,[i-1,j-1])===lei){
+            num++
+          }
+          if(getValueAt(array,[i,j-1])===lei){
+            num++
+          }
+          if(getValueAt(array,[i+1,j-1])===lei){
+            num++
+          }
+          if(getValueAt(array,[i-1,j+1])===lei){
+            num++
+          }
+          if(getValueAt(array,[i,j+1])===lei){
+            num++
+          }
+          if(getValueAt(array,[i+1,j+1])===lei){
+            num++
+          }
+          array[i][j]=num
+      }
+    }
+  }
+  return array
+}
+var a=[
+        ['*', '*', '?', '?'],
+        ['?', '?', '?', '*'],
+        ['?', '*', '*', '?'],
+        ['?', '?', '*', '?'],
+        ['?', '*', '?', '*']
+      ]
+printObj(sweep(a)) 
+
+
+//打印对象
+function printObj(obj){
+  var str=`<table>`
+  for(var i=0;i<obj.length;i++){
+     str+=`<tr>`
+    for(var j=0;j<obj[i].length;j++){
+      str+=`<td width=50px height=50px>${obj[i][j]}</td>`
+    }
+    str+=`</tr>`
+  }
+  str+=`</table>`
+  document.write(str)
+}
+
+
+function getValueAt1(matrix, x,y) {
+  if (x < 0 || x >= matrix.length) {
+    return undefined
+  }
+  if (y < 0 || y >= matrix[0].length) {
+    return undefined
+  }
+  return matrix[x][y]
+}
+
+function isNil(value) {
+  return value === null || value === undefined
+}
+
+function getValueAt2(matrix, x,y) {
+  if (!isNil(matrix)) {
+    if (!isNil(matrix[x])) {
+      return matrix[x][y]
+    } else {
+      return undefined
+    }
+  } else {
+    return undefined
+  }
+}
+</script>

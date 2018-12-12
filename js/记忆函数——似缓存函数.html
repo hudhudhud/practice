@@ -1,0 +1,34 @@
+<script type="text/javascript">
+  //resolver为用户调用该函数时，指定的cache里key值的格式的函数，由用户自己确定，默认为参数的第一个值
+  //因为传的参数可以是对象也可以是多个值，这样就无法确定key值的格式
+  var cache=new Map()
+  function memorize(f,resolver=it=>it){
+    return function(...n){
+       var key=resolver(...n)
+       if(cache.has(key)){
+        return cache.get(key)
+       }
+       var res=f(...n)
+       cache.set(key,res)
+       return res
+    }
+  }
+  //测试1
+  var f=memorize((a,b,c)=>a+b+c,(a,b,c)=>`${a},${b},${c}`)
+  f(1,2,3)
+  f(1,2,3)
+  f(1,2,4)
+  console.log(cache)
+ //测试2 fibb函数
+ cache=new Map()
+ function fibb(n){
+  if(n<3)
+    return 1
+  var memo1=memorize(fibb)
+  var memo2=memorize(fibb)
+  return memo1(n-1)+memo2(n-2)
+ }
+ var memo=memorize(fibb)
+ memo(40)
+ console.log(cache)
+</script>

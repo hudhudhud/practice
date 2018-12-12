@@ -1,0 +1,10 @@
+<script type="text/javascript">
+  function isType(type){
+    return function(val){
+      return Object.prototype.toString.call(val)===`[object ${type}]`
+    }
+  }
+ var isType=isType("Array")
+ isType([])
+ isType("123")
+</script>

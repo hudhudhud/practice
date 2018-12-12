@@ -1,0 +1,115 @@
+<script type="text/javascript">
+//用正则表达式将以下字符串中不在双引号内的逗号变为“|”
+'foo,bar,baz,"da,,,miao,xiaomiao",a,"b,c",d'
+.replace(/(,)(?=([^"]|"[^"]*")*$)/g, '|') //或为逗号右边没有双引号，或者有成对的双引号
+
+// mine:
+'foo,bar,baz,"damiao,xiaomiao",a,"b,c",d'
+.replace(/(^[^"]+)|(",(.)+?(,"))|(",(.)+)/g,function(match){
+ match=match.replace(/,/g,"|")
+ return match
+})
+
+
+// 使用正则表达式匹配出Handlebars模板中所有的模板语法符号：即模板中所有被双大括号及三大括号括起来的内容及双/三大括号本身，并把括号内的内容捕获到
+
+reg=/\{{2}([^}]+?)\}{2}|\{{3}([^}]+?)\}{3}/
+
+//通配符 ?替换为*,.替换为.*,其余特殊符号转义，返回该字符串的正则
+String.prototype.replaceAll = function(wc, target) {
+  wc = wc
+    .replace(/([^\w\d*?])/g, '\\$1')//非特殊字符（除了字母数字以及*？）转义
+    .replace(/\*/g, '.*')
+    .replace(/\?/g, '.')
+  var re = new RegExp(wc, 'g')
+  return this.replace(re, target)
+}
+
+//通配符 ?替换为.,.替换为.*,其余特殊符号转义，返回该字符串的正则
+//"aa?bb*cc[abc]+"  ===>"aa.bb.*cc\[abc\]\+"
+function wildcard2regexp(str){
+ str=str
+ .replace(/([^\w?*])/g,"\\$1")     //或用零宽断言//.replace(/(?![?*])(?=[^\w])/g,"\\")
+ .replace(/(\?)/g,".")
+ .replace(/\*/g,".*")
+
+ return (new RegExp(str))
+}
+
+</script>
+<script type="text/javascript">
+  //匹配数字
+  reg=/-?(0|[1-9]\d*)(\.\d+)?(e[+-]?\d+)?/
+  //把单引号替换为双引号，除了单词缩写的单引号
+    `Bob 'i'm cooking'
+  Lily: 'I'm hungry'
+  the aren't eatting.`
+  .replace(/'(?!\w)|(?!\w)(.)'/g,'$1"')
+  //匹配出没有两个连续相同字母的单词
+  'foo bar hello world love aab'.match(/\b(?!\w*(.)\1)\w+\b/g)
+  //不包括e的单词
+   "fae fwe fsfwa".match(/\b([a-df-zA-Z0-9]+)\b/g)
+  //判断是否为合法ip地址
+  str->return str.match(/\b((2[0-4]\d)|(25[0-5])|([01]?\d?\d))\b/g).length==4
+  //给九个字符 如"X-OXXXO-O" ,能得到横竖斜对角连着三个相同的字符就返回true 
+  //X-O
+  //XXX
+  //O-O
+  regh=/^(...)*([XO])\2\2/   //水平方向，只要前面有任意三个或者没有，开始连续三个连续即可
+  regv=/([XO])..\1..\1/      //垂直方向，可以从任何个开始，只要每隔两个再出现即可
+  regl2r=/^([XO])...\1...\1/ //左对角，就一种情况，按照位置对位即可
+  regr2l=/^..([XO]).\1.\1/   //同上
+  reg=/(^(...)*([XO])\3\3)|(([XO])..\5..\5)|(^([XO])...\7...\7)|(^..([XO]).\9.\9)/ //合并这么多情况
+   
+  //匹配出所有字符
+  '[a]..[""].....b.c[bar][f_oo]'.match(/\b\w+\b/g)
+   //==>["a", "b", "c", "bar", "f_oo"]
+  
+  //从右边开始，每三位一个逗号 345,654
+  '345654'.replace(/(?!^)(?=(...)+$)/g,',') //(?!^)意为该位置的右边不是开始的位置，(?=(...)+$)意为该位置的右边至少有三个或3的倍数个字符为结尾
+
+  //只留下后4位，前面的都替换为#
+  '34567893456789'.replace(/.(?=.{4})/g, "#")
+
+  '34567893456789'.replace(/^(.*)(....)$/,function(m,p,t) {
+   return '#'.repeat(p.length) + t})
+
+  '34567893456789'.replace(/^(.*)(?=....$)/,function(m) {//匹配结果即为(.*)，右边匹配到结尾为四个字符时的位置为止
+   return '#'.repeat(m.length)})
+
+  //四位或六位整数才返回true
+  /^(\d\d){2,3}$/.test("123123");
+  /(^\d{4}$|^\d{6}$)/.test("123123");
+  
+  //解码，把每个单词前面的数字转换为字母，单词的第一位与最后一位换位
+  "72olle 103doo 100ya"
+  .replace(/(\d+)(\w?)(\w*?)(\w?)\b/g  //最后的b意为匹配到单词的结尾
+    ,function(match,h1,h2,h3,h4) {
+     h1=String.fromCharCode(parseInt(h1))
+     return h1+h4+h3+h2
+  })
+  //或
+  "72olle 103doo 100ya".split(" ")
+  .map(w =>
+    w.replace(/^\d+/, c => String.fromCharCode(c))
+     .replace(/^(.)(.)(.*)(.)$/, "$1$4$3$2")
+  )
+  .join(" ")
+
+
+//去掉c,C左右为小写则去掉，为大写则留着
+"fweCBfwfcvDCEfe".replace(/c|[a-z]?C[a-z]?/g, '')
+
+
+//去掉后面的叹号
+ "Hi! Hi!".replace(/!+( |$)/g,"$1")  //叹号后为空格或结束则替换
+ "Hi! Hi!".replace(/\b!+/g, '')  //单词的结束位置为叹号则替换
+ "Hi! Hi!".replace(/(\w)!+/g, '$1') //匹配出字符以及右边感叹号，把他替换为字符
+
+//实现trim
+" faew  ".replace(/^\s+|\s+$/g,"") //开始位置开始为空格或在结束位置之前有空格替换
+
+// jquery里的trim实现
+// Make sure we trim BOM and NBSP (here's looking at you, Safari 5.0 and IE)
+trim=/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, //\uFEFF为unicode,\xA0为空格160unicode
+</script>

@@ -1,0 +1,35 @@
+<script type="text/javascript">
+//class、static、extends只是ES6的语法糖，实际浏览器内部还是在操作他的原型
+class Complex { //Complex是个函数
+  static clone(c){//静态函数
+    return new Complex(c.re, c.im)
+  }
+  static isComplex(c) {
+    return c instanceof Complex
+  }
+  constructor(re, im){
+    this.re = re
+    this.im = im
+  }
+  clone(){
+    return new Complex(this.re, this.im)
+  }
+  add(cplx) {
+    return new Complex(this.re + cplx.re, this.im + cplx.im)
+  }
+  toString() {
+    return `${this.re}+${this.im}i`
+  }
+}
+class Vector extends Complex {
+  constructor(a,b,c){
+    super(a,b)  //调用父类的构造函数，共享this变量,相当于之前的Complex.call(this,a,b,c)
+    this.c = c
+  }
+}
+
+class Vector extends Array {
+
+}
+
+</script>

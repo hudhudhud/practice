@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <style type="text/css">
+    *{
+      xbackground-color: rgba(0,0,0,0.1);
+      margin:0;
+      padding: 0;
+    }
+    .slider{
+      width:930px;
+      height: 350px;
+      margin:auto;
+      margin-top:30px;
+    }
+    .slider .imgList{
+      width:100%;
+      height:100%;
+    }
+    .slider .imgList ul{
+      width:100%;
+      height:100%;
+      position:relative;
+      overflow:hidden;
+      margin:0;
+      padding: 0;
+    }
+    .slider .imgList li{
+      position:absolute;
+      list-style: none;
+      width:650px;
+      height:350px;
+      xtransition: transform 0.2s ease;
+      user-select:none;
+    }
+    .slider a{
+      cursor: pointer;
+    }
+    .slider .imgList img{
+      width:650px;
+      height:350px;
+      position: absolute;
+    }
+    .slider .line{
+      width:800px;
+      margin:auto;
+      text-align: center;
+    }
+    .slider .line a{
+      display: inline-block;
+      width:50px;
+      height: 5px;
+      margin-left:2px;
+    }
+    .slider .normal-line{
+      background-color: rgba(0,0,0,0.2);
+    }
+    .slider .current-line{
+      background-color: red;
+    }
+   /* .list01{
+      transform: translate(0,0) scale(0.9);
+      transform-origin: 0 100%;
+      z-index:0;
+      filter:grayscale(80%) blur(3px);
+    }
+    .list02{
+      transform: translate(140px,0);
+      z-index:1;
+    }
+    .list03{
+      transform: translate(280px,0) scale(0.9);
+      transform-origin: 100% 100%;
+      z-index:0;
+      filter:grayscale(80%) blur(3px);
+    }
+    .list04{
+      transform: translate(420px,0) scale(0.9);
+      transform-origin: 100% 100%;
+      z-index:-1;
+      filter:grayscale(80%) blur(3px);
+    }
+    .list05{
+      transform: translate(560px,0) scale(0.9);
+      transform-origin: 100% 100%;
+      z-index:-2;
+      filter:grayscale(80%) blur(3px);
+    }
+    .list06{
+      transform: translate(700px,0) scale(0.9);
+      transform-origin: 100% 100%;
+      z-index:-3;
+      filter:grayscale(80%) blur(3px);
+    }*/
+  </style>
+</head>
+<body>
+<div class="slider">
+  <div class="imgList">
+    <ul>
+      <li><a><img src="img/a.jpg" alt=""></a></li>
+      <li><a><img src="img/b.jpg" alt=""></a></li>
+      <li><a><img src="img/c.jpg" alt=""></a></li>
+      <li><a><img src="img/f.jpg" alt=""></a></li>
+      <li><a><img src="img/u.jpg" alt=""></a></li>
+      <li><a><img src="img/v.jpg" alt=""></a></li>
+      <li><a><img src="img/w.jpg" alt=""></a></li>
+    </ul>
+  </div>
+</div>
+</body>
+<script type="text/javascript" src="slider-3D.js"></script>
+<script type="text/javascript">
+ 
+
+  var slider=new slider2()
+
+</script>
+</html>

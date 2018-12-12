@@ -1,0 +1,277 @@
+<script type="text/javascript">
+// 实现生成器函数fibb(n)，用于生成斐波那契数列（1，1，2，3，5，8，…）的第1到n项（包含），如果未传参数n，由一直生成直到for of循环内break或调用者不再调用next
+  var cache=[0,1,1,2]
+  function *fibb(n){
+    for(var i=1;;i++){
+      if(n!==undefined&&i>n)
+        return //fibbCalc(i)
+      else 
+        yield fibbCalc(i)
+    }
+  }
+
+ function fibbCalc(n){
+    if(cache[n]!==undefined)
+      return cache[n]
+    else{
+      cache[n]=fibbCalc(n-1)+fibbCalc(n-2)
+      return cache[n]
+    }
+ }
+
+ function *fibb2(n){
+  var a=1
+  var b=1
+  var c=0
+  while(c<=n){
+    [a,b]=[b,a+b]
+    yield a
+    c++
+  }
+ }
+
+</script>
+<script type="text/javascript">
+  //实现生成器函数primes(n)，用于生成于小n的（或前n个）素数
+  function * primes(n){
+    var ary=(new Array(n)).fill(true)
+    ary[0]=false
+    ary[1]=false
+    ary[2]=true
+    for(var i=2;i<=n;i++){
+        if(ary[i]){
+          yield i
+          for(var j=i;i*j<=n;j++){
+            ary[i*j]=false
+          }
+        }
+    }
+  }
+</script>
+<script type="text/javascript">
+  //在Number类型的原型上增加相应的方法以使如下调用可以执行：
+  // 作用：按radix进制迭代数字num的每一位数，如果reverse为true，则反向迭代（即先迭代最高位），进制默认为10，且两个参数的顺序可以任意（使用参数类型判断参数的作用）以达到可以只传一个参数的目的。
+  // 默认先迭代最低位
+  Number.prototype.digits=function*(radix=10,reverse=false){
+    if(arguments.length==2){
+      if(typeof radix==="boolean"&&typeof reverse==="number")
+        [radix,reverse]=[reverse,radix]
+    }
+    else if(arguments.length==1){
+      if(typeof radix==="boolean")
+       [radix,reverse]=[10,radix]
+    }
+    var res
+    var dig=this.valueOf()
+    var ary=[]
+    while(dig){
+      res=dig%radix
+      dig=(dig-res)/radix
+      if(!reverse){
+        yield res
+      }
+      else {
+        ary.push(res)
+      }
+    }
+    if(reverse){
+      while(ary.length){
+        yield ary.pop()
+      }
+    }
+  }
+
+  Number.prototype.digits2=function*digits2(radix=10,reverse=false){
+    if(arguments.length==2){
+      if(typeof radix==="boolean"&&typeof reverse==="number")
+        [radix,reverse]=[reverse,radix]
+    }
+    else if(arguments.length==1){
+      if(typeof radix==="boolean")
+       [radix,reverse]=[10,radix]
+    }
+    var res
+    var dig=this.valueOf()
+    if(dig){
+      res=dig%radix
+      dig=(dig-res)/radix
+      if(!reverse){
+        yield res
+        yield *digits2.call(dig,radix,reverse)
+      }
+      else {
+        yield *digits2.call(dig,radix,reverse)
+        yield res
+      }
+    }
+  }
+
+  // for(let digit of 456789..digits2(true)) {
+  //   console.log(digit)
+  // }
+</script>
+<script type="text/javascript">
+ // {a,b=1}={a:2}
+ // {a,b:{c}}={a:1,b:{c:1}} ==>c=1
+ // function f(){yield {a:1,b:2}}
+ // for(var {a,b} of f())console.log(a,b)
+
+//[...9] ===>[1,2,3....9],...即调用了for of
+//函数为生成器，b=g(),b为迭代器，有next属性 
+  function * g(){
+    yield 1
+    try{
+       var a=yield 2
+       console.log(a)
+    }
+    catch(e){
+      console.error(e)
+    }
+   
+    yield 3
+    yield *"abcde"
+    return  4
+  }
+  // c=g()
+  // c.next()  ==>1
+  // c.next()  ==>2
+  // c.next(111)  ==>"111"   3
+  // c.next()  //Object {value: 4, done: true}
+  // c.return() //Object {value: undefined, done: true}
+  // c.throw(new Error("boom!"))
+
+//实现for of 迭代对象值
+  Object.prototype[Symbol.iterator] = function*() {
+    for (var prop in this) {
+      if (Object.prototype.hasOwnProperty.call(this, prop)) {
+        yield this[prop]
+      }
+    }
+  }
+  for(val of {a:1,b:2}){console.log(val)} //1 2
+
+
+  Object.prototype[Symbol.iterator]=function*(){
+   for(var prop in this){
+        yield [prop,this[prop]]
+    }
+  }
+  for([key,value] of {a:1,b:2}){
+    console.log(key,value)
+  }
+//实现迭代数字
+  //法一，在其原型上实现
+  Number.prototype[Symbol.iterator]=function*(){
+    for(var i=0;i<this;i++){
+      yield i
+    }
+  }
+  //或如下写法
+  Number.prototype={
+    *[Symbol.iterator](){
+        for(var i=0;i<this;i++){
+         yield i
+      }
+    },
+  }
+ //法二，为了兼容浏览器，还可以用普通函数实现迭代函数
+ //即调用他时，返回一个带next方法，其返回value与done属性的对象即可
+ Number.prototype[Symbol.iterator]=function(){ 
+    var start=0
+    self=this
+    return {
+      next:function(){
+              return {
+                value:start++,
+                done:start>self
+              }
+           }
+          }
+  }
+ // for(val of 9){
+ //    console.log(val)
+ //  }
+
+  
+  //实现range方法，从start到end，每次叠加step的值
+  function  * range(start,end,step=1){
+    var res=start
+     while(res<=end){
+          yield res
+          res=res+step
+     }
+  }
+  // for(i of range(5,100,10)){
+  //   console.log(i)
+  // }
+  // 
+  // 
+//forof方法实现
+function* a() {
+  var i = 0
+  for(;;i++) {
+    yield i
+  }
+}
+function forof(iterable, body) {
+  var generated = iterable.next()//{value,done}
+  while(!generated.done) {
+    if (body(generated.value) === false) {
+        iterable.return()
+        break
+    }
+    generated = iterable.next()
+  }
+}
+forof(a(), value => {
+  return false
+})
+
+
+//结果1，间隔2s输出2
+function timeout(d) {
+  return function(f){
+    setTimeout(f, d)
+  }
+}
+function* x(){
+  console.log(1)
+  yield timeout(2000)
+  console.log(2)
+}
+var g = x()
+g.next().value(function(){
+  g.next()
+})
+
+
+function timeout(d) {
+  return function a(f){
+    setTimeout(f, d)
+  }
+}
+function run(genFn) {
+  var iteratable = genFn()
+  f()
+  function f(){
+    iteratable.next().value(function(){
+      f()
+    })
+  }
+}
+  function g*() {
+    console.log(1)
+    yield timeout(2000)
+    console.log(2)
+    yield timeout(3000)
+    console.log(3)
+    yield timeout(4000)
+    console.log(4)
+    yield timeout(1000)
+    console.log(5)
+    yield timeout(2000)
+    console.log(6)
+  }
+  var g = x()
+  run(g)
+</script>

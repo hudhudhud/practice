@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <base href="http://noi.openjudge.cn/" target="_blank">
+    <style>
+    script {
+        display: block;
+        border: 2px solid;
+        white-space: pre;
+    }
+    
+    a {
+        counter-increment: a;
+    }
+    
+    a::before {
+        content: counter(a) '. ';
+    }
+    
+    h2 {
+        counter-reset: a;
+    }
+    </style>
+</head>
+
+<body>
+    <h2>1.1编程基础之输入输出</h2>
+    <a href="/ch0101/01/">Hello, World!</a>
+    <script>
+    // console.log("Hello, World!")
+    </script>
+    <a href="/ch0101/02/">输出第二个整数</a>
+    <script>
+    // var a=prompt("输入a");
+    // var b=prompt("输入b");
+    // var c=prompt("输入c");
+    // console.log(b);
+    </script>
+    <a href="/ch0101/03/">对齐输出</a>
+    <script>
+    // var a=prompt("输入a");
+    // var b=prompt("输入b");
+    // var c=prompt("输入c");
+    // console.log(a+"\t"+b+"\t"+c);
+    </script>
+    <a href="/ch0101/04/">输出保留3位小数的浮点数</a>
+    <script>
+    // var a=prompt("输入a");
+    // console.log(Number(a).toFixed(2));
+    </script>
+    <a href="/ch0101/05/">输出保留12位小数的浮点数</a>
+    <script>
+    // var a=prompt("输入a");
+    // console.log(Number(a).toFixed(12));
+    </script>
+    <a href="/ch0101/06/">空格分隔输出</a>
+    <script>
+    // var a=prompt("输入字符");
+    // var b=prompt("输入整数");
+    // var c=prompt("输入单精度浮点数");
+    // var d=prompt("输入双精度浮点数");
+    // console.log(a+" "+b+" "+Number(c).toFixed(6)+" "+Number(d).toFixed(6));
+    </script>
+    <a href="/ch0101/07/">输出浮点数</a>
+    <script>
+    // ???var a=prompt("输入双精度浮点数");
+    // console.log("%f",a)
+    // console.log("%f",Number(a).toFixed(5))
+    // console.log("%e",a)
+    // console.log("%g",a)
+    </script>
+    <a href="/ch0101/08/">字符三角形</a>
+    <script>
+    // var a=prompt("输入符号")
+    // console.log("  "+a)
+    // console.log(" "+a+a+a)
+    // console.log(a+a+a+a+a)
+    </script>
+    <a href="/ch0101/09/">字符菱形</a>
+    <script>
+    // var a=prompt("输入符号")
+    // console.log("  "+a)
+    // console.log(" "+a+a+a)
+    // console.log(a+a+a+a+a)
+    // console.log(" "+a+a+a)
+    // console.log("  "+a)
+    </script>
+    <a href="/ch0101/10/">超级玛丽游戏</a>
+    <script>
+    //      console.log(
+    // `                ******** 
+    //                 ************
+    //                 ####....#.
+    //              #..###.....##....
+    //               ###.......######              ###                 ###           ###           ###  
+    //                  ...........               #...#               #...#         #...#         #...#  
+    //                 ##*#######                 #.#.#               #.#.#         #.#.#         #.#.#  
+    //              ####*******######             #.#.#               #.#.#         #.#.#         #.#.#  
+    //             ...#***.****.*###....          #...#               #...#         #...#         #...# 
+    //             ....**********##.....           ###                 ###           ###           ###  
+    //             ....****    *****....
+    //               ####        ####
+    //             ######        ######
+    // ##############################################################              ################################## 
+    // #...#......#.##...#......#.##...#......#.##------------------#              #...#......#.##------------------# 
+    // ###########################################------------------#              ###############------------------# 
+    // #..#....#....##..#....#....##..#....#....#####################              #..#....#....##################### 
+    // ##########################################    #----------#                  ##############    #----------# 
+    // #.....#......##.....#......##.....#......#    #----------#                  #.....#......#    #----------# 
+    // ##########################################    #----------#                  ##############    #----------# 
+    // #.#..#....#..##.#..#....#..##.#..#....#..#    #----------#                  #.#..#....#..#    #----------# 
+    // ##########################################    ############                  ##############    ############`)
+    //
+    </script>
+    <h2>1.2编程基础之变量定义、赋值及转换</h2>
+    <a href="/ch0102/01/">整型数据类型存储空间大小</a>
+    <script>
+    </script>
+    <a href="/ch0102/02/">浮点型数据类型存储空间大小</a>
+    <script>
+    </script>
+    <a href="/ch0102/03/">其他基本数据类型存储空间大小</a>
+    <script>
+    </script>
+    <a href="/ch0102/04/">填空：类型转换1</a>
+    <script>
+    // var a=32768;
+    // var A="boolean"
+    // var B="string"
+    // var C="number"
+    // var typea=typeof a
+    // if(typea==A){
+    //   console.log("A")
+    // }else if(typea==B){
+    //   console.log("B")
+    // }else if(typea==C){
+    //   console.log("C")
+    // }
+    </script>
+    <a href="/ch0102/05/">填空：类型转换2</a>
+    <script>
+    </script>
+    <a href="/ch0102/06/">浮点数向零舍入</a>
+    <script>
+    </script>
+    <a href="/ch0102/07/">打印ASCII码</a>
+    <script>
+    // var a=prompt("输入字符")
+    // console.log(a.charCodeAt())
+    </script>
+    <a href="/ch0102/08/">打印字符</a>
+    <script>
+    // var a=prompt("输入值")
+    // console.log(String.fromCharCode(a))
+    </script>
+    <a href="/ch0102/09/">整型与布尔型的转换</a>
+    <script>
+    // var a=prompt("输入整数")
+    // console.log(Number(Boolean(111)))
+    </script>
+    <a href="/ch0102/10/">Hello, World!的大小</a>
+    <script>
+    </script>
+    <h2>1.3编程基础之算术表达式与顺序执行</h2>
+    <a href="/ch0103/01/">A+B问题</a>
+    <script>
+    </script>
+    <a href="/ch0103/02/">计算(a+b)*c的值</a>
+    <script>
+    </script>
+    <a href="/ch0103/03/">计算(a+b)/c的值</a>
+    <script>
+    </script>
+    <a href="/ch0103/04/">带余除法</a>
+    <script>
+    // var a=prompt("输入被除数")
+    // var b=prompt("输入除数")
+    // console.log(Math.round(a/b)+" "+a%b)
+    </script>
+    <a href="/ch0103/05/">计算分数的浮点数值</a>
+    <script>
+    </script>
+    <a href="/ch0103/06/">甲流疫情死亡率</a>
+    <script>
+    // var a=prompt("输入确诊数")
+    // var b=prompt("输入死亡数")
+    // console.log(Number(b/a).toFixed(5)*100+"%")
+    </script>
+    <a href="/ch0103/07/">计算多项式的值</a>
+    <script>
+    // var x=prompt("输入x")-0
+    // var a=prompt("输入a")-0
+    // var b=prompt("输入b")-0
+    // var c=prompt("输入c")-0
+    // var d=prompt("输入d")-0
+    // var result=a*x**3+b*x**2+c*x+d
+    // console.log(result)
+    </script>
+    <a href="/ch0103/08/">温度表达转化</a>
+    <script>
+    </script>
+    <a href="/ch0103/09/">与圆相关的计算</a>
+    <script>
+    // var r=prompt("输入半径")
+    // console.log((2*r).toFixed(4),(2*r*Math.PI).toFixed(4),(Math.PI*r**2).toFixed(4))
+    </script>
+    <a href="/ch0103/10/">计算并联电阻的阻值</a>
+    <script>
+    // var a1=prompt("输入电阻1")-0
+    // var a2=prompt("输入电阻2")-0
+    // console.log((1/(1/a1+1/a2)).toFixed(2))
+    </script>
+    <a href="/ch0103/11/">计算浮点数相除的余数</a>
+    <script>
+    </script>
+    <a href="/ch0103/12/">计算球的体积</a>
+    <script>
+    </script>
+    <a href="/ch0103/13/">反向输出一个三位数</a>
+    <script>
+    // var h=prompt("输入三位数")
+    // var a=h%10;
+    // var b=parseInt(h/10)%10
+    // var c=parseInt(h/100)
+    // console.log(String(a)+String(b)+String(c))
+    </script>
+    <a href="/ch0103/14/">大象喝水</a>
+    <script>
+    // var h=prompt("输入圆桶高度h")
+    // var r=prompt("输入圆桶半径r")
+    // var Pi=3.14159
+    // var s=Pi*r**2*h/1000
+    // var num=20/s
+    // if(num>parseInt(num)){
+    //   num=parseInt(num)+1;
+    // }
+    // else{
+    //   num=parseInt(num)
+    // }
+    // console.log(num);
+    </script>
+    <a href="/ch0103/15/">苹果和虫子</a>
+    <script>
+    </script>
+    <a href="/ch0103/16/">计算线段长度</a>
+    <script>
+    </script>
+    <a href="/ch0103/17/">计算三角形面积</a>
+    <script>
+    </script>
+    <a href="/ch0103/18/">等差数列末项计算</a>
+    <script>
+    // var a1=prompt("等差数列首项")-0
+    // var a2=prompt("等差数列第二项")-0
+    // var n=prompt("输入项数")-0
+    // console.log(a1+(a2-a1)*(n-1))
+    </script>
+    <a href="/ch0103/19/">A*B问题</a>
+    <script>
+    </script>
+    <a href="/ch0103/20/">计算2的幂</a>
+    <script>
+    // var a=prompt("输入非负整数")
+    // console.log(2**a)
+    </script>
+    <h2>1.4编程基础之逻辑表达式与条件分支</h2>
+    <a href="/ch0104/01/">判断数正负</a>
+    <script>
+    </script>
+    <a href="/ch0104/02/">输出绝对值</a>
+    <script>
+    //  var a=prompt("输入浮点数")
+    // console.log(Math.abs(a).toFixed(2))
+    </script>
+    <a href="/ch0104/03/">奇偶数判断</a>
+    <script>
+    </script>
+    <a href="/ch0104/04/">奇偶ASCII值判断</a>
+    <script>
+    </script>
+    <a href="/ch0104/05/">整数大小比较</a>
+    <script>
+    </script>
+    <a href="/ch0104/06/">判断是否为两位数</a>
+    <script>
+    // var a=prompt("输入正整数")
+    // if(a/10>1&&a/100<1){
+    //   console.log(1)
+    // }else{
+    //   console.log(0)
+    // }
+    </script>
+    <a href="/ch0104/07/">收集瓶盖赢大奖</a>
+    <script>
+    </script>
+    <a href="/ch0104/08/">判断一个数能否同时被3和5整除</a>
+    <script>
+    </script>
+    <a href="/ch0104/09/">判断能否被3，5，7整除</a>
+    <script>
+    </script>
+    <a href="/ch0104/10/">有一门课不及格的学生</a>
+    <script>
+    </script>
+    <a href="/ch0104/11/">晶晶赴约会</a>
+    <script>
+    </script>
+    <a href="/ch0104/12/">骑车与走路</a>
+    <script>
+    </script>
+    <a href="/ch0104/13/">分段函数</a>
+    <script>
+    </script>
+    <a href="/ch0104/14/">计算邮资</a>
+    <script>
+    </script>
+    <a href="/ch0104/15/">最大数输出</a>
+    <script>
+    </script>
+    <a href="/ch0104/16/">三角形判断</a>
+    <script>
+    </script>
+    <a href="/ch0104/18/">点和正方形的关系</a>
+    <script>
+    </script>
+    <a href="/ch0104/19/">简单计算器</a>
+    <script>
+    </script>
+    <a href="/ch0104/20/">求一元二次方程的根</a>
+    <script>
+    </script>
+    <a href="/ch0104/21/">苹果和虫子2</a>
+    <script>
+    </script>
+    <a href="/ch0105/03/">均值</a>
+    <script>
+    // var num=prompt("请输入要输入个数")-0
+    // var sum=0
+    // for(var i=0;i<num;i++){
+    //     sum+=prompt("请输入数")-0
+    // }
+    // console.log((sum/num).toFixed(4))
+    </script>
+    <a href="/ch0105/05/">最高的分数</a>
+    <script>
+    var num = prompt("请输入要输入个数") - 0
+    var max = 0
+    for (var i = 0; i < num; i++) {
+        var b = prompt("请输入数")
+        if (max < b) {
+            max = b;
+        }
+    }
+    console.log("最大为" + max);
+    </script>
+    <a href="/ch0105/42/">画矩形</a>
+    <script>
+    function print(h,w,s,isfull){
+      var hang=""
+        for(var i=0;i<h;i++){
+          for(var j=0;j<w;j++){
+            if(i==0||i==h-1){
+              hang+=s
+            }
+            else if(j==0||j==w-1){
+              hang+=s
+            }
+            else if(isfull){
+              hang+=s
+            }
+            else{
+              hang+=" "
+            }
+          }
+          hang+="\n"
+        }
+        console.log(hang)
+    }
+    print(7,7,'@',1)
+    </script>
+    <a href="/ch0105/45/">金币</a>
+    <script>
+    function gold(day){
+      var curDay=0 //当前第几天
+      var n=1 //连续的天数
+      var amount=0 //金币
+      while(curDay<day){
+        if(day-curDay<n){//剩下的天数比金币少，则金币只需要乘以剩下的天数
+          amount+=n*(day-curDay)
+        }else{
+          amount+=n**2
+        }
+        curDay+=n
+        n++
+      }
+      console.log(amount)
+    }
+    </script>
+</body>
+
+</html>

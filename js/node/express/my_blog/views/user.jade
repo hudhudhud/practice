@@ -1,0 +1,33 @@
+extends layout
+
+block content
+  p #{user.name} 's blog
+  
+  a(href='/',style="float:right") 返回首页
+  ul.blog.user-blog
+    for blog in blogs
+      li
+        div.user-left
+          a(href='/blog/#{blog.id}')=blog.title  
+          p  #{blog.createdAt.toLocaleString()}
+        div.user-right
+          a(href='/add/#{blog.id}') 修改
+          a(href='./delete/#{blog.id}') 删除
+
+    else
+      li sorry, no blog!
+
+  p 共
+     span#allCount #{allCount}
+     |条数据 
+  -if(pageCount >1)
+    ul.user-pager
+      - var page=0
+      while page < pageCount
+        - page=page+1
+        if page==currentPage
+          li.current(userId='#{user.id}')
+            span=page
+        else 
+          li.link(userId='#{user.id}')
+            span(href="/user/#{user.id}?page=#{page}")=page

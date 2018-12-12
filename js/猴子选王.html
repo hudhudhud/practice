@@ -1,0 +1,55 @@
+<script type="text/javascript">
+// 题目：猴子选王，m个编了号的猴子顺次围成一圈，从第一只开始报数，报到n的猴子退出，退出的猴子的下一只从1开始重新报数，依此类推，最后剩下的猴子为猴王。
+// 输入m和n求猴王的编号。
+function getKing(m,n){
+    var monkeys=[]
+    for(var i=1;i<=m;i++){
+        monkeys.push(i)
+    }
+    var index=0  
+    var count=0     //为n计数
+    var outCount=0 //淘汰数量
+    var kingIndex  //最后留下的猴子的编号
+    while(outCount<monkeys.length-1){
+      if(monkeys[index]==-1&&index<monkeys.length-1){
+         index++
+         continue
+      }else{
+        count++
+      }
+      if(count==n){
+        monkeys[index]=-1
+        outCount++
+        count=0
+      }
+      else{
+         kingIndex=index
+      }
+      if(index<monkeys.length-1)
+        index++
+      else{ 
+        index=0
+      }
+    }
+    return kingIndex+1
+}
+
+function getKing2(m,n){ //数数的时候，若不是则移到数组最后，否则直接删除，就这样删到只剩一个猴子，不过改变数组长度会影响性能
+    var monkeys=[]
+    for(var i=1;i<=m;i++){
+        monkeys.push(i)
+    }
+    var count=0
+    while(monkeys.length>1){
+      count++
+      if(count==n){
+        count=0
+        monkeys.splice(0,1)
+      }else{
+        monkeys.push(monkeys[0])
+        monkeys.splice(0,1)
+      }
+    }
+    return monkeys
+}
+</script>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+</head>
+<!-- <script type="text/x-template" id="temp">
+  <div v-for="movie in movies">
+    <span>{{movie.title}}</span>
+  </div>
+</script> -->
+<body>
+<div id="app">
+  <div>电影列表</div>
+  <input type="text" @keyup.enter="doSearch" v-model="search">
+  <div v-for="movie in movies">
+        <span>{{movie.title}}</span>
+  </div>
+</div>
+</body>
+<script type="text/javascript" src="vue.js"></script>
+<script type="text/javascript" src="axios.min.js"></script>
+<script type="text/javascript">
+  app=new Vue({
+    el:"#app",
+    data:{
+      search:"iron",
+      movies:[{title:"test"}]
+    },
+    methods:{
+      doSearch(){
+        axios.get("https://api.douban.com/v2/movie/search?q="+this.search)
+              .then((response)=> {
+                //console.log(response.data.subjects)
+                this.movies=response.data.subjects
+              })
+              .catch(function (error) {
+                console.log(error)
+              })
+      }
+    },
+    mounted(){
+      this.doSearch()
+    },
+  })
+
+</script>
+</html>

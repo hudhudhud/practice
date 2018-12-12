@@ -1,0 +1,22 @@
+<style>
+body{
+  position: relative;
+}
+  span{
+    width: 50px;
+    height: 50px;
+    border-radius:50px;
+    position: absolute;
+
+  }
+</style>
+<script>
+  for(var i=0;i<2*Math.PI;i+=0.01){
+     //var y=i**2/(-100)+1000
+     //var y=Math.sin(i/100)*100+100
+    var x = Math.sin(i)*150+500
+    //var y = Math.cos(i)*100 + 200 //x为sin,y为cos画圆
+    var y = Math.cos(i)*100 + 200 - Math.abs(Math.sin(i))*100  //离y轴越近值越大的值往下拉即可变成心状
+    document.write(`<span style="top:${y}px;left:${x}px;background-color:hsl(${i*100},80%,50%)"></span>`)
+  }
+</script>

@@ -1,0 +1,83 @@
+<script type="text/javascript">
+function prop(name){
+  return function(obj){return obj[name]}
+}
+var getAge=prop('age')
+var age=getAge({name:'xx',age:18})
+</script>
+
+<script type="text/javascriptx">
+  function negate(fn){//取反
+    return function(n){
+      return !fn(n)
+    }
+  }
+  function isEven(n){
+    return n%2==0
+  }
+  var isOdd=negate(isEven)
+  console.log(isOdd(3))
+</script>
+
+<script type="text/javascriptx">
+  function once(fn){//返回的函数只调一次
+    let isfirst=true
+    return function(...args){//rest parameters，剩余参数
+      if(isfirst){
+        isfirst=false
+        return fn(...args)//spread operator,...为操作符，把数组重新分开为每一项
+      }
+    }
+  }
+var log=once(console.log)
+log(2)
+log(3)
+log=once(console.log)
+log(5)
+log(6)
+</script>
+<script type="text/javascriptx">
+  function mostTimes(fn,n){
+    return function(...args){
+      if(n>0){
+        n--
+        return fn(...args)
+      }
+    }
+  }
+var log=mostTimes(console.log,3)
+log(1)
+log(2)
+log(3)
+log(4)
+</script>
+<script type="text/javascriptx">
+  function spread(fn){
+    return function(array){
+      return fn(...array)
+    }
+  }
+  var a=spread(Math.max)
+  console.log(a([1,2,3,4]))
+</script>
+
+<script type="text/javascriptx">
+  function flip(fn){
+    return function(...args){
+      return fn(...args.reverse())
+    }
+  }
+ var log=flip(console.log)
+ log(1,2,3)
+</script>
+
+<script type="text/javascript">
+  function unary(fn){
+    return function(...args){
+      return fn(args[0])
+    }
+  }
+ 
+ var parseIntBy10=unary(parseInt);//需要加分号，因为后面第一个为[
+["1","2","3"].map(parseIntBy10)
+</script>

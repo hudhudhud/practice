@@ -1,0 +1,102 @@
+<!-- 自定义Error类型 -->
+<script type="text/javascript">
+function promptDirction(question){
+  var result=prompt(question,"")
+  if(result.toLowerCase()=="left")return "L";
+  if(result.toLowerCase()=="right")return "R";
+  throw new InputError("Invalid direction : "+ result)
+}
+
+// es6继承写法
+class InputError extends Error{
+  constructor(message){
+    super(message)
+    // this.message=message
+    // this.stack=(new Error()).stack   存储到当前层的调用栈
+  }
+}
+
+//或
+// function InputError(message) {
+//    Error.call(this,message)
+//   // this.message=message
+//   // this.stack=(new Error()).stack
+// }
+// InputError.prototype=Object.create(Error.prototype)
+// InputError.prototype.name="InputError"
+
+//若未输入left或right则一直提示重新输入
+function test(){
+    for(;;){
+    try{
+      var dir=promptDirction("where")
+      console.log("you chose",dir)
+      break
+    }catch(e){
+      if(e instanceof InputError){
+        console.log(e.message+" is not a valid direction. Try again.")
+        console.log(e.stack)
+      }else{
+        throw e
+      }
+    }
+  }
+}
+test()
+</script>
+<!-- 盒子问题，开着的才能取其内容，不管有没有取成功，最后都要重新关闭，类似python的with -->
+<script type="text/javascriptx">
+  var box={
+    locked:true,
+    unlock:function(){this.locked=false;},
+    lock:function(){this.locked=true;},
+    _content:[],
+    get content(){
+      if(this.locked)throw new Error("Locked!");
+      return this._content;
+    }
+  }
+  function withBoxUnlocked(f){
+    try{
+        return f()
+    }
+    finally{
+      box.lock()
+    }
+  }
+  function f(){
+    return box.content
+  }
+  withBoxUnlocked(f)
+
+//同python中的with
+  function with(...args){
+    var body=arg.pop()
+    try{
+      return body(args)
+    }
+    catch(e){
+      throw e
+    }
+    finally{
+      args.forEach(arg=>{arg.__close__()})
+    }
+  }
+</script>
+<!-- 断言 assert -->
+<script type="text/javascriptx">
+  function assert(a,b){
+    if(a!=b){
+      throw new Error()
+    }
+  }
+  function assert1(test,message){
+    if(!test){
+      throw new Error(message)
+    }
+  }
+  function lastElement(array){
+    assert1(array.length>0,"empty array in lastElement")
+    return array[array.length-1]
+  }
+</script>

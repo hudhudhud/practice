@@ -1,0 +1,30 @@
+<script type="text/javascript">
+  function traverse(ary,iterator,start=0){
+    if(start>ary.length-1)
+      return
+    iterator(ary[start])
+    traverse(ary,iterator,start+1)
+  }
+  function tail(ary){
+    var result=[]
+    traverse(ary,function(val){
+      result.push(val)
+    },1)
+    return result
+  }
+  function tail2(ary,i=1,result=[]){
+    if(i==ary.length){
+      return result
+    }
+    result[i-1]=ary[i]
+    return tail2(ary,i+1,result)
+  }
+  //不用循环生成一个长m每一项为n的数组
+  function arraymn(m,n,result=[]){
+    if(m==0){
+      return result
+    }
+    result[m-1]=n
+    return arraymn(--m,n,result)
+  }
+</script>

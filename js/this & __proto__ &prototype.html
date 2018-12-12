@@ -1,0 +1,56 @@
+<script type="text/javascript">
+  var protoRabbit={
+    speak:function(line){
+      console.log("the "+this.type+" rabbit says "+line+" ")
+    }
+  }
+  var killerRabbit=Object.create(protoRabbit);
+  killerRabbit.type="killer"
+  
+  var killerRabbit1=Object.create(protoRabbit);
+  killerRabbit1.type="killer1"
+
+  // killerRabbit.speak("skreeee!")
+  // killerRabbit1.speak("skreeee1!")
+</script>
+<script type="text/javascript">
+  function create1(proto){
+    var a={}
+    a.__proto__=proto
+    return a
+  }
+//考虑__proto__在IE老浏览器兼容性问题，可以使用以下函数，但存在的问题proto为null时，没用
+  function create(proto){
+    var A=function(){}
+    A.prototype=proto
+    var a=new A()
+    return a
+  }
+</script>
+
+
+<script type="text/javascript">
+  function NEW(F, ...args) {
+    var o = {}
+    // o.__proto__ = F.prototype
+    Object.setPrototypeOf(o, F.prototype)
+    var returnedValue = F.call(o, ...args)
+    if (returnedValue == null || returnedValue == undefined) {
+      return o
+  }
+  return returnedValue
+}
+</script>
+<script type="text/javascript">
+//__proto__可以理解为对象的一个属性，同toString(),isPrototypeOf()
+  Object.defineProperty(Object.prototype,"__proto___",{
+    get:function(){
+      return Object.getPrototypeOf(this)
+    },
+    set:function(o){
+      Object.setPrototypeOf(this,o)
+      return o
+    }
+  })
+</script>
+

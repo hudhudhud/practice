@@ -1,0 +1,47 @@
+extends layout
+-
+block content
+  if(user)
+    p.title Welcome #{user.name} to #{title}
+  else 
+    p.title Welcome to #{title}
+  div.right
+    ul.menu
+      if user
+        li 
+          a(href='/login/out') 登出
+      else
+        li 
+          a(href='/login') 登录
+        li 
+          a(href='/registe') 注册
+
+      li 
+       a(href='/add') 写文章
+  div.left
+    ul.blog 
+      for blog in blogs
+        li
+          a.title(href='/blog/#{blog.id}')=blog.title
+          p.blog-content !{blog.content.length>200?blog.content.substr(0,200)+"...... ":blog.content} 
+          p  
+            a(href='/user/#{blog.userId}') #{blog.user.name} 
+            |发布于  
+            span #{blog.createdAt.toLocaleString()}
+      else
+        li sorry, no blog!
+
+    p 共
+       span#allCount #{allCount}
+       |条数据 
+    -if(pageCount >1)
+      ul.index-pager
+        - var page=0
+        while page < pageCount
+          - page=page+1
+          if page==currentPage
+            li.current
+              span=page
+          else 
+            li.link
+              span(href="/?page=#{page}" )=page

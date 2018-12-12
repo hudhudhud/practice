@@ -1,0 +1,39 @@
+<script>
+function itos(inter){
+  if(inter==0){
+    return "0"
+  }else if(inter==1){
+    return "1"
+  }else if(inter==2){
+    return "2"
+  }else if(inter==3){
+    return "3"
+  }else if(inter==4){
+    return "4"
+  }else if(inter==5){
+    return "5"
+  }else if(inter==6){
+    return "6"
+  }else if(inter==7){
+    return "7"
+  }else if(inter==8){
+    return "8"
+  }else if(inter==9){
+    return "9"
+  }
+}
+var toString=function(n,x){
+  var inter=n
+  var litt=n%x
+  var str=""
+  while(inter>=1){
+     str=itos(litt)+str
+     inter=(inter-litt)/x
+     litt=inter%x
+  }
+  return str
+}
+console.log(toString(123,10),typeof toString(123,10))
+console.log(toString(4,2),typeof toString(4,2))
+console.log(toString(16,16),typeof toString(16,16))
+</script>

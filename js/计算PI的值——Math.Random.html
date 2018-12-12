@@ -1,0 +1,17 @@
+<script type="text/javascriptx">
+  // 题目：用随机算法计算PI的值,在边长为1的矩形里放入一个圆，圆心为（0.5,0.5），半径为0.5,所以面积比1/4*Pi=在圆上的点/正方形上的点，所以Pi=4*圆上的点/正方形的点
+function distance(x1,y1,x2,y2) {
+  return Math.sqrt((x1 - x2)**2 + (y1 - y2)**2)
+}
+var count = 0
+var num = 100000000
+for(var i = 0; i< num; i++) {
+  var x = Math.random()
+  var y = Math.random()
+  if(distance(x,y,0.5,0.5)<0.5){
+   // if (distance(x,y,0,0) < 1) {
+    count++
+  }
+}
+console.log(count*4/ num)
+</script>

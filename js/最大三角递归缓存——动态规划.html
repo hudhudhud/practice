@@ -1,0 +1,50 @@
+<script type="text/javascript">
+ var triangle = [
+        [2],//0
+        [4, 1],//1
+        [7, 2, 4],//2
+        [9, 6, 1, 8],//3
+        [2, 6, 8, 5, 4]//4
+        // 0, 1, 2, 3, 4 
+  ]
+// 计算triangle这个大三角在i行j列位置的小三角形的
+var cache={}//存放每个三角形的最大值，以防止重复计算影响计算速度，
+            //如计算第二行4的三角形为7,2，计算1的三角形为2,4,2就重复算了一次
+function maxRoute(triangle,i=0,j=0){
+  var position=i+","+j
+  if(cache[position]!==undefined){
+    return cache[position]
+  }
+  if(i==triangle.length-1){
+    return triangle[i][j]
+  }
+  else{
+     //找出i+1行j列与i+1行j+1列两个三角形的最大值中的最大值，然后加上i行j列的数值，done
+    var left=maxRoute(triangle,i+1,j)
+    var right=maxRoute(triangle,i+1,j+1)
+    cache[(i+1)+","+j]=left
+    cache[(i+1)+","+(j+1)]=right
+    return triangle[i][j]+Math.max(left,right)
+  }
+}
+
+//或者可以自底向上循环出解矩阵，不用递归,时间复杂度为O(n)
+//解上面的矩阵得到，最后0,0位置得到最大值28
+ var triangle2 = [
+        [28],//0
+        [26, 17],//1
+        [22, 16, 17],//2
+        [15, 14, 9, 13],//3
+        [2,  6,  8, 5, 4]//4
+        // 0, 1, 2, 3, 4 
+  ]
+ function maxRoute2(triangle) {
+    for(var i=triangle.length-2;i>-1;i--){
+        for(var j=0;j<triangle[i].length;j++){
+            triangle[i][j]=triangle[i][j]+Math.max(triangle[i+1][j],triangle[i+1][j+1])
+        }
+    }
+    return triangle[0][0]
+};
+</script>
+

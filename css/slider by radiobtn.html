@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	  <meta charset="utf-8">
+		<title></title>
+		<style>
+		body{
+			background-color: #edf2f8;
+		}
+		div{
+			border:20px solid white;
+			position: relative;
+			width: 500px;
+			height: 300px;
+			margin:auto;
+			//overflow: none;    /*用来隐藏左边的图片，因为图片超出div边界，所以不管超出部分即用overflow*/
+		}
+		img{
+			//display: none;   /*用none会有问题，导致未点击时img宽度大小为0，不占空间，所以无法对源头文件进行动画*/
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			top:0;
+			//left:-200%;
+			opacity: 0;
+			left:0px;
+			//transition:all 1s linear;
+		}
+		input{
+			display: none;
+		}
+		input+div{
+			border:1px solid;
+			width:20px;
+			height: 20px;
+			background-color: #7cb7cc;
+		             color:white;
+			display: inline-block;
+			z-index: 3;
+			padding:10px;
+			margin-top:250px;
+			margin-left:65px;
+			border-radius: 100%;
+			text-align: center;
+			box-shadow: 0 0 3px 3px  white;
+		}
+		input:checked+div{
+			background-color: white;
+			color:#7cb7cc;
+			box-shadow: 0 0 3px 3px  #7cb7cc;
+		}
+		input:checked~img{
+			//display: inline-block;
+			left:0;
+			opacity: 1;
+			//transform:rotate(360deg);
+			transition:all 1s linear;
+		}
+		</style>
+	</head>
+	<body>
+		<div>
+			<label>
+				<input type="radio"  name=a  checked>
+				<div>1</div>
+				<img   src="https://img.alicdn.com/imgextra/i4/2310266053/TB2vCOwlYlmpuFjSZFlXXbdQXXa_!!2310266053.jpg_q90_.webp" >
+			</label>
+			<label>
+				<input type="radio"  name=a>
+				<div>2</div>
+				<img   src="https://aecpm.alicdn.com/tps/i2/TB10vPXKpXXXXacXXXXvKyzTVXX-520-280.jpg" alt="">
+			</label>
+			<label>
+				<input type="radio"  name=a>
+				<div>3</div>
+				<img src="https://img.alicdn.com/simba/img/TB1g_TJOVXXXXbUXFXXSutbFXXX.jpg" alt="">
+			</label>
+			<label>
+				<input type="radio"  name=a>
+				<div>4</div>
+				<img  src="https://img.alicdn.com/tfs/TB1wdLnQpXXXXaXXXXXXXXXXXXX-520-280.jpg_q90_.webp" alt="">
+			</label>
+		</div>
+	</body>
+</html>

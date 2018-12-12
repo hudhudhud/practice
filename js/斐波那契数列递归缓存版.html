@@ -1,0 +1,14 @@
+<script type="text/javascriptx">
+// 题目：输出"斐波那契数列"的前15项 1 1 2 3 5 8 13 ...
+
+//存放计算过的值，以防止重复计算影响计算速度，如计算第四项是计算三，二，计算第五项是四，三，此时第三项就算了两次
+var cache=[0,1,1]
+function fibb2(n){
+  if(cache[n]!==undefined){
+    return cache[n]
+  }
+ var result=fibb(n-1)+fibb(n-2)
+ cache[n]=result
+ return result
+}
+</script>

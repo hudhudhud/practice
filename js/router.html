@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+<div id="app">
+</div>
+<div id="content"></div>
+</body>
+<script type="text/template" id="home">
+  <h1>首页</h1>
+  <ul>
+    <li><a href="#1">film1</a></li>
+    <li><a href="#2">film2</a></li>
+    <li><a href="#3">film3</a></li>
+  </ul>
+</script>
+<script type="text/template" id="film">
+  <h1>您正在浏览电影</h1>
+  <fieldset>
+    <legend>111</legend>
+  </fieldset>
+</script>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript">
+  jQuery(function($){
+      window.onhashchange=function(){
+           var hash=location.hash
+            if(!hash){
+              $("#app").html($("#home").html())
+            }
+            else{
+              $("#app").html($("#home").html())
+              var id=hash.match(/#([^\/]+)/)[1]
+              if(id){
+
+                var a= $($("#film").html()).find("legend").text(id).end()   //因为$($("#film").html())是创建了新标签，script里的元素是不会被解析为dom的，需要用变量保存才行
+                $("#content").html(a)
+
+                //$("#content").html($($("#film").html()).find("legend").text(id).end())
+              }
+            }
+      }
+      window.onhashchange()
+  })
+</script>
+</html>

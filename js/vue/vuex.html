@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <script type="text/javascript" src="vue.js"></script>
+  <script type="text/javascript" src="vuex@2.3.1.js"></script>
+</head>
+<body>
+<div id="app">
+  <p @click="layzyInc()">{{count}} </p>
+  <p>base:{{base}}</p>
+  <p>addBase:{{addBase}}</p>
+  <p>doneTodosCount:{{doneTodosCount}}</p>
+</div>
+</body>
+<script type="text/javascript">
+  store=new Vuex.Store({
+    state: {
+      count: 2,
+      todos: [
+        { id: 1, text: '...', done: true },
+        { id: 2, text: '...', done: true }
+      ]
+    },
+    mutations: {//内部修改数据的函数只能是同步函数，不能有异步操作
+      increment (state) {
+        state.count++
+      },
+      power (state){
+        state.count ** 2
+      }
+    },
+    getters:{ //获取数据的一些公共方法，组件可通过store.getters.method调用
+      completed(state,getters){
+        return state.todos.filter(it=>it.done).length
+      }
+    },
+    actions:{ //允许异步调用mutations，组件通过dispatch得到调用函数的返回值
+      inc({state,commit}){
+        return new Promise((res,rej)=>{
+           setTimeout(()=>{
+              commit("increment")
+              res()
+           },1000)
+        })
+      }
+    }
+  })
+  //监听store里面数据的变化
+  store.subscribe((type,state)=>console.log(type,state))
+
+  app=new Vue({
+    el:"#app",
+    store,
+    data:{
+      base:10,
+    },
+    methods:{
+      // increment(){
+      //   this.$store.commit("increment")
+      // }
+      ...Vuex.mapMutations([
+        'increment'
+      ]),
+      layzyInc(){
+         this.$store.dispatch("inc").then(()=>{
+            //this.layzyInc()
+         })
+      }
+    },
+    computed:{
+      // count(){
+      //    return  this.$store.state.count
+      // }
+       ...Vuex.mapState({
+        count:'count',
+        addBase:function(state){return state.count + this.base}
+      }),
+      // doneTodosCount () {
+      //     return this.$store.getters.completed
+      // }
+      ...Vuex.mapGetters({
+        doneTodosCount:"completed"
+      })
+    }
+  })
+
+  function mapState(obj){
+    var result={}
+     for(let [key,val] of Object.entries(obj)){
+        if(typeof val==="string"){
+          result[key]= function(){
+             return this.$store.state[val]
+          }
+        }else{
+          result[key]=  function(){
+             return val.call(this,this.$store.state)
+          }
+        }
+     }
+     return result
+  }
+</script>
+</html>

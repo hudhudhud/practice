@@ -1,0 +1,74 @@
+  <script>
+  /**
+   * [把数组减小一个维度]
+   * @param  {[array]} array [传入数组]
+   * @return {[array]}       [返回新数组]
+   */
+  flatten=function(array){
+    var newArray=[]
+    for(var i=0;i<array.length;i++){
+      if(typeof array[i] ==="object"){
+        for(var j=0;j<array[i].length;j++){
+          newArray.push(array[i][j])
+        }
+      }else{
+        newArray.push(array[i])
+      }
+    }
+    return newArray
+  }
+  //用reduce实现
+  flatten1=function(array){
+    return array.reduce(function(res,value){
+      return res.concat(value)
+    },[])
+  }
+  //用胖箭头写
+  flatten2=array=>array.reduce((res,value)=>res.concat(value),[])
+  flatten3=array => [].concat(...array)
+ 
+  /**
+   * [把数组变成一维数组]
+   * @param  {[array]} array [传入数组]
+   * @return {[array]}       [返回一维数组]
+   */
+  flattenDeep=function flattenDeep(array){
+    var newArray=[]
+    for(var i=0;i<array.length;i++){
+      if(typeof array[i] ==="object"){
+         newArray=newArray.concat(flattenDeep(array[i]))
+      }else{
+         newArray.push(array[i])
+      }
+    }
+    return newArray
+  }
+  flattenDeep1=function flattenDeep1(array){
+    return array.reduce(function(res,val){
+      if(Array.isArray(val)){
+        return res.concat(flattenDeep1(val))
+      }else{
+        return res.concat(val)
+      }
+    },[])
+  }
+  
+  flattenDeep2=array=>array.reduce((res,val)=>Array.isArray(val)?res.concat(flattenDeep2(val)):res.concat(val),[])
+
+/**
+ * [按照深度展开数组]
+ */
+  flattenDepth=function flattenDepth(array,depth=1){
+     if (depth == 0) {
+        return array
+     }
+     return array.reduce(function(res,val){
+      if(Array.isArray(val)){
+        return res.concat(flattenDepth(val,depth-1))
+      }else{
+        return res.concat(val)
+      }
+    },[])
+  }
+  flattenDepth1=(array,depth=1)=>depth==0?array:array.reduce((res,val)=>Array.isArray(val)?res.concat(flattenDepth1(val,depth-1)):res.concat(val),[])
+  </script>

@@ -1,0 +1,119 @@
+<script type="text/javascript">
+// Given an integer matrix, find the length of the longest increasing path.
+// From each cell, you can either move to four directions: left, right, up or down. You may NOT move diagonally or move outside of the boundary (i.e. wrap-around is not allowed).
+var matrix = [   //==>return 4
+  [9,9,4],
+  [6,6,8],
+  [2,1,1]
+]
+/**
+ * @param {number[][]} matrix
+ * @return {number}
+ */
+//思路一，从最小的元素开始填路径，若某个已经计算过路径，则直接1+他的路径，四个方向上取最大的
+var longestIncreasingPath= function(matrix){
+  if(matrix.length==0||matrix[0].length==0)
+    return 0
+  let resMatrix=new Array(matrix.length)
+  for(let i=0;i<resMatrix.length;i++){
+    resMatrix[i]=new Array(matrix[0].length)
+  }
+  var array=getSortArray(matrix)
+  var result=0
+  function getValue(value,i,j){
+    if(i>=matrix.length||i<0)
+      return 0
+    if(j>=matrix[0].length||j<0)
+      return 0
+    if(value>matrix[i][j]&&resMatrix[i][j]!=undefined)
+        return resMatrix[i][j]
+     return 0
+  }
+  for(let i=0;i<array.length;i++){
+    let key=array[i].key.split(",")
+    let [row,column]=[Number(key[0]),Number(key[1])]
+    var current=matrix[row][column]
+    resMatrix[row][column]=1+Math.max(
+      getValue(current,row-1,column),
+      getValue(current,row+1,column),
+      getValue(current,row,column-1),
+      getValue(current,row,column+1)
+    )
+    result=Math.max(resMatrix[row][column],result)
+  }
+  return result
+};
+function getSortArray(matrix) { 
+    let array=new Array(matrix.length*matrix[0].length)
+    let len=0
+    for(let i=0;i<matrix.length;i++){
+        for(let j=0;j<matrix[i].length;j++){
+            let obj={}
+            obj["key"]=i+","+j
+            obj["val"]=matrix[i][j]
+            array[len++]=obj
+        }
+    }
+    sortBy(array,o=>o.val)
+    return array
+}
+//插入排序实现
+function sortBy(col,itera){
+    var changed=false
+    for(var i=1;i<col.length;i++){
+       temp=col[i]
+       j=i-1
+       changed=false
+       while(j>=0&&itera(col[j])>itera(temp)){
+          changed=true
+          col[j+1]=col[j]
+          j--
+       }
+       if(changed)col[j+1]=temp
+    } 
+    return col
+};
+</script>
+<script type="text/javascript">
+  var matrix = [   //==>return 4
+  [9,9,4],
+  [6,6,8],
+  [2,1,1]
+]
+/**
+ * @param {number[][]} matrix
+ * @return {number}
+ */
+//每个元素上依次找路径，四个方向上取最大的
+var longestIncreasingPath2= function(matrix){
+  if(matrix.length==0||matrix[0].length==0)
+    return 0
+  let resMatrix=new Array(matrix.length)
+  for(let i=0;i<resMatrix.length;i++){
+    resMatrix[i]=new Array(matrix[0].length)
+  }
+  var result=1
+  for(let i=0;i<matrix.length;i++){
+    for(let j=0;j<matrix[i].length;j++){
+      resMatrix[i][j]=getValue(matrix,i,j,resMatrix)
+      result=Math.max(resMatrix[i][j],result)
+    }
+  }
+  return result
+}
+var tblr=[[-1,0],[1,0],[0,-1],[0,1]]
+function getValue(matrix,row,column,resMatrix){
+    if(resMatrix[row][column]!=undefined)
+        return resMatrix[row][column]
+    var max=1
+    for(var i=0;i<tblr.length;i++){
+      var x=row+tblr[i][0]
+      var y=column+tblr[i][1]
+      if(x>=matrix.length||x<0||y>=matrix[0].length||y<0||matrix[row][column]<=matrix[x][y])
+          continue
+      res=1+getValue(matrix,x,y,resMatrix)
+      max=Math.max(res,max)
+    }
+    return max
+}
+</script>

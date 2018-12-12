@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+
+  <script type="text/javascript" src="vue.js"></script>
+  <script type="text/javascript" src='vue-router.js'></script>
+</head>
+<body>
+ <div id="app">
+   <h1>hello App</h1>
+   <p>
+     <router-link to="/foo">Go to Foo</router-link>
+     <router-link to="/bar">Go to Bar</router-link>
+     <router-link :to="{ name: 'user', params: { userId: 'FooBar' }}">Go to FooBar</router-link>
+     <router-link to="/view">Go to NamedView</router-link>
+   </p>
+   <router-view></router-view>
+   <router-view name="view1"></router-view>
+   <router-view name="view2"></router-view>
+ </div>
+</body>
+<script>
+  const router=new VueRouter({
+    routes:[
+    {
+      path:'/foo',
+      component:{
+        template:`
+        <div>
+          <div>foo</div>
+          <router-link to="/foo/1">Go to 1</router-link>
+          <router-link to="/foo/2">Go to 2</router-link>
+          <router-view></router-view>
+        </div>
+        `
+      },
+      children:[
+        {
+          path:"",
+          component:{
+            template:
+              `<div>default</div>`
+          }
+        },
+        {
+          path:":id",
+          component:{
+            template:
+              `<div>{{$route.params.id}}</div>`
+          }
+        },
+      ]
+    },
+    {
+      path:'/bar',
+      component:{
+        template:`
+        <div>bar</div>
+        `
+      }
+    },
+    {
+      path:'/user/:userId',
+      name:"user",
+      component:{
+        template:`
+          <div>{{$route.params.userId}}</div>
+        `
+      }
+    },
+    {
+      path:'/view',
+      components:{
+        "view1":{
+          template:`<div>view1</div>`
+        },
+         "view2":{
+          template:`<div>view2</div>`
+        }
+      }
+    }
+  ]
+  })
+  const app=new Vue({
+    router:router
+  }).$mount('#app')
+</script>
+</html>

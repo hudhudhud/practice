@@ -1,0 +1,46 @@
+<script type="text/javascript">
+// https://leetcode.com/problems/minimum-moves-to-equal-array-elements/#/description
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+//最大的数不动，其他数+1，数据大时会超时，如[1,2147483647]
+var minMoves = function(nums) {
+  var max=0
+  var count=0
+  var ismax=false
+  while(true){ 
+       for(var i=0;i<nums.length;i++){
+       if(nums[i]!=nums[0])
+         break
+       }
+       if(i==nums.length)break
+       
+       count++
+       max=Math.max(...nums)
+       ismax=false
+       for(var i=0;i<nums.length;i++){
+           if(nums[i]!=max||(nums[i]==max&&ismax)){
+                nums[i]++
+           }else{
+                 ismax=true
+            }
+       }
+  
+  }
+  return count
+};
+//相当于其余数不动，一个数减一，减到与数组中的最小值相等
+var minMoves = function(nums) {
+    var sum=0
+    var result=0
+    var min=Math.min(...nums)
+    for(var i=0;i<nums.length;i++){
+        sum+=nums[i]
+    }
+    result=sum-min*nums.length
+    return result
+    // return nums.reduce((a,b)=>a+b) - nums.length * Math.min(...nums)
+    
+};
+</script>

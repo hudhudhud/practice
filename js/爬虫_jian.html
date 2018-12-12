@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+<link rel="stylesheet" href="http://ifeve.com/wp-content/themes/flat/style.css" type="text/css" />
+<link rel="stylesheet" href="http://ifeve.com/wp-content/themes/flat/comment-style.css" type="text/css" />
+<style type="text/css">
+  html,body{
+    background: none;
+    background-color: #F9F2E2;
+  }
+</style>
+</head>
+<body>
+  
+</body>
+<script src="jquery-3.1.1.min.js"></script>
+<script>
+var currentPage=1
+GetData()
+$(function(){
+   var loading=false
+   history.pushState("1","",location.href)
+   function wheelEvent(){
+      if(loading){
+        return
+      }
+      var scrollPos=window.scrollY
+      var viewportHeight=window.innerHeight
+      var pageHeight=document.documentElement.scrollHeight
+      var vals=Math.abs(scrollPos+viewportHeight-pageHeight)
+      if(vals<2){
+        loading=true
+        var loadingText=$('<footer style="font-size:20px;font-weight:bold">努力加载中...</footer>').appendTo(document.body)
+        GetData(()=>{loadingText.remove();loading=false})
+      }
+   }
+   window.onpopstate=function(){
+    if(history.state=="1"){
+      currentPage=1
+      $("body").html("")
+      GetData()
+      $(window).on('mousewheel scroll',wheelEvent)
+    }
+   }
+   
+   $(window).on('mousewheel scroll',wheelEvent)
+
+   $("body").on("click","a",function(e){
+        history.pushState("1","",location.href+"?title="+$(this).prop("m").match(/http:\/\/ifeve.com\/(.+)?\//)[1])
+        $(window).off('mousewheel scroll',wheelEvent)
+        $("body")
+        .html($("<div class='post'>")
+        .load(`${this.m} .post h2,.post h3,.post p:not(last-child)`,function(){
+            $("a","p").each(function(){if(this.href=="http://pro.badouxueyuan.cn/ifeve/")
+              $(this).remove()})
+          }
+        ))
+        e.preventDefault()
+    })
+})
+
+
+function GetData(cb){
+  return new Promise(function(resolve,reject){
+       $('<div>').load(`http://ifeve.com/page/${currentPage}/ .title`,function(content,statuCode,req){
+        if(statuCode="sucess"){
+          resolve($(this))
+        }
+        else{
+          reject()
+        }
+    })
+  }).then(data=>{
+    setTimeout(()=>{
+       if(cb)cb()
+        currentPage++
+        data.appendTo('body')
+        data.find("a").each(function(){
+          this.m=this.href;
+          this.href=""
+        })
+    },800)
+  })
+}
+</script>
+</html>

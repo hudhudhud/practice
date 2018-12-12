@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8" />
+	<link rel="stylesheet" href="b.css">
+	<!--[ if IE ]>
+	<link rel="stylesheet" href="a.css">
+	<![endif]-->
+	<style>
+		a{
+		color:red;
+		*color:blue;       --IE6识别
+		+color:blue;      --IE6识别
+		color:yellow\9;  --IE9识别IE6不识别
+		
+		}
+	</style>
+</head>
+<body>
+<div></div>
+<a href="www.baidu.com">百度</a>
+</body>
+</html>
+

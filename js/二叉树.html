@@ -1,0 +1,355 @@
+<script type="text/javascript">
+var serialize = function(root) {
+    var res=""
+    if(!root)return res
+    function tree2str(root){
+        if(root==null){              
+            res+="null,"
+            return
+        }        
+        else{
+            res+=String(root.val)+","
+            tree2str(root.left)
+            tree2str(root.right)
+        }
+    }
+    tree2str(root)
+    res=res.substr(0,res.length-1)
+    return res
+};
+
+  //遍历二叉树按跟结点
+  //根左右，先序遍历，画树轮廓即可;
+  //左根右，中序遍历，若为BST,中序遍历对遍历的值排序，画竖线，从最左边开始即可；
+  //左右根，后序遍历，
+  function traverse(root,ary=[]) {
+    if(root){
+      traverse(root.left)
+      console.log(root.val)
+      ary.push(root.val)
+      traverse(root.right)
+    }
+    return ary
+  }
+  //遍历二叉树按数组[0,1,2,3,null,5,6]，每个第n项节点的子节点序号为2*n+1,2*n+2
+  function traverse2(ary,root=0){
+    if(ary[root]!=null&&ary[root]!=undefined){
+      console.log(ary[root])
+      traverse2(ary,2*root+1)
+      traverse2(ary,2*root+2)
+    }
+  }
+  
+  var root={val:0}
+  root.left={val:1}
+  root.right={val:2}
+  root.left.left={val:3}
+  root.left.right={val:4}
+  root.right.left={val:5}
+  root.right.right={val:6}
+  //traverse(root)
+
+  var ary=[0,1,2,3,null,5,6]
+  //traverse2(ary)
+
+  //数组转换为二叉树，把数组放在二叉树的root位置
+  function ary2tree(ary,root=0){
+   if(ary[root]!=undefined&&ary[root]!=null){
+    var tree={}
+    tree.val=ary[root]
+    tree.left=ary2tree(ary,2*root+1)
+    tree.right=ary2tree(ary,2*root+2)
+    return tree
+   }
+   else{
+    return null
+   }
+  }
+  //var tree=ary2tree(ary)
+  //二叉树转换为数组，把二叉树放在数组的pos位置
+  function tree2ary(tree,pos=0,result=[]){
+    if(tree!=null&&tree!=undefined){
+      result[pos]=tree.val
+      tree2ary(tree.left,2*pos+1,result)
+      tree2ary(tree.right,2*pos+2,result)
+    }
+    return result
+  }
+  tree2ary(tree)
+  
+
+//中：3 2 13 7 17 5 11
+//后：3 13 17 7 11 5 2
+//[5,4,2,7,8]二叉树结构，5作为根，比根大的放右边，比根小的放左边，最终中序遍历可以得到排好序的数组
+function bstSort(ary){
+ var root=null
+ for(val of ary){//先构造一颗BST
+   root=insert(root,val)
+ }
+ ary=[]
+ middleTraverse(root,ary)//中序遍历即得到
+ return ary
+}
+function middleTraverse(root,ary) {
+  if(root){
+    middleTraverse(root.left,ary)
+    ary.push(root.val)
+    middleTraverse(root.right,ary)
+  }
+  return ary
+}
+function insert(root,value){
+  if(root==null){
+    return {val:value,left:null,right:null}
+  }else if(value>root.val){
+    var rightTree=insert(root.right,value)
+    root.right=rightTree
+  }else{
+    var leftTree=insert(root.left,value)
+    root.left=leftTree
+  }
+  return root
+}
+
+//从中序遍历与后续遍历得到树的结构
+//restoreTree("DBGEHACIJF","DGHEBJIFCA")
+ function restoreTree(inOrder, postOrder) {
+    if(postOrder=="")return null
+    var rootVal=Array.from(postOrder).pop()
+    var root={}
+    root.val=rootVal
+    var ins=inOrder.split(rootVal)
+    var posl=postOrder.substr(0,ins[0].length)
+    var posr=postOrder.substr(ins[0].length,ins[1].length)
+    root.left=restoreTree(ins[0],posl)
+    root.right=restoreTree(ins[1],posr)
+    return root
+}
+
+//构造一个树
+function TreeNode(val) {
+    this.val = val;
+    this.left = this.right = null;
+}
+// var tree=new TreeNode(1)
+// //tree.left=new TreeNode(2)
+// tree.right=new TreeNode(2)
+// //tree.left.left=new TreeNode(4)
+//  //tree.left.right=new TreeNode(5)
+// tree.right.right=new TreeNode(3)
+// tree.right.right.right=new TreeNode(4)
+// tree.right.right.right.right=new TreeNode(5)
+var tree=ary2tree([1,2,3])
+//遍历二叉树的所有路径
+var binaryTreePaths = function(root) {
+    var res=[]
+    if(!root)return res
+    function find(root,path=[]){
+      if(!root.left&&!root.right){
+          path.push(root.val)
+          res.push(path.join("->"))
+          return root.val
+      }
+      path.push(root.val)
+      if(root.left){
+          find(root.left,path)
+          path.pop()
+      }
+      if(root.right){
+          find(root.right,path)
+          path.pop()
+      } 
+    }
+    find(root)
+    return res
+};
+//找到和为sum的路径,路径必须到叶子节点
+var pathSum = function(root, sum) {
+    var res=[]
+    if(!root)return res
+    function find(root,sum,path=[]){
+      if(!root.left&&!root.right&&sum==root.val){
+          path.push(root.val)
+          res.push(path.slice())//不要push path,因为只是浅复制，会随着后来的变化res也会变化
+          return
+      }
+      path.push(root.val)
+      if(root.left){
+          find(root.left,sum-root.val,path)
+          path.pop()//保证right中处理的left中处理的path在同一个平行空间中保持一致
+      }
+      if(root.right){
+          find(root.right,sum-root.val,path)
+          path.pop()
+      } 
+    }
+    find(root,sum)
+    return res
+};
+//找到和为sum的路径,路径可以是从任意父节点开始，其任意子节点结束
+var pathSumiii = function(root, sum) {
+  var res=[]
+  if(!root)return []
+  //从根，根的左子树，右子树上分别找
+  function findAllRoot(root){
+    //从根节点开始找
+    function find(root,sum,path=[]){
+      path.push(root.val)
+      if(sum==root.val){          
+          res.push(path.slice())//不要push path,因为只是浅复制，会随着后来的变化res也会变化
+          if(!root.left&&!root.right){//到叶子节点时才需要回退到上一步
+            path.pop()
+            return
+         }     
+      }
+      if(root.left){
+          find(root.left,sum-root.val,path)
+      }
+      if(root.right){
+          find(root.right,sum-root.val,path)
+      } 
+    }
+    find(root,sum)
+    if(root.left)
+       findAllRoot(root.left,sum)
+    if(root.right)
+      findAllRoot(root.right,sum)
+  }   
+  findAllRoot(root)
+  return res
+};
+//求二叉树深度
+var maxDepth = function(root,deep=0) {
+    if(!root)return deep
+    deep++
+    return Math.max(maxDepth(root.left,deep),maxDepth(root.right,deep))
+};
+
+//判断是否为平衡二叉树，即左子树与右子数的深度之差不超过1
+var isBalanced = function(root) {
+    if(!root)return true
+    var a=maxDepth(root.left)
+    var b=maxDepth(root.right)
+    if(Math.abs(a-b)>1)
+     return false
+    return isBalanced(root.left)&&isBalanced(root.right)
+};
+//按层遍历二叉树，每一层的值放在数组中，返回一个二维数组
+//考虑把每一层的树存起来，然后遍历取其值
+var levelOrder = function(root) {
+    if(!root)return []
+    var result=[]
+    var temp=[]
+    var current=[root]
+    var next=[]
+    var len
+    while(len=current.length){
+        temp=[]
+        for(var i=0;i<len;i++){
+            temp.push(current[i].val)
+            if(current[i]&&current[i].left)
+                next.push(current[i].left)
+            if(current[i]&&current[i].right)
+                next.push(current[i].right)
+        }
+        result.push(temp)
+        current=next
+        next=[]
+    }
+    return result
+};
+
+//给有序数组排列成平衡的BST,即左右深度差不超过1且左子树比根小，右子树比根大
+//用二分构造
+var sortedArrayToBST = function(nums,start=0,end=nums.length-1) {
+  if(!nums.length)
+      return []
+  if(start>end)
+      return null
+  var middle=((start+end)/2) |0
+  var root={}
+  root.val=nums[middle]
+  root.left=sortedArrayToBST(nums,start,middle-1)
+  root.right=sortedArrayToBST(nums,middle+1,end)
+  return root
+};
+//有序链表转换为平衡BST，设定两个指针，a每次走一步，b走两步，a走到最后的时候，b刚好走到中间
+var sortedListToBST = function(head) {
+    if(!head)return []
+    function bst(head,tail=null){
+        if(head==tail)return null
+        var slow=head
+        var fast=head
+        while(fast!=tail&&fast.next!=tail){//若fast的下一个为最后一个的话，slow不再取下一个
+            slow=slow.next
+            fast=fast.next.next
+        }
+        var tree=new TreeNode(slow.val)
+        tree.left=bst(head,slow)//终点值不会被取到,因为每次fast指针走到最后的时候，slow肯定在fast前面
+        tree.right=bst(slow.next,tail)
+        return tree
+    }
+    return  bst(head)
+};
+//二叉树转化为链表
+var flatten = function(root) {
+    if(!root)return 
+    
+    function toRight(root){
+        if(!root)return null
+        if(root.left){
+          var temp=root.right
+          root.right=root.left
+          var rightPos=root.right
+          while(rightPos.right){
+              rightPos=rightPos.right
+          }
+          rightPos.right=temp
+          root.left=null
+        }
+        toRight(root.left)
+        toRight(root.right)
+        return root
+    }
+    return toRight(root)
+};
+
+// 写出把排序二叉树转换为有序双向链表的代码
+var tree={val:3}
+tree.left={val:2}
+tree.left.left={val:1}
+tree.right={val:4}
+tree.right.right={val:5}
+function sortBytree(root,ary=[]){
+  if(root){
+    sortBytree(root.left,ary)
+    ary.push(root.val)
+    sortBytree(root.right,ary)
+  }
+  return ary
+}
+
+//反转二叉树
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {TreeNode}
+ */
+var invertTree = function(root) {
+    if(!root)return null
+    function reverse(){
+        if(!root)return
+        [root.left,root.right]=[root.right,root.left]
+        invertTree(root.left)
+        invertTree(root.right)
+        return root
+    }
+    return reverse(root)
+};
+</script>

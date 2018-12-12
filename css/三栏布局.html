@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <style type="text/css">
+    section{
+  border:10px solid;
+  overflow:hidden; /* 激发BFC */
+}
+section>*{
+  padding-bottom:2999px;
+  margin-bottom:-2999px;
+}
+[a]{
+  width:100px;
+  float:right;
+  background-color: red;
+  border-left:10px solid;
+}
+[c]{
+  width:100px;
+  float:left;
+  background-color: blue;
+}
+
+[b]{
+  overflow:hidden; /* 激发BFC */
+  background-color: yellow;
+  border-left:10px solid;
+}
+  </style>
+</head>
+<body>
+  <section>
+   <div a>a Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus, suscipit!</div>
+   <div c>c Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis, quaerat.</div>
+    <div b>b Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta explicabo facilis distinctio fugit asperiores maxime minima porro atque, molestias cumque!Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam delectus facilis repellat ducimus pariatur omnis fugit autem sunt? Voluptates, quos.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem consequatur obcaecati dolor ipsum quae voluptatibus, nostrum quas cum quisquam pariatur.</div>
+  </section>
+</body>
+</html>

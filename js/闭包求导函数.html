@@ -1,0 +1,13 @@
+<script type="text/javascript">
+function d(f){//在离该点最近取前后两个点，求导就是求该点的斜率
+  return function(x){
+    var a=x-0.0000000001
+    var b=x+0.0000000001
+    var x=2*0.0000000001
+    var y=f(b)-f(a)
+    return y/x
+  }
+}
+var m=d(x=>x*x)
+console.log(m(2))
+</script>

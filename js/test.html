@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <link rel="stylesheet" href="../css/test.css">
+  <script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="modernizr-custom.js"></script><!-- Modernizr.flex -->
+<script type="text/javascript" src="lodash.js"></script>
+<script type="text/javascript">
+ // $(function(){
+ //    //document.getElementById("b").addEventListener("click",()=>console.log(2))
+ //    function test(){
+ //      window.name=JSON.stringify({m:1,n:2})
+ //      location="https://www.baidu.com"
+ //    }
+ //    $("#b").click(test)
+ // })
+
+// window.onload=function(){
+//      var divs=document.getElementsByTagName("div") //是时时的，所以需要倒着循环或用slice先复制一组出来
+//      // for(var i=divs.length-1;i>-1;i--){
+//      //    var div=divs[i]
+//      //    var text=document.createElement("a")
+//      //    text.innerText=i
+//      //    text.setAttribute("href","https://www.baidu.com")
+//      //    div.parentNode.replaceChild(text,div)
+//      // }
+
+//      // var newDiv=[].slice.call(divs)
+//      // newDiv.forEach((item,i)=>{
+//      //    var text=document.createElement("a")
+//      //    text.innerText=i
+//      //    text.setAttribute("href","https://www.baidu.com")
+//      //    item.parentNode.replaceChild(text,item)
+//      // })
+     
+//      document.getElementById("a").addEventListener("click",(e)=>{console.log("a 事件");},true)
+//      document.getElementById("a").addEventListener("click",(e)=>{console.log("a 冒泡");return false})
+//      // $("#a").on("click",(e)=>{console.log("a 冒泡");return false})
+//      document.getElementById("body").addEventListener("click",()=>console.log("body 冒泡"))
+//      document.getElementById("body").addEventListener("click",()=>console.log("body 事件"),true)
+// }
+
+ 
+//       document.addEventListener("DOMContentLoaded",()=>console.log("DOMContentLoaded"))
+//       document.addEventListener("readystatechange",()=>console.log("readystatechange"))
+//       document.addEventListener("load",()=>console.log("load"))
+
+
+</script>
+<style type="text/css">
+  #a{
+    color:red !important;
+  }
+</style>
+</head>
+<body id=body>
+<input type="range" id=bb  max=100 min=10/>
+<div id=a style="transform:translateX(10px);color:blue">i m test1!</div>
+<div id=b>i&nbsp;&nbsp;&nbsp;m test2!</div>
+<a id=c href="javascript:void(0)" class="a" onclick="doSomething(this)">123</a>
+<input  id="cc" type="checkbox" checked onchange="console.log(1)">
+<select name="select" multiple="">
+  <option value="1">1</option>
+  <option value="2">2</option>
+  <option value="3">3</option>
+</select>
+<input type="checkbox" name=a value="1">
+<input type="checkbox" name=a value="2">
+<input type="checkbox" name=a value="3">
+<input type="checkbox" name=a value="4">
+<br>
+<img src="http://pic.sc.chinaz.com/files/pic/pic9/201509/apic15069.jpg" style="width:100px">
+</body>
+
+<script type="text/javascript">
+ 
+ function doSomething(e) {
+   console.log(e)
+ }
+
+ document.getElementById("bb").addEventListener("input",(e)=>{
+  console.log(e.target.value)
+ })
+
+// render('我是{{name}},年龄{{age}},性别{{set}}',{name:'a',age:18})
+// "我是a,年龄18,性别undefined"
+function render(str,obj){
+  return str.replace(/{{([^{}]+)}}/g,function(m,k){
+    return obj[k]
+  }) 
+}
+async function f1(){
+  var a= await getUrl("xxx")
+  var b= await getUrl("xxx")
+  console.log(1)
+}
+function f2(){
+  var a= getUrlSync("xxx")
+  var b= getUrlSync("xxx")
+  console.log(2)
+}
+
+function getUrl(url) {
+  return new Promise(function(resolve,reject){
+          var script = document.createElement('script')
+          script.src = url
+          script.onload=function(data){
+            resolve(data)
+          }
+          script.onerror=function(e){
+            reject(e)
+          }
+          document.head.append(script)
+        }).then(function(data){return data})
+              
+}
+
+async function getUrl1(url) {
+  var a=await new Promise(function(resolve,reject){
+          var script = document.createElement('script')
+          script.src = url
+          script.onload=function(data){
+            resolve(data)
+          }
+          script.onerror=function(e){
+            reject(e)
+          }
+          document.head.append(script)
+        }).then(function(data){return data})
+
+              
+}
+
+// $.ajax({
+//   "type":"Get",
+//   "url":"https://api.douban.com/v2/movie/search?q=123",
+//   "data":null,
+//   "dataType":"jsonp",
+//   "success":function(data){
+//       console.log(data)
+//   }
+// })
+
+function get(url){
+  var script = document.createElement('script')
+  script.src = url
+  script.onload=function(data){
+    console.log(data)
+  }
+  document.head.append(script)
+}
+</script>
+<script type="text/javascript">
+  // for(;;){
+  //   break label 
+  // }
+  // label: console.log(1)  
+  // xxxx:xxx  标签，不会报错
+  
+const options = [{
+  value: 'zhejiang',
+  label: 'Zhejiang',
+  children: [{
+    value: 'hangzhou',
+    label: 'Hangzhou',
+    children: [{
+      value: 'xihu',
+      label: 'West Lake',
+    }],
+  }],
+}, {
+  value: 'jiangsu',
+  label: 'Jiangsu',
+  children: [{
+    value: 'nanjing',
+    label: 'Nanjing',
+    children: [{
+      value: 'zhonghuamen',
+      label: 'Zhong Hua Men',
+    }],
+  }],
+}];
+
+function build(){
+
+  var res=[]
+  options.map((item,i)=>{
+      res.push({value:item.value,label:item.label,id:i,parent:0,show:true})
+  })
+  options.forEach(initOptions)
+  function initOptions(option,index){
+      if(option.children&&option.children.length>0){
+       option.children.forEach((item,i)=>{
+          res.push({value:item.value,label:item.label,id:index+"-"+i,parent:index,show:false})
+          initOptions(item,index+"-"+i)
+        })
+      }
+  }
+  return res
+}
+
+
+function isContain(ary,obj){
+ for(value of ary){
+    if(value===obj){
+      return true
+    }
+    if(typeof value==="object" 
+      &&value.children 
+      && value.children.length>0){
+       var res=isContain(value.children,obj)
+      if(res)return true
+    }
+ }
+ return false
+}
+
+function isContain1(obj1,obj){
+ if(obj1==obj)return true
+ if(obj1.children&&obj1.children.length>0){
+   for(value of obj1.children){
+        var res=isContain1(value,obj)
+        if(res)return true
+      }
+ }
+ return false
+}
+
+function setHide(ary){
+ for(value of ary){
+    value.show=false
+    if(typeof value==="object" 
+      &&value.children 
+      && value.children.length>0){
+       setHide(value.children)
+    }
+ }
+}
+</script>
+
+</html>

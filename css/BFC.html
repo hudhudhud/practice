@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JS Bin</title>
+  <style type="text/css">
+    [d]{
+      background-color: blue;
+      overflow:hidden;  /*触发元素BFC，使其子元素margin不超过父元素*/
+    }
+    [d] p{
+      background-color: red;
+    }
+
+    [a]{
+      width: 50px;
+      height: 50px;
+      background-color: red;
+      float:left;
+    }
+    [b]{
+      overflow:hidden; /*触发元素BFC，使其显示在矩形框，不绕着浮动元素*/
+    }
+
+    
+    [h]{
+      background-color: red;
+    }
+    [f]{
+      background-color: green;
+    }
+    [m]{
+      background-color: yellow;
+      border:1px solid;
+     /* 让有宽度的父元素浮动，也可让浮动元素把父元素撑大，不过若其上一层也是浮动元素，则要一直往上浮动到body，所以不常用*/
+      /* width: 500px;   
+      float:left; */  
+      
+      overflow:hidden;   /*清除浮动办法，触发元素BFC，让元素只显示在自己父元素中*/
+       /*display:table;*/  /* 或者用表格样式也同理*/
+    }
+    [m] div{
+      float:left;
+      width: 50px;
+      height: 50px;
+      background-color: pink;
+    }
+
+    .clearfix:after{ /* 或者在浮动元素后增加清除浮动的伪元素，也可实现让浮动元素撑大其包含元素*/
+      content:"";
+      display:block;
+      clear:both;
+    }
+  </style>
+</head>
+<body>
+ 1. /*触发元素BFC，使其子元素margin不超过父元素*/
+ <div d><p c>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero quisquam esse ut distinctio, neque accusantium eos ab nisi quo culpa nostrum expedita porro voluptatum quidem. Harum aperiam perspiciatis, impedit veniam.</p></div>
+ 2./*触发元素BFC，使其显示在矩形框，不绕着浮动元素*/
+ <section>
+    <div a></div>
+    <div b>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum natus, nulla eius ex perspiciatis. Ut doloribus reprehenderit aspernatur maxime mollitia omnis in voluptatibus iure, voluptas unde velit, aliquam sequi quas, optio debitis dolorem aliquid soluta laudantium cum exercitationem provident! Labore, alias ut incidunt impedit maxime aspernatur accusantium laudantium ea facilis voluptas eius sint modi recusandae fuga, magni totam ipsum quod voluptates. Aspernatur expedita laborum suscipit voluptates ea eius voluptatum maxime rem veritatis odio labore ipsam, nostrum neque, earum quia nihil commodi cumque sequi! Voluptate rem maxime ut aperiam rerum sunt asperiores quo dolorum debitis illo dolor saepe, blanditiis cumque! Iusto?</div>
+  </section>
+  
+ 3. /*清除浮动办法，触发元素BFC，让元素只显示在自己父元素中*/  
+ <div h>head</div>
+    <section m class="clearfix">
+       <div>1</div>
+       <div>2</div>
+       <div>3</div>
+    </section>
+    <div f>foot</div>
+</body>
+</html>

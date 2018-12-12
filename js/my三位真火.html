@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <script type="text/javascript" src="jquery.js"></script>
+  <script type="text/javascript" src="lodash.js"></script>
+  <style type="text/css">
+    .fire{
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background-color:red;
+      position:fixed;
+    }
+    .font{
+      width: 20px;
+      height: 20px;
+      background-color: pink;
+      position: fixed;
+      z-index: 1;
+    }
+  </style>
+</head>
+<body>
+<div class="font">胡</div>
+<div class="font">哲</div>
+<div class="font">宇</div>
+<div class="font">啦</div>
+<div class="font">啦</div>
+<div class="font">啦</div>
+<div class="font">啦</div>
+<div class="font">啦</div>
+<div class="font">啦</div>
+<div class="font">啦</div>
+<div class="font">啦</div>
+<div class="font">啦</div>
+<div class="fire"></div>
+<div class="fire"></div>
+<div class="fire"></div>
+<script type="text/javascript">
+  var mouseX=0,mouseY=0
+  var width,height
+  requestAnimationFrame(function a(t){
+    $(".font").each(function(i){
+        var offsetY=20*Math.sin(t/300+i*100)
+        $(this).css({
+          'transform':`translateY(${offsetY}px)`
+        })
+    })
+
+    $(".fire").each(function(i){
+        var offsetX=100*Math.cos(t/300+Math.PI*2/3*i)-100/2
+        var offsetY=100*Math.sin(t/300+Math.PI*2/3*i)-100/2
+        
+        $(this).css({
+          'left':mouseX+offsetX,
+          'top':mouseY+offsetY,
+        })
+    })
+    requestAnimationFrame(a)
+  })
+
+  addEventListener("mousemove",_.throttle(function(e){
+    mouseX=e.clientX
+    mouseY=e.clientY
+    $(".font").each(function(i){
+      setTimeout(()=>{
+         $(this).css({
+          'left':e.clientX+i*20,
+          'top':e.clientY
+         })    
+       },80*i)
+     })
+  },32))
+</script>
+</body>
+</html>

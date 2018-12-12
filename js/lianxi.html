@@ -1,0 +1,318 @@
+<script type="text/javascript">
+// 全排列：permutations(ary)
+function permutations(ary){
+  var res=[]
+  function find(ary){
+    if(ary.length==1){
+      res.push(ary)
+      return ary
+    }
+    return 
+  }
+  find(ary)
+  return res
+}
+</script>
+<script type="text/javascript">
+// 实现链式辅助式插入排序
+
+
+</script>
+<script type="text/javascript">
+//作业：补全如下快排算法，不能使用递归。
+// 使用快排对ary的start到end的部分进行排序
+function quickSort(ary, start = 0, end = ary.length - 1) {
+  if (start == end) {
+    return
+  }
+  var sample = ary[start]
+  //...
+  var middle
+  quickSort(ary, start, middle-1)
+  quickSort(ary, middle + 1, end)
+  return ary
+}
+</script>
+<script type="text/javascript">
+//补全以下...部分，使以下表达式的结果为数组的平均值
+[1,2,3,4,5,6].reduce(function(res,val,index,arry){
+   if(index==arry.length-1)
+       return (res+val)/arry.length
+   return res+val
+})
+// [1,2,3,4,5,6].reduce(function(res,val,index,arry){
+//    return (res*index+val)/(index+1)
+// })
+</script>
+
+<script type="text/javascript">
+// numbers is sorted in ascending order
+  var twoSum = function(numbers, target) {
+    for(var i=0;i<numbers.length;i++){
+        for(var j=i+1;j<numbers.length;j++){
+            if(numbers[i]+numbers[j]===target){
+                return [i,j]
+            }
+        }
+    }
+};
+var twoSum1 = function(nums, target) {
+    var left=0, right=nums.length-1;
+    while(left < right) {
+        sum = nums[left] + nums[right];
+        if(sum === target) {
+            return [left+1, right+1]; 
+        } else if(sum > target) {
+            right--;
+        } else {
+            left++;
+        }
+    }   
+};
+</script>
+
+<script type="text/javascript">
+// 题目：在一个字符串a里，查找另一个更短的字符串b，告知其出现的位置，如果找不到，返回-1
+// "abcdefghi"
+// "def"
+// 返回3
+function findIndex(source,target){
+  var slen=source.length
+  var tlen=target.length
+  var sOutIndex=0
+  var sindex=0
+  var tindex=0
+  var count=0
+  while(sOutIndex<slen){
+    count++
+    if(source[sOutIndex]==target[tindex]){
+      sindex=sOutIndex
+      sindex++
+      tindex++
+      while(source[sindex]===target[tindex]){
+         if(sindex<slen&&tindex<tlen){
+           sindex++
+           tindex++
+            count++
+         }
+         else{
+          break
+         }
+      }
+      if(tindex==tlen){
+        console.log(count)
+        return sOutIndex
+      }else{
+        sOutIndex++
+      }
+    }else{
+      sOutIndex++
+    }
+  }
+  console.log(count)
+  return -1
+}
+
+
+</script>
+
+<script type="text/javascript">
+//获取数组或对象在指定path的值，
+//getValueAt({"a":1,"b":{"c":'d'}},["b","c"]) 最后得到"d"
+//getValueAt([1,2,3,[4,5]],[3,1]) 最后得到5
+function getValueAt(matrix,path){
+  if(matrix==null||matrix==undefined){
+    return undefined
+  }else if(path.length==1){
+    return matrix[path]
+  }else{
+    return getValueAt(matrix[path[0]],path.splice(1))
+  }
+}
+function printObj(obj){
+  var str=`<table>`
+  for(var i=0;i<obj.length;i++){
+     str+=`<tr>`
+    for(var j=0;j<obj[i].length;j++){
+      str+=`<td width=50px height=50px>${obj[i][j]}</td>`
+    }
+    str+=`</tr>`
+  }
+  str+=`</table>`
+  document.write(str)
+}
+</script>
+
+
+<script type="text/javascript">
+// 题目：给定一个字符串，找出这个字符串里第一个只出现一次的字符．
+// 例：＇aabccdeffg'，只出现一次的字符为b，d，e，g
+// 其中b为最先出现的，于是返回'b'
+function firstAndOne(str){
+  for(var i=0;i<str.length;i++){
+    if((i==0&&str[i]!=str[i+1])
+      ||(i>0&&i<str.length-1&&str[i]!=str[i-1]&&str[i]!=str[i+1])
+      ||(i==str.length-1&&str[i]!=str[i-1]))
+      return str[i]
+  }
+}
+</script>
+
+<script type="text/javascriptx">
+  // 题目：给定一个字符串，将其中的大小写字母反转。例：输入abcDEF，输出ABCdef
+  function reverseStr(s){
+    var news=""
+    for(var i=0;i<s.length;i++){
+      if(s[i].charCodeAt()>=65&&s[i].charCodeAt()<97){
+        news+=String.fromCharCode(s[i].charCodeAt()+32)
+      }
+      else {
+         news+=String.fromCharCode(s[i].charCodeAt()-32)
+      }
+    }
+    return news
+  }
+  var str=prompt("请输入字符串")+""
+  console.log(str)
+  console.log(reverseStr(str))
+</script>
+<script type="text/javascriptx">
+  // 题目：行程长度编码，输入：aAABBbBCCCaaaaa 输出：(A,3)(B,4)(C,3)(A,5)
+  function calcLen(s){
+    var result=""
+    var count=0
+    var char
+    var prechar=""
+    for(var i=0;i<s.length;i++){
+      char=s[i]
+      if(s[i].charCodeAt()>=97){
+        char=String.fromCharCode(s[i].charCodeAt()-32)
+      }
+      if(i==0)prechar=char
+      if(char==prechar)count++
+      else{
+        result+=`(${prechar},${count})`
+        count=1
+      }
+      prechar=char
+    }
+    result+=`(${prechar},${count})`
+    return result
+  }
+  var str=prompt("请输入字符串")+""
+  console.log(str)
+  console.log(calcLen(str))
+</script>
+
+<script type="text/javascriptx">
+  // 题目：统计数字字符个数
+  function countNumber(s){
+    var count=0
+    for(var i=0;i<s.length;i++){
+      if(s[i].charCodeAt()>=48&&s[i].charCodeAt()<=57){//48到57为数字的ascii码
+        count++
+      }
+    }
+    console.log(count)
+  }
+  countNumber('0-670-82162-1')
+</script>
+
+
+
+<script type="text/javascriptx">
+// 题目：把一句话中的单词顺序调转。
+// 例："the quick brown fox jumps over the lazy dog"输出"dog lazy the over jumps fox brown quick the"
+function reverse(str){
+  var s=[]
+  var word=""
+  var count=0
+  var news=""
+  for(var i=str.length-1;i>=0;i--){
+    if(str[i]==" "){
+      s[count++]=word
+      word=""
+    }else{
+      word=str[i]+word
+    }
+  }
+  s[count++]=word
+  for(var i=0;i<s.length;i++){
+    news+=s[i]+" "
+  }
+  console.log(news)
+}
+</script>
+<script type="text/javascriptx">
+// 题目：输入年份与月份，给出该年该月的第一天是星期几。
+// 例如，输入2016年，11月，输出“星期2”
+// 为了简化复杂性，可以只考虑2000年以后的时间。做为参考，2000年的1月1日是星期六。
+function week(lit){
+  if(lit==0){
+    console.log("星期六")
+  }else if(lit==1){
+    console.log("星期日")
+  }if(lit==2){
+    console.log("星期一")
+  }if(lit==3){
+    console.log("星期二")
+  }if(lit==4){
+    console.log("星期三")
+  }if(lit==5){
+    console.log("星期四")
+  }if(lit==6){
+    console.log("星期五")
+  }
+}
+var year=2016//prompt("请输入年")-0
+var month=12//prompt("请输入月")-0
+var day=365
+var dayr=366
+var months=30
+var monthb=31
+var monthr=29
+var monthe=28
+var dayto=0
+var isr=false
+var lit=0
+if(year>2000){
+  for(var i=2000;i<year;i++){
+    if(i%400==0||(i%4==0&&i%100!=0)){
+        isr=true
+    }
+    else{
+      isr=false
+    }
+    if(isr){
+        dayto+=dayr
+    }else{
+        dayto+=day
+    }
+  }
+}
+for(var j=1;j<=month;j++){
+  if(year%400==0||(year%4==0&&year%100!=0)){
+      isr=true
+  }
+  else{
+    isr=false
+  }
+
+  if(j==1){
+    dayto+=0
+  }
+  else if(j==3){
+    if(isr){dayto+=monthr}
+    else dayto+=monthe
+  }
+  else if(j==2||j==4||j==6||j==8||j==9||j==11){
+    dayto+=monthb
+  }
+  else if(j==5||j==7||j==10||j==12){
+    dayto+=months
+  }
+  console.log("month:"+j)
+  week(dayto%7)
+}
+ // week(dayto%7)
+</script>

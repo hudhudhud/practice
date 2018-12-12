@@ -1,0 +1,44 @@
+<script type="text/javascript">
+// 题目：不使用Math.sqrt，求一个非负数的平方根 
+var sqrt=function(a){
+  var middle
+  var left=0,right=a
+  var p=0.0001 //精确位数
+  if(a<1){right=1} //为小数时，上界为1
+  while(right-left>p){
+    middle=(right+left)/2  //中间值的平方与a比较，误差越小越接近
+    if(middle*middle>a)    //中间值平方比a大，则在0到中间值取解，否则中间值到a取解
+      right=middle
+    else 
+      left=middle  
+  }
+  return (right+left)/2
+}
+
+var sqrt2=function(a){//牛顿法
+  var x=a/2
+  var p=10 //精确位数
+  var y=x=>x*x-a
+  var yd=x=>2*x
+  while(Math.abs(x*x-a)>p){
+    x=x-y(x)/yd(x)
+  }
+  return x 
+}
+
+var mysq=function(a,b){//牛顿法 x的b次方为a，求a
+  var x=a/2
+  var p=0.000001 //精确位数
+  var y=x=>x**b-a
+  var yd=x=>x**(b-1)*b
+  while(Math.abs(x**b-a)>p){
+    x=x-y(x)/yd(x)
+  }
+  return x 
+}
+var a = prompt("请输入求根值") - 0
+var b = prompt("请输入根值") - 0
+// console.log("Math.sqrt:"+Math.sqrt(a))
+// console.log(sqrt2(a))
+console.log("牛顿法:"+mysq(a,b))
+</script>

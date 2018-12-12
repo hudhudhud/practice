@@ -1,0 +1,64 @@
+<script type="text/javascript">
+  function  each(collection,iteratee){
+      for(key in collection){
+       if(!iteratee(collection[key],key,collection)){
+          break
+        }
+      }
+  }
+  function filter1(ary,test){
+    var newAry=[]
+    for(val of ary){
+      if(test(val,index,ary)){
+        newAry.push(val)
+      }
+    }
+    return newAry
+  }
+  filter([1,2,3,4,5],function(val,index,ary){return val>1})
+
+  
+  function reduce(array,f,start){
+    var result=start
+    for(key in array){
+      result=f(result,array[key],key,array)
+    }
+    return result
+  }
+  //console.log(reduce([1,2,3],(a,b)=>a+b,0))
+  
+  function forEach(ary,f){
+    return reduce(ary,function(sth,v,k){
+       f(v,k,ary)
+    })
+  }
+  //console.log(forEach([1,2,3],console.log))
+
+  function map(ary,f){
+    return reduce(ary,function(result,v,k){
+      result.push(f(v,k,ary))
+      return result
+    },[])
+  }
+  console.log(map([1,2,3],Math.sqrt))
+  
+  function join(ary,joiner){
+    return reduce(ary,function(result,v,k){
+        if(k==ary.length-1)//不能用三等号，因为k为上面reduce函数用for in循环得到的字符串，ary.length为值
+          return result+v
+        else
+          return result+v+joiner
+    },"")
+  }
+  //console.log(join([1,2,3],"#"))
+  
+  function filter(ary,test){
+    return reduce(ary,function(result,v,k){
+      if(test(v,k,ary)){
+         result.push(v)
+      }
+      return result
+    },[])
+  }
+  //console.log(filter([1,2,3],a=>a>1))
+</script>

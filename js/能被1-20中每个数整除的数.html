@@ -1,0 +1,66 @@
+<script type="text/javascript">
+// 题目：找出最小的能被1-20中每个数整除的数。
+var isPrime=function(a){
+    if (a < 2) {
+        return false
+    } else {
+        for (var i = 2; i <Math.sqrt(a)+1; i++) {
+            if (a % i == 0&&a!=i) {
+               return false
+            }
+        }
+    }
+    return true
+}
+function findout(size){
+  var count=0
+  var reslut=1
+  for (var i = 2; i <= size; i++){//因为素数只能被自己跟1整除，所以最小至少为所有素数的乘积
+      if(isPrime(i)){
+        reslut*=i
+      }
+  }
+  
+  var len=Math.floor(Math.sqrt(size))//只需算根号左边的幂，右边的幂肯定大于size
+  for (var i = 2; i <len; i++){  //size内部的素数的n次幂小于size,因为之前就已经乘过一次素数，所以只要n-1次即可
+     if(isPrime(i)){
+        for(var j=len;j>0;j--){
+          count++
+           if(i**j<size){
+              reslut*=i**(j-1)
+              break
+           }
+        }
+     }
+  }
+  console.log("findout :"+reslut)
+  console.log("循环次数:"+count)
+}
+function findout2(size){
+  var reslut=1
+  for (var i = 2; i <= size; i++){
+      if(isPrime(i)){
+        reslut*=i
+      }
+  }
+  var isok=true
+  var count=0
+  for(var i=reslut;;i+=reslut){//按上面得到的值为跨度查找最小公倍数
+     isok=true
+     for(var j=2;j<21;j++){
+      count++
+        if(i%j!=0){
+          isok=false
+          break
+        }
+     }
+     if(isok){
+       console.log("findout2:"+i)
+       console.log("循环次数:"+count)
+       break;
+     }
+  }
+}
+findout(20)
+findout2(20)
+</script>

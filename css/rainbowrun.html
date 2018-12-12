@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta  charset="utf-8">
+	<style type="text/css">
+	/*用 box-shadow 实现的彩虹跑道*/
+             section{
+	  width:300px;
+	  height:50px;
+	  border:10px solid;
+	  border-radius:100px;
+	  box-shadow:0 0 0 10px red,        /*只需要扩散半径为border宽度即可*/
+	             0 0 0 20px yellow,
+	             0 0 0 30px blue;
+	  margin:100px;   
+	  margin-left:30px;
+	}
+
+              /*用div border实现的彩虹跑道*/
+	div{
+	  width:300px;
+	  border:10px solid red;
+	  border-radius:50px;
+	  box-sizing:border-box;       /*确保子元素width 100%时候，其border不会覆盖到父元素*/
+	}
+	div>div{
+	  width:100%;
+	  border:10px solid yellow;
+	}
+	div>div>div{
+	  border:10px solid blue;
+	}
+	div>div>div>div{
+	  border:10px solid white;
+	}
+	</style>
+</head>
+<body>
+<p>用 box-shadow 实现的彩虹跑道</p>
+<section>
+</section>
+<p>用div border实现的彩虹跑道</p>
+ <div>
+   <div>
+     <div>
+       <div></div>
+     </div>
+   </div>
+ </div> 
+</body>
+</html>

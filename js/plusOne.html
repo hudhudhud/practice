@@ -1,0 +1,31 @@
+<script type="text/javascript">
+//高精度数+1
+var plusOne = function(digits) {
+      var newNumStr=[]
+    var num
+    var jw=1
+    for(var i=digits.length-1;i>-1;i--){
+        num=Number(digits[i])+jw
+        jw=0
+        if(num>9){
+          jw=parseInt(num/10);
+       }
+       newNumStr.unshift(num%10)
+    }
+    if(jw>0){
+      newNumStr.unshift(jw)
+    }
+    return newNumStr
+}
+var plusOne1 = function(digits) {
+    for(var i=digits.length-1;i>-1;i--){
+        if(digits[i]<9){
+          digits[i]+=1
+          return digits
+        }
+        digits[i]=0
+    }
+    digits.unshift(1)
+    return digits
+}
+</script>

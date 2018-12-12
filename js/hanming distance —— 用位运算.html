@@ -1,0 +1,20 @@
+<script type="text/javascript">
+// Input: x = 1, y = 4
+// Output: 2
+// Explanation:
+// 1   (0 0 0 1)
+// 4   (0 1 0 0)
+//        ↑   ↑
+// The above arrows point to positions where the corresponding bits are different.
+  var hammingDistance = function(x, y) {
+    var z=x^y
+    var count=0
+    while(z>0){
+        count+=z&1 //与1做与运算，结果最后一位等于1说明z最后一位为1，那1的数量加加，等于0说明是0，即加0  
+        z=z>>>1
+    }
+    return count
+};
+
+//判断一个数是否为偶数，也是与1做与运算，最后一位为1则为奇数，否则为偶数
+</script>

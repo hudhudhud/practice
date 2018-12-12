@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>首页</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+<h1>欢迎{{user.name}}来到首页！</h1>
+{{#if user.name}}
+<a href="javascript:document.cookie='loginName=xx;expires=Thu Jan 01 1970 08:00:00 GMT+0800';window.location.reload()">登出</a>
+{{else}}
+<a href="/login.html">登录</a>
+{{/if}}
+
+<h2>问题列表</h2>
+<ul>
+{{#each questions}}
+  <li><a href="/question/{{id}}">{{title}}</a></li>
+{{/each}}
+</ul>
+</body>
+</html>

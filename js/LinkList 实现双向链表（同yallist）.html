@@ -1,0 +1,382 @@
+
+<script type="text/javascript">
+//垃圾回收：没有引用指向他，系统会自动回收，所以删除的部分链表不需要删除
+  function Node(value,pre,next,list){
+    if(new.target!==Node){
+      return new Node(value,pre,next)
+    }
+    this.val=value
+    if(pre){
+      pre.next=this //该node的前一个的下一个即自己,给前一个结点增加next属性
+      this.pre=pre  //当前节点的前一个即pre，给当前节点增加pre属性
+    }else{
+      this.pre=null
+    }
+    if(next){
+      next.pre=this   //下一个的前一个即this，给后一个结点增加pre属性
+      this.next=next  //this的下一个即next，给当前节点增加next属性
+    }else{
+      this.next=null
+    }
+    this.list=list
+    return this
+  }
+  function LinkList(list){
+    if(new.target!==LinkList){
+      return new LinkList(...arguments)
+    }
+    this.length=0
+    this.head=null
+    this.tail=null
+    if(list&&list.length>0){
+      for(val of list){
+        this.push(val)
+      }
+    }else if(arguments.length>0){
+      for(var i=0;i<arguments.length;i++){
+        this.push(arguments[i])
+      }
+    }
+  }
+  LinkList.prototype={
+    constructor:LinkList,
+    toArray(){
+      var ary=[]
+      if(!this)
+        return ary
+      var current=this.head
+      do{
+        ary.push(current.val)
+        current=current.next
+      }while(current)
+      return ary
+    },
+    get length(){
+        return this.toArray().length
+    },
+    toArrayReverse(){
+      var ary=[]
+      if(!this)
+        return ary
+      var current=this.tail
+      do{
+        ary.push(current.val)
+        current=current.pre
+      }while(current)
+      return ary
+    },
+    forEach(fn,thisArg){
+      var ary=[]
+      if(!this)
+        return
+      var current=this.head
+      do{
+        fn.call(thisArg,current.val)
+        current=current.next
+      }while(current)
+    },
+    forEachReverse(fn,thisArg){
+      var ary=[]
+      if(!this)
+        return
+      var current=this.tail
+      do{
+        fn.call(thisArg,current.val)
+        current=current.pre
+      }while(current)
+
+       //或者如下，单向链表时可用如下
+      // function reverse(node){
+      //   if(!node)
+      //    return
+      //   reverse(node.next)
+      //   fn.call(thisArg,node.val)
+      // }
+      // reverse(this.head)
+    },
+    get(n){
+      var current=this.head
+      var pre=this.head
+      var index=n
+      if(index<0||index>this.length-1)
+        return undefined
+      while(index>=0&&current){
+        pre=current
+        current=current.next
+        index--
+      }
+      return pre.val
+    },
+    getReverse(n){
+      var current=this.tail
+      var pre=this.tail
+      var index=n
+      if(index<0||index>this.length-1)
+        return undefined
+      while(index>=0&&current){
+        pre=current
+        current=current.pre
+        index--
+      }
+      return pre.val
+    },
+    map(fn,thisArg){
+      var ary=[]
+      if(!this)
+        return
+      var current=this.head
+      do{
+        ary.push(fn.call(thisArg,current.val))
+        current=current.next
+      }while(current)
+      return new LinkList(ary)
+    },
+    mapReverse(fn,thisArg){
+      var ary=[]
+      if(!this)
+        return
+      var current=this.tail
+      do{
+        ary.push(fn.call(thisArg,current.val))
+        current=current.pre
+      }while(current)
+      return new LinkList(ary)
+    },
+    pop(){
+      if(!this||this.length==0)
+        return
+      var tail=this.tail
+      if(this.length==1){
+        this.head=null
+        this.tail=null
+      }else{
+        this.tail.pre.next=null
+        this.tail=this.tail.pre
+      }
+      return tail.val
+    },
+    push(val){
+      var node=new Node(val,this.tail,null,this)
+      this.tail=node
+      if(!this.head){
+        this.head=node
+      }
+      //this.next=node
+      return this
+    },
+    //obj.reduce((a,b)=>{a.push(b);return a},[])
+    reduce(fn,initialValue){
+      if(!this)
+        return initialValue
+      var current=this.head
+      var res
+      if(initialValue==undefined){
+        res=current.val
+        current=current.next
+      }else{
+        res=initialValue
+      }
+      while(current){
+        res=fn(res,current.val)
+        current=current.next
+      }
+      return res
+    },
+    reduceReverse(fn,initialValue){
+      if(!this)
+        return
+      var current=this.tail
+      var res
+      if(initialValue==undefined){
+        res=current.val
+        current=current.pre
+      }else{
+        res=initialValue
+      }
+      while(current){
+        res=fn(res,current.val)
+        current=current.pre
+      }
+      return res
+    },
+    reverse(){
+      if(!this)
+        return
+      var current=this.tail
+      while(current){
+         var oldNext=current.next
+         var oldPre=current.pre
+         current.next=current.pre
+         current.pre=oldNext
+         current=oldPre
+      }
+      var temp=this.head
+      this.head=this.tail
+      this.tail=temp
+      return this
+    },
+    shift(){
+      if(!this)
+        return
+      var val=this.head.val
+      this.head=this.head.next
+      this.head.pre=null
+      return val
+    },
+    unshift(...items){
+      var count=items.length
+      var index=0
+      while(index<count){
+        var node=new Node(items[index],null,this.head,this)
+        this.head=node
+        if(!this.tail)
+          this.tail=node
+        index++
+      }
+      return this.length
+    },
+    slice(from=0,to=this.length){
+      if(!this)
+        return 
+      var index=0
+      var result=new LinkList()
+      var current=this.head
+      while(to<0){
+        to+=this.length
+      }
+      while(from<0){
+        from+=this.length
+      }
+      while(current&&index<to){
+          if(index>=from){
+            result.push(current.val)
+          }
+          current=current.next
+          index++
+      }
+      return result
+    },
+    sliceReverse(from=0,to=this.length){
+      if(!this)
+        return 
+      var index=0
+      var result=new LinkList()
+      var current=this.tail
+      while(to<0){
+        to+=this.length
+      }
+      while(from<0){
+        from+=this.length
+      }
+      while(current&&index<to){
+          if(index>=from){
+            result.push(current.val)
+          }
+          current=current.pre
+          index++
+      }
+      return result
+    },
+    splice(pos,amount,...values){
+      var current=this.head
+      var preNode=this.head
+      var index=0
+      while(current&&index<pos){
+        preNode=current
+        current=current.next
+        index++
+      }
+      var nextNode=current
+      while(nextNode.next&&index<pos+(amount?amount:0)){
+        nextNode=nextNode.next
+        index++
+      }
+      if(values.length){
+        var newlist=new LinkList(values)
+        nextNode.pre=newlist.tail
+        newlist.tail.next=nextNode
+        preNode.next=newlist.head
+        newlist.head.pre=preNode
+      }else{
+        preNode.next=null
+        this.tail=preNode
+      }
+      return this
+    },
+    //增加结点到前面，如果该结点属于该链表，则先删除
+    unshiftNode(node){
+      if(node.list===this){
+        this.removeNode(node)
+      }
+      node.next=this.head
+      node.pre=null
+      if(this.head){
+        this.head.pre=node
+      }
+      this.head=node
+      if(!this.tail){
+        this.tail=node
+      }
+      return this
+    },
+    pushNode(node){
+      if(node.list===this){
+        this.removeNode(node)
+      }
+      node.pre=this.tail
+      node.next=null
+      if(this.tail){
+        this.tail.next=node
+      }
+      this.tail=node
+      if(!this.head){
+        this.head=node
+      }
+      return this
+    },
+    //移除链表中的某结点
+    removeNode(node){
+      if (node.list!== this) {
+        throw new Error('removing node which does not belong to this list')
+      }
+      if(!node)
+        return this
+      var pre=node.pre
+      var next=node.next
+      if(node==this.head){
+        if(next){
+          this.head=next
+          this.head.pre=null
+        }
+        else{
+          this.head=null
+          this.tail=null
+        }
+      }
+      else if(node==this.tail){
+        if(pre){
+          this.tail=pre
+          this.tail.next=null
+        }else{
+          this.head=null
+          this.tail=null
+        }
+      }
+      else{
+        if(next){
+          node.pre.next=next
+        }
+        if(pre){
+          node.next.pre=pre
+        }
+      }
+      return this
+    }
+  }
+
+
+  // a=new LinkList()
+  // for(var i=0;i<5;i++){
+  //   a.push(i)
+  // }
+</script>

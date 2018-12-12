@@ -1,0 +1,294 @@
+<!-- map -->
+<script type="text/javascript">
+  function Map(ary){
+    this.array=[]
+    this.NaNKeyValue
+    if(!ary)
+      return []
+    for(var [key,value] of ary){ //解构
+      if(key!==key){
+        this.NaNKeyValue={"key":key,"value":value}
+      }
+      else{
+        this.array.push({"key":key,"value":value})
+      }
+    }
+    if(this.NaNKeyValue)
+      this.array.push(this.NaNKeyValue)
+  }
+  Map.prototype={
+    constructor:Map,
+    get size(){
+      return this.array.length
+    },
+    set(key,val){
+      var isExist=false
+      var isNaNKey=false
+      var obj={"key":key,"value":val}
+      if(key!==key){
+          isNaNKey=true
+          this.NaNKeyValue=obj
+      }
+      for(keyvalue of this.array){
+        if(isNaNKey){
+          if(keyvalue.key!==keyvalue.key){
+            isExist=true
+            keyvalue.val=val
+          }
+        }
+        else if(keyvalue.key===key){
+          isExist=true
+          keyvalue.value=val
+        }
+      }
+      if(!isExist)
+        this.array.push(obj)
+      return this.array
+    },
+    get(key){
+      if(key!==key){
+        if(this.NaNKeyValue)
+          return this.NaNKeyValue.value
+      }
+      for(keyvalue of this.array){
+          if(key===keyvalue.key)
+            return keyvalue.value
+      }
+    },
+    clear(){
+      this.array.length=0
+      return this.array
+    },
+    forEach(fn,thisArg){
+      for(val of this.array){
+         fn.call(thisArg,val.value,val.key,this.array)
+      }
+    },
+    delete(key){
+      var isNaN=false
+      if(key!==key)
+        isNaN=true
+      for(var i=0;i<this.array.length;i++){
+        if(isNaN){
+          if(this.array[i].key!==this.array[i].key){
+             break
+          }
+        }else{
+          if(this.array[i].key===key){
+            break
+          }
+        }
+      }
+      if(i!==this.array.length){
+          this.array.splice(i,1)
+          this.NaNKeyValue=null
+      }
+      return this.array
+    },
+    keys(){
+      let self=this
+      return function*(){ // * 迭代器函数 ,返回调用结果
+        for(var i=0;i<self.array.length;i++){
+          yield self.array[i].key
+        }
+      }()
+    },
+    values(){
+      let self=this
+      return function*(){
+        for(var i=0;i<self.array.length;i++){
+          yield self.array[i].value
+        }
+      }()
+    },
+    entries(){   //方法返回一个新的包含 [key, value]对的 Iterator对象，返回的迭代器的迭代顺序与 Map 对象的插入顺序相同。
+      let self=this
+      return function*(){
+         for(var i=0;i<self.array.length;i++){
+          yield [self.array[i].key,self.array[i].value]
+        }
+      }()
+    },
+    *[Symbol.iterator](){//默认的迭代器函数，即自定义for of循环返回的值，用[]即表示该对象的[]内计算结果的属性
+         for(var i=0;i<this.array.length;i++){
+          yield [this.array[i].key,this.array[i].value]
+        }
+    },
+    //或如下写法
+    // [Symbol.iterator](){//默认的迭代器函数，即自定义for of循环返回的值，用[]即表示该对象的[]内计算结果的属性
+    //   let self=this
+    //   return function*(){
+    //      for(var i=0;i<self.array.length;i++){
+    //       yield [self.array[i].key,self.array[i].value]
+    //     }
+    //   }()
+    // }
+  }
+  a=new Map([[1,2],[3,4]])
+  for(val of a.keys())console.log(val)
+  for(val of a)console.log(val)//用其默认迭代器
+</script>
+
+<!-- complex -->
+<script type="text/javascript">
+  function Complex(real,imag){
+    if(new.target!==Complex){//ES6,判断是否是用new来创造的实例
+      return new Complex(real,imag)
+    }
+    this.real=real
+    this.imag=imag
+  }
+  //类似java里的静态函数，因为js不能有多个构造函数，该函数实例没法访问
+  Complex.fromString=function(str){//1+2i,1+-2i
+    let ary=str.split("+")
+    let real=Number(ary[0])
+    let imag=Number(ary[1].substr(0,ary[1].length-1))
+    return new Complex(real,imag)
+  }
+  Complex.clone=function(complex){
+    let real=complex.real
+    let imag=complex.imag
+    return new Complex(real,imag)
+  }
+
+  //实例访问的函数
+  Complex.prototype.plus=function(c){
+    let real,imag
+    if(typeof c==="number"){
+      real=this.real+c
+      imag=this.imag
+    }else{
+      real=this.real+c.real
+      imag=this.imag+c.imag
+    }
+    return new Complex(real,imag)
+  }
+  Complex.prototype.minus=function(c){
+    let real,imag
+    if(typeof c==="number"){
+      real=this.real-c
+      imag=this.imag
+    }else{
+      real=this.real-c.real
+      imag=this.imag-c.imag
+    }
+    return new Complex(real,imag)
+  }
+  Complex.prototype.mul=function(c){
+    let real,imag
+    if(typeof c==="number"){
+      real=this.real*c
+      imag=this.imag*c
+    }else{
+      real=this.real*c.real-this.imag*c.imag
+      imag=this.real*c.imag+this.imag*c.real
+    }
+    return new Complex(real,imag)
+  }
+  Complex.prototype.div=function(c){
+    let real,imag
+    if(typeof c==="number"){
+      real=this.real/c
+      imag=this.imag/c
+    }else{
+      let newComp=this.mul(new Complex(c.real,-c.imag))
+      let m=c.real**2+c.imag**2
+      real=newComp.real/m
+      imag=newComp.imag/m
+    }
+    return new Complex(real,imag)
+  }
+  Complex.prototype.toString=function(){
+    if(this.imag<0){
+      return `${this.real}${this.imag}i`
+    }else{
+      return `${this.real}+${this.imag}i`
+    }
+  }
+  
+  var a=new Complex(1,2)
+  var b=Complex.fromString("1+2i")
+  var c=a.plus(b)
+  // alert(a)//alert里面会默认转换为string,所以它会找a的原型里的toString方法
+  // alert(b)
+  // alert(c)
+</script>
+
+<!-- set -->
+<script type="text/javascript">
+  function Set(ary){
+    this.result=[]
+    this._hasNaN=false
+    if(!ary)return
+    for(val of ary){
+      if(Number.isNaN(val)){
+        this._hasNaN=true
+      }
+      else if(this.result.indexOf(val)==-1){
+        this.result.push(val)
+      }
+    }
+  }
+  Set.prototype={
+    get size(){
+      return this.result.length+(this._hasNaN?1:0)
+    },
+    add(val){
+      if(Number.isNaN(val)){ //或用val!==val判断NaN
+        this._hasNaN=true
+      }
+      else{
+        if(this.result.indexOf(val)==-1)
+          this.result.push(val)
+      }
+      return this
+    },
+    clear(){
+      this.result.length=0
+      this._hasNaN=false
+      return this
+    },
+    delete(val){
+      if(Number.isNaN(val)){
+        this._hasNaN=false
+      }else{
+        var pos=this.result.indexOf(val)
+        if(pos>-1){
+          this.result.splice(pos,1)
+        }
+      }
+      return this
+    },
+    forEach(iterate,context){//context为作用域，即指定迭代函数中this的指向
+       for(key in this.result){
+          iterate.call(context,this.result[key],key,this.result)
+       }
+       if(this._hasNaN)
+          iterate.call(context,NaN)
+       //return this
+    },
+    has(val){
+      if(val!==val&&this._hasNaN)
+        return true
+      return this.result.indexOf(val)>-1
+    },
+    values(){
+      let ary=this.result.slice()
+      if(this._hasNaN)
+        ary.push(NaN)
+      return ary
+    }
+  }
+
+  var o={
+    name:"hd",
+    names:[],
+    getName(){
+      this.names.push(this.name)
+      return this.names
+    }
+  }
+  var m=new Set([1,2,3,3,NaN])
+  m.forEach(o.getName,o)
+  // o.names
+</script>

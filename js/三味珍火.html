@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>mouse</title>
+  <style>
+    .trail,.fire {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: red;
+    }
+  </style>
+</head>
+<body>
+  <div class="trail">欢</div>
+  <div class="trail">迎</div>
+  <div class="trail">就</div>
+  <div class="trail">读</div>
+  <div class="trail">大</div>
+  <div class="trail">喵</div>
+  <div class="trail">教</div>
+  <div class="trail">育</div>
+  <div class="trail"></div>
+  <div class="trail"></div>
+  <div class="trail">迎</div>
+  <div class="trail">就</div>
+  <div class="trail">读</div>
+  <div class="trail">大</div>
+  <div class="trail">喵</div>
+  <div class="trail">教</div>
+  <div class="trail">育</div>
+  <div class="trail"></div>
+  <div class="trail"></div>
+  <div class="trail">迎</div>
+  <div class="trail">就</div>
+  <div class="trail">读</div>
+  <div class="trail">大</div>
+  <div class="trail">喵</div>
+  <div class="trail">教</div>
+  <div class="trail">育</div>
+  <div class="trail"></div>
+  <div class="trail"></div>
+
+  <div class="fire"></div>
+  <div class="fire"></div>
+  <div class="fire"></div>
+  <div class="fire"></div>
+  <div class="fire"></div>
+
+  <script src="jquery.js"></script>
+  <script src="lodash.js"></script>
+  <script>
+
+    var mouseX,mouseY
+    requestAnimationFrame(function a(time) {
+
+      $('.trail').each(function(i){
+        var offset = Math.sin(time/100 + i) * 10
+        $(this).css('transform', `translate(0,${offset}px)`)
+      })
+
+      $('.fire').each(function(i) {
+        var offsetX = 100 * Math.cos(time/300 + Math.PI * 2 / 5 * i)
+        var offsetY = 100 * Math.sin(time/300 + Math.PI * 2 / 5 * i)
+        // console.log(offsetX, offsetY)
+        $(this).css({
+          left: mouseX + offsetX,
+          top: mouseY + offsetY,
+        })
+      })
+
+      requestAnimationFrame(a)
+    })
+
+
+
+    $(window).mousemove(_.throttle(function(e) {
+      console.log(e.clientX, e.clientY)
+      $('.trail').each(function(i){
+        setTimeout(() => {
+          $(this)
+            .css('left',e.clientX+15 + i*15)
+            .css('top', e.clientY+6)
+        }, i * 40)
+      })
+
+      mouseX = e.clientX
+      mouseY = e.clientY
+    }, 32))
+  </script>
+</body>
+</html>

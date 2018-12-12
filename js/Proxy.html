@@ -1,0 +1,107 @@
+<script type="text/javascript">
+//调api公共方法，api后的属性即为key,这样就不需要定义多个api
+var Api = new Proxy({}, {
+    get(obj, key) {
+        return function(...args) {
+            return fetch('/api/' + key, ...args).then(res => res.json())
+        }
+    }
+})
+Api.foo(1,2)  //fetch('/api/foo', 1,2).then(res => res.json())
+
+//测试用例
+var testCases = {}
+var FAKE_LODASH = new Proxy({}, {
+    get: function(obj, name, proxy) {
+        return obj[name] = new Proxy(function() {}, {
+            apply: function(initialFn, proxy, args) {
+                if (testCases[name]) {
+                    testCases[name].push(args)
+                } else {
+                    testCases
+                    [name] = [args]
+                }
+            }
+        })
+    },
+}) 
+
+FAKE_LODASH.foo(1,2,3)  //foo函数的测试用例[1,2,3]
+
+
+//代理对象
+obj={a:1,b:2}
+var proxyObj=new Proxy(obj,{
+  get(obj,key,proxy){  //proxyObj.a  ary=obj,key=a
+    return obj[key]+"11"
+  },
+  set(obj,key,value,proxy){  //proxyObj.a=2
+    obj[key]=value+"lala"
+    return obj[key]
+  },
+  has(obj,key){
+    return true
+  },
+  deleteProperty(obj,key){
+    delete obj[key]
+    console.log("delete success")
+  },
+  getPrototypeOf(){ //Object.getPrototypeOf(proxyObj)
+    return {a:1}
+  }
+})
+
+//函数调用的时候捕获到
+var proxyFun=new Proxy(function(){},{
+  apply(...args){
+    console.log(args)
+  },
+  construct(...args){
+    console.log("from construct")
+    return args
+  }
+})
+
+
+//数组负数项获取
+ary=new Proxy([1,2,3,4],{
+  get(ary,key,proxy){
+    key=+key
+    while(key<0){
+      key+=ary.length
+    }
+    while(key>=ary.length){
+      key-=ary.length
+    }
+    return ary[key]
+  }
+})
+console.log(ary,ary[-1])
+
+//赋值验证
+let validator={
+  set:function(obj,prop,value){
+    if(prop==="age"){
+      if(!Number.isInteger(value)){
+        throw new TypeError("the age is not an integer")
+      }
+      if(value>200){
+        throw new RangeError("the age seems invalid")
+      }
+    }
+    obj[prop]=value
+  }
+}
+
+let person=new Proxy({},validator)
+person.age = 100;
+
+console.log(person.age); 
+// 100
+
+person.age = 'young'; 
+// 抛出异常: Uncaught TypeError: The age is not an integer
+
+person.age = 300; 
+// 抛出异常: Uncaught RangeError: The age seems invalid
+</script>

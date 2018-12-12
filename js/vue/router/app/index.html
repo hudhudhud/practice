@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <base href="/app/">
+</head>
+<body>
+  <div id="app">
+    <router-link to="/user/1">user1</router-link>
+    <router-link to="/user/2">user2</router-link>
+    <router-link to="/user/3">user3</router-link>
+    <router-view></router-view>
+  </div>
+</body>
+  <script type="text/javascript" src="vue.js"></script>
+  <script type="text/javascript" src='vue-router.js'></script>
+  <script type="text/javascript">
+    var content={
+              template:`
+              <div>
+                <h5>{{$route.params.id}}</h5>
+              </div>
+            `
+            }
+    app=new Vue({
+      el:"#app",
+      router:new VueRouter({
+        mode:"history",
+        base:"/app/",//app路径之后的都为前端路由
+        routes:[
+          {
+            path:'',
+            component:content
+          },
+          {
+            path:'/user/:id',
+            component:content
+          },
+          {
+            path:'*',
+            component:{
+              template:`
+              <div>
+                <h5>404</h5>
+              </div>
+            `
+            }
+          }
+        ]
+      })
+    })
+  </script>
+</html>

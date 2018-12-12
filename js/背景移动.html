@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <link rel="stylesheet" href="slider.css">
+  <script src="slider.js"></script>
+  <script type="text/javascript" src="jquery.js"></script>
+  <script type="text/javascript" src="./vue/vue.js"></script>
+  <style type="text/css">
+  body{
+    background-color: gray;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+  }
+  section{
+    xbackground-image: 
+    url(../imgs/a.jpg),
+        url(../imgs/b.jpg);
+    background-repeat: no-repeat;
+    background-size:contain;
+    background-position:50% 50%,650px 0;
+    width: 650px;
+    height: 650px;
+    position:relative;
+    margin:50vh auto 0;
+    transform: translateY(-50%);
+    xanimation:bkmove 10s linear infinite;
+   }
+  /* section:hover{
+      background-position:-650px 0,50% 50%;
+   }*/
+  #title{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    background-image: 
+    url(http://img07.tooopen.com/images/20170314/tooopen_sy_201828895498.jpg);
+    background-repeat: no-repeat;
+    -webkit-background-clip:text;
+    font-size:120px;
+    color:transparent;
+    background-position: 0% 0%;
+    animation:move 30s linear infinite;
+    white-space:nowrap;
+    -webkit-text-stroke: 11px;
+  }
+
+  @keyframes move{
+    from {
+      background-position:0 50%;
+    }
+    to{
+      background-position:100% 50%;
+    }
+  }
+
+  @keyframes bkmove{
+    from {
+        background-position:50% 50%,650px 0;
+    }
+    to{
+      background-position:650px 0,50% 50%;
+    }
+  }
+  .dots{
+    display: none
+  }
+  .prev,.next{
+    display: none
+  }
+  </style>
+</head>
+<body>
+  <section>
+    <img v-for="i in 26" :src="'img/'+String.fromCharCode(96+i)+'.jpg'">
+    <div id="title">life is like this</div>
+  </section>
+</body>
+<script type="text/javascript">
+  app=new Vue({
+      el:"section",
+  })
+  slider=new Slider("section",{
+    "width":1000,
+    "height":588,
+    "autoPlay":true,
+    "duration":5000,
+  })
+  slider.on("beforeNext",function(argument) {
+    $("#title").css('background-image',function(){
+      var index=Math.random()*100%26
+      return `url(img/${String.fromCharCode(index+97)}.jpg)`
+    })
+  })
+</script>
+</html>

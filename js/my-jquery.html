@@ -1,0 +1,25 @@
+<script type="text/javascript">
+var $=5;
+(function(){
+  var prever$=$
+  window.jQuery=window.$=function jQuery(){}
+  jQuery.noConflict=function() {
+    window.$=prever$
+  }
+  jQuery.click=function(f){
+    if(arguments.length==0){
+      jQuery.triggle("click")
+    }else{
+      jQuery.bind("click",f)
+    }
+  }
+  jQuery.end=function(){
+    return this.prevObject
+  }
+  jQuery.find=function(selector){
+    var current=new jQuery(selector)
+    current.prevObject=this
+    return current
+  }
+}())
+</script>

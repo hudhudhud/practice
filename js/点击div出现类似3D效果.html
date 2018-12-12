@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <script type="text/javascript" src="jquery.js"></script>
+  <script type="text/javascript" src="lodash.js"></script>
+  <style type="text/css">
+  *{
+    xbackground-color: rgba(0,0,0,0.3)
+  }
+    section{
+       width: 700px;
+       height: 500px;
+       margin:auto;
+       margin-top:100px;
+       transform-style: preserve-3d;
+    }
+    div{
+      background-color: blue;
+      width: 700px;
+      height: 500px;
+      margin:auto;
+      perspective-origin:0px 0px;
+      transition:all .3s linear;
+      transform-style: preserve-3d;
+      display: flow-root;
+    }
+    h1{
+        transform: translateZ(50px);
+    }
+    h2{
+      transform: translateZ(80px);
+    }
+    /*div:hover{
+       box-shadow: 0px 20px 80px 5px black;
+    }*/
+  </style>
+</head>
+<body>
+<section>
+<div id=a>
+  <h1>Lorem ipsum dolor sit.</h1>
+  <h2>Lorem ipsum dolor sit amet, consectetur adipisicing.</h2>
+</div>
+</section>
+</body>
+<script type="text/javascript">
+  $("section").on("mousemove",function(e){
+      var rect=a.getBoundingClientRect()
+      var xpos=e.clientX-rect.left
+      var ypos=e.clientY-rect.top
+
+      var xele=xpos-rect.width/2 //以中心为原点，离中心远，距离大，则旋转角度就大，反之相反，所以可以把坐标作为角度
+      var yele=ypos-rect.height/2
+
+      // if(xpos<rect.width/2){
+      //   y=-1
+      // }else{
+      //   y=1
+      // }
+      // if(ypos<rect.height/2){
+      //   x=1
+      // }else{
+      //   x=-1
+      // }
+      // $(this).css("transform",`perspective(500px) rotate3d(${x},${y},0,5deg)`)
+      $("#a").css("transform",`rotateY(${xele/10}deg) rotateX(${-yele/10}deg)`)
+  })
+
+  $("section").on("mouseleave",function(){
+     $("#a").css("transform",`rotateY(0) rotateX(0)` )
+  })
+</script>
+</html>

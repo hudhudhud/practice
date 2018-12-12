@@ -1,0 +1,61 @@
+<script type="text/javascript">
+// https://leetcode.com/problems/relative-ranks/#/description
+// 数组按降序将排名，返回排名数组，前三分别为指定字符串
+var findRelativeRanks = function(nums) {
+     var newArray=new Array(nums.length)
+    for(var i=0;i<newArray.length;i++){
+      newArray[i]=nums[i]
+    }
+    for(var i=0;i<newArray.length-1;i++){
+        for(var j=0;j<newArray.length-i-1;j++){
+            if(newArray[j]>newArray[j+1]){
+                var temp=newArray[j+1]
+                newArray[j+1]=newArray[j]
+                newArray[j]=temp
+            }
+        }
+    }
+    for(var i=0;i<nums.length;i++){
+        for(var j=0;j<newArray.length;j++){
+            if(nums[i]==newArray[j]){
+                var num=nums.length-j
+                if(num==1){
+                    nums[i]="Gold Medal"
+                }
+                else if(num==2){
+                    nums[i]="Silver Medal"
+                }
+                else if(num==3){
+                    nums[i]="Bronze Medal"
+                }else{
+                     nums[i]=num+""
+                }
+                break
+            }
+        }
+    }
+    return nums
+};
+var findRelativeRanks1 = function(nums) {
+    var arr = [];
+    for (i=0;i<nums.length;i++) {
+        arr.push(i);
+    }
+    //把数组中值按降序排列所在的位置索引arr
+    //如[10,3,8,9,4]  为 [0, 3, 2, 4, 1]
+    arr.sort(function (a, b) {  return nums[b]-nums[a];  });
+    if(nums.length>0) {
+        nums[arr[0]] = 'Gold Medal';
+    }
+    if(nums.length>1) {
+        nums[arr[1]] = 'Silver Medal';
+    }
+    if(nums.length>2) {
+        nums[arr[2]] = 'Bronze Medal';
+    }
+    for(i=3;i<nums.length;i++) {
+        nums[arr[i]] = (i+1).toString();
+    }
+    return nums;
+};
+</script>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>todoMVC</title>
+  <style type="text/css">
+    *{
+      xbackground-color: rgba(0,0,0,0.1);
+    }
+    body{
+      background-color: #f5f5f5;
+    }
+    #content,#foot{
+       width: 505px;
+       margin:auto;
+    }
+    #content{
+       position: relative;
+    }
+    input{
+      width: 100%;
+      height: 60px;
+      font-size: 20px;
+      box-sizing: border-box;
+      padding: 16px;
+      padding-left:60px;
+      outline:none;
+      border: none;
+      box-shadow: inset 0px -2px 1px rgba(0,0,0,0.03);
+    }
+    .selectAll{
+      box-sizing: border-box;
+      padding-left:23px;
+      padding-right: 23px;
+      height: 60px;
+      line-height: 60px;
+      color:gray;
+      position: absolute;
+      left:0;
+      top:0;
+    }
+    .black{
+      color:black;
+    }
+    .hide{
+      display: none;
+    }
+    .show{
+      display: inline-block;
+    }
+    .writeable{
+      display: none;
+    }
+    .line-through{
+      text-decoration:line-through;
+      color:gray;
+    }
+    [name="thing"] *{
+      line-height: 50px;
+      text-align: center;
+    }
+    .item{
+      width:100%;
+      background-color: #fff;
+      position:relative;
+      height: 58px;
+    }
+    input[type=checkbox]{
+      display: none;
+    }
+    input[type=checkbox]:checked +span:after{
+      content: "✔";
+      text-align: middle;
+    }
+    .cbCircle{
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      line-height: 20px;
+      border:0.5px solid;
+      border-radius: 50%;
+      margin:19px 10px auto 5px;
+      color:gray;
+    }
+    .context{
+      vertical-align:top;
+      width:436px;
+      line-height: 58px;
+      display:inline-block;
+      padding-right: 10px;
+      text-align:left;
+      word-wrap: break-word;
+    }
+    .close{
+      cursor:pointer;
+      color:#AF5B6D;
+      position: absolute;
+      right: 20px;
+    }
+    #foot{
+      background-color: #fff;
+      font-size:15px;
+      color: gray;
+   
+      height: 40px;
+      line-height: 40px;
+      border: 1px solid #e6e6e6;
+      box-shadow:0 10px 0px -3px #fff,
+      0 11px 1px -3px rgba(0, 0, 0, 0.2),
+      0 21px 0px -7px #fff,
+      0 22px 1px -7px rgba(0, 0, 0, 0.2);
+    }
+    #foot div{
+        margin-left:100px;
+        display: inline-block;
+    }
+    #foot div span{
+      margin-right: 10px;
+      padding: 2px 7px 2px 7px;
+    }
+    .current{
+      border:1px solid rgba(175, 47, 47, 0.2);
+      border-radius: 3px;
+    }
+    .itemsNum{
+      margin-left:15px;
+    }
+  </style>
+</head>
+<body>
+<div id="content">
+ <span class="selectAll">V</span> 
+ <input type="text" id=mainInput placeholder="what need to be done?">
+</div>
+<div id=foot class="hide">
+  <span class="itemsNum hide"><span id=num></span> item(s) left</span>
+  <div id=filter>
+    <span id=all>All</span>
+    <span id=active>Active</span>
+    <span id=completed>Completed</span>
+  </div>
+</div>
+</body>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="todoMVC2.js"></script>
+</html>

@@ -1,0 +1,214 @@
+<script type="text/javascript">
+var parse=function(){
+  var index=-1
+  var ch=""
+  var isEnd=false
+  var str
+
+  function doIt(jsonStr){
+    str=jsonStr
+    ch=""
+    index=-1
+    isEnd=false
+    next()
+    var resule
+    try{
+      result=value() 
+      assert(index<str.length)
+      return result
+    }
+    finally{
+      doIt.index=index
+    } 
+  }
+  return doIt
+
+  function assert(test){
+    if(test)
+      throw new SynctaxError(ch,index)
+  }
+  
+  function next(char){
+    if(char!==ch&&char!=undefined){
+      throw new Error("not match 'true' or 'false' or 'null'")
+    }
+    if(index<str.length){
+      index++
+      ch=str[index]
+    }
+    else{
+      isEnd=true
+    }
+  }
+
+  function number(){
+     var num=""
+     while(isNumberChar(ch)){
+        num+=ch
+        next()
+        if(isEnd)break
+     }
+     delSpace()
+     return parseFloat(num)
+  }
+  function isNumberChar(c){
+    var chars=["-","+","e","E","."]
+    if(chars.indexOf(c)>-1)
+      return true
+    if(ch>="1"&&ch<=9){
+      return true
+    }
+    return false
+  }
+  function string(){
+    var str=""
+    next()
+    while(ch!="\""){
+      str+=ch
+      next()
+      if(isEnd)break
+    }
+    next()
+    delSpace()
+    return str
+  }
+  function array(){
+    var ary=[]
+    var val=null
+    next()
+    while(ch!="]"){
+      val=value()
+      ary.push(val)
+      val=null
+      if(ch==","){
+        next()
+        if(isEnd)break
+      }
+    }
+    next()
+    delSpace()
+    return ary
+  }
+  function object(){
+    var obj={}
+    var key=""
+    var val=null
+    next()
+    while(ch!="}"){
+      key=value()
+      if(ch===":"){
+        next()
+        val=value()
+        obj[key]=val
+        if(ch===","){
+          next()//到下一个引号
+        }
+      }
+      if(isEnd)break
+    }
+    next()
+    delSpace()
+    return obj
+  }
+  function value(){
+    delSpace()
+    if(ch==="\""){
+        return string()
+    }
+    else if(isNumberChar(ch)){
+        return number()
+    }
+    else if(ch=="t"){
+       next("t")
+       next("r")
+       next("u")
+       next("e")
+       return true
+    }
+    else if(ch==="f"){
+       next("f") 
+       next("a")
+       next("l")
+       next("s")
+       next("e")
+       return false
+    }
+    else if(ch==="n"){
+       next("n")
+       next("u")
+       next("l")
+       next("l")
+       return null
+    }
+    else if(ch==="{"){
+      return object()
+    }
+    else if(ch==="["){
+      return array()
+    }
+    else throw new SynctaxError(ch,index)
+  }
+  function delSpace(){
+     while(ch&&ch.indexOf(" ")>-1){
+       next()
+     }
+  }
+}()
+
+
+class SynctaxError extends Error{
+  constructor(ch,index){
+    super()
+    this.message=ch+" at "+ index
+  }
+}
+
+var stringify=function(value){
+  function doIt(){
+    var result=o2string(value)
+    return result
+  }
+
+  return doIt()
+
+  function o2string(val){
+     if(type(val,"Number")||type(val,"Boolean")||type(val,"Null")){
+        return val.toString()
+     }
+     else if(type(val,"String")){
+        return '\"'+val.toString()+'\"'
+     }
+     else if(type(val,"Array")){
+        return array2Str(val)
+     }
+     else if(type(val,"Object")){
+        return object2Str(val)
+     }
+  }
+  
+  function array2Str(ary){
+      var str="["
+      for(val of ary){
+        str+=o2string(val)+","
+      }
+      if(str[str.length-1]==",")
+        str=str.substr(0,str.length-1)
+      return str+"]"
+  }
+  function object2Str(obj){
+      var str="{"
+      for(key in obj){
+        str+=o2string(key)+":"
+        str+=o2string(obj[key])+","
+      }
+      if(str[str.length-1]==",")
+        str=str.substr(0,str.length-1)
+      return str+"}"
+  }
+}
+function type(value,type){
+   if(toString.call(value)===`[object ${type}]`){
+      return true
+   }
+}
+</script>

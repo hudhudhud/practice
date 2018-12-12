@@ -1,0 +1,145 @@
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript">
+var mws=[function(next){
+  console.log(1)
+  setTimeout(next,1000)
+},function(next){
+  console.log(2)
+  setTimeout(next,1000)
+},function(next){
+  console.log(3)
+  setTimeout(next,1000)
+},function(next){
+  console.log(4)
+  setTimeout(next,1000)
+}]
+
+var mws=[function(next){
+  console.log(1)
+  setTimeout(function(next){
+    console.log(2)
+    setTimeout(function(next){
+        console.log(3)
+        setTimeout(function(next){
+          console.log(4)
+          setTimeout(next,1000)
+        },1000)
+      },1000)
+  },1000)]
+
+//向右迭代，依次上一次返回的函数放到当前函数的参数里，
+//并且需要返回一个新函数以待下一次传，执行总是贯穿所有，即express中use的原理
+var f=mws.reduceRight((prevNext,f)=>{
+  return function next(){
+    f(prevNext)//即把执行f之后的next函数，即preNext作为参数传给他
+  }
+},function next(){})
+
+//f()
+
+//第一次迭代产生结果
+function next(){
+  console.log(4)
+  setTimeout(function next(){},1000)
+}
+//第二次迭代产生结果
+function next(){
+  console.log(3)
+  setTimeout(function next(){
+    console.log(4)
+    setTimeout(function next(){},1000)
+  },1000)
+}
+//最终结果如下
+function next(){
+  console.log(1)
+  setTimeout(function next(){
+    console.log(2)
+    setTimeout(function next(){
+      console.log(3)
+      setTimeout(function next(){
+        console.log(4)
+        setTimeout(function next(){},1000)
+      },1000)
+    },1000)
+  }
+  ,1000)
+}
+</script>
+
+<script type="text/javascript">
+//jquery中的queue
+a=$("body")
+.queue((next)=>{console.log(1);next()})
+.queue((next)=>{console.log(2);next()})
+.queue((next)=>{console.log(3);next()})
+.queue((next)=>{console.log(4);})
+1
+2
+3
+4
+b=a.queue((next)=>{console.log(4)})
+4
+c=b.queue((next)=>{console.log(4)})
+//不会再运行，因为上一个没有调用next()
+class myQueue1{
+  constructor(){
+    this.fn=[]
+  }
+  queue(f){
+    if(this.fn.length){
+      this.fn.push(f)
+    }else{
+      this.fn.push(f)
+      this.start()
+    }
+    return this
+  }
+  start(){
+    if(this.fn.length){
+      this.fn[0](next=>{
+         this.fn.shift()
+         this.start()
+      })
+    }
+  }
+}
+//该法有问题， 无法再最后不调用next时停止调用
+class myQueue{
+  constructor(){
+    this.fn=[]
+  }
+  queue(f){
+    if(this.fn.length){
+      this.fn.push(f)
+    }else{
+      this.fn.push(f)
+      //this.start() //若用该，会导致所有函数都同步执行
+      setTimeout(()=>{ //所以需要放到setTimeout，事件循环结束之后才执行，即所有的queue执行完才执行
+        this.start()
+      })
+    }
+    return this
+  }
+  start(){
+    var f=this.fn.shift()
+    if(f){
+       f(next=>this.start())
+    }
+  }
+}
+new myQueue1()
+  .queue(function(next) {
+    console.log(1)
+    setTimeout(next, 1000)
+  })
+  .queue(function(next) {
+    console.log(2)
+    setTimeout(next, 1000)
+  })
+  .queue(function(next) {
+    console.log(3)
+    setTimeout(next, 1000)
+  })
+
+</script>

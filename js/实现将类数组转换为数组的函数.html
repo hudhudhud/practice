@@ -1,0 +1,30 @@
+<script type="text/javascript">
+  //实现一个工具函数将类数组对象转换为真正的数组
+ function array(a,n){
+   return Array.prototype.slice.call(a,n||0)
+ }
+
+ function array(a){
+   return Array.prototype.slice.call(a)
+ }
+ //即相当于把上面call的this绑定为前面的slice，即可转换如下
+ var toArray=[].slice.call.bind([].slice)
+
+//传一个函数给spread,函数本身参数是一个个分开的，但是返回的函数参数是数组
+ function spread(f){ 
+   return function(ary){
+    return f.apply(null,ary)
+   }
+ }
+ //即
+ var spread=f=>Function.apply.bind(f,null)
+ var spread=f=>f.apply.bind(f,null)
+
+ function flatten(ary){
+    return [].concat(...ary)
+    return [].concat.apply(null,ary)//不支持es6时
+ }
+ //即 把apply的this绑定为[].concat
+ var flatten=Function.apply.bind([].concat,[])
+
+</script>

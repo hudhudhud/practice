@@ -1,0 +1,159 @@
+<script type="text/javascript">
+//移除链表中值是val的结点
+var removeElements = function(head, val) {
+    if(head == null)
+      return head
+    while(head&&head.val===val){
+        head=head.next
+    }
+    var preNode=head
+    var currentNode=head
+    while(currentNode){
+      preNode=currentNode
+      currentNode=currentNode.next
+      if(currentNode&&currentNode.val===val){
+          preNode.next=currentNode.next
+          currentNode=preNode
+      }
+    }
+    return head
+};
+var removeElements1 = function(head, val) {
+    if(head == null)return head;
+    while(head&&head.val == val) head = head.next;
+    var dh = head;
+    while(head&&head.next){
+        if(head.next.val == val){
+            head.next = head.next.next;
+        }else{
+            head = head.next;
+        }
+    }
+    return dh;
+};
+</script>
+
+<script type="text/javascript">
+// 链表反转
+//得到下一个节点，更改当前节点指向，将指针往下移动
+var reverseList = function(head) {
+  var prev = null
+  var cur = head
+  while(cur!=null){
+      var next = cur.next
+      cur.next = prev
+      prev = cur
+      cur = next
+  }
+  return prev
+};
+//思想：把反序好的尾巴指向头，头指向空
+function reverseList2(head){
+  if(head==null||head.next==null)
+    return head
+  var newHead=reverse2(head.next)//走到最后一层得到最后的结点             倒数第二次得到之前最后的结点
+  head.next.next=head//此时head为最后第二个结点，即把最后的结点指向他   head为倒数第三个结点，让倒数第二个结点指向他
+  head.next=null//然后把head的next指向空                                然后把head的next指向空
+  return newHead//返回最后的结点                                        返回最后的结点
+}
+</script>
+
+<script type="text/javascript">
+function arrayToList(array) {
+  var l=array.length
+  var node
+  var head={
+    val:array[0],
+    next:null
+  }
+  var pre=head
+  for(var i=1;i<l;i++){
+    node={
+      val:array[i],
+      next:null
+    }
+    pre.next=node
+    pre=node
+  }
+  return head
+}
+function listToArray(head){
+  if(!head){
+    return []
+  }
+  var curr=head
+  var newArray=[]
+  do{
+    newArray.push(curr.val)
+    curr=curr.next
+  }while(curr)
+  return newArray
+}
+function remove(head,index){
+  var curr=0
+  var currNode=head
+  var preNode=head
+  if(index==0){
+    head=head.next
+  }
+  else{
+    while(curr<index&&currNode){
+      preNode=currNode
+      currNode=currNode.next
+      curr++
+    }
+    if(currNode)
+      preNode.next=currNode.next
+  }
+  return head
+}
+function remove1(head,index){//找到前一个结点然后在赋值
+  var curr=0
+  var currNode=head
+  var preNode=head
+  if(index==0){
+    head=head.next
+  }
+  else{
+    while(curr<index-1){
+      currNode=currNode.next
+      curr++
+    }
+    currNode.next=currNode.next.next
+  }
+  return head
+}
+function concat(l1,l2){
+  if(l1==null)
+    return l2
+  var l1Curr=l1
+  var preNode=l1
+  while(l1Curr){
+    preNode=l1Curr
+    l1Curr=l1Curr.next
+  }
+  preNode.next=l2
+  return l1
+}
+function insert(l1,index,value){
+  var curr=0
+  var currNode=l1
+  var preNode=l1
+  var newNode={
+      val:value,
+      next:null
+  }
+  if(index==0){
+    newNode.next=l1
+    return newNode
+  }
+  while(curr<index&&currNode){
+    preNode=currNode
+    currNode=currNode.next
+    curr++
+  }
+  preNode.next=newNode
+  newNode.next=currNode
+  return l1
+}
+</script>

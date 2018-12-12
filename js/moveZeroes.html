@@ -1,0 +1,40 @@
+<script type="text/javascript">
+var moveZeroes = function(nums) {
+    var temp
+    var zeroCount=0
+    for(var i=0;i<nums.length;i++){
+      if(nums[i]===0){
+          if(i==nums.length-zeroCount){
+            return nums
+          }
+          var index=i
+          while(index+1<nums.length-zeroCount){
+             temp=nums[index]
+             nums[index]=nums[index+1]
+             nums[index+1]=temp
+             index++
+          }
+          zeroCount++
+          i--
+        }
+    }
+    return nums
+}
+//把不为0的数按计数都依次往前移，剩下的就全为0
+var moveZeroes2 = function(nums) {
+  let insert = 0;
+  for (let i = 0; i < nums.length; i++) {
+    if (nums[i] !== 0) {
+      nums[insert] = nums[i];
+      insert++;
+    }
+  }
+  for (let i = insert; i < nums.length; i++) {
+    nums[i] = 0;
+  }
+};
+//可以考虑遇到0删除然后在后面加0
+//或一个数的前面有多少个0，这个数就要往前挪几位，然后在最后把多少个0补齐
+//[0,1,2,0,1]
+
+</script>

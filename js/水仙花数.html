@@ -1,0 +1,21 @@
+<script type="text/javascriptx">
+//   题目：水仙花数。水仙花数是指一个N位的十进制数，其各位数的N次方的和等于它自己。
+// 如：153 =　1的三次方+5的三次方+3的三次方，则153就是一个水仙花数
+// 或：1634 =　1的四次方+6的四次方+3的四次方+4的四次方
+// 因为1634是一个四位数。
+// 找出100到100000以内所有的水仙花数。
+for(var i=100;i<100000;i++){
+  var n=String(i).length;
+  var inter=i
+  var lit=i%10
+  var sum=0
+  while(inter>0){
+    sum+=lit**n
+    inter=Math.floor((inter-lit)/10)
+    lit=inter%10
+  }
+  if(sum==i){
+    console.log(i)
+  }
+}
+</script>

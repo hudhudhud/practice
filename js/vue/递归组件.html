@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+<div id="app">
+  <json-viewer :json="student"></json-viewer>
+</div>
+</body>
+<script type="text/javascript" src='vue.js'></script>
+<script type="text/javascript">
+Vue.component('json-viewer',{
+  name:'json-viewer',//需要name属性来指定递归的组件
+  props:["json"],
+  template:`
+     <span v-if="toString.call(json)==='[object String]'">"{{json}}"</span>
+     <span v-else-if="toString.call(json)==='[object Number]'">{{json}}</span>
+     <span v-else-if="toString.call(json)==='[object Boolean]'">{{json}}</span>
+     <span v-else-if="toString.call(json)==='[object Array]'">
+       [<span v-for="d in json">{{d}},</span>]
+     </span>
+     <span v-else>
+     {
+      <br>
+       <span v-for="(d,key,index) in json" @click="showList.splice(index,1,!showList[index])">
+       {{key}}:
+       <json-viewer :json="d" v-show="showList[index]"></json-viewer>, <br>
+       </span>
+       <br>
+     }
+     </span>
+  `,
+  data(){
+    return {
+      deep:0,
+      showList:Object.keys(this.json).map(x=>true)
+    }
+  }
+})
+app=new Vue({
+  el:"#app",
+  data:{
+    // data1:"123",
+    // data2:true,
+    // data3:[1,2,3],
+    // data4:{a:1,b:2},
+    // data5:123,
+    student:{
+      name:"aa",
+      age:11,
+      type:[1,2,3,4],
+      list:{
+        kk:{
+          m:1,
+          n:2
+        }
+      }
+    }
+  }
+})
+</script>
+</html>

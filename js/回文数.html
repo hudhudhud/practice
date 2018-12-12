@@ -1,0 +1,57 @@
+<script type="text/javascriptx">
+// 题目：判断一个非负整数是否为回文数字，回文是指从左往右与从右往左读是一样的。
+// 例如：12321是回文数。12344321也是回文数。
+function isPalindromic(a){
+  var inter=a
+  var lit=a%10
+  var s=""
+  while(inter>0){
+    s+=lit
+    inter=Math.floor((inter-lit)/10)
+    lit=inter%10
+  }
+  if(String(a)===s)
+  console.log("是回文数")
+  else
+  console.log("不是回文数")
+}
+function isPalindromic2(a){//把各位数取出来然后每次乘10加余数，最后在比较，如果相同就为回文数
+  var t=a
+  var digit
+  var reverse
+  while(t>=1){
+    digit=t%10
+    reverse=reverse*10+digit
+    t=(t-digit)/10
+  }
+  if(a==reverse)
+    return true
+  return false
+}
+function width(a){
+  var t=a
+  var len=0
+  if(a==0){
+    return 1
+  }
+  while(t>=1){
+    t=t/10
+    len++
+  }
+  return len//取长度
+}
+function isPalindromic3(a){//取对称的两边数字做对比，一不同，就结束比较
+  var w=width(a)
+  var right
+  var left
+  var c=1//当前取的位数
+  while(c<=w/2){
+    right=parseInt(a/10**(c-1))%10
+    left=parseInt(a/10**(w-c))%10
+    if(right!=left)
+      return false
+    c++
+  }
+  return true
+}
+</script>

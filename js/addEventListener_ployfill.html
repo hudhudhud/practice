@@ -1,0 +1,107 @@
+<script type="text/javascript">
+function addEventListener(element,eventName,callback){
+  if(element.addEventListener){
+    element.addEventListener(eventType,callback)
+  }
+  else if(element.attachEvent){
+    element.attachEvent("on"+eventType,callback)
+  }
+  else {
+    element["on"+eventType]=callback
+  }
+}
+function removeListener(element,eventName,callback){
+  if(element.removeListener){
+    element.removeListener(eventName,callback)
+  }
+  else if(element.detachEvent){
+    element.detachEvent("on"+eventName,callback)
+  }
+  else {
+    element["on"+eventName]=null
+  }
+}
+
+function getEvent(event){
+  return event || window.event
+}
+
+function getTarget(event){
+  return event.target || event.srcElement
+}
+
+function stopPropagation(event){
+  if(event.stopPropagation){
+    event.stopPropagation()
+  }
+  else {
+    event.cancelBubble=true
+  }
+}
+
+function preventDefault(event){
+  if(event.preventDefault){
+    event.preventDefault()
+  }
+  else{
+    event.returnValue=false
+  }
+}
+</script>
+
+<script type="text/javascript">
+  //初始化分支模式，在一开始就判断浏览器，而不是执行的时候每次都判断，分支多就会减缓脚本执行速度，封装到自己的方法里
+  var MYAPP={}
+  MYAPP.event={
+    addListener:null,
+    removeListener:null,
+  }
+  if(window.addEventListener){
+    MYAPP.event.addListener=function(el,type,fn){
+      el.addEventListener(type,fn)
+    }
+    MYAPP.event.removeListener=function(el,type,fn){
+      el.removeListener(type,fn)
+    }
+  }
+  else if(document.attachEvent){
+    MYAPP.event.addListener=function(el,type,fn){
+      el.attachEvent("on"+type,fn)
+    }
+    MYAPP.event.removeListener=function(el,type,fn){
+      el.detachEvent("on"+type,fn)
+    }
+  }
+  else{
+    MYAPP.event.addListener=function(el,type,fn){
+      el["on"+type]=fn
+    }
+    MYAPP.event.removeListener=function(el,type,fn){
+      el["on"+type]=null
+    }
+  }
+</script>
+<script type="text/javascript">
+  //惰性初始模式，只有用到的时候才判断浏览器，之后就不再需要判断，否则就一直不需要做判断
+  var MYAPP={}
+  MYAPP.myevent={
+    addListener:function(el,type,fn){
+      if(window.addEventListener){
+        MYAPP.myevent.addListener=function(el,type,fn){
+          el.addEventListener(type,fn)
+        }
+      }
+      else if(document.attachEvent){
+        MYAPP.myevent.addListener=function(el,type,fn){
+          el.attachEvent("on"+type,fn)
+        }
+      }
+      else{
+        MYAPP.myevent.addListener=function(el,type,fn){
+          el["on"+type]=fn
+        }
+      }
+      MYAPP.myevent.addListener(el,type,fn)
+    }
+  }
+</script>

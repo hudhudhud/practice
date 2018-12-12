@@ -1,0 +1,57 @@
+<script type="text/javascript">
+//写法1
+  class Person{
+    constructor(str){
+      [this.firstName,this.lastName]=str.split(" ")
+    }
+    get fullName(){
+      return this.firstName+" "+this.lastName
+    }
+    set fullName(name){
+      [this.firstName,this.lastName]=name.split(" ")
+    }
+  }
+ //写法2
+  function Person1(str) {
+    [this.firstName,this.lastName]=str.split(" ")
+  }
+  Person1.prototype={
+    constructor:Person1,
+    get fullName(){
+       return this.firstName+" "+this.lastName
+    },
+    set fullName(name){
+      [this.firstName,this.lastName]=name.split(" ")
+    },
+  }
+//写法3
+  function Person2(str){
+    var [firstName,lastName]=str.split(" ")
+    Object.defineProperties(this,{
+      firstName:{
+        get(){
+          return firstName
+        },
+        set(name){
+          firstName=name
+        }
+      },
+      lastName:{
+        ["get"](){
+          return lastName
+        },
+        ["set"](name){
+          lastName=name
+        }
+      },
+      fullName:{
+        get:function () {
+          return firstName+" "+lastName
+        },
+        set:function (name) {
+           [firstName,lastName]=name.split(" ")
+        }
+      }
+    })
+  }
+</script>

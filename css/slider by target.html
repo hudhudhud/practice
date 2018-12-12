@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+<style>
+div{
+position:relative;
+width:300px;
+height: 300px;
+}
+
+img{
+position: absolute;
+top:0px;
+left:-800px;
+}
+img:target{
+transition:all 0.5s linear;
+top:0px;
+left:0px;
+z-index: 9999;
+}
+</style>
+</head>
+<body>
+  <a href="#one" id=a>one</a>
+  <a href="#two" id=b>two</a>
+  <a href="#three" id=c>three</a>
+
+ <div>
+	<img  id="one" src="https://img.alicdn.com/imgextra/i4/2310266053/TB2vCOwlYlmpuFjSZFlXXbdQXXa_!!2310266053.jpg_q90_.webp" >
+	<img  id="two" src="https://aecpm.alicdn.com/tps/i2/TB10vPXKpXXXXacXXXXvKyzTVXX-520-280.jpg" alt="">
+	<img id="three" src="https://img.alicdn.com/simba/img/TB1g_TJOVXXXXbUXFXXSutbFXXX.jpg" alt="">
+</div>
+</body>
+</html>
