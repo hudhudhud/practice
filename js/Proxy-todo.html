@@ -1,0 +1,80 @@
+<html>
+    <body>
+        <div id='app'>
+            <input type="text" id="input">
+            <div>输入：<span id="title"></span></div>
+            <button type="button" id="btn">添加</button>
+            <ul id="list"></ul>
+        </div>
+    </body>
+</html>
+<script>
+    const obj={}
+    const arr=[1,2,3]
+    const input=document.getElementById('input')
+    const title=document.getElementById('title')
+    const btn=document.getElementById('btn')
+    const list=document.getElementById('list')
+
+    const Render={
+        init(ary){
+            for(let i=0;i<ary.length;i++){
+                let li=document.createElement('li')
+                li.innerHTML=ary[i]
+                list.append(li)
+            }
+        },
+        addList:function(val){
+            let li=document.createElement('li')
+            li.innerHTML=val
+            list.append(li)
+            newObj.text=''
+        }
+    }
+    
+    const newObj=new Proxy(obj,{
+        get(target,key,proxy){
+            return key in target? target[key]:'no this key'
+        },
+        set(target,key,value,proxy){
+            if(key=='text'){
+                target[key]=value
+                input.value=value
+                title.innerHTML=value
+            }
+            return true
+        }
+    })
+
+    const newAry=new Proxy(arr,{
+        get(target,key,proxy){
+            return key in target? target[key]:'no this key'
+        },
+        set(target,key,value,proxy){
+            console.log(target, key, value, proxy);
+            if(key!='length'){
+                Render.addList(value)
+            }  
+            return true
+        }
+    })
+
+    btn.addEventListener('click',()=>{
+        newAry.push(newObj.text)
+    })
+
+    input.addEventListener('input',(e)=>{
+        newObj.text=e.target.value
+    })
+
+    input.addEventListener('keyup',(e)=>{
+        if(e.keyCode == "13"){
+            newAry.push(newObj.text)
+        }
+    })
+
+    window.onload=()=>{
+        Render.init(arr)
+    }
+</script>
+<!-- https://github.com/nightzing/vue3-Proxy/blob/master/proxy.html -->
