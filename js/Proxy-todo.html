@@ -5,6 +5,7 @@
             <div>输入：<span id="title"></span></div>
             <button type="button" id="btn">添加</button>
             <ul id="list"></ul>
+            <span id='span'></span>
         </div>
     </body>
 </html>
@@ -15,16 +16,21 @@
     const title=document.getElementById('title')
     const btn=document.getElementById('btn')
     const list=document.getElementById('list')
+    const span=document.getElementById('span')
 
     const Render={
         init(ary){
+            list.innerHTML=''
+            let frag= document.createDocumentFragment()
             for(let i=0;i<ary.length;i++){
                 let li=document.createElement('li')
                 li.innerHTML=ary[i]
-                list.append(li)
+                frag.append(li)
             }
+            list.append(frag)
         },
-        addList:function(val){
+        addList:function(val,ary){
+            ary.push(val)
             let li=document.createElement('li')
             li.innerHTML=val
             list.append(li)
@@ -41,6 +47,8 @@
                 target[key]=value
                 input.value=value
                 title.innerHTML=value
+            }else{
+                span.innerText=value
             }
             return true
         }
@@ -53,8 +61,14 @@
         set(target,key,value,proxy){
             console.log(target, key, value, proxy);
             if(key!='length'){
-                Render.addList(value)
-            }  
+                if(key in target){
+                    target[key]=value
+                    Render.init(arr)
+                }
+                else{
+                    Render.addList(value,arr)
+                }
+            }
             return true
         }
     })
@@ -77,4 +91,7 @@
         Render.init(arr)
     }
 </script>
+<!-- https://mp.weixin.qq.com/s/tUsFmUcaMr38ZqHuir1sfQ -->
 <!-- https://github.com/nightzing/vue3-Proxy/blob/master/proxy.html -->
+
+<!-- vue对后来新增对象属性或者数组a[0]=newValue赋值绑定会失效，需要用$set,vue3改用Proxy实现双向绑定，可以优化这些问题 -->
