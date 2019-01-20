@@ -1,0 +1,135 @@
+$h1: #44474B;
+$them: #ED1B24;
+$border: #F1F4F3;
+@function rem($px) {
+  @return $px/12+rem;
+}
+@function getY($x) {
+  @return (0-(134/309*$x - 134))/12+rem;
+}
+
+@function tran($px) {
+  @return $px/(980/375)+px;
+}
+
+@mixin border-radius($value: 4px) {
+  border-radius: $value;
+  -moz-border-radius: $value;
+  -o-border-radius: $value;
+  -webkit-border-radius: $value;
+}
+
+%flex{
+  display: -webkit-box;  /* 老版本语法: Safari, iOS, Android browser, older WebKit browsers. */
+  display: -moz-box;     /* 老版本语法: Firefox (buggy) */
+  display: -ms-flexbox;  /* 混合版本语法: IE 10 */
+  display: -webkit-flex; /* 新版本语法: Chrome 21+ */
+  display: flex;         /* 新版本语法: Opera 12.1, Firefox 22+ */
+}
+%flex-wrap{
+  flex-wrap:  wrap ;
+  -ms-flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+}
+%flex-column{
+  -webkit-box-orient:vertical;
+  -webkit-box-direction:normal;
+  -moz-box-orient:vertical;
+  -moz-box-direction:normal;
+  flex-direction:column;
+  -webkit-flex-direction:column;
+  -ms-flex-direction: column;
+}
+%inline-flex {
+  display: -moz-inline-box;
+  display: -ms-inline-flexbox;
+  display: -webkit-inline-flex;
+  display: inline-flex;
+}
+@mixin align-items($align: center) {
+  -webkit-box-align: $align;
+  -webkit-align-items: $align;
+  -ms-flex-align: $align;
+  align-items: $align;
+}
+@mixin translate($x:0,$y:0){
+  -webkit-transform: translate($x,$y);
+  -moz-transform: translate($x,$y);
+  -ms-transform: translate($x,$y);
+  -o-transform: translate($x,$y);
+  transform: translate($x,$y);
+}
+%flex-align-center {
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+%justify-content-center {
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+%justify-content-space-between {
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+@mixin label-radio($backimg, $activeImg) {
+  & > * {
+    vertical-align: middle;
+  }
+  input[type='radio']:checked::after{
+    background: $activeImg no-repeat center;
+    background-size: 100% 100%;
+  }
+  input[type='radio']{
+    margin-right: rem(5);
+    width: rem(14);
+    height: rem(14);
+  }
+  input[type='radio']::after{
+    position: relative;
+    top: -1px;
+    display: block;
+    margin-right: rem(5);
+    content: '';
+    width: 100%;
+    height: 100%;
+    background: $backimg no-repeat center;
+    background-size: 100% 100%;
+  }
+}
+
+%nowrap{
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+}
+@mixin gradientToRight($left, $right){
+  background: -webkit-linear-gradient(left, $left , $right); /* Safari 5.1 - 6.0 */
+  background: -o-linear-gradient(right, $left, $right); /* Opera 11.1 - 12.0 */
+  background: -moz-linear-gradient(right, $left, $right); /* Firefox 3.6 - 15 */
+  background: linear-gradient(to right, $left , $right); /* 标准的语法 */
+}
+@mixin gradient($top, $bottom){
+  background: -webkit-linear-gradient( $top , $bottom); /* Safari 5.1 - 6.0 */
+  background: -o-linear-gradient( $top, $bottom); /* Opera 11.1 - 12.0 */
+  background: -moz-linear-gradient( $top, $bottom); /* Firefox 3.6 - 15 */
+  background: linear-gradient( $top , $bottom); /* 标准的语法 */
+}
+
+@mixin btn($height:rem(24),$color: #333,$size:rem(15)){
+  height: $height;
+  line-height: $height;
+  padding: 0 rem(15);
+  color: $color;
+  border: 1px solid $color;
+  text-align: center;
+  font-size: $size;
+}

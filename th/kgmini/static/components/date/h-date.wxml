@@ -1,0 +1,30 @@
+<wxs src="./h-date.wxs" module="tools" />
+<view class='date-box'>
+  <view class='data-title'>
+    <text class='title-date'>{{tools.getDay(activeDate, showDate)}}</text>
+    <text>{{tools.getMonth(activeDate, showDate)}}月/{{tools.getYear(activeDate, showDate)}}</text>
+    <text class='title-week'>星期{{tools.getWeek(weekNumber)}}</text>
+  </view>
+  <view class='weeks-text'>
+    <view class="week-text {{index===options.weekText.length-1?'first':''}}" wx:for="{{options.weekText}}" wx:key="*this">{{item}}</view>
+  </view>
+
+  <view class='icon-right' bindtap='indexChangeJT' data-type="2">
+    <view class='icon-img' data-type="2"></view>
+  </view>
+  <view class='icon-left' bindtap='indexChangeJT' data-type="1">
+    <view class='icon-img' data-type="1"></view>
+  </view>
+  <swiper class='swiper' indicator-dots="{{false}}" current="{{selectIndex}}" bindchange="indexChange" bindanimationfinish="animationfinish">
+    <block wx:for="{{selects}}" wx:key="id" wx:for-item="itemSelect">
+      <swiper-item>
+
+        <view class='days'>
+          <view class='day' wx:for="{{itemSelect.fillCount}}" wx:key="*this"></view>
+          <view bindtap='dateChange' data-month="{{itemSelect.id}}" data-num="{{idx+1}}" class="day {{(tools.compare(activeDate, {month: itemSelect.id, day: idx+1})?'active':'')+ ' '+ (tools.getIsDisabled(minTimeNum,maxTimeNum,itemSelect.id  + (idx+1 < 10 ? ('0' + (idx+1)) : idx+1))?'disabled':'')}}" wx:for="{{itemSelect.days}}" wx:key="*this" wx:for-index="idx">{{item+1}}</view>
+        </view>
+      </swiper-item>
+    </block>
+  </swiper>
+
+</view>

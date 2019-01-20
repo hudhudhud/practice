@@ -1,0 +1,25 @@
+@keyframes result-show {
+  0%{
+    transform: translateY(20%);
+  }
+  100%{
+    transform: translateY(0);
+  }
+}
+
+@keyframes cell-show {
+  0%{
+    width: 50rpx;
+  }
+  100% {
+    width: 130rpx;
+  }
+}
+@keyframes cell-hide {
+  0%{
+    width: 130rpx;
+  }
+  100% {
+    width: 65rpx;
+  }
+}

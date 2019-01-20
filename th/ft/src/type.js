@@ -1,0 +1,1 @@
+export const LOGIN_MUTATION = 'SOME_MUTATION';

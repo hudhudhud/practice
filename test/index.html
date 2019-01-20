@@ -107,6 +107,8 @@ var result1 = ("55" == 55); //true，因为转换后相等
 var result2 = ("55" === 55); //false，因为不同的数据类型不相等
 null == undefined  //true
 null === undefined //false
+0==''  //true
+0==='' //false
 
 //逗号操作符，在用于赋值时，逗号操作符总会返回表达式中的最后一项
 var num = (5, 1, 4, 8, 0); // num 的值为 0
@@ -260,4 +262,22 @@ alert(color); //"blue"
 var colors = ["red", "blue", "green"]; // 创建一个包含 3 个字符串的数组
 colors.length = 2;
 alert(colors[2]); //undefined
+
+
+如果数组中的某一项的值是 null 或者 undefined，那么该值在 join()、
+toLocaleString()、 toString()和 valueOf()方法返回的结果中以空字符串表示。
+
+[null,1,undefined].join()
+",1,"
+
+ary.push(item1,item2)   =>返回ary数组长度
+ary.pop()               =>返回弹出的最后一项
+ary.shift()             =>返回弹出的第一项
+ary.unshift(item1,item2) =>返回ary数组长度
+
+sort()方法会调用每个数组项的 toString()转型方法！！！！，然后比较得到的字符串，以
+确定如何排序。即使数组中的每一项都是数值， sort()方法比较的也是字符串，如下所示。
+var values = [0, 1, 5, 10, 15];
+values.sort();
+alert(values); //0,1,10,15,5
  -->

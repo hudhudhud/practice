@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "校园课表",
+  "disableScroll": true,
+  "usingComponents": {
+    "h-date": "../../../../../static/components/date/h-date"
+  }
+}

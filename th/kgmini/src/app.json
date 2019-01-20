@@ -1,0 +1,147 @@
+{
+  "pages": [
+    "pages/index/main",
+    "pages/home/main",
+    "pages/nearby/main",
+    "pages/featureList/main",
+    "pages/profile/main"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "",
+    "navigationBarTextStyle": "black"
+  },
+  "subpackages": [
+    {
+      "name": "auth",
+      "root": "pages/auth/",
+      "pages": [
+        "login/main",
+        "register/main",
+        "protocol/main"
+      ]
+    },
+    {
+      "name": "classifyInfo",
+      "root": "pages/homeChild/",
+      "pages": [
+        "institutionInfo/main",
+        "institutionInfo/curriculumList/main",
+        "curriculumIntro/main",
+        "map/main",
+        "curriculumDetail/main",
+        "confirmOrder/main",
+        "noticeList/main",
+        "noticeDetail/main",
+        "payOrder/main",
+        "curriculumList/main",
+        "socialPracticeList/main",
+        "socialPracticeDetail/main",
+        "searchPage/main",
+        "communityCollege/main",
+        "socialPracticeInfo/main",
+        "socialPracticeInfo/curriculumList/main"
+      ]
+    },
+    {
+      "name": "featureList",
+      "root": "pages/featureList/sub/",
+      "pages": [
+        "schoolSelect/main",
+        "mineSelect/main",
+        "selectClassDetail/main",
+        "selectClassList/main",
+        "checkIn/main",
+        "classroomShowList/main",
+        "classroomShowAdd/main",
+        "lunch/main",
+        "lunch/info/main",
+        "lunch/createOrder/main",
+        "classroomEvaluateList/main",
+        "classroomEvaluateDetail/main",
+        "lunch/addEvaluate/main",
+        "classroomShowDetail/main",
+        "policy/main",
+        "webview/main",
+        "childManage/main",
+        "childManage/searchChild/main",
+        "childManage/addChild/main",
+        "communityCollegeList/main"
+      ]
+    },
+    {
+      "name": "profile",
+      "root": "pages/profile/sub/",
+      "pages": [
+        "orderList/main",
+        "orderList/evaluation/main",
+        "orderList/orderDetail/main",
+        "collection/main",
+        "myEvaluation/main",
+        "addressList/main",
+        "addressAdd/main",
+        "proposal/main",
+        "needInvoice/main",
+        "needInvoice/invoiceDetail/main"
+      ]
+    },
+    {
+      "name": "set",
+      "root": "pages/profile/set/",
+      "pages": [
+        "updateInfo/main",
+        "updateSet/main",
+        "updatePsw1/main",
+        "updatePsw2/main",
+        "aboutMine/main"
+      ]
+    },
+    {
+      "name": "teacher",
+      "root": "pages/teacher/",
+      "pages": [
+        "profile/main",
+        "curriculum/curriculumList/main",
+        "curriculum/evaluateStudentAdd/main",
+        "evaluateList/main",
+        "curriculum/evaluateStudent/main"
+      ]
+    }
+  ],
+  "tabBar": {
+    "backgroundColor": "#fff",
+    "color": "#AEAEAE",
+    "selectedColor": "#000",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/home/main",
+        "text": "首页",
+        "selectedIconPath": "static/img/tab/tab.png",
+        "iconPath": "static/img/tab/tab_gray.png"
+      },
+      {
+        "pagePath": "pages/profile/main",
+        "text": "我的",
+        "selectedIconPath": "static/img/tab/tab4.png",
+        "iconPath": "static/img/tab/tab4_gray.png"
+      }
+    ]
+  },
+  "plugins": {
+    "mapPlugin": {
+      "version": "1.0.6",
+      "provider": "wx5bc2ac602a747594"
+    }
+  },
+  "networkTimeout": {
+    "request": 10000
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置接口的效果展示"
+    }
+  },
+  "navigateToMiniProgramAppIdList": ["wx90f838924f83e70d"]
+}
