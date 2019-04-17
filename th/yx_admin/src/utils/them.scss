@@ -1,0 +1,25 @@
+$color: blue;
+$leftWidth:200px;
+$topHeight:50px;
+$borderColor:#dcdfe6;
+
+@function rem($px) {
+  @return $px/12/2+rem;
+}
+
+
+@mixin fl {
+  float:left;
+}
+
+@mixin fr {
+  float:right;
+}
+
+@mixin clearfix {
+  &:after {
+    content: "";
+    display: block;
+    clear: both;
+  }
+}
