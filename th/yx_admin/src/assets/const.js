@@ -1,0 +1,263 @@
+export const fileUploadUrl='/file/upload'
+export const selectDown={
+    gender: [
+        {label: '男', value: 0},
+        {label: '女', value: 1},
+    ],
+    userStatus:[{label:'激活',value:0},{label:'冻结',value:1},],
+    proStatus: [
+        {label: '已上架', value: true},
+        {label: '已下架', value:false}
+    ],
+    proShow:[
+        {label:'显示',value:true},
+        {label:'隐藏',value:false}
+     ],
+    stockType:[{label: "出库", value: 1}, {label: '入库', value: 2}],
+    operationFlag:[
+        {label: '启用', value: 0},
+        {label: '禁用', value: 1}
+    ],
+    orderStatus:[
+        {label:"待支付",value:0},
+        {label:"已支付",value:1},
+        {label:"待发货",value:2},
+        {label:"已发货",value:3},
+        {label:"已收货",value:4},
+        {label:"交易完成",value:5},
+        {label:"交易关闭",value:6},
+    ],
+    afterSaleStatus:[
+        {label:"未售后",value:0},
+        {label:"正在售后",value:1},
+        {label:"售后完成",value:2},
+    ],
+    orderType:[
+        {label:"普通订单",value:0},
+        {label:"礼包订单",value:1},
+        {label:"限时购订单",value:2},
+        {label:"拼团订单",value:3},
+    ],
+    tagType:[
+        {label:"健康指数标签",value:1},
+    ],
+    memberTeamNumType:[
+        {label:"被推荐人",value:'inviteNumber'},
+        {label:"直属下级",value:'parentNumber'},
+        {label:"团队总人数",value:'teamNumber'},
+    ],
+    accountType:[
+        {label:"待结",value:0},
+        {label:"余额",value:1},
+    ],
+    memberRank:[
+        {label:"会员",value:0},
+        {label:"店主",value:1},
+        {label:"一星店主",value:2},
+        {label:"二星店主",value:3},
+        {label:"三星店主",value:4},
+        // {label:"三星砖石店主",value:5},
+        // {label:"三星皇冠店主",value:6},
+    ],
+    memberAuditStatus:[
+        {label:"审核中",value:1},
+        {label:"审核成功",value:2},
+        {label:"审核失败",value:3},
+    ],
+    releaseStatus:[
+        {label: '上架', value: true},
+        {label: '下架', value: false}
+    ],
+    bannerPosition:[
+        {label:'小程序首页',value:1},
+        {label:'小程序的学习分享',value:2}
+    ],
+    learnShareReleaseStatus:[
+        {label: '是', value: true},
+        {label: '否', value: false}
+    ],
+    getLabel(val){
+        if(val==='')return ''
+        let item=this.find(item=>item.value==val)
+        if(item){
+            return item.label
+        }
+    }
+}
+export const  menus=[
+    {
+      id:0,
+      name:'主页',
+      href:'/'
+    },
+    {
+    id:1,
+    name:'商品管理',
+    href:'',
+    children:[
+        {
+            id:10,
+            name:'常规商品管理',
+            href:'/product/productManage',
+        },
+        {
+            id:11,
+            name:'相关信息管理',
+            href:'',
+            children:[
+                {
+                    id:110,
+                    name:'品类结构管理',
+                    href:'/product/baseInfo/catgManage'
+                },
+                {
+                    id:111,
+                    name:'商品标签库管理',
+                    href:'/product/baseInfo/tagManage'
+                },
+                {
+                    id:112,
+                    name:'商品规格管理',
+                    href:'/product/baseInfo/specManage'
+                },
+                {
+                    id:113,
+                    name:'供应商管理',
+                    href:'/product/baseInfo/supplierManage',
+                },
+            ]
+        }
+    ]
+},
+    {
+    id:2,
+    name:'订单管理',
+    href:'',
+    children:[
+        {
+            id:20,
+            name:'订单管理',
+            href:'/order/service',
+        },
+        {
+            id:21,
+            name:'运营订单管理',
+            href:'/order/operation',
+        },
+        {
+            id:22,
+            name:'财务订单管理',
+            href:'/order/finance',
+        }]
+},
+    {
+        id:3,
+        name:'会员管理',
+        href:'',
+        children:[
+            {
+                id:30,
+                name:'会员等级',
+                href:'/member/rankManage',
+            },
+            {
+                id:31,
+                name:'会员列表',
+                href:'/member/memberManage',
+            },
+            {
+                id:32,
+                name:'实名认证',
+                href:'/member/indentityManage',
+            },
+            {
+                id:33,
+                name:'协议管理',
+                href:'/member/protocolManage',
+            }]
+    },
+    {
+        id:4,
+        name:'营销工具',
+        href:'',
+        children:[
+            {
+                id:40,
+                name:'礼包管理',
+                href:'',
+            },
+            ]
+    },
+    {
+        id:5,
+        name:'财务管理',
+        href:'',
+        children:[
+            {
+                id:50,
+                name:'提现管理',
+                href:'',
+            },
+        ]
+    },
+    {
+        id:6,
+        name:'内容管理',
+        href:'',
+        children:[
+            {
+                id:60,
+                name:'banner管理',
+                href:'/content/miniPro/bannerManage'
+            },
+            {
+                id:61,
+                name:'公告管理',
+                href:'/content/miniPro/announceManage'
+            },
+            {
+                id:62,
+                name:'首页弹窗管理',
+                href:'/content/miniPro/popManage'
+            },
+            {
+                id:63,
+                name:'学习分享管理',
+                href:'/content/miniPro/learnShareManage'
+            },
+        ]
+    },
+    {
+        id:7,
+        name:'系统设置',
+        href:'',
+        children:[
+            {
+                id:70,
+                name:'菜单管理',
+                href:'/system/menuManage'
+            },
+            {
+                id:71,
+                name:'角色管理',
+                href:'/system/roleManage'
+            },
+            {
+                id:72,
+                name:'用户管理',
+                href:'/system/userManage'
+            }
+        ]
+    },
+]
+export const orgTypeParam={
+    mech:0,
+    sch:1,
+    comm:2
+}
+
+export const remarkType={
+    user_remark:1,
+    service_remark:2,
+    logistics_remark:3  //(1,"用户留言"), SERVICE_REMARK(2,"客服留言"), LOGISTICS_REMARK(3,"后勤留言");
+}

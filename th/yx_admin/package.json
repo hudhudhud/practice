@@ -1,0 +1,51 @@
+{
+  "name": "formcomponent",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "vue-cli-service serve",
+    "build": "vue-cli-service build ",
+    "totest": "vue-cli-service build && scp -r ./dist root@47.98.210.138:/ht/websites"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "element-ui": "^2.4.11",
+    "flex.css": "^1.1.7",
+    "font-awesome": "^4.7.0",
+    "htadmin-form": "^1.0.6",
+    "js-cookie": "^2.2.0",
+    "mockjs": "^1.0.1-beta3",
+    "qs": "^6.6.0",
+    "vue": "^2.5.17",
+    "vue-router": "^3.0.1",
+    "vue2-editor": "^2.6.6",
+    "vuex": "^3.0.1"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.2.0",
+    "@vue/cli-service": "^3.2.0",
+    "babel-helper-vue-jsx-merge-props": "^2.0.3",
+    "babel-plugin-syntax-jsx": "^6.18.0",
+    "babel-plugin-transform-vue-jsx": "^3.7.0",
+    "babel-preset-env": "^1.7.0",
+    "node-sass": "^4.9.0",
+    "sass-loader": "^7.0.1",
+    "vue-template-compiler": "^2.5.17",
+    "path-to-regexp": "2.4.0"
+  },
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {}
+    }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ],
+  "babel": {
+    "plugins": [
+      "transform-vue-jsx"
+    ]
+  }
+}
