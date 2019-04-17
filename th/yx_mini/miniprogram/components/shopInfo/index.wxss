@@ -1,0 +1,40 @@
+.shop {
+  margin: 0 20rpx;
+  display: flex;
+  display: -webkit-flex;
+  padding: 30rpx 0;
+  border-bottom: 1px solid #f2f2f2;
+  font-size: 26rpx;
+
+}
+.shop-detail {
+  flex: 1;
+  display: flex;
+  display: -webkit-flex;
+}
+.sub-title{
+  color: #BBBBBB;
+}
+
+.text-line{
+  text-decoration:line-through;
+}
+
+.shop-img {
+  width: 160rpx;
+  height: 160rpx;
+  margin-right: 20rpx;
+}
+
+.shop-text {
+  width: 422rpx;
+}
+
+.shop-title {
+  margin-bottom: 4rpx;
+}
+
+.shop-price {
+  flex: 1;
+  text-align: right;
+}

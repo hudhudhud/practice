@@ -1,0 +1,49 @@
+/* packageMember/contract/index.wxss */
+.contractBox{
+  width:710rpx;
+  height:144rpx;
+  background:rgba(255,255,255,1);
+  border-radius:10rpx;
+  margin: 0 auto;
+  margin-top: 20rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+.contract_left{
+  padding-left: 30rpx;
+}
+.contract_left_c1{
+  height:40rpx;
+  font-size:28rpx;
+  font-family:PingFangSC-Regular;
+  font-weight:400;
+  color:rgba(45,45,45,1);
+  line-height:40rpx;
+}
+.contract_left_c2{
+  height:34rpx;
+  font-size:24rpx;
+  font-family:PingFangSC-Regular;
+  font-weight:400;
+  color:rgba(153,153,153,1);
+  line-height:34rpx;
+  padding-top: 10rpx;
+}
+.contract_right{
+  height:34prx;
+  font-size:24rpx;
+  font-family:PingFangSC-Regular;
+  font-weight:400;
+  color:rgba(173,171,171,1);
+  line-height:34rpx;
+  padding-right: 44rpx;
+}
+.contract_jiantou{
+  position: absolute;
+  width: 12rpx;
+  height: 24rpx;
+  top: 60rpx;
+  right: 18rpx;
+}

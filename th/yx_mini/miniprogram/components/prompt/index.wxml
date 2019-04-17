@@ -1,0 +1,11 @@
+<view class="mask" wx:if="{{show}}">
+    <view class="content">
+        <view class="title" wx:if="{{title}}">{{title}}</view>
+        <input type="text" bindinput="handleInput" placeholder="{{placeholder}}" />
+        <view class="btns">
+            <view class="btn" bindtap="cancel">取消</view>
+            <view class="btn full" bindtap="confirm">确定</view>
+        </view>
+    </view>
+
+</view>

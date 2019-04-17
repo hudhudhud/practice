@@ -12,6 +12,10 @@
             config: {
                 type: Array
             },
+            labelWidth: {
+                type: String,
+                default: '120px'
+            },
             formConfig: {
                 type: null,
                 default: function () {
@@ -25,12 +29,15 @@
                 id: generateUUID()
             }
         },
-        render: function (h) {
+        created(){
             this.setDefaultValue();
+        },
+        render: function (h) {
             let items = Array.apply(null, {length: this.config.length}).map((it, i) => {
                 let props = {
                     itemData: this.config[i],
-                    formData: this.formData
+                    formData: this.formData,
+                    isEdit: this.formConfig.isEdit
                 }, component = '';
                 if (this.config[i] instanceof Base) {
                     // 如果是定义好的组件
@@ -51,9 +58,9 @@
                         })];
                     }
                     if (this.config[i].label) {
-                        return (<el-form-item label={this.config[i].label}>
-                            {component}
-                        </el-form-item>)
+                        return (<el-form-item label={this.config[i].label} required={this.config[i].required}>
+                        {component}
+                    </el-form-item>)
                     } else {
                         return <div>{component}</div>;
                     }
@@ -65,55 +72,55 @@
             });
             // 添加 下方俩个 按钮  // 以后改成可由外部传入
             items.push(<el-form-item>
-                {this.formConfig.showConfirmButton !== false ? <el-button type="primary"
-                                                                          onClick={this.submit}>{this.formConfig.confirmButtonText || '确定'}</el-button> : ''}
-                {this.formConfig.showCancelButton !== false ?
-                    <el-button onClick={this.cancel}>{this.formConfig.cancelButtonText || '取消'}</el-button> : ''}
+            {this.formConfig.showConfirmButton !== false ? <el-button type="primary"
+            onClick={this.submit}>{this.formConfig.confirmButtonText || '确定'}</el-button> : ''}
+            {this.formConfig.showCancelButton !== false ?
+            <el-button onClick={this.cancel}>{this.formConfig.cancelButtonText || '取消'}</el-button> : ''}
             </el-form-item>);
 
-            // 拼接规则
-            let rules = Object.assign({}, ...this.config.map(i => {
-                return {[i.key]: i.rules}
-            }));
-            // 完成表单控件
-            return (
-                <el-form key={this.id} ref={this.id} label-width={this.formConfig['label-width']||'120px'} rules={rules} model={this.formData}>
-                    {items}
-                </el-form>)
-        },
-        methods: {
-            submit: function (e) {
-
-                //  console.log(this.config);
-                this.$refs[this.id].validate((valid) => {
-                    if (valid) {
-                        this.$emit('form-submit', this.formData)
-                    } else {
-                        console.log('error submit!!');
-                        return false;
-                    }
-                });
-            },
-            cancel: function () {
-                this.$emit('form-cancel');
-            },
-            /**
-             * 重设表单数据，一般父组件调用
-             * @param form 外部传进来的 表单数据
-             * */
-            resetFormData: function (form) {
-                Object.assign(this.formData, form)
-            },
-            /**
-             * 设置默认表单数据 初始化调用
-             */
-            setDefaultValue: function () {
-                this.formData = Object.assign({}, ...this.config.map(i => {
-                    return {[i.key]: i.value}
+                // 拼接规则
+                let rules = Object.assign({}, ...this.config.map(i => {
+                    return {[i.key]: i.rules}
                 }));
+                // 完成表单控件
+                return (
+                    <el-form inline={this.formConfig.inline} key={this.id} ref={this.id} label-width={this.labelWidth} rules={rules} model={this.formData}
+                    size={this.formConfig.size}>
+                {items}
+            </el-form>)
+            },
+            methods: {
+                submit: function (e) {
+                    //  console.log(this.config);
+                    this.$refs[this.id].validate((valid) => {
+                        if (valid) {
+                            this.$emit('form-submit', this.formData)
+                        } else {
+                            console.log('error submit!!');
+                            return false;
+                        }
+                    });
+                },
+                cancel: function () {
+                    this.$emit('form-cancel');
+                },
+                /**
+                 * 重设表单数据，一般父组件调用
+                 * @param form 外部传进来的 表单数据
+                 * */
+                resetFormData: function (form) {
+                    Object.assign(this.formData, form)
+                },
+                /**
+                 * 设置默认表单数据 初始化调用
+                 */
+                setDefaultValue: function () {
+                    this.formData = Object.assign({}, ...this.config.map(i => {
+                        return {[i.key]: i.value}
+                    }));
+                }
             }
         }
-    }
 </script>
 
 <style scoped lang="scss">

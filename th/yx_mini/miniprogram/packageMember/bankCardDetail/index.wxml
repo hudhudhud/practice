@@ -1,0 +1,34 @@
+<!--packageMember/bankCardDetail/index.wxml-->
+<view class="bkDetailBox">
+  <view class="bkDetailItem">
+    <view class="bkDetailItem_left">持卡人</view>
+    <view class="bkDetailItem_right"><input bindblur='inputBlurFun1' value="{{name}}" class="bkInfoInput" placeholder="请输入持卡人姓名"/></view>
+  </view>
+  <view class="bkDetailItem">
+    <view class="bkDetailItem_left">开户银行</view>
+    <view class="bkDetailItem_right">
+      <picker class="backPicker" bindchange="bindPickerChange" range-key="{{'name'}}" value="{{bankIndex}}" range="{{bankList}}">
+        <view class="picker">
+        {{bankList[bankIndex].name}}
+        </view>
+      </picker>
+    </view>
+  </view>
+  <view class="bkDetailItem">
+    <view class="bkDetailItem_left">所属支行</view>
+    <view class="bkDetailItem_right"><input bindblur='inputBlurFun2' value="{{branchBankName}}" class="bkInfoInput" placeholder="例：中国银行西兴支行"/></view>
+  </view>
+  <view class="bkDetailItem">
+    <view class="bkDetailItem_left">银行卡号</view>
+    <view class="bkDetailItem_right"><input bindblur='inputBlurFun3' value="{{cardNumber}}" class="bkInfoInput" placeholder="请输入持卡人的银行卡号"/></view>
+  </view>
+</view>
+<view class="bkDetailBox2">
+  <view class="bkDetailItem2_left">设置为默认银行卡：</view>
+  <view class="bkDetailItem2_right"><switch class="bkswitch" checked="{{byDefault}}" bindchange="switch1Change" /></view>
+</view>
+<view class="bkDetailBox2">
+  <view class="bkDetailItem2_left">设置为月结银行卡：</view>
+  <view class="bkDetailItem2_right"><switch class="bkswitch" checked="{{salaryStatus}}" bindchange="switch2Change" /></view>
+</view>
+<view class="bindBankCard" bindtap='bindBankCardBtn'>{{bankId?'确认修改':'同意并绑卡'}}</view>

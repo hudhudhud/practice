@@ -1,0 +1,15 @@
+<!--packageProfile/myTeam/index.wxml-->
+<view class="myteamListTittle">
+  <view class="myteamListTittleItem">姓名</view>
+  <view class="myteamListTittleItem">等级</view>
+  <view class="myteamListTittleItem">付费会员</view>
+  <view class="myteamListTittleItem">邀请会员</view>
+</view>
+<view class='myteamlist'>
+  <view class='myteamlistItem' wx:for="{{myTeamList}}" wx:key="{{index}}">
+    <view class='myteamlistItem_c1'>{{item.nickName}}</view>
+    <view class='myteamlistItem_c1'>{{item.nickName}}</view>
+    <view class='myteamlistItem_c1'>{{item.nickName}}</view>
+    <view class='myteamlistItem_c1'>{{item.nickName}}</view>
+  </view>
+</view>

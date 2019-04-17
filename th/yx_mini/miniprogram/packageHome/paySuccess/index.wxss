@@ -1,0 +1,31 @@
+/* miniprogram/packageHome/paySuccess/index.wxss */
+page{
+  background-color: #fff;
+}
+.pay-success{
+  width: 168rpx;
+  height: 168rpx;
+  display: block;
+  margin: 86rpx auto 112rpx;
+}
+.btn {
+  margin: 30rpx auto 0;
+  width: 376rpx;
+  height: 88rpx;
+  border-radius: 44rpx;
+  line-height: 86rpx;
+  border:1px solid #D8D8D8;
+  background-color: #fff;
+  outline: none;
+  font-size: 36rpx;
+  color: #3C3C3C;
+}
+.btn.full{
+  border: none;
+  line-height: 88rpx;
+  color: #fff;
+  background: -webkit-linear-gradient(left, #ff2c6d, #ff942f); /* Safari 5.1 - 6.0 */
+  background: -o-linear-gradient(right, #ff2c6d, #ff942f); /* Opera 11.1 - 12.0 */
+  background: -moz-linear-gradient(right, #ff2c6d, #ff942f); /* Firefox 3.6 - 15 */
+  background: linear-gradient(to right, #ff2c6d, #ff942f); /* 标准的语法 */
+}

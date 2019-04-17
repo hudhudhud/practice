@@ -1,0 +1,16 @@
+<wxs src="./index.wxs" module="util"/>
+<scroll-view
+        scroll-y
+        style="height:100vh;"
+        lower-threshold="getCollectionList"
+>
+    <view class='block' wx:for="{{list}}" wx:key="id">
+        <shop-info detail="{{util.getDetail(item)}}">
+        </shop-info>
+        <view class='btns'>
+            <button bindtap="deleteCollection" data-i="{{index}}">删除</button>
+        </view>
+    </view>
+    <view class="no-list" wx:if="{{!list.length}}">暂无数据</view>
+
+</scroll-view>

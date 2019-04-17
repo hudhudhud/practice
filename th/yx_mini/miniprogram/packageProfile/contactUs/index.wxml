@@ -1,0 +1,33 @@
+<!--packageProfile/trainTutor/index.wxml-->
+<view class='trainTutorTab'>
+  <view data-type='1' bindtap="trainTabBtn" class="trainTutorTabItem {{trainTabType==1?'trainTutorTabItemActive':''}}">
+    <view class='trainTutorTab_top'>客服微信号</view>
+    <view class='trainTutorTab_bottom'></view>
+  </view>
+  <view data-type='2' bindtap="trainTabBtn" class="trainTutorTabItem {{trainTabType==2?'trainTutorTabItemActive':''}}">
+    <view class='trainTutorTab_top'>火兔公众号</view>
+    <view class='trainTutorTab_bottom'></view>
+  </view>
+  <view data-type='3' bindtap="trainTabBtn" class="trainTutorTabItem {{trainTabType==3?'trainTutorTabItemActive':''}}">
+    <view class='trainTutorTab_top'>400电话</view>
+    <view class='trainTutorTab_bottom'></view>
+  </view>
+</view>
+<!-- <view class="trainTutorBox">
+  <view class="trainTutorPostBox">
+    <view class="trainTutorPost">
+      <image class="trainTutorPostPhoto" src="../../images/profile/balance_bg@2x.png"></image>
+      <view class='trainTutorPostName'>姓名姓名姓名</view>
+      <image class="trainTutorPostTwoCode" src="../../images/profile/balance_bg@2x.png"></image>
+    </view>
+  </view>
+</view> -->
+<image wx:if="{{trainTabType==1}}" class="canvas_img" src="{{postCanvasImg}}"></image>
+<image wx:if="{{trainTabType==2}}" class="canvas_img2" src="{{postCanvasImg2}}"></image>
+<view  wx:if="{{trainTabType==3}}" class="phoneBox">
+  <view class="phone_test">400-1234-666</view>
+  <image class='phone_icon' bindtap='phoneCallFun' src='../../images/profile/phone_con1@2x.png'></image>
+</view>
+<canvas class="canvasBox" canvas-id='postCanvas1' style='width:375px;height:531px;'></canvas>
+<canvas class="canvasBox2" canvas-id='postCanvas2' style='width:375px;height:450px;'></canvas>
+<view class="saveImgBtn" wx:if="{{trainTabType!=3}}" bindtap='saveImgFun'>保存到手机</view>

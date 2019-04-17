@@ -1,0 +1,60 @@
+<view class="block">
+    <!--  <navigator class='item' url='../userInfo/index'>
+        <text>个人资料</text>
+        <image class='ar-right' src='/images/profile/ar_right.png'></image>
+      </navigator>-->
+    <view class='item' bindtap="updateHeadImg">
+        <text>头像：</text>
+        <view>
+            <image class='head' src="{{userInfo.avatarUrl}}"></image>
+            <image class='ar-right' src='/images/profile/ar_right.png'></image>
+        </view>
+    </view>
+    <view class='item' bindtap="updateNickName">
+        <text>昵称：</text>
+        <view>
+            <text>{{userInfo.nickName}}</text>
+            <image class='ar-right' src='/images/profile/ar_right.png'></image>
+        </view>
+    </view>
+    <view class='item'>
+        <text>会员号：</text>
+        <view>
+            <text>{{userInfo.sn}}</text>
+        </view>
+    </view>
+    <view class='item'>
+        <text>微信二维码：</text>
+        <view bindtap="uploadQrcode">
+            <image class='head' src="{{userInfo.avatarUrl}}" wx:if="{{userInfo.qrcodeUrl}}"></image>
+            <text wx:else>上传</text>
+            <image class='ar-right' src='/images/profile/ar_right.png'></image>
+        </view>
+    </view>
+    <view class='item' bindtap="updatePhone">
+        <text>绑定手机号</text>
+        <view>
+            <text>{{userInfo.mobile}}</text>
+            <image class='ar-right' src='/images/profile/ar_right.png'></image>
+        </view>
+    </view>
+
+    <view class='item' bindtap='setPsw' data-type="2">
+        <text>支付密码</text>
+        <view>
+            <text>修改密码</text>
+
+            <image class='ar-right' src='/images/profile/ar_right.png'></image>
+        </view>
+    </view>
+
+</view>
+<!--<view class='block'>
+  <view class='item specail'>
+    <text>最后登录日期</text>
+    <text>2019-12-12 12:12:12</text>
+  </view>
+</view>-->
+
+<!--<button class='confirm-button'>退出登录</button>-->
+<prompt show="{{showPrompt}}" placeholder="请输入昵称" bind:confirm="promptConfirm" bind:cancel="promptCancel"></prompt>

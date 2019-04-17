@@ -1,0 +1,32 @@
+<wxs src="../../services/util.wxs" module="util" />
+
+<view class="nav-back"></view>
+<scroll-view class="scroll-view {{isIPX?'ipx':''}}" scroll-y style="height: 100vh;"  bindscrolltolower="getShopList">
+  <swiper class='swiper' bindchange="transition" indicator-dots="true" autoplay="true" interval="3000" previous-margin="36rpx" next-margin="36rpx">
+    <swiper-item wx:for="{{bannerList}}" wx:key="index">
+      <view class="swiper-item" data-url='{{item.url}}' bindtap="bannerClick">
+        <image src="{{item.imageUrl}}" class="slide-image {{swiperActive===index?'active':''}}" />
+      </view>
+    </swiper-item>
+
+  </swiper>
+
+  <view class='block'>
+    <view class='title'>
+      <view class='title-text'>好货优选</view>
+    </view>
+
+    <view class='card' bindtap='toDetail' data-id="{{item.id}}" wx:for="{{shopList}}" wx:key="id">
+      <image class='main-img' src="{{item.imageUrl}}"></image>
+      <view>{{item.name}}</view>
+      <view class='shop-price'>
+        <view>
+          <view class='tag' wx:for="{{util.tag(item.keywords)}}" wx:for-item="tagItem" wx:key="index">{{tagItem}}</view>
+        </view>
+        <view class='price'>￥{{item.price}}</view>
+      </view>
+    </view>
+
+  </view>
+
+</scroll-view>

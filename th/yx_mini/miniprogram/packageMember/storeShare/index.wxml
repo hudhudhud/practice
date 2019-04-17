@@ -1,0 +1,4 @@
+<!--packageMember/storeShare/index.wxml-->
+<canvas  class="canvasBox" canvas-id="canvasBoxId" style='width:375px;height:655px;'></canvas>
+<image class="posImage" src="{{postCanvasImg}}"></image>
+<view class="storeShareBtn" bindtap='saveImgFun'>保存到手机</view>

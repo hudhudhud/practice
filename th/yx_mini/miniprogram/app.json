@@ -1,0 +1,90 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/profile/index",
+    "pages/member/index"
+  ],
+  "window": {
+    "backgroundColor": "#F6F6F6",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#FFFFFF",
+    "navigationBarTitleText": "火兔优选",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "custom": true,
+    "color": "#ACACAC",
+    "selectedColor": "#484747",
+    "backgroundColor": "#FFFFFF",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "images/tabIcon/home.png",
+        "selectedIconPath": "images/tabIcon/home_a.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/member/index",
+        "iconPath": "images/tabIcon/member.png",
+        "selectedIconPath": "images/tabIcon/member_a.png",
+        "text": "优选会员"
+      },
+      {
+        "pagePath": "pages/profile/index",
+        "iconPath": "images/tabIcon/profile.png",
+        "selectedIconPath": "images/tabIcon/profile_a.png",
+        "text": "我的"
+      }
+    ]
+  },
+  "usingComponents": {
+    "shop-info": "/components/shopInfo/index",
+    "prompt": "/components/prompt/index",
+    "inputPayPsw": "/components/inputPayPsw/index"
+  },
+  "subpackages": [
+    {
+      "root": "packageHome",
+      "pages": [
+        "shopDetail/index",
+        "confirmOrder/index",
+        "paySuccess/index"
+      ]
+    },
+    {
+      "root": "packageProfile",
+      "pages": [
+        "userSet/index",
+        "setPsw/index",
+        "myCollection/index",
+        "addressList/index",
+        "orderList/index",
+        "orderDetail/index",
+        "contactUs/index",
+        "express/index"
+      ]
+    },
+    {
+      "root": "packageMember",
+      "pages": [
+        "performanceData/index",
+        "balance/index",
+        "stayOut/index",
+        "withdraw/index",
+        "trainTutor/index",
+        "myTeam/index",
+        "salesOrder/index",
+        "learnShare/index",
+        "learnShareDetail/index",
+        "bankCard/index",
+        "bankCardDetail/index",
+        "autonym/index",
+        "contract/index",
+        "contractDetail/index",
+        "achChart/index",
+        "storeShare/index"
+      ]
+    }
+  ]
+}

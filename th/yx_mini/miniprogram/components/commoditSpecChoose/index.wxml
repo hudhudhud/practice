@@ -1,0 +1,48 @@
+<wxs src="../../services/util.wxs" module="util"/>
+<view class="mask {{show?'show':''}}" bindtap="cancel">
+
+</view>
+
+<view class="spec-content {{show?'show':''}}">
+    <view class="close" bindtap="cancel">
+        <image src="/images/order/close.png"></image>
+    </view>
+    <view>
+        <image src="{{select.imageUrl||detail.images[0]}}" class="shop-img"></image>
+        <view class="shop-info">
+            <view>
+                <view>
+                    <text class="price">¥{{select.price||detail.price}}</text>
+                    <text class="marketPrice">¥{{select.marketPrice||detail.marketPrice}}</text>
+                </view>
+                <view class="quantity">库存{{select.quantity||detail.quantity}}件</view>
+
+            </view>
+        </view>
+    </view>
+
+    <!--规格-->
+    <block wx:for="{{specList}}" wx:key="title" wx:for-item="group" wx:for-index="gIndex">
+        <view class="spec-title">{{group.title}}</view>
+        <view class="spec-list">
+            <view class="spec-item {{group.active===index?'active':''}} {{util.includes(item,group.active===-1?group.unActiveAbleList:group.activeAbleList)?'':'disabled'}}"
+                  wx:for="{{group.list}}" wx:key="*this" bindtap="selectedSpec"
+                  data-disabled="{{!util.includes(item,group.active===-1?group.unActiveAbleList:group.activeAbleList)}}"
+                  data-gi="{{gIndex}}" data-i="{{index}}">
+                {{item}}
+            </view>
+        </view>
+    </block>
+    <!--数量-->
+    <view class="count">
+        <view>数量：</view>
+        <view class="count-btn">
+            <image src="/images/order/reduce.png" bindtap="countChange" data-num="{{-1}}"></image>
+            <text>{{count}}</text>
+            <image src="/images/order/add.png" bindtap="countChange" data-num="{{1}}"></image>
+        </view>
+    </view>
+
+    <view class="submit" bindtap="confirm">立即购买</view>
+</view>
+

@@ -1,0 +1,21 @@
+/* packageProfile/learnShareDetail/index.wxss */
+page{
+  background-color: #fff;
+}
+.learnShareDetail_tittle{
+  width:100%;
+  font-size:32rpx;
+  font-family:PingFangSC-Semibold;
+  font-weight:600;
+  color:rgba(60,60,60,1);
+  line-height:44rpx;
+  margin: 0 auto;
+  border: 1px solid #F2F2F2;
+  padding: 20rpx;
+  box-sizing: border-box;
+}
+.container{
+  width: 100%;
+  padding: 20rpx;
+  box-sizing: border-box;
+}

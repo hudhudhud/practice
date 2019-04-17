@@ -1,0 +1,6 @@
+var bigger = function(psw, index){
+   return psw.length>index;
+}
+module.exports = {
+  bigger: bigger
+}

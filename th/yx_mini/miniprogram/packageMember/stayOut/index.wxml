@@ -1,0 +1,34 @@
+<image class="bal_headerBg" src="../../images/profile/balance_bg@2x.png">
+  <view class="balHeader">
+    <view class="balHeaderCon">
+      <view class="balHeaderCon_top"><text class='bal_money_fh'>￥</text>3556.00</view>
+      <view class="balHeaderCon_bottom">待发放收益</view>
+    </view>
+  </view>
+</image>
+<view class="baldetailTittle">待发放明细</view>
+<view class='baldetailBox'>
+  <view class="baldetailTabBox">
+    <view data-type='1' bindtap="balTabBtn" class="baldetailTabItem {{balTabType==1?'baldetailTabItemActive':''}}">
+      <view class='baldetailTab_top'>全部</view>
+      <view class='baldetailTab_bottom'></view>
+    </view>
+    <view data-type='2' bindtap="balTabBtn" class="baldetailTabItem {{balTabType==2?'baldetailTabItemActive':''}}">
+      <view class='baldetailTab_top'>收入</view>
+      <view class='baldetailTab_bottom'></view>
+    </view>
+    <view data-type='3' bindtap="balTabBtn" class="baldetailTabItem {{balTabType==3?'baldetailTabItemActive':''}}">
+      <view class='baldetailTab_top'>支出</view>
+      <view class='baldetailTab_bottom'></view>
+    </view>
+  </view>
+  <view class="balList">
+    <view wx:for="{{6}}" wx:key="{{index}}" class="balListItem">
+      <view class="balList_left">
+        <view class="balList_left_c1">收益入账</view>
+        <view class="balList_left_c2">2018-06-17 17:09:25</view>
+      </view>
+      <view class="balList_right">+100.00</view>
+    </view>
+  </view>
+</view>

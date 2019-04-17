@@ -1,0 +1,107 @@
+page {
+  background-color: #fff;
+}
+.ipx {
+  padding-bottom: 168rpx!important;
+}
+.scroll-view {
+  padding-bottom: 100rpx;
+  box-sizing: border-box;
+}
+.nav-back {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  height: 210rpx;
+  background: -webkit-linear-gradient(#FF2C6D, #FF942F); /* Safari 5.1 - 6.0 */
+  background: -o-linear-gradient(#ff2c6d, #ff942f); /* Opera 11.1 - 12.0 */
+  background: -moz-linear-gradient(#ff2c6d, #ff942f); /* Firefox 3.6 - 15 */
+  background: linear-gradient(#ff2c6d, #ff942f); /* 标准的语法 */
+}
+
+.swiper {
+  margin-top: 30rpx;
+  height: 356rpx;
+}
+.swiper-item{
+  display: flex;
+  align-items: flex-end;
+  height: 306rpx;
+}
+.slide-image {
+  border-radius: 15rpx;
+  box-sizing: border-box;
+  margin: 0 20rpx;
+  width: 100%;
+  height: 268rpx;
+  transition: height .5s ease-out;
+}
+
+.slide-image.active {
+  height: 306rpx;
+}
+
+.title{
+  position: relative;
+  margin: 30rpx auto 0;
+  width: 376rpx;
+  border-top: 1px solid #EBEBEB;
+}
+.title-text{
+  border-radius: 10rpx;
+  left: 50%;
+  top: 0;
+  transform: translate(-50%,-50%);
+  position: absolute;
+  text-align: center;
+  font-size: 30rpx;
+  color: #3C3C3C;
+  font-weight: bold;
+  padding: 0 20rpx;
+  background-color: #fff;
+}
+.card{
+  position: relative;
+  margin: 154rpx auto 0;
+  width: 710rpx;
+  height: 274rpx;
+  border-radius: 10rpx;
+  box-shadow: 0 5rpx 20rpx #EBEBEB;
+  box-sizing: border-box;
+  padding-top: 164rpx;
+  color: #3C3C3C;
+  padding-left: 10rpx;
+  white-space: nowrap;
+}
+.main-img {
+  top: -124rpx;
+  left: 16rpx;
+  position: absolute;
+  border-radius: 10rpx;
+  display: block;
+  width: 678rpx;
+  height: 288rpx;
+}
+.shop-price {
+  padding: 10rpx;
+  display: flex;
+  justify-content: space-between;
+
+}
+.tag {
+  border-radius: 4rpx;
+  margin-right: 10rpx;
+  display: inline-block;
+  background-color: #FEE9EF;
+  color: #FF2F6B;
+  font-size: 24rpx;
+  height: 38rpx;
+  line-height: 38rpx;
+  padding: 0 12rpx;
+}
+.price{
+  font-size: 34rpx;
+  color: #FF2F6B;
+  margin-right: 16rpx;
+}

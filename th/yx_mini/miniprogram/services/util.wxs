@@ -1,0 +1,17 @@
+var tag = function(str) {
+str = str||'';
+  return str.split(',');
+}
+
+var includes = function(current, able) {
+  return able.indexOf(current)!==-1;
+}
+
+var toFixed = function(num, length){
+  return num.toFixed(length)
+}
+module.exports = {
+  tag: tag,
+  includes: includes,
+  toFixed: toFixed
+};

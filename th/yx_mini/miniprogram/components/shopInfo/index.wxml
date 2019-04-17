@@ -1,0 +1,15 @@
+<wxs src="../../services/util.wxs" module="util" />
+<view class='shop'>
+    <image class='shop-img' src="{{detail.imageUrl}}"></image>
+    <view class='shop-detail'>
+      <view class='shop-text'>
+        <view class='shop-title'>{{detail.name}}</view>
+        <view class='sub-title'>{{detail.skuStr||detail.keywords}}</view>
+      </view>
+      <view class='shop-price'>
+        <view class='current-price'>¥{{util.toFixed(detail.price,2)}}</view>
+        <view class='sub-title text-line'>{{util.toFixed(detail.marketPrice,2)}}</view>
+        <view class='sub-title'>x{{detail.count}}</view>
+      </view>
+    </view>
+  </view>

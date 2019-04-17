@@ -1,0 +1,128 @@
+/* miniprogram/packageMember/achChart/index.wxss */
+
+.tab {
+  position: relative;
+  height: 100rpx;
+  display: flex;
+  display: -webkit-flex;
+  justify-content: space-between;
+  padding: 0 140rpx;
+  color: #b1b1b1;
+  font-size: 30rpx;
+  background-color: #fff;
+  box-shadow: 0px 8px 12px 0px rgba(229, 229, 229, 0.47);
+}
+
+.tab view {
+  position: relative;
+  height: 100%;
+  line-height: 100rpx;
+}
+
+.active {
+  color: #3c3c3c;
+}
+
+.active::after {
+  content: '';
+  position: absolute;
+  border-radius: 5rpx;
+  width: 44rpx;
+  height: 8rpx;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #ff2f45;
+}
+
+.chart-title {
+  font-size: 28rpx;
+  color: #3c3c3c;
+  font-weight: bold;
+  text-align: center;
+  padding: 30rpx 0 12rpx;
+}
+
+.card {
+  border-radius: 10rpx;
+  width: 710rpx;
+  margin: 20rpx auto;
+  background-color: #fff;
+}
+
+.card-title {
+  height: 82rpx;
+  display: flex;
+  display: -webkit-flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 20rpx;
+  border-bottom: 1px solid #f2f2f2;
+}
+
+.date {
+  height: 20rpx;
+  line-height: 20rpx;
+  font-weight: bold;
+  border-left: 2px solid #3c3c3c;
+  padding-left: 12rpx;
+}
+
+.status {
+  font-size: 24rpx;
+}
+
+.red .date {
+  border-left-color: #ed1b24;
+}
+
+.red .status {
+  color: #ed1b24;
+}
+
+.blue .date {
+  border-left-color: #3e85ff;
+}
+
+.blue .status {
+  color: #3e85ff;
+}
+
+.gray .date {
+  border-left-color: #999;
+}
+
+.gray .status {
+  color: #999;
+}
+
+.card-content {
+  display: flex;
+  display: -webkit-flex;
+  text-align: center;
+  padding-bottom: 40rpx;
+}
+
+.card-content view {
+  position: relative;
+  flex: 1;
+}
+
+.card-content .left::after {
+  content: '';
+  position: absolute;
+  border-right: 2px solid #e5e5e5;
+  height: 34rpx;
+  right: 0;
+  top: 48rpx;
+}
+
+.value {
+  font-size: 28px;
+  margin: 20rpx 0;
+}
+
+.label {
+  font-size: 22rpx;
+  color: #808080;
+}

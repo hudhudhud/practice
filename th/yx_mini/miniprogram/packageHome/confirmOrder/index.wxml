@@ -1,0 +1,92 @@
+<wxs src="../../services/util.wxs" module="util" />
+<view class="address" bindtap="getAddress" data-refresh="1">
+  <image class='ad-icon' src='/images/order/address.png'></image>
+  <view class='ad-info'>
+    <view class='ad-name'>
+      <text>收货人：{{address.userName}}</text>
+      <text>{{address.telNumber}}</text>
+    </view>
+    <view class='ad-text'>收货地址：{{address.provinceName+address.cityName+address.countyName+address.detailInfo}}</view>
+  </view>
+  <image class='ac-right' src='/images/order/ac_right.png'></image>
+  <image class='ad-bot' src='/images/order/add_bot.png'></image>
+</view>
+<view class='line-8'></view>
+<view class="inviter" wx:if="{{firstOrder}}" bindtap="changeInviter">
+  <view>邀请人：{{inviter}}</view>
+  <image src="/images/order/ac_right.png" class="inviter-icon"></image>
+</view>
+<view class='line-8'></view>
+<view class='shop-info'>
+  <shop-info detail="{{detail}}"></shop-info>
+  <view class='remark'>
+    <view>备注：</view>
+    <input placeholder='请写下想要说的话…' bindinput='changeRemark'></input>
+  </view>
+
+</view>
+
+<view class='line-8'></view>
+<!-- 商品信息 金额 -->
+<view class='cost'>
+  <view class='cost-row'>
+    <text>商品金额</text>
+    <text>¥{{util.toFixed(detail.price*detail.count,2)}}</text>
+  </view>
+  <view class='cost-row'>
+    <text>配送费用</text>
+    <text>¥{{util.toFixed(postAge,2)}}</text>
+  </view>
+  <view class='cost-row'>
+    <text class='total'>商品应付金额</text>
+    <text class='total-count'>¥{{util.toFixed(detail.price*detail.count+postAge,2)}}</text>
+  </view>
+</view>
+
+<view class='line-8'></view>
+<!-- 支付抵扣 -->
+<view class='pay-discount'>
+  <view class="pay-title">支付抵扣</view>
+
+  <view class='discount' bindtap="payTypeCheck" data-type="0">
+    <view>
+      <view>
+        <image class='dis-icon' src='/images/order/money.png'></image>
+        <text class='dis-type'>余额抵扣</text>
+      </view>
+      <!--<view class='dis-intro'>余额3000.00元，本次商品可抵扣3000.00元</view>-->
+    </view>
+    <view class='select'>
+      <image src="{{payType==='0'?'/images/order/select.png':'/images/order/not_select.png'}}"></image>
+    </view>
+  </view>
+
+  <view class='discount' bindtap="payTypeCheck" data-type="1">
+    <view>
+      <view>
+        <image class='dis-icon' src='/images/order/wx.png'></image>
+        <text class='dis-type'>微信支付</text>
+      </view>
+    </view>
+    <view class='select'>
+      <image src="{{payType==='1'?'/images/order/select.png':'/images/order/not_select.png'}}"></image>
+    </view>
+  </view>
+</view>
+
+<view class='line-8'></view>
+
+<view class='float-bottom' style="padding-bottom:{{isIPX?'58rpx':''}}">
+  <view>
+    <view class='bot-total'>
+      <text>应付款：</text>
+      <text style='color: #FF0000'>¥{{util.toFixed(detail.price*detail.count+postAge,2)}}</text>
+    </view>
+    <view class='shop-count'>共1件商品</view>
+  </view>
+  <view class="submit {{!address.userName||(!inviter&&firstOrder)?'disabled':''}}" bindtap="submit">提交订单</view>
+</view>
+<bindPhone wx:if="{{showBindPhone}}" propPhone="{{bindPhone}}" bind:confirm="bindPhoneConfirm"></bindPhone>
+<setPayPsw show="{{showSetPayPsw}}" title="{{setPayPswTitle}}" bind:cancel="setPayPswCancel" bind:confirm="setPayPswConfirm"></setPayPsw>
+<inputPayPsw show="{{showInputPayPsw}}" bind:confirm="inputPayPswConfirm" bind:cancel="inputPayPswCancel"></inputPayPsw>
+<prompt title="绑定信息" show="{{showPrompt}}" placeholder="请输入邀请人ID" bind:confirm="inviterConfirm" bind:cancel="inviterCancel"></prompt>

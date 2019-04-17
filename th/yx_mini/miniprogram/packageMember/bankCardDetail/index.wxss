@@ -1,0 +1,83 @@
+/* packageMember/bankCardDetail/index.wxss */
+.bkDetailBox{
+  width:710rpx;
+  background:rgba(255,255,255,1);
+  border-radius:10rpx;
+  margin: 0 auto;
+  margin-top: 20rpx;
+}
+.bkDetailItem{
+  width: 650rpx;
+  height: 100rpx;
+  margin: 0 auto;
+  border-bottom:1px solid rgba(221,221,221,1);
+  display: flex;
+  align-items: center;
+}
+.bkDetailItem:last-child{
+  border: none;
+}
+.bkDetailItem_left{
+  width:160rpx;
+  height:42rpx;
+  font-size:30rpx;
+  font-family:PingFangSC-Regular;
+  font-weight:400;
+  color:rgba(51,51,51,1);
+  line-height:42rpx;
+}
+.bk_picker_tittle{
+  display: inline-block;
+  width: 160rpx;
+}
+.bkDetailItem_right{
+  width: 480rpx;
+}
+.bkInfoInput{
+  width: 480rpx;
+}
+.backPicker{
+  width:200rpx;
+  border:1px solid #DDDDDD;
+  text-align: center;
+}
+.bkDetailBox2{
+  width:710rpx;
+  height:82rpx;
+  background:rgba(255,255,255,1);
+  border-radius:10rpx;
+  margin: 0 auto;
+  margin-top: 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.bkDetailItem2_left{
+  height:42rpx;
+  font-size:30rpx;
+  font-family:PingFangSC-Regular;
+  font-weight:400;
+  color:rgba(51,51,51,1);
+  line-height:42rpx;
+  padding-left: 30rpx;
+}
+.bkDetailItem2_right{
+  padding-right: 30rpx;
+}
+.bindBankCard{
+  width:650rpx;
+  height:78rpx;
+  line-height: 78rpx;
+  text-align: center;
+  margin: 0 auto;
+  background:linear-gradient(132deg,rgba(255,44,109,1) 0%,rgba(255,176,47,1) 100%);
+  border-radius:39px;
+  font-size:30rpx;
+  font-family:PingFangSC-Semibold;
+  font-weight:600;
+  color:rgba(255,255,255,1);
+  margin-top: 100rpx;
+}
+.bkswitch{
+  /* height: 40rpx; */
+}

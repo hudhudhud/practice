@@ -1,0 +1,19 @@
+<!--packageMember/bankCard/index.wxml-->
+<view class="bankCardList">
+  <view class="bankCardItem" catchtap='editBankCardFun' wx:for="{{bankList}}" wx:key="{{index}}" data-bankid="{{item.id}}" style="background:{{bankStyle[item.bankId].back}}">
+    <image class="bankCardItem_chahao" data-id="{{item.id}}" catchtap='deleteBankFun' src='../../images/member/chahao@2x.png'></image>
+    <view class="bankCardItem_top">
+      <image class="bankCardItem_top_left" src="{{'../../images/member/bankCard/'+bankStyle[item.bankId].icon+'.png'}}"></image>
+      <view class="bankCardItem_top_right">
+        <view class="bankCardCon">
+          <view class="bankCardIcon1" wx:if="{{item.byDefault}}">默认</view>
+          <view class="bankCardIcon2" wx:if="{{item.salaryStatus}}">月结</view>
+          <view class="bankCardName">{{item.bankName}}</view>
+        </view>
+        <view class="bankCardMs">储蓄卡</view>
+      </view>
+    </view>
+    <view class="bankCardItem_bottom"><view class="bankCardXing">**** **** ****</view><view class="bankCardNum">{{item.cardNumber}}</view></view>
+  </view>
+</view>
+<view class="addBankCard" bindtap='addBankCardFun'>新增银行卡</view>

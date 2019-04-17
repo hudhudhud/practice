@@ -1,0 +1,59 @@
+/* components/bindPhone/index.wxss */
+.mask {
+    z-index: 10;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background-color: rgba(0, 0, 0, .5);
+}
+
+.content {
+    margin: 100rpx auto;
+    width: 660rpx;
+    background-color: #fff;
+    border-radius: 10rpx;
+    padding: 40rpx 52rpx 80rpx;
+    box-sizing: border-box;
+}
+
+.title {
+    font-size: 32rpx;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 122rpx;
+}
+
+.item {
+    margin-top: 38rpx;
+    display: flex;
+    display: -webkit-flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.code {
+    font-size: 30rpx;
+    color: #3c3c3c;
+    font-weight: bold;
+}
+.code.num{
+    font-size: 22rpx;
+}
+
+.submit {
+    width: 512rpx;
+    height: 88rpx;
+    line-height: 88rpx;
+    margin: 170rpx auto 0;
+    text-align: center;
+    font-size: 32rpx;
+    color: #fff;
+    border-radius: 44rpx;
+    outline: none;
+    background: -webkit-linear-gradient(left, #ff2c6d, #ff942f); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(right, #ff2c6d, #ff942f); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(right, #ff2c6d, #ff942f); /* Firefox 3.6 - 15 */
+    background: linear-gradient(to right, #ff2c6d, #ff942f); /* 标准的语法 */
+}

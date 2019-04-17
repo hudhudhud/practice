@@ -1,0 +1,111 @@
+<!--packageProfile/performanceData/index.wxml-->
+<view class='performanceModelBox'>
+  <view class='performanceModelTittle'>今日概况</view>
+  <view class="performanceBox1">
+    <view class="performance1_item">
+      <view class="performance1_item_top">12.3万</view>
+      <view class="performance1_item_bottom">今日订单</view>
+      <view class="fengeLine fengeLine1"></view>
+    </view>
+    <view class="performance1_item">
+      <view class="performance1_item_top">12.3万</view>
+      <view class="performance1_item_bottom">今日订单</view>
+      <view class="fengeLine fengeLine1"></view>
+    </view>
+    <view class="performance1_item">
+      <view class="performance1_item_top">12.3万</view>
+      <view class="performance1_item_bottom">今日订单</view>
+    </view>
+  </view>
+</view>
+<view class='performanceModelBox performanceModelBox2'>
+  <view class='performanceModelTittle'>销售概况</view>
+  <view class='performanceBox2'>
+    <view class="performance2_item">
+      <view class="performance2_item_top">2342342352元</view>
+      <view class="performance2_item_bottom">累计销售金额</view>
+      <view class="fengeLine fengeLine2"></view>
+    </view>
+    <view class="performance2_item">
+      <view class="performance2_item_top2">21312412.21</view>
+      <view class="performance2_item_bottom">累计收益</view>
+    </view>
+  </view>
+  <view class='performanceBox2 performanceBox2_1'>
+    <view class="performance2_item">
+      <view class="performance2_item_top">2342342元</view>
+      <view class="performance2_item_bottom">会员礼包</view>
+      <view class="fengeLine fengeLine2"></view>
+      <view class="sanjiao_icon"></view>
+    </view>
+    <view class="performance2_item">
+      <view class="performance2_item_top">21312412.21</view>
+      <view class="performance2_item_bottom">其他销售</view>
+    </view>
+  </view>
+</view>
+<view class='performanceModelBox'>
+  <view class='performanceModelTittle'>历史记录</view>
+  <view class='performanceBox3'>
+    <view class='performance3_item'>
+      <view class='performanceItem3_top performanceItem3_top1'>
+        <view class='performanceItem3_top_left'>2019-03</view>
+        <view class='performanceItem3_top_right'>未结束</view>
+        <view class="fengeLine_left"></view>
+      </view>
+      <view class='performanceItem3_bottom'>
+        <view class='performanceItem3_b_box'>
+          <view class='performanceItem3_b_c1'>234234235234</view>
+          <view class='performanceItem3_b_c2'>累计销售金额</view>
+          <view class='performanceItem3_b_c3'>（不含退款）</view>
+          <view class="fengeLine fengeLine3"></view>
+        </view>
+        <view class='performanceItem3_b_box'>
+          <view class='performanceItem3_b_c1'>21312412.21</view>
+          <view class='performanceItem3_b_c2'>累计收益</view>
+          <view class='performanceItem3_b_c3'>（不含退款）</view>
+        </view>
+      </view>
+    </view>
+    <view class='performance3_item'>
+      <view class='performanceItem3_top performanceItem3_top2'>
+        <view class='performanceItem3_top_left'>2019-03</view>
+        <view class='performanceItem3_top_right'>待结算</view>
+        <view class="fengeLine_left"></view>
+      </view>
+      <view class='performanceItem3_bottom'>
+        <view class='performanceItem3_b_box'>
+          <view class='performanceItem3_b_c1'>234234235234</view>
+          <view class='performanceItem3_b_c2'>累计销售金额</view>
+          <view class='performanceItem3_b_c3'>（不含退款）</view>
+          <view class="fengeLine fengeLine3"></view>
+        </view>
+        <view class='performanceItem3_b_box'>
+          <view class='performanceItem3_b_c1'>21312412.21</view>
+          <view class='performanceItem3_b_c2'>累计收益</view>
+          <view class='performanceItem3_b_c3'>（不含退款）</view>
+        </view>
+      </view>
+    </view>
+    <view class='performance3_item'>
+      <view class='performanceItem3_top'>
+        <view class='performanceItem3_top_left'>2019-03</view>
+        <view class='performanceItem3_top_right'>已结算</view>
+        <view class="fengeLine_left"></view>
+      </view>
+      <view class='performanceItem3_bottom'>
+        <view class='performanceItem3_b_box'>
+          <view class='performanceItem3_b_c1'>234234235234</view>
+          <view class='performanceItem3_b_c2'>累计销售金额</view>
+          <view class='performanceItem3_b_c3'>（不含退款）</view>
+          <view class="fengeLine fengeLine3"></view>
+        </view>
+        <view class='performanceItem3_b_box'>
+          <view class='performanceItem3_b_c1'>21312412.21</view>
+          <view class='performanceItem3_b_c2'>累计收益</view>
+          <view class='performanceItem3_b_c3'>（不含退款）</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

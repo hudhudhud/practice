@@ -1,0 +1,24 @@
+<view class='block'>
+  <view class="item">
+    <label>收货人：</label>
+    <input></input>
+  </view>
+  <view class="item">
+    <label>联系方式：</label>
+    <input></input>
+  </view>
+  <view class="item" bindtap='getAddress'>
+    <label>所在地区：</label>
+    <image class='ar_right' src='/images/profile/ar_right.png'></image>
+  </view>
+  <view class="item">
+    <label>详细地址：</label>
+    <input placeholder='街道/楼号/单元号/门牌号'></input>
+  </view>
+</view>
+<view class="default block" >
+  <label>设置为默认地址：</label>
+   <switch  color="#FF2C6D"/>
+</view>
+
+<button class='confirm-button' style='width: 376rpx;'>保存设置</button>

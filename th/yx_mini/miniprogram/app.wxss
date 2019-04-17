@@ -1,0 +1,51 @@
+/**app.wxss**/
+
+page {
+  background-color: #f2f2f2;
+  font-size: 30rpx;
+  color: #333;
+}
+scroll-view{
+  box-sizing: border-box;
+}
+.ipx {
+  padding-bottom: 68rpx;
+}
+
+.block {
+  background-color: white;
+}
+button {
+  outline: none;
+  background-color: transparent;
+  padding: 0;
+  margin: 0;
+}
+
+.confirm-button {
+  width: 600rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+  margin: 80rpx auto 0;
+  text-align: center;
+  font-size: 32rpx;
+  color: #fff;
+  border-radius: 44rpx;
+  outline: none;
+  background: -webkit-linear-gradient(left, #ff2c6d, #ff942f); /* Safari 5.1 - 6.0 */
+  background: -o-linear-gradient(right, #ff2c6d, #ff942f); /* Opera 11.1 - 12.0 */
+  background: -moz-linear-gradient(right, #ff2c6d, #ff942f); /* Firefox 3.6 - 15 */
+  background: linear-gradient(to right, #ff2c6d, #ff942f); /* 标准的语法 */
+}
+.back {
+  background: -webkit-linear-gradient(left, #ff2c6d, #ff942f); /* Safari 5.1 - 6.0 */
+  background: -o-linear-gradient(right, #ff2c6d, #ff942f); /* Opera 11.1 - 12.0 */
+  background: -moz-linear-gradient(right, #ff2c6d, #ff942f); /* Firefox 3.6 - 15 */
+  background: linear-gradient(to right, #ff2c6d, #ff942f); /* 标准的语法 */
+}
+
+.no-list{
+  padding: 20rpx;
+  text-align: center;
+  font-size: 25rpx;
+}

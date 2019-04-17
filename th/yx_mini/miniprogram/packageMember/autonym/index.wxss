@@ -1,0 +1,207 @@
+/* pages/autonym/index.wxss */
+.autHeader{
+  width: 100%;
+  height: 120rpx;
+  background-color: #fff;
+  border-top: 2rpx solid #F2F2F2;
+}
+.autHeader_top{
+  height:42rpx;
+  font-size:30rpx;
+  font-family:PingFangSC-Medium;
+  font-weight:600;
+  color:rgba(51,51,51,1);
+  line-height:42rpx;
+  padding-left: 20rpx;
+  padding-top: 20rpx;
+}
+.autHeader_top_xing{
+  color: red;
+  padding-right: 8rpx;
+}
+.autHeader_bottom{
+  height:34rpx;
+  font-size:24rpx;
+  font-family:PingFangSC-Medium;
+  font-weight:500;
+  color:rgba(153,153,153,1);
+  line-height:34rpx;
+  padding-left: 42rpx;
+  padding-top: 4rpx;
+}
+.autCardPhotoBox{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30rpx;
+}
+.autCardPhotoItem{
+  width: 365rpx;
+  height: 240rpx;
+  background-color: #fff;
+  position: relative;
+}
+.autCardPhotoItem_img{
+  width: 120rpx;
+  height: 120rpx;
+  display: block;
+  margin: 0 auto;
+  margin-top: 30rpx;
+}
+.autCardPhotoItem_con{
+  height:36rpx;
+  font-size:26rpx;
+  font-family:PingFangSC-Regular;
+  font-weight:400;
+  color:rgba(187,187,187,1);
+  line-height:36rpx;
+  text-align: center;
+  padding-top: 20rpx;
+}
+.autCard_fiedImg{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: block;
+  top: 0;
+  left: 0;
+}
+.autUserInfoTittle{
+  height:80rpx;
+  line-height: 80rpx;
+  background:rgba(255,255,255,1);
+  font-size:30rpx;
+  font-family:PingFangSC-Medium;
+  font-weight:600;
+  color:rgba(51,51,51,1);
+  margin-top: 30rpx;
+  border-bottom: 2rpx solid #F2F2F2;
+}
+.autUserInfoTittle_xing{
+  color: #f00;
+  padding-left: 20rpx;
+  padding-right: 8rpx;
+}
+.autUserInfoBox{
+  width: 100%;
+  background-color: #fff;
+  padding-bottom: 30rpx;
+}
+.autUserInfoitem{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 30rpx;
+  padding-left: 20rpx;
+  padding-right: 20rpx;
+  height:42rpx;
+  font-size:30rpx;
+  font-family:PingFangSC-Regular;
+  font-weight:400;
+  color:rgba(153,153,153,1);
+  line-height:42rpx;
+}
+.autUserInfoitem_left{
+  width: 200rpx;
+}
+.autUserInfoitem_right{
+  width: 510rpx;
+  color: #000;
+}
+.classpicker{
+  width: 400rpx;
+  border: 1px solid #ddd;
+}
+.userInfoInput{
+  /* border: 2rpx solid #F2F2F2; */
+}
+.user_radio_group{
+  color: #000;
+}
+.userInfoSexRadio{
+  margin-left: 30rpx;
+}
+.autbankCardBox{
+  display: flex;
+  height: 100rpx;
+  background-color: #fff;
+  align-items: center;
+  margin-top: 10rpx;
+}
+.autbankCardItem1{
+  width:200rpx;
+  font-size:30rpx;
+  font-family:PingFangSC-Regular;
+  font-weight:400;
+  color:rgba(153,153,153,1);
+  padding-left: 20rpx;
+}
+.autbankCardItem2{
+  width:480rpx;
+  font-size:30rpx;
+  font-family:PingFangSC-Regular;
+  font-weight:400;
+  color:rgba(153,153,153,1);
+  padding-right: 18rpx;
+  text-align: right;
+}
+.autbankCardItem3{
+  width: 12rpx;
+  height: 24rpx;
+}
+.authetongBox{
+  display: flex;
+  height: 100rpx;
+  background-color: #fff;
+  align-items: center;
+  margin-top: 10rpx;
+}
+.authetongItem1{
+  width:488rpx;
+  font-size:30rpx;
+  font-family:PingFangSC-Regular;
+  font-weight:400;
+  color:rgba(153,153,153,1);
+  padding-left: 20rpx;
+}
+.authetongItem2{
+  display: block;
+  width: 32rpx;
+  height: 32rpx;
+}
+.authetongItem3{
+  font-size:30rpx;
+  font-family:PingFangSC-Regular;
+  font-weight:400;
+  color:rgba(153,153,153,1);
+  padding-left: 10rpx;
+}
+.autTijiaoBtnBox{
+  padding-bottom: 40rpx;
+}
+.autTijiaoBtn{
+  width:650rpx;
+  height:78rpx;
+  line-height: 78rpx;
+  text-align: center;
+  margin: 0 auto;
+  background:linear-gradient(135deg,rgba(255,44,109,1) 0%,rgba(255,111,77,1) 51%,rgba(255,176,47,1) 100%);
+  border-radius:39px;
+  font-size:30rpx;
+  font-family:PingFangSC-Semibold;
+  font-weight:600;
+  color:rgba(255,255,255,1);
+  margin-top: 170rpx;
+}
+.autTijiaoBtn_hui{
+  background:rgba(221,221,221,1);
+}
+.autTijiaoStatus{
+  height:36rpx;
+  font-size:26rpx;
+  font-family:PingFangSC-Regular;
+  font-weight:400;
+  color:rgba(237,27,36,1);
+  line-height:36rpx;
+  margin-top: 10rpx;
+  text-align: center;
+}

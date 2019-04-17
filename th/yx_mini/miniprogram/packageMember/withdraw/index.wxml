@@ -1,0 +1,29 @@
+<!--pages/withdraw/index.wxml-->
+<view class='withdrawDtailBox'>
+  <view class='witCardBox'>
+    <view class='witCardItem_left'>到账银行卡</view>
+    <view class='witCardItem_right'>中国建设银行(6567)</view>
+    <image class='witCardItem_jiantou' src='../../images/profile/jiantou@2x.png'></image>
+  </view>
+  <view class='witMoneyTittle'>提现金额</view>
+  <view class='witMoneyNum'>￥7000.00</view>
+  <view class='witMoneyMiaoshu'>实际到账金额：¥6930.00（已扣除0.10%税金）</view>
+  <view class='witMoneyBox'>
+    <view class='witMoneyItem_left'>账户可提现金额：¥8000000.00</view>
+    <view class='witMoneyItem_right'>全部提现</view>
+  </view>
+  <view class='witBtn'>提现</view>
+</view>
+<view class='wit_shuoming'>
+  <view class='wit_shuoming_tittle'>提现说明：</view>
+  <view class='wit_shuoming_con'>1、为保证您的账户安全，提现银行卡必须为本人名下银行卡，否则无法正常提现；</view>
+  <view class='wit_shuoming_con'>2、提现将收取10%的税费， 税费组成为：公司代扣缴服务类税费7%，综合费率3%，打款手续费1%由公司承担； </view>
+  <view class='wit_shuoming_con'>3、最低起提金额为100元；</view>
+</view>
+<view wx:if="{{autonymShow}}" class='witCover'>
+  <view class="autonymBox">
+    <image class='autonymItem1' src='../../images/profile/autonym_icon@2x.png'></image>
+    <view class="autonymItem2">为保证资金安全，请先完成实名认证后再进行提现，谢谢！</view>
+    <view class="autonymItem3" bindtap='autonymBtn'>立即去实名</view>
+  </view>
+</view>

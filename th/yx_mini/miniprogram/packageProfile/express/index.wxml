@@ -1,0 +1,26 @@
+<view class="block">
+    <view class="item">
+        <label>物流公司：</label>
+        <text>{{info.expName}}</text>
+    </view>
+    <view class="item">
+        <label>物流单号：</label>
+        <text>{{info.number}}</text>
+        <view class="copy" bindtap="copy">复制</view>
+    </view>
+    <view class="item flex">
+        <label>物流备注：</label>
+        <text>{{info.remark}}</text>
+    </view>
+</view>
+
+<view class="info">
+    <view class="title">
+        <view>物流信息跟踪</view>
+        <view class="refresh" bindtap="findLogistics">刷新物流</view>
+    </view>
+    <view class="detail {{index?'':'important'}}" wx:for="{{info.list}}" wx:key="index" >
+        <view class="text">{{item.status}}</view>
+        <view class="time">{{item.time}}</view>
+    </view>
+</view>

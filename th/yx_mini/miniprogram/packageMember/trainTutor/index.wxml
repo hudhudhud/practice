@@ -1,0 +1,18 @@
+<view class='trainTutorTab'>
+  <view wx:for='{{dataInfo}}' data-type='{{index}}' wx:key="{{index}}" bindtap="trainTabBtn" class="trainTutorTabItem {{trainTabType==index?'trainTutorTabItemActive':''}}">
+    <view class='trainTutorTab_top'>{{item.rankName}}</view>
+    <view class='trainTutorTab_bottom'></view>
+  </view>
+</view>
+<!-- <view class="trainTutorBox">
+  <view class="trainTutorPostBox">
+    <view class="trainTutorPost">
+      <image class="trainTutorPostPhoto" src="../../images/profile/balance_bg@2x.png"></image>
+      <view class='trainTutorPostName'>姓名姓名姓名</view>
+      <image class="trainTutorPostTwoCode" src="../../images/profile/balance_bg@2x.png"></image>
+    </view>
+  </view>
+</view> -->
+<image class="canvas_img" src="{{postCanvasImg}}"></image>
+<canvas wx:for="{{dataInfo}}" wx:key="{{index}}" class="canvasBox" canvas-id="{{'postCanvas'+index}}" style='width:375px;height:531px;'></canvas>
+<view class="saveImgBtn" bindtap='saveImgFun'>保存到手机</view>

@@ -1,0 +1,78 @@
+<!--pages/autonym/index.wxml-->
+<view class='autHeader'>
+  <view class='autHeader_top'><text class='autHeader_top_xing'>*</text>请上传真实的身份证照片信息</view>
+  <view class='autHeader_bottom'>(请保证身份证信息清晰可见)</view>
+</view>
+<view class='autCardPhotoBox'>
+    <view class='autCardPhotoItem' data-type='1' bindtap='upAutonymImgFun'>
+      <image class='autCardPhotoItem_img' src='../../images/profile/add_img@2x.png'></image>
+      <view class='autCardPhotoItem_con'>身份证正面照</view>
+      <image class='autCard_fiedImg' src="{{image1}}"></image>
+    </view>
+    <view class='autCardPhotoItem' data-type='2' bindtap='upAutonymImgFun'>
+      <image class='autCardPhotoItem_img' src='../../images/profile/add_img@2x.png'></image>
+      <view class='autCardPhotoItem_con'>身份证反面照</view>
+      <image class='autCard_fiedImg' src="{{image2}}"></image>
+    </view>
+</view>
+<view class='autUserInfoTittle'><text class='autUserInfoTittle_xing'>*</text>请真实填写身份信息</view>
+<view class='autUserInfoBox'>
+  <view class='autUserInfoitem'>
+    <view class='autUserInfoitem_left'>真实姓名：</view>
+    <view class='autUserInfoitem_right'><input disabled="{{dataInfo.realname}}" bindblur='inputBlurFun1' value="{{realname}}" class="userInfoInput" placeholder="请输入真实姓名"/></view>
+  </view>
+  <view class='autUserInfoitem'>
+    <view class='autUserInfoitem_left'>年龄：</view>
+    <view class='autUserInfoitem_right'><input disabled="{{dataInfo.age}}" bindblur='inputBlurFun2' value="{{age}}" class="userInfoInput" placeholder="请输入年龄"/></view>
+  </view>
+  <view class='autUserInfoitem'>
+    <view class='autUserInfoitem_left'>性别：</view>
+    <view class='autUserInfoitem_right'>
+      <radio-group class="user_radio_group" bindchange="radioChange">
+          <radio disabled="{{dataInfo.gender}}" value="1" checked="{{gender==1?true:false}}">男</radio>
+          <radio disabled="{{dataInfo.gender}}" class="userInfoSexRadio"checked="{{gender==0?true:false}}" value="0">女</radio>
+      </radio-group>
+    </view>
+  </view>
+  <view class='autUserInfoitem'>
+    <view class='autUserInfoitem_left'>证件号码：</view>
+    <view class='autUserInfoitem_right'><input disabled="{{dataInfo.cardNumber}}" bindblur='inputBlurFun3' value="{{cardNumber}}" class="userInfoInput" placeholder="请输入证件号码"/></view>
+  </view>
+  <view class='autUserInfoitem'>
+    <view class='autUserInfoitem_left'>省市区：</view>
+    <view class='autUserInfoitem_right'>
+      <picker
+        disabled="{{dataInfo.cardNumber}}"
+        class="classpicker"
+        mode="region"
+        bindchange="bindRegionChange"
+        value="{{region}}"
+      >
+        <view class="picker">
+          {{region[0]}}，{{region[1]}}，{{region[2]}}
+        </view>
+      </picker>
+    </view>
+  </view>
+  <view class='autUserInfoitem'>
+    <view class='autUserInfoitem_left'>户籍地址：</view>
+    <view class='autUserInfoitem_right'><input disabled="{{dataInfo.street}}" bindblur='inputBlurFun4' value="{{street}}" class="userInfoInput" placeholder="请输入户籍地址"/></view>
+  </view>
+</view>
+<view class='autbankCardBox'>
+  <view class='autbankCardItem1'>月结银行卡：</view>
+  <view class='autbankCardItem2' bindtap='setSalaryCardFun'>{{salaryCardData.flag?'已设置':'未设置'}}</view>
+  <image class='autbankCardItem3' src='../../images/profile/jiantou@2x.png'></image>
+</view>
+<view class='authetongBox'>
+  <view class='authetongItem1'>三方劳务合同：</view>
+  <image wx:if="{{readCheck}}" bindtap='readCheckFun' class='authetongItem2' src='../../images/profile/checkbox@2x.png'></image>
+  <image wx:if="{{!readCheck}}" bindtap='readCheckFun' class='authetongItem2' src='../../images/profile/checkbox_hui@2x.png'></image>
+  <view class='authetongItem3'>已阅读并确认</view>
+</view>
+<view class="autTijiaoBtnBox">
+  <view  class="autTijiaoBtn {{dataInfo.status==1 || dataInfo.status==2?'autTijiaoBtn_hui':''}}" bindtap='autonymBtn'>提交</view>
+  <view class='autTijiaoStatus' wx:if="{{dataInfo.status===1 }}">您的申请已提交，等待审核中…</view>
+  <view class='autTijiaoStatus' wx:if="{{dataInfo.status===2 }}">您的申请已通过审核</view>
+  <view class='autTijiaoStatus' wx:if="{{dataInfo.status===3 }}">审核失败，请重新提交</view>
+</view>

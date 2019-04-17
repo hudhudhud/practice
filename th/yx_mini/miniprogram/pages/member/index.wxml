@@ -1,0 +1,103 @@
+<!--pages/profile/index.wxml-->
+<!-- ******优选会员****** -->
+<view class='profileHeader'>
+  <!-- <view class='proRankName'>优选会员</view> -->
+  <view class='proUserInfo'>
+    <view class='proUserPhotoBox'><image class='proUserPhoto' src='{{userInfo.avatarUrl}}'></image></view>
+    <view class='proUserItemCenter'>
+      <view class='proUserItemName'>{{userInfo.nickName}}</view>
+      <view class='proUserItemId'>ID：{{userInfo.sn}}</view>
+    </view>
+    <image class='proTwoCode' bindtap='storeShareFun' src='../../images/profile/twoCodeIcon@2x.png'></image>
+    <image class='addLeagueBtn' src='../../images/profile/addLeague@2x.png'></image>
+  </view>
+</view>
+<!-- ******业绩数据****** -->
+<view class='performanceData'>
+  <view class='modelDataTittle' bindtap='proDataFun'>
+    业绩数据
+    <image class='prodata_jiantou' src='../../images/profile/jiantou@2x.png'></image>
+  </view>
+  <view class='proDataItemBox'>
+    <view class='proDataItem'>
+      <view class='proDataItem_top'>{{performanceData.teamNumber}}</view>
+      <view class='proDataItem_bottom'>达人服务</view>
+    </view>
+    <view class='proDataItem'>
+      <view class='proDataItem_top'>{{performanceData.orderNumber}}</view>
+      <view class='proDataItem_bottom'>商品订单</view>
+    </view>
+    <view class='proDataItem'>
+      <view class='proDataItem_top'>{{performanceData.monthSales}}</view>
+      <view class='proDataItem_bottom'>本月销售</view>
+    </view>
+    <view class='proDataItem'>
+      <view class='proDataItem_top'>{{performanceData.grossSales}}</view>
+      <view class='proDataItem_bottom'>累计销售</view>
+    </view>
+    <view class='proDatajiangexian'></view>
+  </view>
+  <view class='proDataLineBox'>
+    <view class='proDataLineTittle'>当月自购订单及自身销售订单总金额</view>
+    <view class='proDataLineBg'>
+      <view class='proDataLine' style="width:{{linewith}}">
+        <view class='proDataLineNum3'>{{saleroomData.mySaleroom}}</view>
+      </view>
+      <view class='proDataLineNum1'>0</view>
+      <view class='proDataLineNum2'>{{saleroomData.goalSaleroom}}</view>
+    </view>
+  </view>
+</view>
+<!-- ******资产****** -->
+<view class='propertyBox'>
+  <view class='modelDataTittle'>资产</view>
+  <view class='propertyItemBox'>
+    <view bindtap="enterBalanceFun" class='propertyItem'>
+      <view class='propertyItemNum'>{{accountData.amount}}</view>
+      <view class='propertyItemMiaoshu'>余额</view>
+    </view>
+    <view bindtap="enterStayOutFun" class='propertyItem'>
+      <view class='propertyItemNum'>{{accountData.currency}}</view>
+      <view class='propertyItemMiaoshu'>待发放</view>
+    </view>
+    <view class='propertyItemjiange'></view>
+  </view>
+</view>
+<!-- ******应用****** -->
+<view wx:if="{{rank}}" class='applyListBox'>
+  <view class='modelDataTittle'>应用</view>
+  <view class='applyItemBox'>
+    <view class='applyItem' data-applyType='1' bindtap='applyBtnFun'>
+      <image class='applyItemTop' src='../../images/profile/apply/apply_icon1@2x.png'></image>
+      <view class='applyItemBottom'>培训导师</view>
+    </view>
+    <view class='applyItem' data-applyType='2' bindtap='applyBtnFun'>
+      <image class='applyItemTop' src='../../images/profile/apply/apply_icon2@2x.png'></image>
+      <view class='applyItemBottom'>我的团队</view>
+    </view>
+    <view class='applyItem' data-applyType='3' bindtap='applyBtnFun'>
+      <image class='applyItemTop' src='../../images/profile/apply/apply_icon3@2x.png'></image>
+      <view class='applyItemBottom'>销售订单</view>
+    </view>
+    <view class='applyItem' data-applyType='4' bindtap='applyBtnFun'>
+      <image class='applyItemTop' src='../../images/profile/apply/apply_icon4@2x.png'></image>
+      <view class='applyItemBottom'>学习分享</view>
+    </view>
+    <view class='applyItem' data-applyType='5' bindtap='applyBtnFun'>
+      <image class='applyItemTop' src='../../images/profile/apply/apply_icon5@2x.png'></image>
+      <view class='applyItemBottom'>银行卡</view>
+    </view>
+    <view class='applyItem' data-applyType='6' bindtap='applyBtnFun'>
+      <image class='applyItemTop' src='../../images/profile/apply/apply_icon6@2x.png'></image>
+      <view class='applyItemBottom'>实名认证</view>
+    </view>
+    <view class='applyItem' data-applyType='7' bindtap='applyBtnFun'>
+      <image class='applyItemTop' src='../../images/profile/apply/apply_icon7@2x.png'></image>
+      <view class='applyItemBottom'>三方合同</view>
+    </view>
+    <view class='applyItem' data-applyType='8' bindtap='applyBtnFun'>
+      <image class='applyItemTop' src='../../images/profile/apply/apply_icon8@2x.png'></image>
+      <view class='applyItemBottom'>社群绩效</view>
+    </view>
+  </view>
+</view>   

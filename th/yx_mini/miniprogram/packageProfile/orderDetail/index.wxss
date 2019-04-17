@@ -1,0 +1,145 @@
+/* miniprogram/packageProfile/orderDetail/index.wxss */
+
+page {
+  background-color: #fff;
+}
+
+.top-status {
+  height: 140rpx;
+  background: -webkit-linear-gradient(left, #ff2c6d, #ff942f); /* Safari 5.1 - 6.0 */
+  background: -o-linear-gradient(right, #ff2c6d, #ff942f); /* Opera 11.1 - 12.0 */
+  background: -moz-linear-gradient(right, #ff2c6d, #ff942f); /* Firefox 3.6 - 15 */
+  background: linear-gradient(to right, #ff2c6d, #ff942f); /* 标准的语法 */
+  display: flex;
+  display: -webkit-flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 40rpx;
+  font-size: 26rpx;
+  color: #fff;
+  white-space: nowrap;
+}
+
+.status-text {
+  margin-bottom: 12rpx;
+  font-size: 36rpx;
+  font-weight: bold;
+}
+
+.status-icon {
+  width: 100rpx;
+  height: 100rpx;
+}
+
+.address {
+  font-size: 26rpx;
+  height: 120rpx;
+  display: flex;
+  display: -webkit-flex;
+  align-items: center;
+}
+
+.address .detail {
+  margin-top: 8rpx;
+  color: #bbb;
+}
+
+.address .head {
+  border-radius: 50%;
+  width: 80rpx;
+  height: 80rpx;
+  margin: 0 20rpx;
+}
+
+.line-8 {
+  height: 8rpx;
+  background-color: #f2f2f2;
+}
+
+.bag-title {
+  margin: 0 20rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+  border-bottom: 1px solid #f2f2f2;
+}
+
+.bag-title image {
+  width: 36rpx;
+  height: 36rpx;
+  vertical-align: middle;
+  margin-right: 10rpx;
+}
+
+.bag-title text {
+  vertical-align: middle;
+  font-size: 28rpx;
+  color: #999;
+}
+
+.remark {
+  box-sizing: border-box;
+  height: 204rpx;
+  font-size: 26rpx;
+  padding: 30rpx 20rpx;
+  display: flex;
+  display: -webkit-flex;
+  white-space: nowrap;
+}
+
+.cost {
+  position: relative;
+  padding: 10rpx 0 30rpx;
+  font-size: 26rpx;
+}
+
+.cost-row {
+  padding: 20rpx 20rpx 0 20rpx;
+  display: flex;
+  display: -webkit-flex;
+  justify-content: space-between;
+}
+
+.total {
+  font-size: 30rpx;
+  font-weight: bold;
+}
+
+.total-count {
+  font-size: 30rpx;
+  color: #ed1b24;
+  font-weight: bold;
+}
+
+.order-other-info {
+  color: #636363;
+}
+
+.copy {
+  font-size: 22rpx;
+  color: #333;
+  width: 128rpx;
+  height: 52rpx;
+  border: 1px solid #d8d8d8;
+  border-radius: 26rpx;
+  text-align: center;
+  line-height: 50rpx;
+  position: absolute;
+  right: 20rpx;
+  top: 30rpx;
+}
+
+.btns {
+  padding: 0 20rpx;
+  display: flex;
+  justify-content: flex-end;
+}
+.btn{
+  margin: 10rpx 0;
+  border-radius: 26rpx;
+  border: 1px solid #D8D8D8;
+  box-sizing: border-box;
+  height: 52rpx;
+  line-height: 50rpx;
+  font-size: 24rpx;
+  padding: 0 16rpx;
+}

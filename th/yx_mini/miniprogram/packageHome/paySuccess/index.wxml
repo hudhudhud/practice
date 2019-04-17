@@ -1,0 +1,3 @@
+<image class="pay-success" src="/images/order/pay_success.png"></image>
+<button class='btn' bindtap="orderList">返回订单</button>
+<button class='btn full' bindtap="back">继续购物</button>

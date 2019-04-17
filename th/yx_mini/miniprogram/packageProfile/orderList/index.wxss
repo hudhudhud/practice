@@ -1,0 +1,86 @@
+/* miniprogram/packageProfile/orderList/index.wxss */
+
+.nav {
+  z-index: 10;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  padding: 0 30rpx;
+  box-sizing: border-box;
+  height: 92rpx;
+  display: flex;
+  display: -webkit-flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 26rpx;
+  box-shadow: 0px 8px 12px 0px rgba(229, 229, 229, 0.47);
+}
+
+.nav view {
+  box-sizing: border-box;
+  height: 56rpx;
+  line-height: 56rpx;
+  border-radius: 0 0 5rpx 5rpx;
+}
+
+.active {
+  border-bottom: 6rpx solid #ff2f45;
+}
+
+.scroll-view {
+  height: 100vh;
+  box-sizing: border-box;
+  padding-top: 100rpx;
+  background-color: #f2f2f2;
+}
+
+.card {
+  background-color: #fff;
+  font-size: 26rpx;
+  margin-bottom: 8rpx;
+}
+
+.status {
+  color: #ff3c00;
+  float: right;
+}
+
+.card-title {
+  padding: 30rpx 22rpx 0;
+}
+
+.count {
+  padding: 10rpx ;
+  text-align: right;
+  font-size: 24rpx;
+}
+
+.total {
+  font-size: 32rpx;
+  font-weight: bold;
+}
+.btns{
+  height: 100rpx;
+  display: flex;
+  display: -webkit-flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.btn {
+  margin-right: 20rpx;
+  padding: 0 16rpx;
+  box-sizing: border-box;
+  min-width: 128rpx;
+  height: 52rpx;
+  line-height: 50rpx;
+  border-radius: 26rpx;
+  border: 1px solid #D8D8D8;
+  text-align: center;
+  font-size: 24rpx;
+}
+.btn.them{
+  border-color: #ED1B24;
+  color: #ED1B24;
+}

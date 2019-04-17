@@ -1,0 +1,15 @@
+<!--packageProfile/myTeam/index.wxml-->
+<view class="myteamListTittle">
+  <view class="myteamListTittleItem">时间</view>
+  <view class="myteamListTittleItem">姓名</view>
+  <view class="myteamListTittleItem">状态</view>
+  <view class="myteamListTittleItem">金额</view>
+</view>
+<view class='myteamlist'>
+  <view class='myteamlistItem' wx:for="{{salesOrderList.records}}" wx:key="{{index}}">
+    <view class='myteamlistItem_c1'>{{item.createData}}</view>
+    <view class='myteamlistItem_c1'>{{item.name}}</view>
+    <view class='myteamlistItem_c1'>{{item.status}}</view>
+    <view class='myteamlistItem_c1'>{{item.amount}}</view>
+  </view>
+</view>

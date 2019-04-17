@@ -1,0 +1,9 @@
+<!--packageMember/contract/index.wxml-->
+<view class="contractBox" wx:for="{{dataList}}" wx:key="{{item.id}}" data-id='{{item.id}}' bindtap='enterDetailFun'>
+  <view class="contract_left">
+    <view class="contract_left_c1">{{item.type}}</view>
+    <view class="contract_left_c2">签订时间：{{item.elecSignTime}}</view>
+  </view>
+  <view class="contract_right">查看详情</view>
+  <image class='contract_jiantou' src='../../images/profile/jiantou@2x.png'></image>
+</view>

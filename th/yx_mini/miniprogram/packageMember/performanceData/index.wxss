@@ -1,0 +1,220 @@
+/* packageProfile/performanceData/index.wxss */
+/* ---今日概况--- */
+.performanceModelBox{
+  width:710rpx;
+  background:rgba(255,255,255,1);
+  border-radius:10rpx;
+  margin: 0 auto;
+  margin-top: 20rpx;
+}
+.performanceModelTittle{
+  width:670rpx;
+  height:80rpx;
+  line-height: 80rpx;
+  font-size:30rpx;
+  font-family:PingFangSC-Semibold;
+  font-weight:600;
+  color:rgba(60,60,60,1);
+  margin: 0 auto;
+  border-bottom:2rpx solid rgba(242,242,242,1);
+}
+.performanceBox1{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.performance1_item{
+  text-align: center;
+  padding-bottom: 30rpx;
+  position: relative;
+  width: 33.33%;
+  overflow: hidden;
+}
+.performance1_item_top{
+  height:40rpx;
+  font-size:28rpx;
+  font-family:PingFangSC-Semibold;
+  font-weight:600;
+  color:rgba(60,60,60,1);
+  line-height:40rpx;
+  padding-top: 30rpx;
+}
+.performance1_item_bottom{
+  height:32rpx;
+  font-size:22rpx;
+  font-family:PingFangSC-Regular;
+  font-weight:400;
+  color:rgba(128,128,128,1);
+  line-height:32rpx;
+  padding-top: 20rpx;
+}
+.fengeLine{
+  position: absolute;
+  right: -2rpx;
+  width:4rpx;
+  height:34rpx;
+  background:rgba(229,229,229,1);
+  border-radius:2rpx;
+}
+.fengeLine1{
+  top: 58rpx;
+}
+/* ---销售概况--- */
+.performanceModelBox2{
+  padding-bottom: 20rpx;
+}
+.performanceBox2{
+  display: flex;
+  align-content: space-between;
+  align-items: center;
+  padding-bottom: 20rpx;
+  position: relative;
+}
+.performance2_item{
+  width: 50%;
+  text-align: center;
+  position: relative;
+}
+.performance2_item_top{
+  height:40rpx;
+  font-size:28rpx;
+  font-family:PingFangSC-Semibold;
+  font-weight:600;
+  color:rgba(60,60,60,1);
+  line-height:40rpx;
+  padding-top: 20rpx;
+}
+.performance2_item_top2{
+  height:40rpx;
+  font-size:28rpx;
+  font-family:PingFangSC-Semibold;
+  font-weight:400;
+  color:rgba(128,128,128,1);
+  line-height:40rpx;
+  padding-top: 20rpx;
+}
+.performance2_item_bottom{
+  height:30rpx;
+  font-size:22rpx;
+  font-family:PingFangSC-Regular;
+  font-weight:400;
+  color:rgba(128,128,128,1);
+  line-height:30rpx;
+  padding-top: 20rpx;
+}
+.fengeLine2{
+  top: 48rpx;
+}
+.performanceBox2_1{
+  width: 670rpx;
+  height: 132rpx;
+  margin: 0 auto;
+  background:rgba(242,242,242,1);
+  border-radius:10rpx;
+  position: relative;
+}
+.sanjiao_icon{
+  position: absolute;
+  left: 148rpx;
+  top: -24rpx;
+  width:0;
+  height:0;
+  border-left:12rpx solid transparent;
+  border-right:12rpx solid transparent;
+  border-bottom:12rpx solid #F2F2F2;
+}
+/* ---历史记录--- */
+.performanceBox3{
+  width: 670rpx;
+  margin: 0 auto;
+  border-bottom: 2rpx solid #F2F2F2;
+}
+.performance3_item{
+  overflow: hidden;
+}
+.performanceItem3_top{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 20rpx;
+  position: relative;
+}
+.performanceItem3_top1 .performanceItem3_top_right{
+  color: #ED1B24;
+}
+.performanceItem3_top1 .fengeLine_left{
+  background:rgba(237,27,36,1);
+}
+.performanceItem3_top2 .performanceItem3_top_right{
+  color: #3E85FF;
+}
+.performanceItem3_top2 .fengeLine_left{
+  background:rgba(62,133,255,1);
+}
+.fengeLine_left{
+  position: absolute;
+  left: 0;
+  top: 32rpx;
+  width:4rpx;
+  height:20rpx;
+  background:rgba(153,153,153,1);
+  border-radius:2rpx;
+}
+.performanceItem3_top_left{
+  height:42rpx;
+  font-size:30rpx;
+  font-family:PingFangSC-Medium;
+  font-weight:600;
+  color:rgba(60,60,60,1);
+  line-height:42rpx;
+  padding-left: 16rpx;
+}
+.performanceItem3_top_right{
+  height:42rpx;
+  font-size:24rpx;
+  font-family:PingFangSC-Regular;
+  font-weight:400;
+  color:rgba(153,153,153,1);
+  line-height:42rpx;
+  text-align: right;
+}
+.performanceItem3_bottom{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  padding-bottom: 20rpx;
+}
+.performanceItem3_b_box{
+  padding-top: 40rpx;
+  width: 50%;
+  position: relative;
+}
+.fengeLine3{
+  top: 68rpx;
+}
+.performanceItem3_b_c1{
+  height:40rpx;
+  font-size:28rpx;
+  font-family:PingFangSC-Semibold;
+  font-weight:600;
+  color:rgba(60,60,60,1);
+  line-height:40rpx;
+}
+.performanceItem3_b_c2{
+  height:32rpx;
+  font-size:22rpx;
+  font-family:PingFangSC-Regular;
+  font-weight:400;
+  color:rgba(128,128,128,1);
+  line-height:32rpx;
+  padding-top: 20rpx;
+}
+.performanceItem3_b_c3{
+  height:32rpx;
+  font-size:22rpx;
+  font-family:PingFangSC-Regular;
+  font-weight:400;
+  color:rgba(128,128,128,1);
+  line-height:32rpx;
+}

@@ -1,0 +1,51 @@
+<view class='card'>
+  <view class='name'>
+    <text>张三的房间里的饭豆腐</text>
+    <text style='color:#666;margin-left:30rpx'>132****3232</text>
+  </view>
+  <view class='address'>火星省 地球市 南瓜村 西红柿镇 东大街 火星省 地球市南瓜村西红柿镇东大街</view>
+  <view class='btns'>
+
+    <view class='set-default'>
+      <image src='/images/profile/select.png'></image>
+      <text>设为默认</text>
+    </view>
+    <view class='md'>
+      <label>
+        <image src='/images/profile/edit.png'></image>
+        <text>编辑</text>
+      </label>
+      <label>
+        <image src='/images/profile/delete.png'></image>
+        <text>删除</text>
+      </label>
+    </view>
+  </view>
+</view>
+
+<view class='card'>
+  <view class='name'>
+    <text>张三的房间里的饭豆腐</text>
+    <text style='color:#666;margin-left:30rpx'>132****3232</text>
+  </view>
+  <view class='address'>火星省 地球市 南瓜村 西红柿镇 东大街 火星省 地球市南瓜村西红柿镇东大街</view>
+  <view class='btns'>
+
+    <view class='set-default'>
+      <image src='/images/profile/select.png'></image>
+      <text>设为默认</text>
+    </view>
+    <view class='md'>
+      <label>
+        <image src='/images/profile/edit.png'></image>
+        <text>编辑</text>
+      </label>
+      <label>
+        <image src='/images/profile/delete.png'></image>
+        <text>删除</text>
+      </label>
+    </view>
+  </view>
+</view>
+
+<button class='confirm-button' bindtap='addressAdd'>新增收货地址</button>

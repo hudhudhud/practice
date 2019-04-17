@@ -1,0 +1,21 @@
+/* miniprogram/packageProfile/updatePsw1/index.wxss */
+
+.input {
+  height: 81rpx;
+  padding: 0 40rpx;
+  display: flex;
+  display: -webkit-flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.input input {
+  flex: 1;
+}
+.code {
+  font-size: 28rpx;
+  color: #333;
+  text-align: right;
+}
+.code.small {
+  font-size: 20rpx;
+}

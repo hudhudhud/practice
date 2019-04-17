@@ -1,0 +1,26 @@
+<wxs src="./index.wxs" module="util" />
+<view class="mask {{show?'show':''}}" bindtap="cancal">
+
+</view>
+<view class="content {{show?'show':''}}">
+    <view class="title">请输入支付密码</view>
+    <view class="boxs">
+        <view class="box" wx:for="{{6}}" wx:key="index">{{util.bigger(psw,index)?'*':''}}</view>
+    </view>
+    <view class="tip" bindtap="forgetPayPsw">忘记支付密码?</view>
+    <view class="keyboard {{isIPX?'ipx':''}}">
+        <view class="btn" bindtap="handInput" data-type="1"><button>1</button></view>
+        <view class="btn" bindtap="handInput" data-type="2"><button>2</button></view>
+        <view class="btn" bindtap="handInput" data-type="3"><button>3</button></view>
+        <view class="btn" bindtap="handInput" data-type="4"><button>4</button></view>
+        <view class="btn" bindtap="handInput" data-type="5"><button>5</button></view>
+        <view class="btn" bindtap="handInput" data-type="6"><button>6</button></view>
+        <view class="btn" bindtap="handInput" data-type="7"><button>7</button></view>
+        <view class="btn" bindtap="handInput" data-type="8"><button>8</button></view>
+        <view class="btn" bindtap="handInput" data-type="9"><button>9</button></view>
+
+        <view class="btn special"></view>
+        <view class="btn" bindtap="handInput" data-type="0"><button>0</button></view>
+        <view class="btn special" bindtap="handInput" data-type="x"><button><image class="deleteImg" src="/images/order/deletePsw.png"></image></button></view>
+    </view>
+</view>

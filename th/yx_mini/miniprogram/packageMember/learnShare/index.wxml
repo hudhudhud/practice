@@ -1,0 +1,19 @@
+<!--packageProfile/learnShare/index.wxml-->
+<scroll-view class='scroll-view' scroll-y style="height: 100vh;" bindscrolltolower="addMoreFun">
+  <swiper class="swiperBox" indicator-dots="true" indicator-color='rgba(217,217,217,1)' indicator-active-color='rgba(237,27,36,1)' autoplay='true'>
+    <block>
+      <swiper-item wx:for="{{bannerList}}" wx:key="index">
+        <!-- <image class="swiperBox_img" src="{{item.imageUrl}}"></image> -->
+        <navigator class="swiperItem" url='{{item.url}}'>
+          <image src="{{item.imageUrl}}" class="swiperBox_img" />
+        </navigator>
+      </swiper-item>
+    </block>
+  </swiper>
+  <view class="learnList">
+    <view class="learnListItem" data-id='{{item.id}}' wx:for="{{learnShareList}}" wx:key="{{item.id}}" bindtap='learnShareDetailFun'>
+      <image class="learnListItem_img" src="{{item.imageUrl}}"></image>
+      <view class="learnListItem_tittle">{{item.title}}</view>
+    </view>
+  </view>
+</scroll-view>

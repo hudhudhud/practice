@@ -1,0 +1,24 @@
+/* miniprogram/packageProfile/myCollection/index.wxss */
+page{
+  padding-top: 1px;
+}
+.block{
+  margin-bottom: 8rpx;
+}
+.btns{
+  display: flex;
+  height: 100rpx;
+  align-items: center;
+  justify-content: flex-end;
+}
+.btns button {
+  margin-right: 30rpx;
+  display: block;
+  min-width: 128rpx;
+  height: 52rpx;
+  line-height: 50rpx;
+  border: 1px solid #D8D8D8;
+  border-radius: 26rpx;
+  text-align: center;
+  font-size: 22rpx;
+}

@@ -1,0 +1,134 @@
+/* components/commoditSpecChoose/index.wxss */
+.mask{
+    z-index: 100;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background-color: rgba(0,0,0,.4);
+    display: none;
+}
+.mask.show {
+    display: block;
+}
+ .spec-content.show{
+    transform: translateY(0);
+}
+
+.spec-content{
+    transition: transform .3s ease-out;
+    transform: translateY(100%);
+    position: fixed;
+    z-index: 101;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    font-size: 26rpx;
+    color: #333;
+    padding-bottom: 70rpx;
+}
+
+.shop-img{
+    display: inline-block;
+    vertical-align: middle;
+    width: 200rpx;
+    height: 200rpx;
+    margin: 40rpx 20rpx;
+}
+.shop-info{
+    vertical-align: middle;
+    height: 200rpx;
+    margin: 40rpx 0;
+    display: inline-flex;
+    display: -webkit-inline-flex;
+    display: -ms-inline-flexbox;
+    align-items: flex-end;
+}
+.price {
+    color: #ED1B24;
+    font-size: 44rpx;
+    margin: 0 10rpx 10rpx 0;
+}
+.marketPrice {
+    color: #BBBBBB;
+    font-size: 24rpx;
+}
+.quantity{
+    font-size: 26rpx;
+    color: #666666;
+}
+.close {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 30rpx;
+}
+.close image{
+    width: 24rpx;
+    height: 24rpx;
+}
+.spec-title{
+    margin-left: 30rpx;
+    font-weight: bold;
+}
+.spec-list{
+    margin-top: 10rpx;
+}
+.spec-item{
+    border: 1rpx solid transparent;
+    box-sizing: border-box;
+    display: inline-block;
+    vertical-align: middle;
+    height: 52rpx;
+    line-height: 52rpx;
+    text-align: center;
+    background-color: #EEEEEE;
+    margin-left: 30rpx;
+    margin-bottom: 15rpx;
+    padding: 0 34rpx;
+}
+.spec-item.active {
+    border: 1rpx solid #ED1B24;
+    background-color: #FFF3F4;
+    color: #ff273d;
+}
+.disabled.spec-item {
+    border-color: transparent;
+    color: #B1B1B1;
+}
+
+
+.count{
+    margin-top: 15rpx;
+    border-top: 1px solid #f2f2f2;
+    display: flex;
+    display: -webkit-flex;
+    justify-content: space-between;
+    padding: 42rpx 30rpx;
+}
+.count-btn image {
+    margin: 0 30rpx;
+    vertical-align: middle;
+    display: inline-block;
+    width: 40rpx;
+    height: 40rpx;
+}
+
+
+.submit {
+    width: 600rpx;
+    height: 98rpx;
+    line-height: 98rpx;
+    margin: 80rpx auto 0;
+    text-align: center;
+    font-size: 32rpx;
+    color: #fff;
+    border-radius: 44rpx;
+    outline: none;
+    background: -webkit-linear-gradient(left, #ff2c6d, #ff942f); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(right, #ff2c6d, #ff942f); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(right, #ff2c6d, #ff942f); /* Firefox 3.6 - 15 */
+    background: linear-gradient(to right, #ff2c6d, #ff942f); /* 标准的语法 */
+}

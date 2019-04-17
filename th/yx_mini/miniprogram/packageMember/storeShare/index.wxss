@@ -1,0 +1,28 @@
+/* packageMember/storeShare/index.wxss */
+page{
+  background-color: #FF4048;
+}
+.storeShareBtn{
+  width:650rpx;
+  height:78rpx;
+  background:rgba(255,255,255,1);
+  border-radius:39rpx;
+  line-height: 78rpx;
+  text-align: center;
+  font-size:30rpx;
+  font-family:PingFangSC-Semibold;
+  font-weight:600;
+  color:rgba(255,44,109,1);
+  margin: 0 auto;
+  margin-bottom: 40rpx;
+}
+.posImage{
+  width: 100%;
+  height: 1310rpx;
+  display: block;
+}
+.canvasBox{
+  position: fixed;
+  left: 0;
+  top: 2000rpx;
+}

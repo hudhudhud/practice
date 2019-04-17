@@ -1,0 +1,167 @@
+/* pages/profile/index.wxss */
+/* ---优选会员--- */
+.profileHeader{
+  width:100%;
+  height:274rpx;
+  background:linear-gradient(180deg,rgba(255,44,109,1) 0%,rgba(255,148,47,1) 100%);
+  position: relative;
+}
+.profileHeader .proRankName{
+  height:58rpx;
+  font-size:42rpx;
+  font-family:PingFangSC-Semibold;
+  font-weight:600;
+  color:rgba(255,255,255,1);
+  line-height:58rpx;
+  padding-left: 20rpx;
+}
+.proUserInfo{
+  display: flex;
+  align-items: center;
+}
+.proUserInfo .proUserPhotoBox{
+  width: 130rpx;
+  height: 130rpx;
+  border-radius: 50%;
+  border: 1rpx solid #fff;
+  margin-left: 20rpx;
+}
+.proUserInfo .proUserPhoto{
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+.proUserInfo .proUserItemCenter{
+  padding-left: 20rpx;
+  padding-right: 20rpx;
+  width:470rpx;
+}
+.proUserItemName{
+  width:450rpx;
+  height:48rpx;
+  font-size:34rpx;
+  font-weight:500;
+  color:rgba(255,255,255,1);
+  line-height:48rpx;
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+}
+.proUserItemId{
+  height:34rpx;
+  font-size:24rpx;
+  font-weight:400;
+  color:rgba(255,255,255,1);
+  line-height:34rpx;
+  padding-top: 20rpx;
+}
+.proEmail{
+  width: 54rpx;
+  height: 38rpx;
+  display: block;
+}
+/* ---我的订单--- */
+.myOrderBox{
+  width:710rpx;
+  height:216rpx;
+  background:rgba(255,255,255,1);
+  border-radius:10rpx;
+  margin: 0 auto;
+  margin-top: 20rpx;
+  overflow: hidden;
+}
+.myOrderTittleBox{
+  display: flex;
+  width: 690rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  border-bottom:2rpx solid rgba(242,242,242,1);
+  margin: 0 auto;
+  align-items: center;
+}
+.myOrderTittle_left{
+  width:200rpx;
+  padding-left: 10rpx;
+  font-size:30rpx;
+  font-family:PingFangSC-Semibold;
+  font-weight:600;
+  color:rgba(60,60,60,1);
+}
+.myOrderTittle_center{
+  width: 448rpx;
+  text-align: right;
+  font-size:24rpx;
+  font-family:PingFangSC-Regular;
+  font-weight:400;
+  color:rgba(137,137,137,1);
+}
+.myOrderTittle_right{
+  width: 16rpx;
+  height: 14rpx;
+  margin-left: 8rpx;
+}
+.proMyOrderBox{
+  position: absolute;
+  left: 20rpx;
+  bottom: -150rpx;
+}
+.orderStatuItemBox{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.orderStatuItem{
+  width: 20%;
+  text-align: center;
+  padding-top: 24rpx;
+}
+.orderStatuItemIcon{
+  width: 44rpx;
+  height: 44rpx;
+}
+.orderStatuItemTittle{
+  height:34rpx;
+  font-size:24rpx;
+  font-family:PingFangSC-Regular;
+  font-weight:400;
+  color:rgba(128,128,128,1);
+  line-height:34rpx;
+  padding-top: 10rpx;
+}
+/* ---个人操作部分--- */
+.operationBox{
+  width:710rpx;
+  background:rgba(255,255,255,1);
+  border-radius:10rpx;
+  margin: 0 auto;
+  margin-top: 170rpx;
+  margin-bottom: 144rpx;
+  overflow: hidden;
+}
+.operationBox1{
+  margin-top: 168rpx;
+}
+.operationItem{
+  display: flex;
+  align-items: center;
+  height: 100rpx;
+}
+.operationItem_c1{
+  width: 60rpx;
+  height: 60rpx;
+  margin-left: 20rpx;
+}
+.operationItem_c2{
+  width:584rpx;
+  height:60rpx;
+  font-size:28rpx;
+  font-family:PingFangSC-Regular;
+  font-weight:400;
+  color:rgba(60,60,60,1);
+  line-height:60rpx;
+  padding-left: 16rpx;
+}
+.operationItem_c3{
+  width: 12rpx;
+  height: 24rpx;
+}

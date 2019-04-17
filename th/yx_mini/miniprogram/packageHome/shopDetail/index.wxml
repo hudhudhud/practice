@@ -1,0 +1,70 @@
+<wxs src="../../services/util.wxs" module="util" />
+<commoditSpec detail="{{detail}}" show="{{show}}" wx:if="{{detail.id}}" bind:cancel="specCancel" bind:confirm="specConfirm"></commoditSpec>
+<scroll-view scroll-y style="height: 100vh;" scroll-top="{{scrollTop}}" scroll-with-animation="true" class="scroll-view {{isIPX?'ipx-page':'page'}}">
+
+  <swiper class='swiper' indicator-dots="false" autoplay="true" interval="3000">
+    <swiper-item wx:for="{{detail.images}}" wx:key="index">
+      <view class="swiper-item">
+        <image src="{{item}}" class="slide-image" />
+      </view>
+    </swiper-item>
+  </swiper>
+
+  <view class='block'>
+    <view class='title'>
+      <view class='new'>新品</view>
+      <view class='name'>{{detail.name}}</view>
+    </view>
+    <view class='price'>
+      <text class='current-price'>￥{{util.toFixed(detail.price,2)}}</text>
+      <text class='old-price'>￥{{util.toFixed(detail.marketPrice,2)}}</text>
+    </view>
+  </view>
+
+  <view class='block health'>
+    <image class='healthy-img' src='/images/home/healthy.png'></image>
+    <view style='margin-right:10rpx;'>健康指数：
+      <text style="font-size:30rpx;color:#1FA53D">{{detail.healthIndex}}</text>
+    </view>
+    <view class='tag' wx:for="{{util.tag(detail.tags)}}" wx:key="index">无公害</view>
+  </view>
+
+  <view class='block mt pb'>
+    <view class='text-title'>编辑推荐</view>
+    <view class='intro'>{{detail.healthEvaluation}} </view>
+  </view>
+  <view class='block mt'>
+    <view class='text-title'>商品信息</view>
+    <image class="ad-img" src="{{detail.infoImageUrl}}"></image>
+  </view>
+  <view class='block mt'>
+    <import src="../../wxParse/wxParse.wxml"/>
+    <template is="wxParse" data="{{wxParseData:article.nodes}}"/>
+  </view>
+
+
+</scroll-view>
+
+ <view class='mig'>
+    <image class='mig-img' bindtap='checkMenu' src="{{menuShow?'/images/home/close.png':'/images/home/add.png'}}" />
+
+    <view class="menu {{menuShow?'show':''}}">
+      <button wx:if="{{userInfo.rank >= 1}}" open-type="share" bindtap="checkMenu"><image src='/images/home/share.png' /></button>
+      <image src='/images/home/home.png' bindtap="toHome" />
+      <image src='/images/home/top.png' bindtap='handleScrollTop' />
+    </view>
+  </view>
+
+ <!-- 底部购买栏 -->
+  <view class="buy {{isIPX?'ipx':''}}">
+    <view class='buy-btn' bindtap="collection">
+      <image src="{{isCollect?'/images/home/collection.png':'/images/home/no_collection.png'}}" />
+      <view>收藏</view>
+    </view>
+    <view class='buy-btn'>
+      <image src='/images/home/customer.png' />
+      <view>客服</view>
+    </view>
+    <view class='buy-submit' bindtap='submit'>立即购买</view>
+  </view>
+

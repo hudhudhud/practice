@@ -1,0 +1,6 @@
+var getDetail = function(e){
+   return {name: e.productName,keywords: e.productSpecName,marketPrice: '',imageUrl: e.mainImage,price: e.productBuyPrice,count: e.buyQuantity};
+}
+module.exports = {
+  getDetail: getDetail
+}

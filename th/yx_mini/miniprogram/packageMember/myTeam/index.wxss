@@ -1,0 +1,67 @@
+/* packageProfile/myTeam/index.wxss */
+page{
+  background: #fff;
+}
+.myteamListTittle{
+  width:100%;
+  height:100rpx;
+  background:rgba(255,255,255,1);
+  box-shadow:0rpx 8rpx 12rpx 0rpx rgba(229,229,229,0.47);
+  display: flex;
+  align-items: center;
+}
+.myteamListTittleItem{
+  text-align: center;
+  height:42rpx;
+  font-size:30rpx;
+  font-family:PingFangSC-Medium;
+  font-weight:600;
+  color:rgba(60,60,60,1);
+  line-height:42rpx;
+}
+.myteamListTittleItem:nth-of-type(1){
+  width: 270rpx;
+}
+.myteamListTittleItem:nth-of-type(2){
+  width: 80rpx;
+}
+.myteamListTittleItem:nth-of-type(3){
+  width: 200rpx;
+}
+.myteamListTittleItem:nth-of-type(4){
+  width: 200rpx;
+}
+.myteamlist{
+  overflow: hidden;
+  padding-bottom: 40rpx;
+}
+.myteamlistItem{
+  display: flex;
+  align-items: center;
+  padding-top: 30rpx;
+}
+.myteamlistItem_c1{
+  height:40rpx;
+  font-size:28rpx;
+  font-family:PingFangSC-Regular;
+  font-weight:400;
+  color:rgba(60,60,60,1);
+  line-height:40rpx;
+  text-align: center;
+}
+.myteamlistItem_c1:nth-of-type(1){
+  width: 230rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 0 20rpx;
+}
+.myteamlistItem_c1:nth-of-type(2){
+  width: 80rpx;
+}
+.myteamlistItem_c1:nth-of-type(3){
+  width: 200rpx;
+}
+.myteamlistItem_c1:nth-of-type(4){
+  width: 200rpx;
+}

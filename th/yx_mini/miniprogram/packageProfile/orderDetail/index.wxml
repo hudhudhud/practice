@@ -1,0 +1,87 @@
+<wxs src="./index.wxs" module="util"/>
+<wxs src="../../services/util.wxs" module="global"/>
+<view class="top-status">
+  <view>
+    <view class='status-text'>{{detail.status}}</view>
+    <view wx:if="{{detail.orderStatus===0}}">{{detail.endTimeStr}}</view>
+    <view wx:if="{{detail.orderStatus===1||detail.orderStatus===2||detail.orderStatus===3}}">请耐心等待</view>
+    <view wx:if="{{detail.orderStatus===4}}">已收货</view>
+    <view wx:if="{{detail.orderStatus===5}}">交易完成</view>
+    <view wx:if="{{detail.orderStatus===6}}">交易关闭</view>
+  </view>
+  <image class='status-icon' wx:if="{{detail.id}}" src="/images/order/icon/status{{detail.orderStatus}}.png"></image>
+</view>
+
+<view class='address'>
+  <image src='/images/test.jpg' class='head'></image>
+  <view>
+    <text>{{detail.name}}</text>
+    <text style='margin-left:60rpx;'>{{detail.mobile}}</text>
+    <view></view>
+    <view class='detail'>{{detail.address}}</view>
+  </view>
+</view>
+
+<view class='line-8'></view>
+<view class='bag'>
+  <view wx:for="{{detail.logisticsParcelVoList}}" wx:key="index" wx:for-item="bag">
+    <view class='bag-title'>
+      <image src='/images/order/bag.png'></image>
+      <text>{{index+1}}号包裹</text>
+    </view>
+    <shop-info wx:for="{{bag.logisticsOrderVoList}}" wx:key="orderDeailId" detail="{{util.getDetail(item)}}"></shop-info>
+    <view class="btns">
+      <view class="btn" wx:if="{{global.includes(detail.orderStatus, [2,3,4,5])}}" bindtap="toExpress">查看物流</view>
+    </view>
+  </view>
+</view>
+
+<view class='line-8'></view>
+<view class='remark'>
+  <label>备注：</label>
+  <textarea disabled value="{{detail.remark}}"></textarea>
+</view>
+
+<view class='line-8'></view>
+
+<!-- 商品信息 金额 -->
+<view class='cost'>
+  <view class='cost-row'>
+    <text>商品金额：</text>
+    <text>￥{{detail.userAmount}}</text>
+  </view>
+  <!--<view class='cost-row'>-->
+    <!--<text>享受折扣：</text>-->
+    <!--<text>￥1552.5</text>-->
+  <!--</view>-->
+ <!-- <view class='cost-row'>
+    <text>积分抵扣：</text>
+    <text>￥1552.5</text>
+  </view>-->
+ <!-- <view class='cost-row'>
+    <text>火兔E卡抵扣：</text>
+    <text>￥1552.5</text>
+  </view>-->
+  <view class='cost-row'>
+    <text>配送费用</text>
+    <text>￥{{detail.postage}}</text>
+  </view>
+  <view class='cost-row'>
+    <text class='total'>商品应付金额</text>
+    <text class='total-count'>￥{{detail.total}}</text>
+  </view>
+</view>
+
+<view class='line-8'></view>
+<view class='cost order-other-info'>
+  <view class='cost-row'>
+    <text>订单编号：{{detail.sn}}</text>
+    <view class='copy' bindtap="copy">复制</view>
+  </view>
+  <view class='cost-row'>
+    <text>下单时间：{{detail.createTime}}</text>
+  </view>
+  <view class='cost-row'>
+    <text>支付时间：{{detail.payTime}}</text>
+  </view>
+</view>

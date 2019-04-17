@@ -1,0 +1,20 @@
+<view class="back" wx:if="{{show}}">
+    <view class='block'>
+        <image class="close" bindtap="close" src="/images/order/close.png"></image>
+        <view class='title'>{{title}}</view>
+        <view class='tip'>{{title==='设置支付密码'?'您尚未设置支付密码，为了您的资金安全，请先完成支付密码的设置，该密码用于账户U币，小金库的支付验证。':''}}</view>
+        <view class='item'>
+            <input value="{{phone}}" placeholder='请输入手机号' type='number' bindinput="handleInput" data-type="phone"></input>
+        </view>
+        <view class='item'>
+            <input placeholder='请输入验证码' type='number' bindinput="handleInput" data-type="code"></input>
+            <view class="code {{time=='获取验证码'?'':'num'}}" bindtap="sendCode">{{time=='获取验证码'?time:time+'后再次获取'}}</view>
+        </view>
+        <view class='item'>
+            <input placeholder='请输入支付密码' password='true' type='number' bindinput="handleInput"
+                   data-type="payPsw"></input>
+        </view>
+        <view class='psw-tip'>密码必须是6位数字！</view>
+        <view class='submit' bindtap="setPayPsw">确定</view>
+    </view>
+</view>

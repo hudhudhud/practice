@@ -1,0 +1,7 @@
+{
+  "disableScroll": true,
+  "navigationBarTitleText": "商品详情",
+  "usingComponents": {
+    "commoditSpec": "/components/commoditSpecChoose/index"
+  }
+}

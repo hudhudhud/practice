@@ -1,0 +1,233 @@
+{
+	"miniprogramRoot": "miniprogram/",
+	"cloudfunctionRoot": "cloudfunctions/",
+	"setting": {
+		"urlCheck": true,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true,
+		"nodeModules": true,
+		"autoAudits": false,
+		"uglifyFileName": true
+	},
+	"appid": "wx8dd8a1f93361650f",
+	"projectname": "%E7%81%AB%E5%85%94%E4%BC%98%E9%80%89%E5%95%86%E5%9F%8E",
+	"libVersion": "2.6.2",
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"list": []
+		},
+		"miniprogram": {
+			"current": 27,
+			"list": [
+				{
+					"id": -1,
+					"name": "db guide",
+					"pathName": "pages/databaseGuide/databaseGuide",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "商品详情",
+					"pathName": "packageHome/shopDetail/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "确认订单",
+					"pathName": "packageHome/confirmOrder/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "支付成功",
+					"pathName": "packageHome/paySuccess/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "订单列表",
+					"pathName": "packageProfile/orderList/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "订单详情",
+					"pathName": "packageProfile/orderDetail/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 6,
+					"name": "实名认证",
+					"pathName": "packageMember/autonym/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "个人中心",
+					"pathName": "pages/profile/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "业绩数据",
+					"pathName": "packageProfile/performanceData/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 9,
+					"name": "培训导师",
+					"pathName": "packageMember/trainTutor/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "绑定银行卡",
+					"pathName": "packageMember/bankCardDetail/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "优选会员",
+					"pathName": "pages/member/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "学习分享",
+					"pathName": "packageMember/learnShare/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "我的团队",
+					"pathName": "packageMember/myTeam/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "销售订单",
+					"pathName": "packageMember/salesOrder/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "银行卡",
+					"pathName": "packageMember/bankCard/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "添加银行卡",
+					"pathName": "packageMember/bankCardDetail/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 17,
+					"name": "三方合同",
+					"pathName": "packageMember/contract/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "三方合同",
+					"pathName": "packageMember/contract/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "培训导师",
+					"pathName": "packageMember/trainTutor/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "协议详情",
+					"pathName": "packageMember/contractDetail/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "联系我们",
+					"pathName": "packageProfile/contactUs/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 22,
+					"name": "学习分享详情",
+					"pathName": "packageMember/learnShareDetail/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "手机号",
+					"pathName": "packageProfile/bindPhone/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "详情",
+					"pathName": "packageProfile/orderDetail/index",
+					"query": "id=28",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "店铺分享",
+					"pathName": "packageMember/storeShare/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "提现",
+					"pathName": "packageProfile/withdraw/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "提现",
+					"pathName": "packageMember/withdraw/index",
+					"scene": null
+				}
+			]
+		}
+	}
+}

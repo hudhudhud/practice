@@ -1,0 +1,55 @@
+<view class="tab">
+  <view class='active'>一星会员</view>
+  <view>二星会员</view>
+</view>
+<view class='block'>
+  <view class='chart-title'>最近七日社群利润（元）</view>
+  <canvas style="width: 100%; height: 700rpx;" canvas-id="firstCanvas"></canvas>
+</view>
+
+<view class='card'>
+  <view class='card-title red'>
+    <view class='date'>2019-03</view>
+    <view class='status'>未结束</view>
+  </view>
+  <view class='card-content'>
+    <view class='left'>
+      <view class='value'>31231223</view>
+      <view class='label'>累积销售金额</view>
+    </view>
+      <view>
+      <view class='value'>231</view>
+      <view class='label'>累计收益</view>
+    </view>
+  </view>
+
+    <view class='card-title blue'>
+    <view class='date'>2019-03</view>
+    <view class='status'>未结束</view>
+  </view>
+  <view class='card-content'>
+    <view class='left'>
+      <view class='value'>31231223</view>
+      <view class='label'>累积销售金额</view>
+    </view>
+      <view>
+      <view class='value'>231</view>
+      <view class='label'>累计收益</view>
+    </view>
+  </view>
+
+    <view class='card-title gray'>
+    <view class='date'>2019-03</view>
+    <view class='status'>未结束</view>
+  </view>
+  <view class='card-content'>
+    <view class='left'>
+      <view class='value'>31231223</view>
+      <view class='label'>累积销售金额</view>
+    </view>
+      <view>
+      <view class='value'>231</view>
+      <view class='label'>累计收益</view>
+    </view>
+  </view>
+</view>

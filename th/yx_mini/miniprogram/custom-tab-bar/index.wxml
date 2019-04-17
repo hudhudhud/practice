@@ -1,0 +1,34 @@
+<cover-view class='tabbar' style="padding-bottom:{{isIPX?'68rpx':'10rpx'}}">
+
+    <cover-view class='item' wx:for="{{list}}" wx:key="index" data-path="{{item.pagePath}}" data-index="{{index}}"
+                bindtap="switchTab" wx:if="{{index < 1}}">
+        <cover-image class="item-img {{selected===0&&index === 0?'big-img':''}}"
+                     src="{{selected===index?item.selectedIconPath:item.iconPath}}"/>
+        <cover-view hidden="{{selected===0&&index===0}}" class='item-text'
+                    style="color: {{selected === index ? selectedColor : color}}">{{item.text}}
+        </cover-view>
+    </cover-view>
+    <cover-view class="item">
+        <button   open-type="getUserInfo"
+                 bindgetuserinfo="switchTab" data-path="{{list[1].pagePath}}">
+
+            <cover-image class="item-img"
+                         src="{{selected===1?list[1].selectedIconPath:list[1].iconPath}}"/>
+            <cover-view class='item-text'
+                        style="color: {{selected === index ? selectedColor : color}}">{{list[1].text}}
+            </cover-view>
+        </button>
+    </cover-view>
+    <cover-view class="item">
+        <button   open-type="getUserInfo"
+                 bindgetuserinfo="switchTab" data-path="{{list[2].pagePath}}">
+
+            <cover-image class="item-img"
+                         src="{{selected===2?list[2].selectedIconPath:list[2].iconPath}}"/>
+            <cover-view class='item-text'
+                        style="color: {{selected === index ? selectedColor : color}}">{{list[2].text}}
+            </cover-view>
+        </button>
+    </cover-view>
+
+</cover-view>

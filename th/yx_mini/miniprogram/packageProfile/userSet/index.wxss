@@ -1,0 +1,46 @@
+/* miniprogram/packageProfile/userSet/index.wxss */
+
+.item {
+  height: 85rpx;
+  margin: 0 20rpx;
+  padding: 0 20rpx;
+  display: flex;
+  display: -webkit-flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #f2f2f2;
+  color: #999;
+  font-size: 28rpx;
+}
+.item image {
+  vertical-align: middle;
+}
+.item > text:first-of-type {
+  color: #333;
+  font-weight: bold;
+}
+
+.head {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+}
+.ar-right {
+  vertical-align: middle;
+  margin-left: 18rpx;
+  width: 12rpx;
+  height: 24rpx;
+}
+.item.specail{
+  background-color: #fff;
+  margin-top: 20rpx;
+  font-size: 30rpx;
+  color: #666;
+}
+
+.ar-right {
+  vertical-align: middle;
+  margin-left: 18rpx;
+  width: 12rpx;
+  height: 24rpx;
+}

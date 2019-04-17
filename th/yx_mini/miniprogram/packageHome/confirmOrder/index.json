@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "bindPhone": "/components/bindPhone/index",
+    "setPayPsw": "/components/setPayPsw/index"
+  },
+  "navigationBarTitleText": "确认订单"
+}
