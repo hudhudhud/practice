@@ -592,3 +592,94 @@ var object = {
  };
  alert(object.getNameFunc()()); //"My Object"
 ```
+
+```js
+  //7.4.1 静态私有变量
+ //初始化未经声明的变量，总是会创建一个全局变量,如下Myobject就是全局的，privateVariable是局部的
+ (function(){
+ //私有变量和私有函数
+     var privateVariable = 10;
+     function privateFunction(){
+         return false;
+     }
+     //构造函数
+     MyObject = function(){
+     };
+     //公有/特权方法
+     MyObject.prototype.publicMethod = function(){
+         privateVariable++;
+         return privateFunction();
+     };
+ })();
+```
+
+当在函数内部定义了其他函数时，就创建了闭包。闭包有权访问包含函数内部的所有变量，原理
+如下。
+ 在后台执行环境中，闭包的作用域链包含着它自己的作用域、包含函数的作用域和全局作用域。
+ 通常，函数的作用域及其所有变量都会在函数执行结束后被销毁。
+ 但是，当函数返回了一个闭包时，这个函数的作用域将会一直在内存中保存到闭包不存在为止。
+使用闭包可以在 JavaScript 中模仿块级作用域（JavaScript 本身没有块级作用域的概念），要点如下。
+ 创建并立即调用一个函数，这样既可以执行其中的代码，又不会在内存中留下对该函数的引用。
+ 结果就是函数内部的所有变量都会被立即销毁——除非将某些变量赋值给了包含作用域（即外
+部作用域）中的变量。
+闭包还可以用于在对象中创建私有变量，相关概念和要点如下。
+ 即使 JavaScript 中没有正式的私有对象属性的概念，但可以使用闭包来实现公有方法，而通过公
+有方法可以访问在包含作用域中定义的变量。
+ 有权访问私有变量的公有方法叫做特权方法。
+ 可以使用构造函数模式、原型模式来实现自定义类型的特权方法，也可以使用模块模式、增强
+的模块模式来实现单例的特权方法。
+JavaScript 中的函数表达式和闭包都是极其有用的特性，利用它们可以实现很多功能。不过，因为
+创建闭包必须维护额外的作用域，所以过度使用它们可能会占用大量内存。
+
+```js
+window.resizeTo(x,y)//设置窗口大小为x,y
+window.resizeBy(x,y)//设置窗口大小为原来的大小加x,加y
+ window.open()
+ //接收 4 个参数：要加载的 URL、窗口目标、一个特性字符串以及一个表示新页面是否取代浏览
+//器历史记录中当前加载页面的布尔值。通常只须传递第一个参数，最后一个参数只在不打开新窗口的情
+//况下使用。
+
+//如果为 window.open()传递了第二个参数，而且该参数是已有窗口或框架的名称，那么就会在具
+//有该名称的窗口或框架中加载第一个参数指定的 URL。
+// 如：
+//等同于< a href="http://www.wrox.com" target="topFrame"></a>
+window.open("http://www.wrox.com/", "topFrame");
+//第二个参数也可以是下列任何一个特殊的窗口名称： _self、 _parent、 _top 或_blank。
+//第三个参数是一个逗号分隔的设置字符串，表示在新窗口中都显示哪些特性
+window.open("http://www.wrox.com/","wroxWindow","height=400,width=400,top=10,left=10,resizable=yes");
+```
+
+```js
+//setInterval
+var num = 0;
+var max = 10;
+var intervalId = null;
+function incrementNumber() {
+    num++;
+    //如果执行次数达到了 max 设定的值，则取消后续尚未执行的调用
+    if (num == max) {
+        clearInterval(intervalId);
+        alert("Done");
+    }
+}
+intervalId = setInterval(incrementNumber, 500);
+//setTimeout
+var num = 0;
+var max = 10;
+function incrementNumber() {
+    num++;
+    //如果执行次数未达到 max 设定的值，则设置另一次超时调用
+    if (num < max) {
+       setTimeout(incrementNumber, 500);
+    } else {
+       alert("Done");
+    }
+}
+setTimeout(incrementNumber, 500);
+
+//可见，在使用超时调用时，没有必要跟踪超时调用 ID，因为每次执行代码之后，如果不再设置另
+//一次超时调用，调用就会自行停止。一般认为，使用超时调用来模拟间歇调用的是一种最佳模式。在开
+//发环境下，很少使用真正的间歇调用，原因是后一个间歇调用可能会在前一个间歇调用结束之前启动。
+//而像前面示例中那样使用超时调用，则完全可以避免这一点。所以，最好不要使用间歇调用。
+
+```
