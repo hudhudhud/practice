@@ -28,7 +28,7 @@
 typeof null 
 "object"
 
-//基本数据类型包括 Undefined、 Null、 Boolean、 Number 和 String。
+//基本数据类型包括 Undefined、 Null、 Boolean、 Number 和 String、Symbol。
 
 null==undefined 
 true
@@ -444,16 +444,16 @@ Object.getOwnPropertyNames(obj) //对象自身所有实例属性，无论是否�
 但同时又共享着对方法的引用，最大限度地节省了内存。另外，这种混成模式还支持向构造函数传递参
 数；可谓是集两种模式之长。下面的代码重写了前面的例子。*/
 function Person(name, age, job){
-this.name = name;
-this.age = age;
-this.job = job;
-this.friends = ["Shelby", "Court"];
+    this.name = name;
+    this.age = age;
+    this.job = job;
+    this.friends = ["Shelby", "Court"];
 }
 Person.prototype = {
-constructor : Person,
-sayName : function(){
-alert(this.name);
-}
+    constructor : Person,
+    sayName : function(){
+        alert(this.name);
+    }
 }
 var person1 = new Person("Nicholas", 29, "Software Engineer");
 var person2 = new Person("Greg", 27, "Doctor");
@@ -508,7 +508,7 @@ function  f() {
   this.m=1
 }
 //原型对象都包含一个指向构造函数的指针f.prototype.constructor，
-//而实例都包含一个指向原型对象的内部指针obj.__proto__。
+//而实例都包含一个指向原型对象的内部指针obj.__proto__。(obj.__proto__===f.prototype)
 obj=new f()
 ```
 那么，假如我们让原型对象等于另一个类型的实例，结果会怎么样呢？
@@ -682,4 +682,53 @@ setTimeout(incrementNumber, 500);
 //发环境下，很少使用真正的间歇调用，原因是后一个间歇调用可能会在前一个间歇调用结束之前启动。
 //而像前面示例中那样使用超时调用，则完全可以避免这一点。所以，最好不要使用间歇调用。
 
+```
+```js
+ addEventListener() 
+ removeEventListener()
+//所有 DOM 节点中都包含这两个方法，并且它们都接受 3 个参数：要处
+//理的事件名、作为事件处理程序的函数和一个布尔值。
+// 最后这个布尔值参数如果是 true，表示在捕获
+//阶段调用事件处理程序；如果是 false，表示在冒泡阶段调用事件处理程序。
+//可以绑定多次，执行按绑定顺序执行
+//这时候的事件处理程序是在元素的作用域中运行；换句话说，程序中的 this 引用当前元素
+```
+```js
+ attachEvent()
+ detachEvent()
+//这两个方法接受相同的两个参数：事件处理程序名称与事件处理程序函数。只支持事件冒泡
+//可以绑定多次，执行按绑定顺序反方向执行
+//IE 实现了与 DOM 中类似的两个方法：事件处理程序会在全局作用域中运行，因此 this 等于 window
+```
+```js
+var EventUtil = {
+    addHandler: function(element, type, handler){
+        if (element.addEventListener){
+            element.addEventListener(type, handler, false);
+        } else if (element.attachEvent){
+            element.attachEvent("on" + type, handler);//为了在 IE8 及更早版本中运行，此时的事件类型必须加上"on"前缀
+        } else {
+            element["on" + type] = handler; //document.getElementById("myBtn").onclick = function(){
+                                            //  alert("Clicked");
+                                            //};只能绑定一次
+        }
+    },
+    removeHandler: function(element, type, handler){
+        if (element.removeEventListener){
+            element.removeEventListener(type, handler, false);
+        } else if (element.detachEvent){
+            element.detachEvent("on" + type, handler);
+        } else {
+            element["on" + type] = null;
+        }
+    }
+};
+
+var btn = document.getElementById("myBtn");
+var handler = function(){
+alert("Clicked");
+};
+EventUtil.addHandler(btn, "click", handler);
+//这里省略了其他代码
+EventUtil.removeHandler(btn, "click", handler);
 ```
