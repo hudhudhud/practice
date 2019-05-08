@@ -43,6 +43,7 @@ export async function uploadImg(file, url,fileKey='file') {
         let form = new FormData(); // FormData 对象
         form.append(fileKey, data); // 文件对象
         xmlhttp.open("POST", process.env.VUE_APP_BASE_API + url, true);
+        xmlhttp.setRequestHeader('token', getCookie('Admin-Token'))
         xmlhttp.send(form);
 
     });
@@ -109,4 +110,13 @@ function canvasResizetoFile(canvas, quality, fn, type) {
     canvas.toBlob(function (blob) {
         fn(blob);
     }, type || 'image/jpeg', quality);
+}
+
+function getCookie(name)
+{
+    var arr,reg=new RegExp("(^| )"+name+"=([^;]*)(;|$)");
+    if(arr=document.cookie.match(reg))
+        return unescape(arr[2]);
+    else
+        return null;
 }
