@@ -692,6 +692,9 @@ setTimeout(incrementNumber, 500);
 //阶段调用事件处理程序；如果是 false，表示在冒泡阶段调用事件处理程序。
 //可以绑定多次，执行按绑定顺序执行
 //这时候的事件处理程序是在元素的作用域中运行；换句话说，程序中的 this 引用当前元素
+//回调函数参数event属性：
+// currentTarget Element 只读 其事件处理程序当前正在处理事件的那个元素，即绑定事件的元素
+// target: Element 只读 当前触发事件的真正目标元素
 ```
 ```js
  attachEvent()
@@ -721,14 +724,133 @@ var EventUtil = {
         } else {
             element["on" + type] = null;
         }
-    }
+    },
+    getEvent: function(event){
+        return event ? event : window.event;
+    },
+    getTarget: function(event){
+        return event.target || event.srcElement;
+    },
+    preventDefault: function(event){
+        if (event.preventDefault){
+            event.preventDefault();
+        } else {
+            event.returnValue = false;
+        }
+    },
+    stopPropagation: function(event){
+        if (event.stopPropagation){
+            event.stopPropagation();
+        } else {
+            event.cancelBubble = true;
+        }
+    },
+    //获取相关元素，比如mouseover 和 mouserout 事件时，会涉及更多的元素事件
+    getRelatedTarget: function(event){
+        if (event.relatedTarget){
+            return event.relatedTarget;
+        } 
+        else if (event.toElement){
+            return event.toElement;
+        }
+        else if (event.fromElement){
+             return event.fromElement;
+        }
+        else {
+            return null;
+        }
+    },
 };
 
 var btn = document.getElementById("myBtn");
-var handler = function(){
-alert("Clicked");
+var handler = function(event){
+    event = EventUtil.getEvent(event);
+    var target = EventUtil.getTarget(event);
+    alert("Clicked");
 };
 EventUtil.addHandler(btn, "click", handler);
 //这里省略了其他代码
 EventUtil.removeHandler(btn, "click", handler);
+
+btn.onclick = function(event){
+    event = EventUtil.getEvent(event);
+};
+```
+```js
+//图片的load事件、script的load事件、link的load事件
+//我们是想向 DOM 中添加一个新元素，
+//所以必须确定页面已经加载完毕——如果在页面加载前操作 document.body 会导致错误
+EventUtil.addHandler(window, "load", function(){
+    var image = document.createElement("img");
+    EventUtil.addHandler(image, "load", function(event){
+        event = EventUtil.getEvent(event);
+        alert(EventUtil.getTarget(event).src);
+    });
+    document.body.appendChild(image);
+    image.src = "smile.gif";//新图像元素不一定要从添加到文档后才开始
+                              //下载，只要设置了 src 属性就会开始下载。
+});
+//与图像不同，只有在设置了<script>元素的 src 属性并将该元素添加到文档后，才会开始下载 JavaScript 文件
+EventUtil.addHandler(window, "load", function(){
+    var script = document.createElement("script");
+    EventUtil.addHandler(script, "load", function(event){
+        alert("Loaded");
+    });
+    script.src = "example.js";
+    document.body.appendChild(script);
+});
+//与<script>节点类似，在未指定 href 属性并将<link>元素添加到文档之前也不会开始下载样式表
+EventUtil.addHandler(window, "load", function(){
+    var link = document.createElement("link");
+    link.type = "text/css";
+    link.rel= "stylesheet";
+    EventUtil.addHandler(link, "load", function(event){
+        alert("css loaded");
+    });
+    link.href = "example.css";
+    document.getElementsByTagName("head")[0].appendChild(link);
+});
+```
+```js
+//当浏览器窗口被调整到一个新的高度或宽度时，就会触发 resize 事件
+EventUtil.addHandler(window, "resize", function(event){
+    alert("Resized");
+});
+```
+```js
+//scroll
+//在混杂模式下，可以通过<body>元素的 scrollLeft 和 scrollTop 来监控到这一变化；而在标准模式下，除 Safari 之外的所有浏览器都会通过<html>元素来反映这一变化
+EventUtil.addHandler(window, "scroll", function(event){
+    if (document.compatMode == "CSS1Compat"){//标准模式
+        alert(document.documentElement.scrollTop);
+    } else {//混杂模式，主要为了兼容ie
+        alert(document.body.scrollTop);
+    }
+});
+```
+
+```js
+var div = document.getElementById("myDiv");
+EventUtil.addHandler(div, "mouseout", function(event){
+    event = EventUtil.getEvent(event);
+    var target = EventUtil.getTarget(event);
+    var relatedTarget = EventUtil.getRelatedTarget(event);
+    alert("Moused out of " + target.tagName + " to " + relatedTarget.tagName);
+});
+```
+event.clientX/clientY  光标相对视口的位置
+event.pageX/pageY   光标相对页面的位置
+event.screenX/screenY 光标相对显示屏幕的位置
+event.offsetX/offsetY 光标相对目标元素边界的位置
+
+
+```js
+//mousewheel事件，event.wheelDelta属性
+//当用户向前滚动鼠标滚轮时， wheelDelta 是 120 的倍数；当用户向后滚动鼠标滚轮时， wheelDelta 是120 的倍数
+EventUtil.addHandler(document, "mousewheel", function(event){
+    event = EventUtil.getEvent(event);
+    var delta = (client.engine.opera && client.engine.opera < 9.5 ?//早期opera方向是反的
+    -event.wheelDelta : event.wheelDelta);
+    alert(delta);
+});
 ```
