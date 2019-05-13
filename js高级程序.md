@@ -760,6 +760,18 @@ var EventUtil = {
             return null;
         }
     },
+    getWheelDelta: function(event){
+        if (event.wheelDelta){
+             return (client.engine.opera && client.engine.opera < 9.5 ?
+             -event.wheelDelta : event.wheelDelta);
+        } else {
+            return -event.detail * 40;
+            //Firefox 支持一个名为 DOMMouseScroll 的类似事件,当向前滚动鼠标滚轮时，这个属性的值是-3 的倍数，当向后滚动
+            //  鼠标滚轮时，这个属性的值是 3 的倍数
+            //由于Firefox 的值有所不同，因此首先要将这个值的符号反向，然后再乘以 40，就可以保证与其他浏览器的
+            //  值相同了。
+        }
+     },
 };
 
 var btn = document.getElementById("myBtn");
@@ -853,4 +865,14 @@ EventUtil.addHandler(document, "mousewheel", function(event){
     -event.wheelDelta : event.wheelDelta);
     alert(delta);
 });
+//我们将相关代码放在了一个私有作用域中，从而不会让新定义的函数干扰全局作用域
+(function(){
+    function handleMouseWheel(event){
+        event = EventUtil.getEvent(event);
+        var delta = EventUtil.getWheelDelta(event);
+        alert(delta);
+    }
+    EventUtil.addHandler(document, "mousewheel", handleMouseWheel);
+    EventUtil.addHandler(document, "DOMMouseScroll", handleMouseWheel);
+})();
 ```
