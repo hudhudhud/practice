@@ -772,6 +772,14 @@ var EventUtil = {
             //  值相同了。
         }
      },
+     //这个属性只有在发生keypress 事件时才包含值，而且这个值是按下的那个键所代表字符的 ASCII 编码
+     getCharCode: function(event){
+         if (typeof event.charCode == "number"){
+             return event.charCode;
+         } else {
+            return event.keyCode;
+         }
+     },
 };
 
 var btn = document.getElementById("myBtn");
@@ -788,6 +796,10 @@ btn.onclick = function(event){
     event = EventUtil.getEvent(event);
 };
 ```
+window 的 load 事件会在页面中的一切都加载完毕时触发，但这个过程可能会因为要加载的外部资源过多而颇费周折
+DOMContentLoaded 事件则在形成完整的 DOM 树之后就会触发，不理会图像、 JavaScript 文件、 CSS 文件或其他资源是否已经下载完毕。
+与 load 事件不同，DOMContentLoaded 支持在页面下载的早期添加事件处理程序，这也就意味着用户能够尽早地与页面
+进行交互
 ```js
 //图片的load事件、script的load事件、link的load事件
 //我们是想向 DOM 中添加一个新元素，
@@ -875,4 +887,47 @@ EventUtil.addHandler(document, "mousewheel", function(event){
     EventUtil.addHandler(document, "mousewheel", handleMouseWheel);
     EventUtil.addHandler(document, "DOMMouseScroll", handleMouseWheel);
 })();
+```
+```js
+//在取得了字符编码之后，就可以使用 String.fromCharCode()将其转换成实际的字符。
+var textbox = document.getElementById("myText");
+EventUtil.addHandler(textbox, "keypress", function(event){
+    event = EventUtil.getEvent(event);
+    alert(EventUtil.getCharCode(event));
+});
+```
+contextmenu右键菜单事件
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<title>ContextMenu Event Example</title>
+</head>
+<body>
+<div id="myDiv">Right click or Ctrl+click me to get a custom context menu.
+Click anywhere else to get the default context menu.</div>
+<ul id="myMenu" style="position:absolute;visibility:hidden;background-color:
+silver">
+<li><a href="http://www.nczonline.net">Nicholas’ site</a></li>
+<li><a href="http://www.wrox.com">Wrox site</a></li>
+<li><a href="http://www.yahoo.com">Yahoo!</a></li>
+</ul>
+</body>
+</html>
+```
+```js
+EventUtil.addHandler(window, "load", function(event){
+    var div = document.getElementById("myDiv");
+    EventUtil.addHandler(div, "contextmenu", function(event){
+        event = EventUtil.getEvent(event);
+        EventUtil.preventDefault(event);
+        var menu = document.getElementById("myMenu");
+        menu.style.left = event.clientX + "px";
+        menu.style.top = event.clientY + "px";
+        menu.style.visibility = "visible";
+    });
+    EventUtil.addHandler(document, "click", function(event){
+        document.getElementById("myMenu").style.visibility = "hidden";
+    });
+});
 ```
