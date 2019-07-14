@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <style>
+    ul {
+      position: relative;
+      border: 5px solid;
+      height: 20px;
+      overflow: hidden;
+    }
+    ul li {
+      position: absolute;
+      top: 100%;
+      animation: leave 1s 1;
+    }
+    @keyframes leave {
+      from {
+        top: 0;
+      }
+      to {
+        top: -100%;
+      }
+    }
+    ul li.active {
+      top: 0;
+      transition: 1s;
+      animation: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <notice :msgs="['aa','bb','cc']"></notice>
+  </div>
+</body>
+<script>
+  Vue.component('notice', {
+    template: `
+        <ul>
+          <li :class="{active:index == current}" v-for="(msg,index) in msgs">{{msg}}aaa</li>
+        </ul>
+    `,
+    props: ['msgs'],
+    data() {
+      return {
+        current: 0,
+      }
+    },
+    mounted() {
+      setInterval(() => {
+        this.current = ++this.current % this.msgs.length
+      }, 2000)
+    }
+  })
+
+  var app = new Vue({
+    el: '#app'
+  })
+</script>
+</html>
