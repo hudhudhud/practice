@@ -12,7 +12,7 @@
     "deploy:prod": "node build/build.js && scp -r ./dist root@120.55.61.166:/ht/websites/keguan-admin"
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "element-ui": "^2.4.11",
     "es6-promise-polyfill": "^1.2.0",
     "font-awesome": "^4.7.0",
