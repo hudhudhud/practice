@@ -23,7 +23,7 @@
     "js-md5": "^0.7.3",
     "less": "^3.8.1",
     "less-loader": "^4.1.0",
-    "lodash": "^4.17.10",
+    "lodash": "^4.17.21",
     "material-design-icons-iconfont": "^3.0.3",
     "moment": "^2.22.2",
     "style-resources-loader": "^1.2.1",
