@@ -13,7 +13,7 @@
     "@babel/polyfill": "^7.0.0",
     "anywhere": "^1.5.0",
     "axios": "^0.18.0",
-    "d3": "^5.7.0",
+    "d3": "^7.6.1",
     "d3-cloud": "^1.2.5",
     "echarts": "^4.1.0",
     "echarts-wordcloud": "^1.1.3",
